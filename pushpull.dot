@@ -1,0 +1,20 @@
+digraph pushpull {
+  rankdir="LR";
+
+  Wikipedia [label="Wikipedia"];
+  Facebook [label="Facebook"];
+  CED_push [label="CED"];
+  CED_pull [label="CED"];
+
+  subgraph cluster_push {
+    label="Push";
+
+    Wikipedia -> CED_push [label="push"];
+  }
+
+  subgraph cluster_pull {
+    label="Pull";
+    Facebook -> CED_pull [label="response"];
+    CED_pull -> Facebook [label="request"];
+  }
+}
