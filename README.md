@@ -1,6 +1,6 @@
 # Event Data User Manual
 
-Read the [latest version in PDF](/CrossRef/event-data-user-manual/raw/master/build/event-data-manual.pdf) (or HTML). 
+Read the [latest version in PDF](https://github.com/CrossRef/event-data-user-manual/raw/master/build/event-data-manual.pdf) (or HTML). 
 
 ## Editing
 
