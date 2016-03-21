@@ -21,7 +21,12 @@ header-includes:
 
 Crossref Event Data (CED) is a service for collecting and distributing the events that occur around scholarly research objects. It concerns primarily articles in Crossref and datasets in DataCite that have a DOI. For the purposes of this document, 'Research Object' will be used to mean any item in Crossref (including articles, books, conference proceedings, etc) or in DataCite (including datasets etc) that has a DOI. 'Research object' is used to mean any item that has a DOI.
 
+For more info see [http://eventdata.crossref.org]().
+
+
 This data will be available via an API, where users can browse, integrate it with other software or conduct experiments.
+
+
 
 TODO
 
