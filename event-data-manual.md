@@ -7,6 +7,7 @@ margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 4cm
 fontfamily: "sans"
+date: Version 0.1 MVP
 header-includes:
     - \usepackage{graphicx}
     - \usepackage[dvipsnames]{xcolor}
@@ -287,19 +288,22 @@ TODO
 - limitations e.g. API keys, requests, removing sensitive info
 - not available at MVP technical challenges
 
-#### DOI Reversal service
+## DOI Reversal service
 
 TODO
 
 - see [DOIs vs Landing Pages](#landing-pages)
 
 
-#### Known research objects
+### Known research objects
 
 TODO
 
 - timestamp avilable for all works useful for knowing when a DOI might have first been queried against.
 
+## Software
+
+All the software involved in running Crossref Event Data is open source and available to the public. Crossref will publish a detailed log of every piece of software that is running at what version and update it when the new versions are deployed. This will allow auditors to know precisely which combinations of software were running at a given point in time.
 
 # Sources {#sources}
 
