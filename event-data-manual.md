@@ -992,20 +992,6 @@ TODO
 - what it does
 - where it runs
 
-## Baleen-Twitter
-
-[http://github.com/crossref/baleen-twitter]()
-
-The adaptor that connects to the a Twitter live stream and calculates events.
-
-Maintained and operated by Crossref.
-
-TODO
-
-- what it does
-- where it runs
-- docs
-
 ## DOI Destinations
 
 [http://github.com/crossref/doi-destinations]()
@@ -1029,137 +1015,6 @@ TODO
  - see source-tokens for explanation of push vs pull
  - list source tokens
  - see http://eventdata.crossref.org/api/agents but caveats
-
-
-
-# Appendix: NISO Altmetrics Data Quality Code of Conduct {#niso-appendix} 
-
-NISO provides an *Altmetrics Data Quality Code of Conduct* `NISO RP-25-201X-3`. Crossref participated in the development of this Code of Conduct. Below are responses to each of the recommendations in the Code of Conduct as of 17th March (draft).
-
-Because these principles are designed into CED from the start, responses to the CoC questions make references to this entire manual.
-
-
-#### 1: List all available data and metrics (providers and aggregators).
-
-T1
-
-See the [list of sources](#sources).
-
-#### 2: Provide a clear definition of each metric.
-
-A1
-
-Crossref Crossref Event Data reports raw events, not metrics. The following events are provided:
-
-- Links from Crossref DOIs to DataCite DOIs. Crossref is the central linking hub for scholarly communications. Publishers deposit metadata about articles as they are published. This includes links to datasets via DataCite.
-- Links from DataCite DOIs to Crossref DOIs. Researchers deposit scholarly research objects for citation to DataCite.
-
-Researchers deposit datasets and provide links to scholarly Research Objects via Crossref DOIs.
-
-- Twitter DOI mentions. People discuss scholarly Research Objects via their DOIs, or the landing pages to which those DOIs resolve.
-
-Crossref works with the Twitter data source, filtering Crossref and DataCite DOIs and corresponding landing pages.
-
-- Wikipedia DOI citations and uncitations. Wikipedia pages are edited on a constant basis. A page can reference a DOI, and an edit to a page can introduce or remove a link to a DOI.
-
-Crossref tracks when these events happen and records when a DOI is added or removed from a page, the DOI, and the page and revision numbers.
-
-- Data supplied by other providers. Providers are able to push events, such as a DOI is annotation or download, into the Crossref Event Data service. The content of the event is dependent on the type of source. Crossref Event Data will make the event available verbatim. Events are supplied by the party that generated them.
-- Facebook. Facebook Graph API allows Crossref Event Data to query for every DOI it knows about and record how many times a DOI was shared, liked, and commented on. Each time this data are collected is treated as an event.
-
-#### 3: Describe the method(s) by which data are generated or collected and how data are maintained over time.
-
-T1, T2, R1
-
-Links from Crossref DOIs to DataCite DOIs. CrossRef identifies deposits and updates Crossref Event Data when it sees a DataCite DOI cited. This will happen in bulk for historical data, and will then be completed live as new deposits are made.
-
-- Links from DataCite DOIs to Crossref DOIs. DataCite identifies deposits and updates Crossref Event Data when it sees a Crossref DOI cited. This will happen in bulk for historical data, and then will be done live as new deposits are made.
-- Twitter DOI mentions. Crossref Crossref Event Data subscribes to the Twitter firehose, filtering it by Crossref and DataCite DOIs and those domains that DOIs resolve to. It stores all tweets that mention DOIs. For tweets that mention article or dataset landing pages, Crossref Event Data will attempt to identify the corresponding DOI and record that link (including both the DOI and the landing page URL). Not all landing pages URLs can be mapped to DOIs, but if a new technique enables a previously unknown mapping for a historical tweet, this event will be raised. The firehose is a live stream.
-- Wikipedia DOI citations and uncitations. Crossref Crossref Event Data subscribes to the Wikipedia live stream of edits. For every edit that is made to any Wikipedia article, Crossref Event Data will analyze the content of the edit and look for DOIs having been added or removed. An event will be recorded for either the adding or removal of a DOI in a Wikipedia page. The edit stream is live and produces a live stream of events.
-- Data provided by other providers. Crossref Crossref Event Data provides a “Push API” that enables data sources to push data into Crossref Event Data.
-
-Providers can push data in batches or live. This is a generic capability, but allows for significant players in the scholarly space to publish DOI event data.
-
-- Facebook: The Facebook API is queried for every DOI that belongs to Crossref or DataCite. The results are stored directly. The Facebook API is queried periodically. There are no guarantees about how often the Facebook API is queried as this depends on practical issues of scalability.
-
-#### 4: Describe all known limitations of the data.
-
-A3
-
-Pull sources are limited to the selection of DOIs, see the [Sources](#sources) section for details.
-
-- Links from Crossref DOIs to DataCite DOIs. Publishers must provide data. Crossref has around 5,000 publisher members and there are some variabilities among them.
-- Links from DataCite DOIs to Crossref DOIs. Researchers must provide data to DataCite.
-- Twitter DOI mentions. All DOIs in tweets can be reliably identified. In the case of landing pages, Crossref Crossref Event Data will make a best effort to resolve the landing pages, but there is no 100 percent reliable way to do this.
-- Wikipedia DOI citations and uncitations. The Wikipedia live stream or supporting infrastructure may become unavailable. If this happens, those events will be missed.
-- Data provided by other providers. The content of pushed data are the responsibility of those pushing the data. However, as they are the source, the data they do push can be considered to be canonical and of the best available quality.
-- Facebook. As Crossref Crossref Event Data will be querying the Facebook API for a large number of DOIs, the period between updates is entirely dependent on practical scaling issues. Crossref Event Data may prioritize fetching data for DOIs that are more likely to have activity.
-
-#### 5: Provide a documented audit trail of how and when data generation and collection methods change over time and list all known effects of these changes. Documentation should note whether changes were applied historically or only from change date forward.
-
-R1, R2, R3
-
-Events data are passed directly through. We provide no metrics.
-
-All events have a timestamps for when they occurred and when they were generated or collected. Thus the infrastructure used to generate and collect events can be matched to the timestamp.
-
-The Lagotto software is open source, so date stamps can be correlated to the version of the software that was running.
-
-#### 6: Describe how data are aggregated.
-
-T2
-
-Events are stored individually and returned individually. Crossref Event Data will collect data and make it available without aggregation.
-
-#### 7: Detail how often data are updated.
-
-T3 Crossref Event Data provides an API to allow users to get data at any point. Data will be made available on the API as soon as possible after it is inserted into Crossref Event Data. See the individual [Sources](#sources) for details on data freshness.
-
-
-#### 8: Describe how data can be accessed.
-
-T4
-
-All data will be freely available via the Crossref Event Data API. The raw data will be the primary way of interacting with Crossref Event Data. For a fee, we will also provide an SLA (service level agreement) that will guarantee consistency of service (guaranteed response times to API calls).
-
-The data will be identical to the free version, however.
-
-
-#### 9: Confirm that data provided to different data aggregators and users at the same time are identical and, if not, how and why they differ.
-
-R4
-
-Crossref Event Data provides an API, which will allow users to make queries against DOIs to retrieve events.
-
-Crossref Event Data also provides an SLA version of the API. This will have identical data, but we make guarantees of response times.
-
-There will be a single API for all data, which is open. Using the SLA version of the API provides identical data.
-
-#### 10: Confirm that all retrieval methods lead to the same data and, if not, how and why they differ.
-
-All retrieval methods produce the same data. There is a single API, although there are service level agreements which guarantee response times.
-
-#### 11: Describe the data-quality monitoring process.
-
-T5, A2
-
-The main failure mode will be service interruptions, meaning data sources becoming unavailable. These will be monitored per source to ensure that there is a constant stream of data. For Crossref Event Data, quality means consistency not, e.g., detection of gaming.
-
-TODO: outages reporting
-
-#### 12: Provide a process by which data can be independently verified (aggregators only).
-
-R5
-
-All Relations and data and the Deposits by which the data was generated will be freely available. Audit data will be available to selected parties on request (see [Audit and Reproducibility](#audit-reproducibility)).
-
-#### 13: Provide a process for reporting and correcting data or metrics that are suspected to be inaccurate.
-
-A2
-
-Crossref support will be able to handle requests. We can attempt to reprocess raw data to re-generate events. We can back-fill missing events with appropriate date-stamps. As we are not aggregating events into metrics or scores, we will not provide scores which might later need adjustment.
-
-TODO: Reporting outages?
 
 
 # Appendix: FAQ
@@ -1328,10 +1183,6 @@ UUID
 - [http://api.eventdata.crossref.org](http://api.eventdata.crossref.org)
 - The API for Crossref Event Data. 
 
-## Event Data Audit Information
-
-- [http://audit.eventdata.crossref.org](http://audit.eventdata.crossref.org)
-- Full audit information, including audit logs, software versions and reversal datasets in use.
 
 
 ## Internal
@@ -1346,17 +1197,8 @@ UUID
 - [http://sandbox.api.eventdata.crossref.org](http://sandbox.api.eventdata.crossref.org)
 - Instance of the API to allow external developers and partners to test integration. This is usually running the same version of the software as the production instance at `api.eventdata.crossref.org`. This does not contain production data. Contact us if you want to use it.
 
-### Landing Page Reversal Service [NOT UP]
-
-- [http://reverse.eventdata.crossref.org](http://reverse.eventdata.crossref.org)
-- Service to attempt to deduce a DOI from an articel landing page.
-
 ### Wikipedia Live Events [NOT UP]
 
 - [http://wikipedia.eventdata.crossref.org](http://wikipedia.eventdata.crossref.org)
 - The Wikipedia agent for CED. Watch live events as they occur.
 
-### Twitter Live Events [NOT UP]
-
-- [http://twitter.eventdata.crossref.org](http://twitter.eventdata.crossref.org)
-- The Twitter agent for CED. Watch live events as they occur.
