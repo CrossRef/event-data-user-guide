@@ -49,6 +49,7 @@ The current status of the NISO Code of Conduct is *Draft for Public Comment* and
 TODO
 
 - ISBN
+- see definitions and use cases http://www.niso.org/apps/group_public/download.php/16268/NISO%20RP-25-201x-1%2C%20Altmetrics%20Definitions%20and%20Use%20Cases%20-%20draft%20for%20public%20comment.pdf
 
 ## What is an Event? {#what-is-event}
 
