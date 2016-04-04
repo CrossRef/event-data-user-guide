@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Crossref logos" />
+    <meta name="generator" content="pandoc" />
+  $for(author-meta)$
+    <meta name="author" content="$author-meta$" />
+  $endfor$
+  $if(date-meta)$
+    <meta name="date" content="$date-meta$" />
+  $endif$
+  $if(keywords)$
+    <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+  $endif$
+    <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    <style type="text/css">code{white-space: pre;}</style>
+  $if(quotes)$
+    <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
+  $endif$
+  $if(highlighting-css)$
+    <style type="text/css">
+  $highlighting-css$
+    </style>
+  $endif$
+  $for(css)$
+    <link rel="stylesheet" href="$css$" type="text/css" />
+  $endfor$
+  $if(math)$
+    $math$
+  $endif$
+  $for(header-includes)$
+    $header-includes$
+  $endfor$
+
+    <title>Crossref Event Data</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://assets.crossref.org/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://assets.crossref.org/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://assets.crossref.org/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.crossref.org/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://assets.crossref.org/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://assets.crossref.org/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://assets.crossref.org/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://assets.crossref.org/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.crossref.org/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://assets.crossref.org/favicon/manifest.json">
+    <link rel="mask-icon" href="https://assets.crossref.org/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Crossref">
+    <meta name="application-name" content="Crossref">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="https://assets.crossref.org/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body>
+
+    <style>
+        @import url("http://fast.fonts.net/lt/1.css?apiType=css&c=e98f5793-4cb3-43cf-9c5a-90c30937c6bd&fontids=903184,903187,903190,903193,903196,903199,903202,903205");
+        @font-face{
+        font-family:"HelveticaNeueETW01-45Lt";
+        src:url("https://assets.crossref.org/private/fonts/903184/e0781a75-0ecb-464e-b6e9-85780ddc0921.eot?#iefix");
+        src:url("https://assets.crossref.org/private/fonts/903184/e0781a75-0ecb-464e-b6e9-85780ddc0921.eot?#iefix") format("eot"),
+            url("https://assets.crossref.org/private/fonts/903184/b8765d4b-d9a3-48b9-ac65-560e7517cf0e.woff2") format("woff2"),
+            url("https://assets.crossref.org/private/fonts/903184/d7d2e6c6-fc3a-41a5-9b52-648e12e215b2.woff") format("woff"),
+            url("https://assets.crossref.org/private/fonts/903184/cb64744b-d0f7-4ef8-a790-b60d6e3e4f21.ttf") format("truetype"),
+            url("https://assets.crossref.org/private/fonts/903184/ccde919e-a712-41ef-b90f-9efc47661659.svg#ccde919e-a712-41ef-b90f-9efc47661659") format("svg");
+        }
+
+        @font-face{
+        font-family:"HelveticaNeueETW01-65Md";
+        src:url("https://assets.crossref.org/private/fonts/903196/a747e1ea-ecdf-4f3d-ad47-3df9cfbee3cc.eot?#iefix");
+        src:url("https://assets.crossref.org/private/fonts/903196/a747e1ea-ecdf-4f3d-ad47-3df9cfbee3cc.eot?#iefix") format("eot"),
+            url("https://assets.crossref.org/private/fonts/903196/3e8a8b56-3cb0-4347-b670-eaaf06b76e9b.woff2") format("woff2"),
+            url("https://assets.crossref.org/private/fonts/903196/07173950-fa69-4b65-9c71-0cf2ec00b51d.woff") format("woff"),
+            url("https://assets.crossref.org/private/fonts/903196/aac5a4b8-ffd3-4529-a098-21b91bc86f9a.ttf") format("truetype"),
+            url("https://assets.crossref.org/private/fonts/903196/2379b081-2371-47d9-8be9-4e39d7892ebf.svg#2379b081-2371-47d9-8be9-4e39d7892ebf") format("svg");
+        }
+
+      body {
+        font-family:'HelveticaNeueETW01-45Lt';
+        font-style: normal !important;
+      }
+
+      h1, h2, h3 {
+        font-family:'HelveticaNeueETW01-65Md';
+      }
+
+      .logo-area {
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+
+      p {
+        font-size: 1.2em;
+      }
+   
+    </style>
+    <div class="container">
+
+      <div class="page-header">
+        <img src="http://assets.crossref.org/logo/crossref-logo-100.svg" width="100" height="65" alt="Crossref logo">
+      </div>
+
+      <div class="col-md-4 col-xs-12">
+        $if(toc)$
+      <div id="$idprefix$TOC">
+      $toc$
+      </div>
+      $endif$
+      </div>
+      <div class="col-md-8 col-xs-12">
+
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+<div id="$idprefix$header">
+<h1 class="title">$title$</h1>
+$if(subtitle)$
+<h1 class="subtitle">$subtitle$</h1>
+$endif$
+$for(author)$
+<h2 class="author">$author$</h2>
+$endfor$
+$if(date)$
+<h3 class="date">$date$</h3>
+$endif$
+</div>
+$endif$
+
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>
+
+
+      </div>
+    </div>
+  </body>
+</html>

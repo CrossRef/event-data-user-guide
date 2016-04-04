@@ -464,7 +464,7 @@ The exact period of time before Deposits are archived to the Deposit Log are to 
 
 # Scope {#scope}	
 
-Crossref Event Data collects Event Data on Research Objects that have Crossref or DataCite DOIs. It does this by monitoring various services for references to those Research Objects.  
+Crossref Event Data collects Event Data on Research Objects that have Crossref or DataCite DOIs. It does this by monitoring various services for references to those Research Objects.
 
 ## DOIs vs Landing Pages {#landing-pages}
 
