@@ -6,25 +6,49 @@ margin-left: 2cm
 margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 4cm
-fontfamily: "sans"
-date: Version 0.1 MVP Pre-draft 
+fontfamily: "sans"  
+date: __VERSION__
 header-includes:
-    - \usepackage{graphicx}
-    - \usepackage[dvipsnames]{xcolor}
-    - \hypersetup{colorlinks=true,linkcolor=MidnightBlue}
-    - \let\cleardoublepage\clearpage
+    - \\usepackage{graphicx}
+    - \\usepackage[dvipsnames]{xcolor}
+    - \\hypersetup{colorlinks=true,linkcolor=MidnightBlue}
+    - \\let\\cleardoublepage\\clearpage
+    - \\DeclareUnicodeCharacter{00A0}{ }
 
 
 ---
 
 # Introduction {#introduction}
 
+#ifdef __TODO__
+---- ------------------------------------------------------------
+Note WORK IN PROGRESS INCLUDES TODOS
+------------------------------------------------------------------
+#endif
+
+#ifdef __FUTURE__
+---- ------------------------------------------------------------
+Note WORK IN PROGRESS INCLUDES FUTURE FEATURES
+------------------------------------------------------------------
+#endif
+
+#ifdef __WIP__
+---- ------------------------------------------------------------
+Note Note that this document is a work in progress.
+     For internal circulation only.
+     Some parts may be missing and references may be made to non-existent sections.
+------------------------------------------------------------------
+#endif
+
+
 Crossref Event Data (CED) is a service for collecting and distributing the events that occur around scholarly research objects. It concerns primarily articles in Crossref and datasets in DataCite that have a DOI. For the purposes of this document, 'Research Object' will be used to mean any item in Crossref (including articles, books, conference proceedings, etc) or in DataCite (including datasets etc) that has a DOI. 
 
-CED is currently at Minimum Viable Product (MVP) stage. MVP means that we have put the pieces in place to demonstrate that we can collect and disseminate Event Data, but **it is not offered as a complete or production-quality service**. This manual may refer to future cabpilities. 
+CED is currently at Minimum Viable Product (MVP) stage. MVP means that we have put the pieces in place to demonstrate that we can collect and disseminate Event Data, but **it is not offered as a complete or production-quality service**.
 
-For more information about Crossref Event Data, and the most up to date version of this User Manual, see the Product Information page at [http://eventdata.crossref.org]().
+This manual may refer to future cabpilities of Crossref Event Data in order to illustrate principles. Crossref Event Data and this manual are constantly evolving. For more information about Crossref Event Data, and the most up to date version of this User Manual, see the Product Information page at [http://eventdata.crossref.org](http://eventdata.crossref.org).
 
+
+#ifdef __TODO__
 
 ## Principles and Motivation
 
@@ -35,6 +59,9 @@ TODO
 - aggregators - not doing that
 - audience
 
+#endif
+
+#ifdef __FUTURE__
 
 ## NISO
 
@@ -46,10 +73,16 @@ For the purposes of NISO compliance, Crossref Event Data serves both as an 'altm
 
 The current status of the NISO Code of Conduct is *Draft for Public Comment* and you can find more information on the [NISO Altmetrics Initiative site](http://www.niso.org/topics/tl/altmetrics_initiative). See the [Roadmap](#roadmap) section for details on when CED will be compliant.
 
+#endif
+
+#ifdef __TODO__
+
 TODO
 
 - ISBN
 - see definitions and use cases http://www.niso.org/apps/group_public/download.php/16268/NISO%20RP-25-201x-1%2C%20Altmetrics%20Definitions%20and%20Use%20Cases%20-%20draft%20for%20public%20comment.pdf
+
+#endif
 
 ## What is an Event? {#what-is-event}
 
@@ -108,6 +141,8 @@ For most tasks, Relations are useful. They help you to answer questions like "wh
 
 When it is important to get more detail on what exactly occurred to produce a Relation, the Deposit API will provide it. For example, it can help you to answer questions like "was this DOI reference removed from Wikipedia repeatedly?". It can also answer questions like "when exactly in the past has CED queried Facebook about this DOI".
 
+#ifdef __FUTURE__
+
 # Roadmap
 
 Crossref Event Data is currently at MVP stage, which is a proof of concept with a limited number of sources. As we move toward a full 'Clearinghouse' release more data sources, partners and methods for accessing data will be added.
@@ -140,19 +175,35 @@ Please contact Crossref if you are interested on eventdata@crossref.org.
 
 At MVP stage access to data is via the APIs and the user interface that is built into the Lagotto software. At a future point Crossref may integrate some information into its user interfaces.
 
+#endif
+
 # Quick start
 
 You can access data through the user interface or the API. At MVP stage there is a limited amount of data in the system. Here are some examples to get you started.
 
 ## User interface
 
+#ifdef __TODO__
+
+TODO
+
+- links to the production instance
+
+#endif
+
 Browse all of the available Research Objects. 
 
-TODO LINK
+[http://staging.api.eventdata.crossref.org/works](http://staging.api.eventdata.crossref.org/works)
 
-View all of the Relations for the DOI XXXXXXX
+View all of the Relations for the DOI `10.1073/PNAS.88.3.951`
 
-TODO LINK
+[http://staging.api.eventdata.crossref.org/works/doi.org/10.1073/PNAS.88.3.951](http://staging.api.eventdata.crossref.org/works/doi.org/10.1073/PNAS.88.3.951)
+
+View all of the relations in CED
+
+[http://staging.api.eventdata.crossref.org/relations](http://staging.api.eventdata.crossref.org/relations)
+
+#ifdef __TODO__
 
 ## API
 
@@ -162,10 +213,6 @@ Browse all of the available Research Objects.
 
 TODO LINK
 
-You will see something like:
-
-TODO RESPONSE
-
 View all of the Relations for the DOI XXXXXXX
 
 TODO LINK
@@ -175,9 +222,13 @@ You will see something like:
 TODO RESPONSE
 
 
+#endif
+
 # Using the API
 
 The API is free to use without restrictions. At MVP stage it contains only small but growing sample of Event Data. While the API does provide search functionality, you may not yet find the DOI you are looking for.
+
+The API is documented using Swagger, which will be available shortly after MVP. Check the latest version of this manual.
 
 ## Events, Deposits & Relations
 
@@ -205,10 +256,6 @@ Show only Deposits form the Wikipedia Data Source:
 Show only Deposits that involve removing a Relation:
 
 `http://eventdata.crossref.org/api/deposits?message_type=delete`
-
-TODO
-
- - Swagger docs available at ...
 
 An example response from the Deposit API:
 
@@ -319,59 +366,57 @@ Query parameters for filtering Relations:
 - `recent` - Limit to relations created last x days
 - `per_page` - Results per page (0-1000), defaults to 1000
 
-Here is an example API response. It is the result of the above deposit.
+Here is an example API response.
 
     {
       meta: {
         status: "ok",
         message-type: "relation-list",
-        message-version: "6.0.0",
+        message-version: "v7",
         total: 2,
         total_pages: 1,
         page: 1
       },
-      relations: [
-      {
-        id: "https://en.wikipedia.org/wiki/Xorphanol",
-        work_id: "http://doi.org/10.1111/J.1749-6632.1988.TB38614.X",
-        source_id: "wikipedia",
-        relation_type_id: "is_referenced_by",
-        author: [ ],
-        title: "Xorphanol",
-        issued: { date-parts: [[2016, 3, 21]] },
-        container-title: "Wikipedia",
-        URL: "https://en.wikipedia.org/wiki/Xorphanol",
-        events: { },
-        timestamp: "2016-03-22T13:17:04Z"
-      },
-      {
-        id: "http://doi.org/10.1111/J.1749-6632.1988.TB38614.X",
-        work_id: "https://en.wikipedia.org/wiki/Xorphanol",
+      relations: [{
+        subj_id: "https://en.wikipedia.org/wiki/Red_giant",
+        obj_id: "http://doi.org/10.1086/306546",
         source_id: "wikipedia",
         relation_type_id: "references",
-        author: [{family: "GMEREK", given: "DEBRA E." },
-        { family: "COWAN", given: "A."}
-        ],
-        title: "Role of Opioid Receptors in Bombesin-induced Grooming",
-        issued: {
-        date-parts: [[1988,5]]},
-        container-title: "Ann NY Acad Sci",
-        volume: "525",
-        page: "291-300",
-        issue: "1 Neural Mechan",
-        DOI: "10.1111/j.1749-6632.1988.tb38614.x",
-        URL: "http://dx.doi.org/10.1111/j.1749-6632.1988.tb38614.x",
+        total: 1,
+        author: [ ],
+        title: "Red giant",
+        issued: {date-parts: [[2016,3,31]]},
+        container-title: "Wikipedia",
+        URL: "https://en.wikipedia.org/wiki/Red_giant",
+        work_type_id: "entry-encyclopedia",
         events: { },
-        timestamp: "2016-03-22T13:17:04Z"
-        }
-        ]
-    }
+        timestamp: "2016-03-31T14:46:11Z"
+      },
+      {
+        subj_id: "http://doi.org/10.1086/306546",
+        obj_id: "https://en.wikipedia.org/wiki/Red_giant",
+        source_id: "wikipedia",
+        relation_type_id: "is_referenced_by",
+        total: 1,
+        author: [{family: "Boothroyd", given: "Arnold I."},
+                 {family: "Sackmann", given: "I.-Juliana"}],
+        title: "The CNO Isotopes: Deep Circulation in Red Giants and First and Second Dredge-up",
+        issued: {date-parts: [[1999,1]]},
+        container-title: "ApJ",
+        volume: "510",
+        page: "232-250",
+        issue: "1",
+        DOI: "10.1086/306546",
+        URL: "http://dx.doi.org/10.1086/306546",
+        work_type_id: "article-journal",
+        events: { },
+        timestamp: "2016-03-31T14:46:11Z"}]
+  }
 
-We see in this example that the single deposit in the example above has created a Relation and an automatic inverse Relation (see [Inverse Relations](#inverse-relations)).
+The Subject and Objects are referred to by their canonical URLs. Notice that a single Deposit with a `references` relation type has created two Relations: one with a `references` and an automatic inverse `is_referenced_by` (see [Inverse Relations](#inverse-relations)). The metadata provided corresponds to the Subject of the Relation in each case.
 
 
-
- 
+ #ifdef __TODO__
 
 TODO
 
@@ -380,6 +425,9 @@ TODO
 - doesn't contain all deposits - see [Availability](#availability)
 - swagger docs
 
+#endif
+
+#ifdef __TODO__
 
 ## Deleted data
 
@@ -393,18 +441,26 @@ Some data is cached, which means the API might not reflect the most recent data 
 
 When a Deposit enters CED there may be a short delay before it is processed to update the Relations information. This will be at least 5 minutes, but at times of heavy traffic this may increase. You can check the status of Deposits by using the Deposit API.
 
+
+
 TODO
 
  - cached details - what, how long?
 
+#endif
+
+#ifdef __TODO__
+
+
 ## Availability {#availability}
 
-All of the data is open for anyone to use. We will try to ensure that the Relations and Deposit APIs are available to all. As we are providing this as a free-to-access service, we cannot guarantee availability and high demand may produce occasional fluctuations in service. At some point in the future we will introduce a paid-for Sevice Level Agreement (SLA), which will provide agreements about the availability of the service. They will provide exatly the same data.
+All of the data is open for anyone to use. We will try to ensure that the Relations and Deposit APIs are available to all. As we are providing this as a free-to-access service, high demand may produce occasional fluctuations in service. We are planning to introduce a paid-for Sevice Level Agreement (SLA), which will provide agreements about the availability of the service. They will provide exatly the same data.
 
 All Relations in CED will be available via the Relations API, and once a Relation is in CED, it will always be available in its most up-to-date form on the API unless it is deleted. For practical reasons due to the high volume of data, the Deposits are *not* guaranteed to be available on the Deposits API forever. Deposits will be archived after a certain period of time so data will never be lost or become unavailable. See the [Audit and Reproducibility](#audit-reproducibility) section for how to access old deposits.
 
 The exact period of time before Deposits are archived to the Deposit Log are to be determined, based on real-world observations.
 
+#endif
 
 # Scope {#scope}	
 
@@ -414,25 +470,25 @@ Crossref Event Data collects Event Data on Research Objects that have Crossref o
 
 Some parts of the web refer to Research Objects using their DOIs and some use the landing page. In Wikipedia, for example, a high proportion of scholarly references include a DOI and this is strongly encouraged by the community and by various research projects. In other places, for example social media sites like Twitter, people will usually use the URL of the article they are reading. We do find DOIs on Twitter but they are heavily outweighed by the article landing pages that the DOI ultimately points to.
 
-CED therefore monitors certain Data Sources for article landing pages and attempts to deduce the DOI from the landing page URL. For details on the methodology see the [Landing Page Reversal](#reversal) section.
+CED therefore monitors certain Data Sources for article landing pages and attempts to deduce the DOI from the landing page URL. For details on the methodology see the [Landing Page Reversal](#reversal) section.
 
 A different approach is suitable for each Data Source, so please see each source's documentation for full details.
 
-## Other DOI Registration Agencies 
+## Other DOI Registration Agencies 
 
 CED accepts any DOI so, whilst nearly every DOI in CED will belong to either Crossref or DataCite, it is possible that DOIs from another Registration Agency (RA) will be found in CED.
 
 ## Internal Research Object list
 
-TODO
+Lagotto stores a list of Research Objects it knows about. Every Research Object that is mentioned in a Deposit by a Data Source is added to this list. It would not be practical to store details of every single Research Object in existence (approximately 100 million) when the majority have no events. CED only stores Research Objects that it thinks are likely to have event data. The aim is that most Research Objects in CED have at least one Relation.
 
-- doesn't store all DOIs
-- used for pull sources, see Selection of DOIs and each source
-- Research Objects added over time
-- have timestamp so can see first time CED became aware of DOI for query
+For pull sources, such as Facebook, CED can only retrieve data for Research Objects it knows about via the internal Research Object list. It would be practically impossible to poll the Facebook API for 100 million Research Objects. Thus CED will only check for Facebook events on Research Objects that been added to CED through some other push source (such as Wikipedia). Whilst this does mean that CED doesn't check Facebook for every Research Object in existence, it does mean that there is a higher probablility that the Research Objects it *does* check do have some data. Check the documentation for each Source for full details.
 
+Every Research Object in CED has a timestamp so you can check when CED first became aware of it.
 
+This means that some events may not be captured because CED doesn't know about, and therefore can't query for, the DOI. It also means that even if there is some event data for a given Research Object, it only goes as far back as the time when CED became aware of it.
 
+#ifdef __TODO__
 
 TODO
 
@@ -445,6 +501,10 @@ TODO
 - CED captures all DOIs within scope but not every landing page
 - service available to try out plus docs 
 - each source
+
+#endif
+
+#ifdef __FUTURE__
 
 
 # Landing Page Reversal
@@ -527,7 +587,7 @@ TODO
 - see chapter
 
 
-### Known research objects
+### Known research objects
 
 TODO
 
@@ -549,15 +609,19 @@ TODO
 
  - version numbers and reversal datasets
 
+#endif
+
 # Data Sources {#sources}
 
 The following Event Data Sources are available:
 
 - Wikipedia
 - Facebook
-- Twitter TODO NOT MVP
+#ifdef __FUTURE__
+- Twitter
 - DataCite Related
 - Crossref Related
+#endif
 
 Full details of each source are provided below.
 
@@ -578,25 +642,26 @@ Push sources, for example Wikipedia, are able to send data directly to CED. This
 
 ## Selection of DOIs for Pull Sources {#selection-of-dois}
 
-Pull Sources work by making a query against an external service for a given DOI. To do this, it maintains an internal list of DOIs. As it's not practical to store every single extant DOI, CED only stores DOIs that it thinks are likely to have event data. This means that some events may not be captured because CED doesn't know about, and therefore can't query for, the DOI. It also means that even if there is some event data for a given Research Object, it only goes as far back as the time when CED became aware of it.
-
-Every time CED learns about a new DOI, for example via a push source, it is placed on the list. The current mechanism is to rely on DOIs that enter via push sources.
-
-The [Scope](#scope) section gives full details.
+Pull Sources work by making a query against an external service for a given Research Object's DOI. To do this, it maintains an internal list of Research Objecturces. The [Scope](#scope) section gives full details.
 
 
 ## Sources, Agents and Source tokens
+
+#ifdef __TODO__
 
 TODO
 
  - describe agents vs sources
  - see [appendix](#source-tokens-appendix) for list 
 
+#endif
 
 
 ## List of sources
 
-### Datacite Related
+#ifdef __FUTURE__
+
+### Datacite Related
 
 Links from DataCite DOIs to Crossref DOIs. These are article citations made by dataset publishers that indicate in the metadata for a dataset that the dataset is linked to a Crossref DOI, via DataCite.
 
@@ -612,7 +677,7 @@ TODO
 - depositors from DataCite
 
 
-#### Methodology
+#### Methodology
 
 #### Coverage
 
@@ -631,6 +696,9 @@ TODO
 
 #### Further information
 
+#endif
+
+#ifdef __FUTURE__
 
 ### Crossref Related
 
@@ -652,7 +720,7 @@ TODO
 - date corresponds to most recent index
 
 
-#### Methodology
+#### Methodology
 
 #### Coverage
 
@@ -673,7 +741,9 @@ TODO
 
 #### Further information
 
+#endif
 
+#ifdef __FUTURE__
 
 
 ### Twitter {#twitter}
@@ -700,7 +770,7 @@ TODO
 - re-generated events with new data
 
 
-#### Methodology
+#### Methodology
 
 TODO
 
@@ -751,13 +821,20 @@ TODO
 #### Further information
 
 
+#endif
+
 
 ### Facebook
 
 Number of “shares,” “likes” and “comments” for a given DOI, as retrieved from the Facebook API.
 
+#ifdef __TODO__
+
 TODO  - old developer account, maybe not all data types available
 
+#endif
+
+#ifdef __TODO__
 
 #### What events look like
 
@@ -774,16 +851,16 @@ TODO
  - useful to look at Deposits to get samples over time
 
 
+
 #### Provenance
 
-#### Methodology
+#### Methodology
+
+#endif
 
 #### Coverage
 
-The Facebook source works by fetching counts for a selection of DOIs that it knows about. Because of the limitations of the Facebook API it is impractical to attempt to fetch data for all DOIs. Therefore CED checks only for a subset of all DOIs.
-
-TODO selection of DOIs
-
+The Facebook source works by fetching counts for a selection of DOIs for Research Object that CED knows about. See the Internal Research Object section.
 
 #### Freshness
 
@@ -791,6 +868,7 @@ CED will fetch data for each DOI it knows about
 
 The Facebook agent fetches DOIs on a schedule, currently twice a day at 06:00 and 18:00. Depending on the number of DOIs and response times it may not be possible to maintain this level. 
 
+#ifdef __TODO__
 
 #### Audit & Reproducibility
 
@@ -798,7 +876,10 @@ TODO
 
  - plan to store API responses in audit log when service is launched
 
+#endif
 
+#ifdef __TODO__
+ 
 #### Limtations, Quirks & Failure Cases
 
 TODO
@@ -811,13 +892,12 @@ TODO
  - depends on Facebook API availability and rate limiting
  - Facebook has changed data schema before, may reduce amount of data in future
 
+#endif
+
+
 #### Further information
 
 The Facebook source is part of the Lagotto software. Full technical details of the Facebook source are available on [the Lagotto documentation](http://www.lagotto.io/docs/facebook/).
-
-
-
-
 
 ### Wikipedia {#sources-wikipedia}
 
@@ -828,20 +908,31 @@ Edits taken from all known Wikipedia projects (`*.wikipedia.org`). This excludes
 
 #### What events look like
 
-TODO
+Wikipedia provides a Canonical URL for each page. DOIs are reported as they are found linked from Wikipedia pages. When CED detects that a DOI link is added to an article it will be added as a normal relation. When CED detects that a DOI link is removed from an article, that Relation will be removed. Thus a given Relation object may exist and then subsequently not exist. All such activity is detailed in the Deposits, which are available on the API.
 
-- Canonical URL  See the [Introduction](#sources-wikipedia)
-
+The `references` and `is_referenced_by` relation types are used.
 
 #### How to use it
 
+When you see a Relation that mentions a DOI you can follow the link to the Wikipedia page and view the link. Note that the DOI might have been subsequently removed and CED may not yet be aware of that.
+
+If you are interested in looking at patterns of adding and removal you may be interested in the Deposits API, which will provide details of how often a reference was added or removed. For full details check the Audit Log for the Wikipedia source, which will provide the individual revision numbers for each edit to the article.
+
 #### Provenance
 
-#### Methodology
+The data about edits comes from the [Wikipedia Recent Changes stream](https://www.mediawiki.org/wiki/API:Recent_changes_stream). This includes edit numbers and the title. The citations come from the article text via the [Wikipedia RESTBase API](https://www.mediawiki.org/wiki/RESTBase). The Canonical URL comes from the article page via the standard Wikipedia page.
+
+#### Methodology
+
+Crossref runs a service that monitors the Wikipedia Recent Changes live stream, which includes every edit that is made to any Wikipedia page in any language. It fetches the old and new versions of the edit and compares DOI links. See the [Software](#software) section for details.
 
 #### Coverage
 
+Every DOI that is found linked from a Wikipedia article page is added to CED.
+
 #### Freshness
+
+The stream is nominally live and Deposits and Relations will in CED after a short delay.
 
 #### Audit & Reproducibility
 
@@ -876,43 +967,49 @@ Using this data it is possible to fetch the page versions and compare cited DOIs
 #### Limtations, Quirks & Failure Cases
 
 ##### Recent Change Stream disconnection
-The Recent Changes stream connection can be dropped due to network errors or server errors at either side. The client will attempt to reconnect immediately, but there can be up to 1 minute’s downtime.
-Events that occur while the Recent Changes Stream is disconnected cannot be recovered.
 
-Sometimes
-
-https://phabricator.wikimedia.org/T130024
+The Recent Changes stream connection can be dropped due to network errors or server errors at either side (for example, in [2016](https://phabricator.wikimedia.org/T130024) when an upgrade caused a prolonged outage). The client will attempt to reconnect immediately, but there can be a few minutes' downtime. Events that occur while the Recent Changes Stream is disconnected cannot be recovered.
 
 ##### RESTBase API
-Pages are fetched using wikimedia’s RESTBase API, after a minute’s wait to allow propagation. If they are not available on the API then they cannot be fetched. Because of the high volume of data coming through it is not possible to retry. 
+
+Pages are fetched using wikimedia’s RESTBase API, after a short delay to allow propagation. If they are not available on the API then they cannot be fetched. Because of the high volume of data coming through it is not possible to retry. 
 Page revisions that take more than one minute to propagate through Wikipedia’s internal systems may not be captured.
 
-##### Repeated delivery
+The RESTBase API is techincally [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable) so there may be interruptions to service.
 
-Will have same ID. When viewing events, should make no difference. When viewing deposits, bear this in mind.
+#ifdef __TODO__
 
 ##### Inability to recognise DOI
 
+TODO
+
 URL vs text, reference section
 
+#endif
 
 ##### Completeness of audit data
 
-Because not all the audit data is being stored 
+It is impractical to store the metadata of every single edit that appears on Wikipedia. Therefore only those edits for which there was a DOI citation was added or removed are stored. This means that it's possible to audit false positives but not false-negatives.
 
 #### DOIs and templates
 
-TODO
+The [Wikitext markup language](https://en.wikipedia.org/wiki/Wiki_markup) allows for the inclusion of templates. Historically there have been a large number of ways of citing Research Objects (whether using DOIs or not) and there is a large number of templates spread out over the various Wikipedia language properties. 
 
-snippets don't always include DOIs, look at HTML not wikitext
+This means that DOIs may occur in the rendered HTML version of a page that are not present in the Wikitext markup. Bear this in mind if you are using a tool such as [MWCites](https://github.com/mediawiki-utilities/python-mwcites).
 
 #### Edit wars
 
-TODO
+One of the things that makes Wikipedia interesting as a source of scholarly event data is the fact that anyone can edit, including reverts.
+
+Sometimes authors disagree on a matter of academic principle, which can reasult in references to Research Objects being added and removed. Sometimes a larger edit containing a reference is automatically rolled back. Sometimes vandalism to an article with references causes references to be removed (and often automatically restored). 
+
+This means that when there *is* activity around a reference, there's often more than just one event.
 
 #### Further information
 
+See the [Software](#software) section for details on the software that gathers data.
 
+#ifdef __TODO__
 
 ### Other Push sources
 
@@ -927,7 +1024,7 @@ TODO
 
 #### Provenance
 
-#### Methodology
+#### Methodology
 
 #### Coverage
 
@@ -939,7 +1036,9 @@ Depending upon the providers, these can be received as a live stream or sent in 
 
 #### Limtations, Quirks & Failure Cases
 
+#endif
 
+#ifdef __FUTURE__
 
 # Pushing data into Crossref Event Data
 
@@ -962,6 +1061,8 @@ TODO
  - don't trust the data
  - may be service interruptions
  - contact us if you want to try stuff out
+
+#endif
 
 # Appendix: Software
 
@@ -1180,12 +1281,15 @@ UUID
 
 ### Event Data API
 
+- [http://api.eventdata.crossref.org](http://api.eventdata.crossref.org/api)
+- The API for Crossref Event Data. The Lagotto software is running here.
+
+### Event Data MVP User Inferface
+
 - [http://api.eventdata.crossref.org](http://api.eventdata.crossref.org)
-- The API for Crossref Event Data. 
+- The API for Crossref Event Data. The Lagotto software is running here. Access to the User Interface is provided at MVP stage.
 
-
-
-## Internal
+## Internal and Development
 
 ### Event Data API Staging
 
@@ -1200,5 +1304,5 @@ UUID
 ### Wikipedia Live Events [NOT UP]
 
 - [http://wikipedia.eventdata.crossref.org](http://wikipedia.eventdata.crossref.org)
-- The Wikipedia agent for CED. Watch live events as they occur.
+- The Wikipedia agent for CED. This is the service that monitors Wikipedia and pushes data into CED. Watch live events as they occur.
 
