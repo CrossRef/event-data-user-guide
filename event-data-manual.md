@@ -228,238 +228,6 @@ If you're using Chrome, we suggest you use JSONView (available for [Chrome](http
 
 Note that when you browse the Deposits API you will see live Deposits as they occur. Look at the `state` to see whether or not they have been processed yet.
 
-# Using the API
-
-The API is free to use without restrictions. At MVP stage it contains only small but growing sample of Event Data. While the API does provide search functionality, you may not yet find the DOI you are looking for.
-
-**The [API is documented using Swagger](http://api.eventdata.crossref.org/api)**. where you can find detailed information on all of the options available. What follows here is a conceptual explanation of the CED API.
-
-## Events, Deposits & Relations
-
-As detailed in the [What is an Event](#what-is-an-event) section, Event Data is represented as Relations and Deposits. These are available on the Event Data API. The API is web-based and uses JSON so you can easily develop software to work with it or try it out in your browser.
-
-### Deposit API
-
-The Deposit API provides access to recent Deposits. It is available at `http://eventdata.crossref.org/api/deposits`.
-
-Query parameters for filtering Deposits:
-
-- `message_type` - `create` or `delete`
-- `source_token` - the source token ID of the service that pushed the data in (see [Source Tokens](#source-tokens-appendix))
-- `state` - the state of the deposit: one of `waiting`, `working`, `failed`, `done`
-- `page` - the page number
-
-Most deposits are of `create` type. For Data Sources such as Wikipedia, where references can be removed, the type of a deposit might be `delete`.
-
-Example queries:
-
-Show only Deposits form the Wikipedia Data Source:
-
-`http://eventdata.crossref.org/api/deposits?source_token=a147a49b-8ef1-4d2a-92b3-541ee7c87f2f`
-
-Show only Deposits that involve removing a Relation:
-
-`http://eventdata.crossref.org/api/deposits?message_type=delete`
-
-An example response from the Deposit API:
-
-    {
-      meta: {
-        status: "ok",
-        message-type: "deposit-list",
-        message-version: "6.0.0",
-        total: 1,
-        total_pages: 1,
-        page: 1
-      },
-      deposits: [
-      {
-        id: "cd6e55aa-b03c-494a-909d-2f1f707d489b",
-        state: "done",
-        message_type: "relation",
-        message_action: "create",
-        source_token: "a147a49b-8ef1-4d2a-92b3-541ee7c87f2f",
-        subj_id: "https://en.wikipedia.org/wiki/Xorphanol",
-        obj_id: "http://dx.doi.org/10.1111/j.1749-6632.1988.tb38614.x",
-        relation_type_id: "references",
-        source_id: "wikipedia",
-        total: 1,
-        occurred_at: "2016-03-22T12:10:19Z",
-        timestamp: "2016-03-22T13:17:04Z",
-        subj: {
-          pid: "https://en.wikipedia.org/wiki/Xorphanol",
-          title: "Xorphanol",
-          container-title: "Wikipedia",
-          issued: "2016-03-21T18:59:05.000Z",
-          URL: "https://en.wikipedia.org/wiki/Xorphanol",
-          registration_agency: "wikipedia",
-          type: "entry-encyclopedia",
-          tracked: false
-        },
-        obj: { }
-      }
-      ]
-    }
-
-An explanation of the pertinent parts:
-
-    deposits: [
-
-The list of Deposits follows. You can use the `page` parameter to page through the results. Our example has only one Deposit.
-
-    state: "done",
-
-When a Deposit enters CED its status is `waiting`. It will then be processed, at which point its status will be `working` and then it will be either `done` or `failed` if there was a problem processing it. When a Deposit is in the `done` state it will have created, updated or deleted one or more Relations.
-
-    source_token: "a147a49b-8ef1-4d2a-92b3-541ee7c87f2f",
-
-Every Data Source has a token to identify it. You can use this to query the Deposit API for events that came from a particular sources. See the [Source Tokens](#source-tokens-appendix) section for the list of available sources.
-
-    subj_id: "https://en.wikipedia.org/wiki/Xorphanol",
-
-The Subject of the event. In this case it is the English Wikipedia article 'Xorphanol', but it could be a tweet.
-
-    obj_id: "http://dx.doi.org/10.1111/j.1749-6632.1988.tb38614.x",
-
-The Object of the event, usually a DOI.
-
-    relation_type_id: "references",
-
-The type of the Relation being recorded. Other values are 'cites', 'mentions', 'likes' etc.
-
-    total: 1,
-
-The number of actions this represents. For most data this will be 1, but for Data Sources like Facebook, which represents only 'the number of times a DOI is currently liked', this can have other values.
-
-    occurred_at: "2016-03-22T12:10:19Z",
-
-The agent that collects this data records the time as soon as it collects the event. In this example, there was an edit to Wikipedia at 12:10.
-
-    timestamp: "2016-03-22T13:17:04Z",
-
-CED records the time as soon as it recieves the event. In this example, the deposit was made at 13:17, meaning the Wikipedia Data Source took 1 hour and 7 minutes to process the event. Note that the `timestamp` can be considerably different to the `occurred_at` if, for example, back-files are re-analyzed to extract new data. If you are performing analysis remember to bear in mind the difference between when the event occurred and when CED became aware of it.
-
-    subj: {
-      pid: "https://en.wikipedia.org/wiki/Xorphanol",
-      title: "Xorphanol",
-      container-title: "Wikipedia",
-      issued: "2016-03-21T18:59:05.000Z",
-      URL: "https://en.wikipedia.org/wiki/Xorphanol",
-      registration_agency: "wikipedia",
-      type: "entry-encyclopedia",
-      tracked: false
-    },
-
-The Wikipedia Data Source includes information about the subject, in this case the Wikipedia article so CED can provide basic information about it.
-
-    obj: { }
-
-Sources can also include metadata information about the object, in this case a DOI, but CED automatically gathers this information.
-
-### Relations API
-
-The Relations API provides access to all of the Relations in CED. It is available at `http://eventdata.crossref.org/api/relations`.
-
-Query parameters for filtering Relations:
-
-- `work_id` - The ID of the work, e.g. `http://doi.org/10.5555/12345678`
-- `work_ids` - Comma separated work IDs
-- `relation_type_id` - Relation type, e.g. `cites`
-- `source_id` - ID of the Data Source, e.g. `wikipedia`
-- `page` - Page number
-- `recent` - Limit to relations created last x days
-- `per_page` - Results per page (0-1000), defaults to 1000
-
-Here is an example API response.
-
-    {
-      meta: {
-        status: "ok",
-        message-type: "relation-list",
-        message-version: "v7",
-        total: 2,
-        total_pages: 1,
-        page: 1
-      },
-      relations: [{
-        subj_id: "https://en.wikipedia.org/wiki/Red_giant",
-        obj_id: "http://doi.org/10.1086/306546",
-        source_id: "wikipedia",
-        relation_type_id: "references",
-        total: 1,
-        author: [ ],
-        title: "Red giant",
-        issued: {date-parts: [[2016,3,31]]},
-        container-title: "Wikipedia",
-        URL: "https://en.wikipedia.org/wiki/Red_giant",
-        work_type_id: "entry-encyclopedia",
-        events: { },
-        timestamp: "2016-03-31T14:46:11Z"
-      },
-      {
-        subj_id: "http://doi.org/10.1086/306546",
-        obj_id: "https://en.wikipedia.org/wiki/Red_giant",
-        source_id: "wikipedia",
-        relation_type_id: "is_referenced_by",
-        total: 1,
-        author: [{family: "Boothroyd", given: "Arnold I."},
-                 {family: "Sackmann", given: "I.-Juliana"}],
-        title: "The CNO Isotopes: Deep Circulation in Red Giants and First and Second Dredge-up",
-        issued: {date-parts: [[1999,1]]},
-        container-title: "ApJ",
-        volume: "510",
-        page: "232-250",
-        issue: "1",
-        DOI: "10.1086/306546",
-        URL: "http://dx.doi.org/10.1086/306546",
-        work_type_id: "article-journal",
-        events: { },
-        timestamp: "2016-03-31T14:46:11Z"}]
-    }
-
-The Subject and Objects are referred to by their canonical URLs. Notice that a single Deposit with a `references` relation type has created two Relations: one with a `references` and an automatic inverse `is_referenced_by` (see [Inverse Relations](#inverse-relations)). The metadata provided corresponds to the Subject of the Relation in each case.
-
-
- #ifdef __TODO__
-
-TODO
-
-- example query
-- example response and docs
-- doesn't contain all deposits - see [Availability](#availability)
-- swagger docs
-
-#endif
-
-## Deleted data
-
-Relations can be deleted. For example, when a reference from a Wikipedia article to a DOI is removed, that reference no longer exists. CED aims to always have the most up-to-date state as far as possible.
-
-When a Relation is deleted, it will be because of a particular Deposit which included an instruction to delete it. All Deposit events are retained in the Deposit API and log, so no information is lost. If you are interested in, for example, Wikipedia deletions, can find every addition and deletion of a reference in the Deposits.
-
-## Cache and Processing Delays
-
-Some data is cached, which means the API might not reflect the most recent data in CED. 
-
-When a Deposit enters CED there may be a short delay before it is processed to update the Relations information. This will be at least 5 minutes, but at times of heavy traffic this may increase. You can check the status of Deposits by using the Deposit API.
-
-#ifdef __TODO__
-Data will never be older than TODO.
-#endif
-
-
-## Availability {#availability}
-
-All of the data is open for anyone to use. We will try to ensure that the Relations and Deposit APIs are available to all. As we are providing this as a free-to-access service, high demand may produce occasional fluctuations in service. We are planning to introduce a paid-for Sevice Level Agreement (SLA), which will provide agreements about the availability of the service. They will provide exatly the same data.
-
-All Relations in CED will be available via the Relations API, and once a Relation is in CED, it will always be available in its most up-to-date form on the API unless it is deleted. For practical reasons due to the high volume of data, the Deposits are *not* guaranteed to be available on the Deposits API forever. Deposits will be archived after a certain period of time so data will never be lost or become unavailable. 
-
-#ifdef __FUTURE__
-
-The exact period of time before Deposits are archived to the Deposit Log are to be determined, based on real-world observations. See the [Audit and Reproducibility](#audit-reproducibility) section for how to access old deposits.
-
-#endif
-
 # Scope {#scope}	
 
 Crossref Event Data collects Event Data on Research Objects that have Crossref or DataCite DOIs. It does this by monitoring various services for references to those Research Objects.
@@ -487,6 +255,7 @@ For pull sources, such as Facebook, CED can only retrieve data for Research Obje
 Every Research Object in CED has a timestamp so you can check when CED first became aware of it.
 
 This means that some events may not be captured because CED doesn't know about, and therefore can't query for, the DOI. It also means that even if there is some event data for a given Research Object, it only goes as far back as the time when CED became aware of it.
+
 
 
 #ifdef __FUTURE__
@@ -1079,6 +848,238 @@ TODO
  - don't trust the data
  - may be service interruptions
  - contact us if you want to try stuff out
+
+#endif
+
+# Using the API
+
+The API is free to use without restrictions. At MVP stage it contains only small but growing sample of Event Data. While the API does provide search functionality, you may not yet find the DOI you are looking for.
+
+**The [API is documented using Swagger](http://api.eventdata.crossref.org/api)**. where you can find detailed information on all of the options available. What follows here is a conceptual explanation of the CED API.
+
+## Events, Deposits & Relations
+
+As detailed in the [What is an Event](#what-is-an-event) section, Event Data is represented as Relations and Deposits. These are available on the Event Data API. The API is web-based and uses JSON so you can easily develop software to work with it or try it out in your browser.
+
+### Deposit API
+
+The Deposit API provides access to recent Deposits. It is available at `http://eventdata.crossref.org/api/deposits`.
+
+Query parameters for filtering Deposits:
+
+- `message_type` - `create` or `delete`
+- `source_token` - the source token ID of the service that pushed the data in (see [Source Tokens](#source-tokens-appendix))
+- `state` - the state of the deposit: one of `waiting`, `working`, `failed`, `done`
+- `page` - the page number
+
+Most deposits are of `create` type. For Data Sources such as Wikipedia, where references can be removed, the type of a deposit might be `delete`.
+
+Example queries:
+
+Show only Deposits form the Wikipedia Data Source:
+
+`http://eventdata.crossref.org/api/deposits?source_token=a147a49b-8ef1-4d2a-92b3-541ee7c87f2f`
+
+Show only Deposits that involve removing a Relation:
+
+`http://eventdata.crossref.org/api/deposits?message_type=delete`
+
+An example response from the Deposit API:
+
+    {
+      meta: {
+        status: "ok",
+        message-type: "deposit-list",
+        message-version: "6.0.0",
+        total: 1,
+        total_pages: 1,
+        page: 1
+      },
+      deposits: [
+      {
+        id: "cd6e55aa-b03c-494a-909d-2f1f707d489b",
+        state: "done",
+        message_type: "relation",
+        message_action: "create",
+        source_token: "a147a49b-8ef1-4d2a-92b3-541ee7c87f2f",
+        subj_id: "https://en.wikipedia.org/wiki/Xorphanol",
+        obj_id: "http://dx.doi.org/10.1111/j.1749-6632.1988.tb38614.x",
+        relation_type_id: "references",
+        source_id: "wikipedia",
+        total: 1,
+        occurred_at: "2016-03-22T12:10:19Z",
+        timestamp: "2016-03-22T13:17:04Z",
+        subj: {
+          pid: "https://en.wikipedia.org/wiki/Xorphanol",
+          title: "Xorphanol",
+          container-title: "Wikipedia",
+          issued: "2016-03-21T18:59:05.000Z",
+          URL: "https://en.wikipedia.org/wiki/Xorphanol",
+          registration_agency: "wikipedia",
+          type: "entry-encyclopedia",
+          tracked: false
+        },
+        obj: { }
+      }
+      ]
+    }
+
+An explanation of the pertinent parts:
+
+    deposits: [
+
+The list of Deposits follows. You can use the `page` parameter to page through the results. Our example has only one Deposit.
+
+    state: "done",
+
+When a Deposit enters CED its status is `waiting`. It will then be processed, at which point its status will be `working` and then it will be either `done` or `failed` if there was a problem processing it. When a Deposit is in the `done` state it will have created, updated or deleted one or more Relations.
+
+    source_token: "a147a49b-8ef1-4d2a-92b3-541ee7c87f2f",
+
+Every Data Source has a token to identify it. You can use this to query the Deposit API for events that came from a particular sources. See the [Source Tokens](#source-tokens-appendix) section for the list of available sources.
+
+    subj_id: "https://en.wikipedia.org/wiki/Xorphanol",
+
+The Subject of the event. In this case it is the English Wikipedia article 'Xorphanol', but it could be a tweet.
+
+    obj_id: "http://dx.doi.org/10.1111/j.1749-6632.1988.tb38614.x",
+
+The Object of the event, usually a DOI.
+
+    relation_type_id: "references",
+
+The type of the Relation being recorded. Other values are 'cites', 'mentions', 'likes' etc.
+
+    total: 1,
+
+The number of actions this represents. For most data this will be 1, but for Data Sources like Facebook, which represents only 'the number of times a DOI is currently liked', this can have other values.
+
+    occurred_at: "2016-03-22T12:10:19Z",
+
+The agent that collects this data records the time as soon as it collects the event. In this example, there was an edit to Wikipedia at 12:10.
+
+    timestamp: "2016-03-22T13:17:04Z",
+
+CED records the time as soon as it recieves the event. In this example, the deposit was made at 13:17, meaning the Wikipedia Data Source took 1 hour and 7 minutes to process the event. Note that the `timestamp` can be considerably different to the `occurred_at` if, for example, back-files are re-analyzed to extract new data. If you are performing analysis remember to bear in mind the difference between when the event occurred and when CED became aware of it.
+
+    subj: {
+      pid: "https://en.wikipedia.org/wiki/Xorphanol",
+      title: "Xorphanol",
+      container-title: "Wikipedia",
+      issued: "2016-03-21T18:59:05.000Z",
+      URL: "https://en.wikipedia.org/wiki/Xorphanol",
+      registration_agency: "wikipedia",
+      type: "entry-encyclopedia",
+      tracked: false
+    },
+
+The Wikipedia Data Source includes information about the subject, in this case the Wikipedia article so CED can provide basic information about it.
+
+    obj: { }
+
+Sources can also include metadata information about the object, in this case a DOI, but CED automatically gathers this information.
+
+### Relations API
+
+The Relations API provides access to all of the Relations in CED. It is available at `http://eventdata.crossref.org/api/relations`.
+
+Query parameters for filtering Relations:
+
+- `work_id` - The ID of the work, e.g. `http://doi.org/10.5555/12345678`
+- `work_ids` - Comma separated work IDs
+- `relation_type_id` - Relation type, e.g. `cites`
+- `source_id` - ID of the Data Source, e.g. `wikipedia`
+- `page` - Page number
+- `recent` - Limit to relations created last x days
+- `per_page` - Results per page (0-1000), defaults to 1000
+
+Here is an example API response.
+
+    {
+      meta: {
+        status: "ok",
+        message-type: "relation-list",
+        message-version: "v7",
+        total: 2,
+        total_pages: 1,
+        page: 1
+      },
+      relations: [{
+        subj_id: "https://en.wikipedia.org/wiki/Red_giant",
+        obj_id: "http://doi.org/10.1086/306546",
+        source_id: "wikipedia",
+        relation_type_id: "references",
+        total: 1,
+        author: [ ],
+        title: "Red giant",
+        issued: {date-parts: [[2016,3,31]]},
+        container-title: "Wikipedia",
+        URL: "https://en.wikipedia.org/wiki/Red_giant",
+        work_type_id: "entry-encyclopedia",
+        events: { },
+        timestamp: "2016-03-31T14:46:11Z"
+      },
+      {
+        subj_id: "http://doi.org/10.1086/306546",
+        obj_id: "https://en.wikipedia.org/wiki/Red_giant",
+        source_id: "wikipedia",
+        relation_type_id: "is_referenced_by",
+        total: 1,
+        author: [{family: "Boothroyd", given: "Arnold I."},
+                 {family: "Sackmann", given: "I.-Juliana"}],
+        title: "The CNO Isotopes: Deep Circulation in Red Giants and First and Second Dredge-up",
+        issued: {date-parts: [[1999,1]]},
+        container-title: "ApJ",
+        volume: "510",
+        page: "232-250",
+        issue: "1",
+        DOI: "10.1086/306546",
+        URL: "http://dx.doi.org/10.1086/306546",
+        work_type_id: "article-journal",
+        events: { },
+        timestamp: "2016-03-31T14:46:11Z"}]
+    }
+
+The Subject and Objects are referred to by their canonical URLs. Notice that a single Deposit with a `references` relation type has created two Relations: one with a `references` and an automatic inverse `is_referenced_by` (see [Inverse Relations](#inverse-relations)). The metadata provided corresponds to the Subject of the Relation in each case.
+
+
+ #ifdef __TODO__
+
+TODO
+
+- example query
+- example response and docs
+- doesn't contain all deposits - see [Availability](#availability)
+- swagger docs
+
+#endif
+
+## Deleted data
+
+Relations can be deleted. For example, when a reference from a Wikipedia article to a DOI is removed, that reference no longer exists. CED aims to always have the most up-to-date state as far as possible.
+
+When a Relation is deleted, it will be because of a particular Deposit which included an instruction to delete it. All Deposit events are retained in the Deposit API and log, so no information is lost. If you are interested in, for example, Wikipedia deletions, can find every addition and deletion of a reference in the Deposits.
+
+## Cache and Processing Delays
+
+Some data is cached, which means the API might not reflect the most recent data in CED. 
+
+When a Deposit enters CED there may be a short delay before it is processed to update the Relations information. This will be at least 5 minutes, but at times of heavy traffic this may increase. You can check the status of Deposits by using the Deposit API.
+
+#ifdef __TODO__
+Data will never be older than TODO.
+#endif
+
+
+## Availability {#availability}
+
+All of the data is open for anyone to use. We will try to ensure that the Relations and Deposit APIs are available to all. As we are providing this as a free-to-access service, high demand may produce occasional fluctuations in service. We are planning to introduce a paid-for Sevice Level Agreement (SLA), which will provide agreements about the availability of the service. They will provide exatly the same data.
+
+All Relations in CED will be available via the Relations API, and once a Relation is in CED, it will always be available in its most up-to-date form on the API unless it is deleted. For practical reasons due to the high volume of data, the Deposits are *not* guaranteed to be available on the Deposits API forever. Deposits will be archived after a certain period of time so data will never be lost or become unavailable. 
+
+#ifdef __FUTURE__
+
+The exact period of time before Deposits are archived to the Deposit Log are to be determined, based on real-world observations. See the [Audit and Reproducibility](#audit-reproducibility) section for how to access old deposits.
 
 #endif
 
