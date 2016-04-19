@@ -415,7 +415,7 @@ Here is an example API response.
         work_type_id: "article-journal",
         events: { },
         timestamp: "2016-03-31T14:46:11Z"}]
-  }
+    }
 
 The Subject and Objects are referred to by their canonical URLs. Notice that a single Deposit with a `references` relation type has created two Relations: one with a `references` and an automatic inverse `is_referenced_by` (see [Inverse Relations](#inverse-relations)). The metadata provided corresponds to the Subject of the Relation in each case.
 
@@ -480,9 +480,9 @@ CED accepts any DOI so, whilst nearly every DOI in CED will belong to either Cro
 
 ## Internal Research Object list {#internal-research-object-list}
 
-CED stores a list of Research Objects. Every time CED becomes aware of a new Research Object, for example via a Data Source, it is added to the list. It would not be practical to store details of every single Research Object in existence (approximately 100 million) when the majority have no events. CED only stores Research Objects that it thinks are likely to have event data. The aim is that most Research Objects in CED have at least one Relation.
+CED stores a list of Research Objects. Every time CED becomes aware of a new Research Object, for example via a Data Source, it is added to the list. It would not be practical to store details of every single Research Object in existence (approximately 80 million) when the majority have no events. CED only stores Research Objects that it thinks are likely to have event data. The aim is that most Research Objects in CED have at least one Relation.
 
-For pull sources, such as Facebook, CED can only retrieve data for Research Objects it knows about via the internal Research Object list. It would be practically impossible to poll the Facebook API for 100 million Research Objects. Thus CED will only check for Facebook events on Research Objects that been added to CED through some other push source (such as Wikipedia). Whilst this does mean that CED doesn't check Facebook for every Research Object in existence, it does mean that there is a higher probablility that the Research Objects it *does* check do have some data. Check the documentation for each Source for full details.
+For pull sources, such as Facebook, CED can only retrieve data for Research Objects it knows about via the internal Research Object list. It would be practically impossible to poll the Facebook API for 80 million Research Objects. Thus CED will only check for Facebook events on Research Objects that been added to CED through some other push source (such as Wikipedia). Whilst this does mean that CED doesn't check Facebook for every Research Object in existence, it does mean that there is a higher probablility that the Research Objects it *does* check do have some data. Check the documentation for each Source for full details.
 
 Every Research Object in CED has a timestamp so you can check when CED first became aware of it.
 
@@ -619,7 +619,7 @@ Every Source operates by communicating with an external service via its API to r
 
 Pull sources, for example Facebook, provide some kind of interface that CED must go out and query. Most sources require one request to be made for each DOI we are interested in. Because of this, the data that we have for a pull source is only as recent as the last time we checked against it.
 
-Because of techincal limitations like bandwidth, external organisations imposing rate limits on their APIs, and because there are around 100 million DOIs in existence, we cannot check every DOI against every Pull Source and we are limited in how often we can make queries.
+Because of techincal limitations like bandwidth, external organisations imposing rate limits on their APIs, and because there are around 80 million DOIs in existence, we cannot check every DOI against every Pull Source and we are limited in how often we can make queries.
 
 CED will aim to update data from pull sources as often as possible, but this will fluctuate depending on real-world observations.
 
@@ -627,7 +627,7 @@ Push sources, for example Wikipedia, are able to send data directly to CED. This
 
 ## Selection of DOIs for Pull Sources {#selection-of-dois}
 
-Pull Sources work by making a query against an external service for a given Research Object's DOI. To do this, it maintains an internal list of Research Objecturces. The [Scope](#scope) section gives full details.
+Pull Sources work by making a query against an external service for a given Research Object's DOI. To do this, it maintains an internal list of Research Objects. The [Scope](#scope) section gives full details.
 
 
 ## Data Sources, Agents and Source tokens
@@ -636,7 +636,7 @@ A Data Source describes the type of data or where it came from. Examples of Data
 
 Every source is identified by a name, for example `mendeley` or `wikipedia`. You can use these to filter Relations and Deposits. Every Agent has its own Source token, for example `a147a49b-8ef1-4d2a-92b3-541ee7c87f2f`, and this identifies a particular piece of software running on a particular server. You can use this to filter Deposits or to help trace the path of data through the system. See see the [Source Tokens Appendix](#source-tokens-appendix) for a full list of currently operating Agents and their Source Tokens.
 
-All of the Pull Sources are operated by Crossref, but the Push Sources can be run by anyone — Crossref, DataCite or a third party.
+All of the Pull Sources are operated by Crossref, but the Push Sources could in theory be run by anyone — Crossref, DataCite or a third party.
 
 ## List of Data Sources
 
@@ -952,6 +952,8 @@ Every DOI that is found linked from a Wikipedia article page is added to CED.
 
 The stream is nominally live and Deposits and Relations will in CED after a short delay.
 
+#ifdef __FUTURE__
+
 #### Audit & Reproducibility
 
 An input trigger event corresponds to a change in any Wikipedia property. Because there is a very high volume of edits (up to 2 million per day) it is impractical to store triggers for which no DOIs were found. When an trigger does correspond to an event because a DOI was added or removed (50 thousand triggers per day), it is stored. When a trigger is stored it is given a UUID. Because an edit to a Wikipedia page (which would be treated as one trigger) can introduce more than one DOI reference, every trigger may correspond to one or more events. 
@@ -981,6 +983,8 @@ Example:
      "server-name":"sv.wikipedia.org"}
  
 Using this data it is possible to fetch the page versions and compare cited DOIs.
+
+#endif 
 
 #### Limitations, Quirks & Failure Cases
 
@@ -1088,7 +1092,9 @@ Crossref Event Data uses a collection of software. It is all open source.
 
 Lagotto is central to Crossref Event Data, and it runs at `eventdata.crossref.org`. It accepts events through the Deposit Push API and serves them up via the Relations and Deposit API. It also hosts all of the pull agents. Lagotto has extensive documentation, which can provide further detailed information the pull sources and interfaces, available on the [Lagotto site](http://lagotto.io).
 
-Lagotto was originally developed at [http://plos.org](PLoS) and developed by Martin Fenner. Maintained jointly by DataCite and Crossref. Operated by Crossref.
+Lagotto was originally developed at [PLoS](http://plos.org) and [DataCite](http://datacite.org) by Martin Fenner. It is now developed and maintained jointly by DataCite and Crossref. 
+
+The Lagotto sterver that runs Event Data is operated by Crossref.
 
 ## Baleen-Wikipedia
 
@@ -1152,7 +1158,7 @@ Do I have to pay for the data?
  : No, the public data will be free. The clearinghouse will be free to access and pull data from for both commercial and noncommercial users. However for those users who enjoy an optimum level of service, will will also offer a paid-for SLA agreement to ensure agreed service-level standards. 
 
 You have a Deposit API and a Relation API. What is the difference?
- : Before the MVP Technical blog post, we won’t have released info about these two items. When will the interviews occur? Also not sure about the latter term, Reflection API.
+ : The Relations API gives access to all of the Relations in Crossref Event Data. These cover nearly all use cases. For situations where it is useful to see the individual data points, e.g. tracking Wikpedia citation and citation removal activity, the Deposits API will be useful.
 
 Will the data be auditable?
  : Yes. Based on our auditability guidelines, we will provide authorised access to a separate storage location for the purposes of obtaining data evidence for audits.  
@@ -1163,9 +1169,6 @@ Where will you store the data?
 Can I use the data to feed into my commercial tool? 
  : Yes. We do not clean or aggregate the data we collect so that any commercial vendor has the opportunity to do this themselves in order to use the data in the way which best suits their commercial needs.  
 
-Can you guarantee coverage of events across the Data Sources?
- : Comment from Jennifer: “guarantees” are very tricky. we’re going to need to get our lawyer, Lois, to provide wording surrounding this later on before launch. Let’s leave this for now.
-
 Can you guarantee speed of accessing event data?
  : At MVP we are unable to make promises about speed of access. Please contact us via the [Event Data page](http://eventdata.crossref.org) for more information.
 
@@ -1173,7 +1176,7 @@ Is your code base open source?
  : Yes, all the code we use is open source. See the [Software](#software) section.
 
 When will Event Data be launched?
- : The MVP will be launch at the end of March, along with a Sandbox testing environment for interested users to test the pull and push sources available at that point (facebook and Wikipedia). We will release the full clearinghouse around July/August 2016 and then the SLA service in November 2016. 
+ : The MVP was launched on the 18th of April. We will release the full clearinghouse around July/August 2016 and then the SLA service in November 2016. 
 
 How do I access the data?
   : Deposits, Relations and Works are available via the CED APIs. At MVP stage you can browse Relations and Works in the User Interface.
@@ -1254,7 +1257,7 @@ JSON
  : JavaScript Object Notation. A common format for sending data. All data coming out of the CED API is in JSON format.
 
 MEDRA
- :  multilingual European DOI Registration Agency. A DOI Registration Agency.
+ :  Multilingual European DOI Registration Agency. A DOI Registration Agency.
 
 MVP
  : Minimum Viable Product. The first iteration of Crossref Event Data available to the public. Not a production quality service.
@@ -1288,7 +1291,7 @@ UUID
 ### Event Data Product Information Page
 
 - [http://eventdata.crossref.org](http://eventdata.crossref.org)
-- Product page for Crossref Event Data, full information and user manual.
+- Product page for Crossref Event Data, full information and user guide.
 
 ### Event Data API
 
@@ -1307,7 +1310,7 @@ UUID
 - [http://staging.api.eventdata.crossref.org](http://staging.api.eventdata.crossref.org)
 - Instance of the API where we can test the next version. This is an unstable testing environment and does not contain real data.
 
-## Event Data API Sandbox
+### Event Data API Sandbox
 
 - [http://sandbox.api.eventdata.crossref.org](http://sandbox.api.eventdata.crossref.org)
 - Instance of the API to allow external developers and partners to test integration. This is usually running the same version of the software as the production instance at `api.eventdata.crossref.org`. This does not contain production data. Contact us if you want to use it.
@@ -1316,4 +1319,10 @@ UUID
 
 - [http://wikipedia.eventdata.crossref.org](http://wikipedia.eventdata.crossref.org)
 - The Wikipedia agent for CED. This is the service that monitors Wikipedia and pushes data into CED. Watch live events as they occur.
+
+# Revision history
+
+| Date          | Version | Author             |                     |
+|---------------|---------| -------------------|---------------------|
+| 18-April-2016 | 0.1     | jwass@crossref.org | Initial MVP release |
 
