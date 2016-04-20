@@ -81,7 +81,7 @@ However the types of events that occur are varied. Here are some examples:
 
 Data is collected from a range of services and the information we have access to is as varied as the types of events that occur
 
- - we can capture and represent an individual tweet that mentions a DOI on Twitter
+ - we can capture and represent an individual Tweet that mentions a DOI on Twitter
  - Facebook only gives us access to a count of how many times a DOI has been liked at a given point in time
  - Wikipedia poses an interesting challenge because a reference can be added or removed, so depending when you query the system, a reference may or may not exist
 
@@ -286,7 +286,7 @@ TODO
 - not all landing pages can be followed
 - not possible to reverse all URLs
 - some publishers prevent it
-- show data for proportion of tweets collected
+- show data for proportion of Tweets collected
 - domains from sample of DOIs per publisher
 
 ## Auditability 
@@ -563,7 +563,7 @@ TODO
  - filters
  - pipeline
  - audit logs
-- title is body of tweet
+- title is body of Tweet
 
 
 #### Coverage
@@ -960,7 +960,7 @@ The agent that collects this data records the time as soon as it collects the ev
 
     timestamp: "2016-03-22T13:17:04Z",
 
-CED records the time as soon as it recieves the event. In this example, the deposit was made at 13:17, meaning the Wikipedia Data Source took 1 hour and 7 minutes to process the event. Note that the `timestamp` can be considerably different to the `occurred_at` if, for example, back-files are re-analyzed to extract new data. If you are performing analysis remember to bear in mind the difference between when the event occurred and when CED became aware of it.
+CED records the time as soon as it receives the event. In this example, the deposit was made at 13:17, meaning the Wikipedia Data Source took 1 hour and 7 minutes to process the event. Note that the `timestamp` can be considerably different to the `occurred_at` if, for example, back-files are re-analyzed to extract new data. If you are performing analysis remember to bear in mind the difference between when the event occurred and when CED became aware of it.
 
     subj: {
       pid: "https://en.wikipedia.org/wiki/Xorphanol",
@@ -1092,8 +1092,8 @@ We welcome new Data Sources. Using the Push API, third parties can easily push D
 We would love to help you develop your Push Source.
 
  1. Contact us at eventdata@crossref.org to discuss your source. We will need to create a Data Source in Event Data and update our documentation.
- 1. Decide what kind of Relation Types best descirbes your data. See the [Relations](#relations) section for a list of Relation types.
- 1. Decide if you want to include a Total. For individial events, like tweets, you don't need to. When there's a total number of events in a relation, e.g. Facebook where we record the total number of likes for a given DOI, a total can be supplied.
+ 1. Decide what kind of Relation Types best describes your data. See the [Relations](#relations) section for a list of Relation Types.
+ 1. Decide if you want to include a Total. For individual events, like tweets, you don't need to. When there's a total number of events in a relation, e.g. Facebook where we record the total number of likes for a given DOI, a total can be supplied.
 
 ### Tokens
 
@@ -1116,14 +1116,14 @@ We would love to help you develop your Push Source.
 ### Sending Data
 
  1. Send your Deposit by POSTing to [`http://sandbox.api.eventdata.crossref.org/api/deposits`](http://sandbox.api.eventdata.crossref.org/api/deposits)
- 1. You will recieve a 202 on success or a 400 on failure. 
+ 1. You will receive a 202 on success or a 400 on failure. 
  1. You can check on the status of your deposit by visiting `http://sandbox.api.eventdata.crossref.org/api/deposits/«deposit-id»`
  1. Deposits will usually be processed within a few minutes. When the status changes from `waiting` to `done`, it has been fully processed. If there is an error processing, it will read `failed`.
 
 ### Ready to go!
 
  1. When you are happy with your Agent, let us know and we will enable it in the Production service.
- 1. Switch over from the staging environment, `staging.api.eventata.crossref.org` to the Production environment, `api.eventdata.crossref.org`
+ 1. Switch over from the Staging Environment, `staging.api.eventata.crossref.org` to the Production Environment, `api.eventdata.crossref.org`
  1. Enable your agent, push historical deposits if necessary, and start pushing new data!
 
 ## Examples
