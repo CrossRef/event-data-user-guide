@@ -8,4 +8,5 @@ Edit the `event-data-manual.md` Markdown file. To build run `./build.sh`. Rememb
 
 ## Requirements
 
-Requires [Pandoc](http://pandoc.org/installing.html). 
+- Requires [Pandoc](http://pandoc.org/installing.html). 
+- Install `gpp`, available with brew and probably `apt-get`.
