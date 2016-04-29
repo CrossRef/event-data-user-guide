@@ -1324,7 +1324,7 @@ What format does the API data come in?
  : All APIs use JSON format
 
 Do I have to pay for the data?
- : No, the public data will be free. The clearinghouse will be free to access and pull data from for both commercial and noncommercial users. However for those users who enjoy an optimum level of service, will will also offer a paid-for SLA agreement to ensure agreed service-level standards. 
+ : No, the public data will be free. The clearinghouse will be free to access and pull data from for both commercial and noncommercial users. However for those users who want to enjoy an optimum level of service, we will also offer a paid-for SLA agreement to ensure agreed service-level standards. 
 
 You have a Deposit API and a Relation API. What is the difference?
  : The Relations API gives access to all of the Relations in Crossref Event Data. These cover nearly all use cases. For situations where it is useful to see the individual data points, e.g. tracking Wikpedia citation and citation removal activity, the Deposits API will be useful.
