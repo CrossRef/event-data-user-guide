@@ -23,6 +23,8 @@ Welcome to the Crossref Event Data User Guide. It contains everything you need t
 
 Everyone should read the introduction. You can jump ahead to "The Service" for a detailed description of what CED provides, but for full understanding you should read "Concepts".
 
+**This document is pre-release. Some features described here are at preview stage and some are planned. The Event Data Service has not yet launched and is not feature-complete.**
+
 # 1 Introduction
 
 Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
@@ -60,7 +62,7 @@ Every Event is the result of some data input from a source, and the entire proce
 
 ![](images/introduction-evidence-flow.png "Event Data Evidence Flow")
 
-Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an examplar altmetrics data provider, setting the standard in openness and transparency. You can read the CED Code of Conduct Self-Reporting table in the [appendix](#appendix-niso-coc).
+Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an examplar altmetrics data provider, setting the standard in openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
 
 ## Accessing the Data 
 
@@ -74,15 +76,19 @@ Crossref Event Data is available via our Query API. The Query API allows you to 
 
 We will add other mechanisms for retrieving Events when we introduce the Service Level Agreement.
 
-The data is made available via a REST API. Because around a million events are collected per month, the queries are made on a per-day basis. Even per day there are tens of thousands of events, so it's worth deciding on a query filter that matches your use case.
+The data is made available via a REST API. Because around a million events are collected per month, the queries are made to the API on a per-day basis. Even per day there are tens of thousands of events, so it's worth deciding on a query filter that matches your use case.
 
-## Reliability
+## Reliability and Monitoring
 
 We will provide a Health Dashboard which will show how each component in the system and each external source is functioning. CED integrates with a number of external data sources, and is transparent about how we interact with them.
 
+## Service Level Agreement
+
+We will introduce a Service Level Agreement which will provide agreed service levels for responsiveness of the service. It will also include APIs for access to data.
+
 # 2 The Service
 
-Crossref Event Data is a system for collecting Events and distributing them. Approximately 100,000 Events occur per day, which is approximately one per second. Events for most Data Sources are collected and produced by Crossref, but some are produced by our partners.
+Crossref Event Data is a system for collecting Events and distributing them. Up to 100,000 Events occur per day, which is approximately one per second. Events for most Data Sources are collected and produced by Crossref, but some are produced by our partners.
 
  - The Query API provides an interface for accessing Events. It's a REST API that allows download of events and supports various filters. 
 
@@ -93,9 +99,9 @@ Crossref Event Data is a system for collecting Events and distributing them. App
 
 ## Query API
 
-Use the Query API is the way to retrieve Event Data. It is simple REST API and uses JSON. Because there are up to a million events per month, every query is scoped by a date, in `YYYY-MM-DD` format. Even when scoped to a particular date, there can be tens of thousands of events. Therefore there are a number of filters available.
+The Query API provides access to Event Data. It is simple REST API and uses JSON. Because there are up to a million events per month, every query is scoped by a date, in `YYYY-MM-DD` format. Even when scoped to a particular date, there can be tens of thousands of events. Therefore there are a number of filters available.
 
-The Query has two date views: `collected` and `occurred`. See ['Occurred-at vs Collected-at'](##concept-timescales) for a more detailed discussion. Each is suitable for different use cases:
+The Query has two date views: `collected` and `occurred`. See ['Occurred-at vs Collected-at'](#concept-timescales) for a more detailed discussion. Each is suitable for different use cases:
 
  - `collected` is useful when you want to run a daily query to fetch all events for a given filter and you want to be sure you always have all available events
  - `collected` is useful when you want to reference a dataset and be sure it never changes
@@ -111,7 +117,7 @@ All queries are available on both views.
 
 The Query API is updated every day. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
 
-## Data Sources
+## Data Sources {#data-sources}
 
 Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. 
 
@@ -129,7 +135,7 @@ Event Data is a hub for the collection and distribution of Events and contains d
 
 For detailed discussion of each one, see the [Sources In Depth](#in-depth-sources) section.
 
-### Available queries
+### Available Queries
 
 Note: You can copy and paste these into your browser, but be aware that some responses can be up to 20MB, which may make the browser unresponsive.
 
@@ -179,7 +185,7 @@ If you want to collect all events for a given date range, you can issue a set of
  - `http://query.api.eventdata.crossref.org/occurred/2016-08-.../sources/twitter/events.json`
  - `http://query.api.eventdata.crossref.org/occurred/2016-08-31/sources/twitter/events.json`
 
-Note that this is a form of pagination, which is a standard part of REST APIs. You can find code examples in the [Code Examples]{#appendix-code-examples} section.
+Note that this is a form of pagination, which is a standard part of REST APIs. You can find code examples in the [Code Examples](#appendix-code-examples) section.
 
 ## Data Format
 
@@ -189,9 +195,15 @@ The most up-to-date list of supported relations is available in [Lagotto](https:
 
 A sample Event can be read:
 
- > The DOI `10.1056/NEJMP1608511` was `discussed` in the tweet ID `http://twitter.com/statuses/763877751396954112` on Twitter. The text of the tweet is `"RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…"` and the author was `kdjhaveri`. 
- > The tweet was made at `2016-08-11T23:20:22Z` and was processed at `2016-08-12T00:41:11Z`.
- > The ID of the Event is `1b5620e1-89c4-4d50-ac65-006babd07b4b`.
+ - the DOI `10.1056/NEJMP1608511`
+ - was `discussed`
+ - in the tweet ID `http://twitter.com/statuses/763877751396954112`
+ - on Twitter
+ - the text of the tweet is `"RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…"`
+ - and the author was `kdjhaveri`. 
+ - the tweet was made at `2016-08-11T23:20:22Z`
+ - and was processed at `2016-08-12T00:41:11Z`.
+ - the ID of the Event is `1b5620e1-89c4-4d50-ac65-006babd07b4b`.
 
 It looks like:
 
@@ -219,17 +231,118 @@ It looks like:
 
 The following fields are available:
 
- - `subj_id` - the subject of the relation as a URI, in this case a tweet
- - `relation_type_id` - the type of relation
- - `obj_id` ` the object of the relation as a URI, in this case a DOI
- - `occurred_at` the time when the Event occurred
- - 
+ - `subj_id` - the subject of the relation as a URI, in this case a tweet.
+ - `relation_type_id` - the type of relation.
+ - `obj_id` - the object of the relation as a URI, in this case a DOI.
+ - `occurred_at` - the date and time when the Event occurred.
+ - `id` - the unique ID of the event. This is used to identify the event in Event Data. Is used to trace Evidence for an Event. 
+ - `message-action` - what action does this represent? Can be `create` or `delete`. In nearly all cases, this is `create`, but can be `delete` in, for example, Wikipedia.
+ - `source_id` - the ID of the source as listed in [Data Sources]{#data-sources}.
+ - `subj` - the subject metadata, optional. Depends on the Source.
+ - `obj` - the object metadata, optional. Depends on the Source.
+ - `total` - the pre-aggregated total that this represents, if this is from a pre-aggregated source such as Facebook. Usually 1. See [Individual Events vs Pre-Aggregated](#concept-individual-aggregated).
+ - `timestamp`- the date and time time at which Event was processed by Event Data.
+
+All times in the API in ISO8601 UTC Zulu format.
 
 See [Precise meaning of Event fields](#in-depth-precise) for more detail on precisely what the fields of an Event mean under various circumstances.
 
 ## Evidence
 
+The Evidence API provides access to Evidence Records and Artifacts. You can find a full discussion of Evidence in the [Evidence In Depth](#in-depth-evidence) section.
+
+An Evidence Record generally corresponds to a single input that came from an external API. For example, the poll of an external API or an input event from a stream.
+
+An Artifact generally corresponds to an internal piece of data is produced by Crossref and consumed in the process of deriving Events from Evidence. For example, the list of DOIs or Newsfeed RSS feed URLs.
+
+### Format of Evidence Records
+
+An Evidence Record looks like:
+
+     {
+      "timestamp": "2016-08-12T00:41:11Z",
+      "input-artifacts": [
+        "http://evidence.eventdata.crossref.org/artifacts/domains-7215EE9C7D9DC229D2921A40E899EC5F",
+        "https://github.com/CrossRef/doi-destinations/version/234",
+        "https://github.com/CrossRef/event-data-twitter-agent/version/234",
+        "http://evidence.eventdata.crossref.org/artifacts/doi-url-7215EE9C7D9DC229D2921A40E899EC5F"
+        ]
+      "input-status": 200,
+      "input-headers": {
+        "x-fb-trace-id": "GKoDnoIcGvR",
+        "date": "Tue, 23 Aug 2016 08:27:28 GMT",
+        "x-fb-rev": "2520541",
+        "pragma": "no-cache",
+        «SNIPPED»
+      },
+      "input-body": {
+        "tweetId": "tag:search.twitter.com,2005:767511609329803264",
+          "author": "http://www.twitter.com/JAMAInternalMed",
+          "postedTime": "2016-08-22T00:00:01.000Z",
+          "body": "Physicians' utilization patterns of non-recommended services suggest consistent behavior https://t.co/KWintjzxaA https://t.co/1AGbQiFf5m",
+          "urls": [
+            "http://archinte.jamanetwork.com/article.aspx?articleid=2543749&utm_source=TWITTER&utm_medium=social_jn&utm_term=543832897&utm_content=content_engagement%7Carticle_engagement&utm_campaign=article_alert&linkId=27613815",
+            "https://twitter.com/JAMAInternalMed/status/767511609329803264/photo/1"
+        ],
+        "matchingRules": [
+            "url_contains:\"//archinte.jamanetwork.com/\""
+        ]},
+      "events": [
+        {
+          "obj_id": "https://doi.org/10.1056/NEJMP1608511",
+          "occurred_at": "2016-08-11T23:20:22Z",
+          "subj_id": "http://twitter.com/statuses/763877751396954112",
+          "total": 1,
+          "id": "1b5620e1-89c4-4d50-ac65-006babd07b4b",
+          "subj": {
+            "pid": "http://twitter.com/statuses/763877751396954112",
+            "author": {
+              "literal": "http://www.twitter.com/kdjhaveri"
+              },
+              "title": "RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…",
+              "issued": "2016-08-11T23:20:22.000Z",
+              "URL": "http://twitter.com/statuses/763877751396954112",
+              "type": "tweet"
+            },
+          "message_action": "create",
+          "source_id": "twitter",
+          "timestamp": "2016-08-12T00:41:11Z",
+          "relation_type_id": "discusses"
+          }
+        ]
+      }
+
+
+Not all fields are compulsory, and the format will vary from Source to Source. However, the following fields are commonly found:
+
+ - `timestamp` - the timestamp that the Evidence was recieved. This can be different from the `timestamps` and 'occurred_at` fields on the resulting Events. You should not normally use this field.
+ - `input-artifacts` - links to Artifacts that were used in processing the input
+ - `input-status` - the HTTP status code of an external API response
+ - `input-headers` - the HTTP headers of an external API response
+ - `input-body` - the HTTP response of an external API as a string, or in some digested form
+ - `events` - a list of Events that were produced, in internal Lagotto Deposit format. These may appear to be similar to Event format, but there are some differences. Note that the `events` section may be empty if the input resulted in no Events.
+
+### Getting Evidence Records
+
+If you have an Event and you want to see the Evidence for it, query by its ID.
+
+    http://service.eventdata.crossref.org/evidence/event/«event-id»
+
+You will recieve `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Link` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
+
+Inside the Evidence Record you will find an `events` section which will contain one or more events, including the one you queried for. Note that one piece of Evidence may have produced a number of Events.
+
+You can also query for Evidence Records by the date they occurred:
+
+    http://service.eventdata.crossref.org/evidence/occurred/«YYYY-MM-DD»
+
+You will recieve a page which includes a list of URLs for all Evidence Records for that day. 
+
+This can be useful if, for example, you want to see all inputs that were received from a particular source, whether or not they resulted in Events. Note that the time in the query corresponds to the `timestamp` field of the Evidence Record, and corresponds to the time the Evidence was processed. The times at which an Event occurred, the Event was collected, the Evidence was processed are different.
+
 ## Health
+
+TODO
 
 # 3 Concepts
 
@@ -241,7 +354,7 @@ See [Precise meaning of Event fields](#in-depth-precise) for more detail on prec
 
 ### Matching by DOIs {#concept-matching-dois}
 
-Some services use DOIs directly to make references. Wikipedia, for example, has citations all over the web, but where they link scholarly articles, the DOI is generally included. There are tools in the page editing workflow to encourage and suggest the incorporation of DOIs. Another data source that uses DOIs for references is DataCite, who link datasets to articles via their dataset metadata.
+Some services use DOIs directly to make references. Wikipedia, for example, has references all over the web, but where they link scholarly articles, the DOI is generally included. There are tools in the page editing workflow to encourage and suggest the incorporation of DOIs. Another data source that uses DOIs for references is DataCite, who link datasets to articles via their dataset metadata.
 
 Data that come from services like this can be very precise. We know that the person who made the citation intended to use the DOI to refer to the content item in question and we can reliably report that an Event occurred for this Crossref DOI.
 
@@ -260,10 +373,9 @@ DOIs can be expressed in a number of ways, for example:
 
 In addition, when they are displayed in an HTML page, they can be hyperlinked. **The Crossref DOI Display guidelines specify that a DOI should be a hyperlink**.
 
-Depending on the Data Source and Agent, 
+Some services, such as Twitter, automatically link URLs. Some services, such as Wikipedia, provide tools that make linking the default, although there are still unlinked DOIs.
 
-
-
+Generally, Event Data will only find links in HTML that are correctly linked using a URL.
 
 ### Publisher Domains {#concept-publisher-domains}
 
@@ -282,6 +394,8 @@ Depending on the Data Source and Agent,
 ## External Agents {#concept-external-agents}
 
 ## Individual Events vs Pre-Aggregated {#concept-individual-aggregated}
+
+todo
 
 
 
@@ -340,7 +454,19 @@ The `timestamp` usually happens a short while after the event was collected. For
 
 Event Data allows Subject and Object metadata to be included. Where the Subject or Object metadata are DOIs, and therefore can be easily looked up from the Crossref or DataCite Metadata API, it is usually not included. In other cases, it is often included.
 
+### ID
+
+The ID is generated by Agents, whether they're operated by Crossref or external parties. They are expressed as UUIDs and should be treated as opaque identifiers.
+
 See the list of (Sources in-depth)[#in-depth-sources] for a discussion of the various subject fields per source.
+
+### Message Action
+
+Most of the time an Event can be read as "this relation was created". An Event records the relationship that came into being at a given point in time.
+
+Sometimes these relationships come and go. For example, in Wikipeida, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
+
+The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records that the relation was removed.
 
 ## Sources in Depth {#in-depth-sources}
 
@@ -692,7 +818,7 @@ note not all wordpress
 
 TODO
 
-## Evidence 
+## Evidence {#in-depth-evidence}
 
 Every Event has an Evidence Record. Each Evidence Record corresponds to an input from an external source. Each Evidence Record has links to supporting data in the form of Artifacts.
 
@@ -1027,13 +1153,13 @@ URL
 UUID
   : universally unique identifier. Looks like `c0eb1c46-6a59-49c9-926b-a10667ddd9de`.
 
-## Retired words
+## Retired Terminology
 
 The following words have been used during the development of Event Data but are no longer official:
 
  - Deposit - this is an internal entity used within Lagotto. It does not form part of the public DET service, although it may be of interest to users who want to look into the internals.
  - "DOI Event Tracking" / "DET" - the old name for the Crossref Event Data service
- - Relations - this is an internal entity used within Lagotto. CED does not use Relations.
+ - Relations - this is an internal entity used within Lagotto. CED does not use Lagotto Relation objects. The concept of 'relations' is however.
 
 
 # Revision history
