@@ -7,16 +7,9 @@ margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 4cm
 fontfamily: "sans"
-date: __VERSION__
-header-includes:
-    - \\usepackage{graphicx}
-    - \\usepackage[dvipsnames]{xcolor}
-    - \\hypersetup{colorlinks=true,linkcolor=MidnightBlue}
-    - \\let\\cleardoublepage\\clearpage
-    - \\DeclareUnicodeCharacter{00A0}{ }
-
-
 ---
+
+v0.4 draft
 
 
 # Welcome
@@ -24,19 +17,19 @@ header-includes:
 Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. It is split into four sections:
 
  - "Introduction" is a high level overview of the service and background and is suitable for everyone.
- - "The Service" describes the various components of the Event Data service.
+ - "The Service" describes the Event Data service and how to use it.
  - "Concepts" covers some of the issues that should be understood before using Event Data.
- - "In Depth" describes all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience
+ - "In Depth" describes all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience.
 
 Everyone should read the introduction. You can jump ahead to "The Service" for a detailed description of what CED provides, but for full understanding you should read "Concepts".
 
-# Introduction
+# 1 Introduction
 
 Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
 
 ![](images/overview.png "Event Data Overview")
 
-Much of the activity around scholarly content happens outside of the formal literature. The scholarly community needs an infrastructure that collects, stores, and openly makes available these interactions. Crossref Event Data will provide a means of monitoring and displaying links to scholarly content on the open web. Our belief is that the greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed.
+Much of the activity around scholarly content happens outside of the formal literature. The scholarly community needs an infrastructure that collects, stores, and openly makes available these interactions. Crossref Event Data will monitor and collect links to scholarly content on the open web. The greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed.
 
 
 ## Events
@@ -61,13 +54,15 @@ Events from every Data Source are different, but they have a common set of attri
 
 ## Transparency and Data Quality
 
-We don't just ask you to trust us. Every Event is the result of some data input from a source, and the entire process — including the data that we gathered in order to produce the event and the software we used to generate it — is completely open. For every Event we provide a full Evidence Record.
+Data comes from a wide range of sources and each source is subject to different types of processing. Transparency of each piece of Event Data is crucial: where it came from, why it was selected, how it was processed and how it got here. 
+
+Every Event is the result of some data input from a source, and the entire process is completely open. For every Event we provide a full Evidence Record.
 
 ![](images/introduction-evidence-flow.png "Event Data Evidence Flow")
 
 Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an examplar altmetrics data provider, setting the standard in openness and transparency. You can read the CED Code of Conduct Self-Reporting table in the [appendix](#appendix-niso-coc).
 
-## Getting the Data 
+## Accessing the Data 
 
 Crossref Event Data is available via our Query API. The Query API allows you to make requests like:
 
@@ -79,41 +74,164 @@ Crossref Event Data is available via our Query API. The Query API allows you to 
 
 We will add other mechanisms for retrieving Events when we introduce the Service Level Agreement.
 
-The data made available via a REST API. However, because upwards of 40,000 events are collected per day, 
+The data is made available via a REST API. Because around a million events are collected per month, the queries are made on a per-day basis. Even per day there are tens of thousands of events, so it's worth deciding on a query filter that matches your use case.
 
-# The Service
+## Reliability
+
+We will provide a Health Dashboard which will show how each component in the system and each external source is functioning. CED integrates with a number of external data sources, and is transparent about how we interact with them.
+
+# 2 The Service
+
+Crossref Event Data is a system for collecting Events and distributing them. Approximately 100,000 Events occur per day, which is approximately one per second. Events for most Data Sources are collected and produced by Crossref, but some are produced by our partners.
+
+ - The Query API provides an interface for accessing Events. It's a REST API that allows download of events and supports various filters. 
+
+ - Every Event that Crossref produces has an Evidence Record. These are available via the Evidence Service. It provides supporting evidence for every Event.
+
+ - Every component in the CED system, internal and external, in CED is monitored. The Health Dashboard monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
+
 
 ## Query API
 
-events format
-split by day partitions
+Use the Query API is the way to retrieve Event Data. It is simple REST API and uses JSON. Because there are up to a million events per month, every query is scoped by a date, in `YYYY-MM-DD` format. Even when scoped to a particular date, there can be tens of thousands of events. Therefore there are a number of filters available.
+
+The Query has two date views: `collected` and `occurred`. See ['Occurred-at vs Collected-at'](##concept-timescales) for a more detailed discussion. Each is suitable for different use cases:
+
+ - `collected` is useful when you want to run a daily query to fetch all events for a given filter and you want to be sure you always have all available events
+ - `collected` is useful when you want to reference a dataset and be sure it never changes
+ - `occurred` is useful when you want to retrieve events that occurred at a particular time
+ - when using `occurred` you should be aware that new events may be collected at any time in the future that occurred at a date in the past
+
+The API base is therefore one of:
+
+  - `http://api.eventdata.crossref.org/occurred/`
+  - `http://api.eventdata.crossref.org/collected/`
+
+All queries are available on both views.
+
+The Query API is updated every day. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
 
 ## Data Sources
 
-Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. It plays two roles: that of Data Provider and Data Aggregator. 
+Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. 
 
-Sources that Crossref provides:
+| Name                   | Source Identifier   | Provided by |
+|------------------------|---------------------|-------------|
+| Crossref to DataCite   | crossref_datacite   | Crossref    |
+| Facebook               | facebook            | Crossref    |              
+| Mendeley               | mendeley            | Crossref    |
+| Newsfeed               | newsfeed            | Crossref    |
+| Reddit                 | reddit              | Crossref    |            
+| Twitter                | twitter             | Crossref    |
+| Wikipedia              | wikipedia           | Crossref    |
+| Wordpress.com          | wordpressdotcom     | Crossref    |    
+| DataCite to Crossref   | datacite_crossref   | DataCite    |
 
- - Crossref to DataCite
- - Facebook
- - Mendeley
- - Newsfeed
- - Reddit
- - Twitter
- - Wikipedia
- - Wordpress.com
+For detailed discussion of each one, see the [Sources In Depth](#in-depth-sources) section.
 
-Sources provided by partners:
+### Available queries
 
- - DataCite to Crossref
+Note: You can copy and paste these into your browser, but be aware that some responses can be up to 20MB, which may make the browser unresponsive.
 
-A detailed discussion of each one is included in the 'In Depth' section.
+#### All data for a day
+
+    http://query.api.eventdata.crossref.org/«view»/«date»/events.json
+
+e.g.
+
+    http://query.api.eventdata.crossref.org/collected/2016-08-08/events.json
+
+#### All data for a particular source for a day
+
+    http://query.api.eventdata.crossref.org/«view»/«date»/sources/«source»/events.json
+
+e.g.
+
+    http://query.api.eventdata.crossref.org/collected/2016-08-08/twitter/events.json
+
+#### All data for a DOI for a day
+
+Note: Convert the DOI to lower case before querying.
+
+    http://query.api.eventdata.crossref.org/«view»/«date»/works/«doi»/events.json
+
+e.g.
+
+    http://query.api.eventdata.crossref.org/collected/2016-08-08/works/10.5555/12345678/events.json
+
+#### All data for a DOI for a day for a given source
+
+Note: Convert the DOI to lower case before querying.
+
+    http://query.api.eventdata.crossref.org/«view»/«date»/works/«doi»/sources/«source»/events.json
+
+e.g.
+
+    http://query.api.eventdata.crossref.org/collected/2016-08-08/works/10.5555/12345678/sources/twitter/events.json
+
+### Querying a Date Range
+
+If you want to collect all events for a given date range, you can issue a set of queries. E.g. to get all Wikipedia events in August 2016, issue the following API queries:
+
+ - `http://query.api.eventdata.crossref.org/occurred/2016-08-01/sources/twitter/events.json`
+ - `http://query.api.eventdata.crossref.org/occurred/2016-08-02/sources/twitter/events.json`
+ - `http://query.api.eventdata.crossref.org/occurred/2016-08-03/sources/twitter/events.json`
+ - `http://query.api.eventdata.crossref.org/occurred/2016-08-.../sources/twitter/events.json`
+ - `http://query.api.eventdata.crossref.org/occurred/2016-08-31/sources/twitter/events.json`
+
+Note that this is a form of pagination, which is a standard part of REST APIs. You can find code examples in the [Code Examples]{#appendix-code-examples} section.
+
+## Data Format
+
+The response from the Query API will be a list of Events. An Event is of the form "this subject has this relation to this object". The list of relations is:
+
+The most up-to-date list of supported relations is available in [Lagotto](https://github.com/lagotto/lagotto/blob/master/db/seeds/production/relation_types.yml).
+
+A sample Event can be read:
+
+ > The DOI `10.1056/NEJMP1608511` was `discussed` in the tweet ID `http://twitter.com/statuses/763877751396954112` on Twitter. The text of the tweet is `"RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…"` and the author was `kdjhaveri`. 
+ > The tweet was made at `2016-08-11T23:20:22Z` and was processed at `2016-08-12T00:41:11Z`.
+ > The ID of the Event is `1b5620e1-89c4-4d50-ac65-006babd07b4b`.
+
+It looks like:
+
+    {
+      "obj_id": "https://doi.org/10.1056/NEJMP1608511",
+      "occurred_at": "2016-08-11T23:20:22Z",
+      "subj_id": "http://twitter.com/statuses/763877751396954112",
+      "total": 1,
+      "id": "1b5620e1-89c4-4d50-ac65-006babd07b4b",
+      "subj": {
+        "pid": "http://twitter.com/statuses/763877751396954112",
+        "author": {
+          "literal": "http://www.twitter.com/kdjhaveri"
+        },
+        "title": "RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…",
+        "issued": "2016-08-11T23:20:22.000Z",
+        "URL": "http://twitter.com/statuses/763877751396954112",
+        "type": "tweet"
+      },
+      "message_action": "create",
+      "source_id": "twitter",
+      "timestamp": "2016-08-12T00:41:11Z",
+      "relation_type_id": "discusses"
+    }
+
+The following fields are available:
+
+ - `subj_id` - the subject of the relation as a URI, in this case a tweet
+ - `relation_type_id` - the type of relation
+ - `obj_id` ` the object of the relation as a URI, in this case a DOI
+ - `occurred_at` the time when the Event occurred
+ - 
+
+See [Precise meaning of Event fields](#in-depth-precise) for more detail on precisely what the fields of an Event mean under various circumstances.
 
 ## Evidence
 
 ## Health
 
-# Concepts
+# 3 Concepts
 
 ## Data Aggregator vs Provider
 
@@ -130,6 +248,20 @@ Data that come from services like this can be very precise. We know that the per
 ### Unabiguously linking DOIs to URLs {#concept-urls}
 
 ### External Parties Matching Content to DOIs {#concept-external-dois}
+
+### Linked and Unlinked DOIs
+
+DOIs can be expressed in a number of ways, for example:
+
+ - `10.5555/12345678`
+ - `doi:10.5555/12345678`
+ - `http://dx.doi.org/10.5555/12345678`
+ - `https://doi.org/10.5555/12345678`
+
+In addition, when they are displayed in an HTML page, they can be hyperlinked. **The Crossref DOI Display guidelines specify that a DOI should be a hyperlink**.
+
+Depending on the Data Source and Agent, 
+
 
 
 
@@ -152,6 +284,65 @@ Data that come from services like this can be very precise. We know that the per
 ## Individual Events vs Pre-Aggregated {#concept-individual-aggregated}
 
 
+
+
+
+# 4 In Depth
+
+## Precise meaning of Event fields {#in-depth-precise}
+
+### Subject and Object IDs
+
+The `subj_id` and `obj_id` are both URIs that represent the subject and object of the Event respectively. In most cases they are resolvable URLs, but in some cases they can be URIs that represent entities but are not resolvable URLs.
+
+Examples of resolvable `subj_id` or `obj_id`s are: 
+
+ - DOIs, e.g. `http://doi.org/10.5555/12345678`
+ - Twitter URLs, e.g. `http://twitter.com/statuses/763877751396954112`
+
+Examples of non-resolvable `subj_id` or `obj_id`s are:
+
+ - Facebook-month, e.g. `http://facebook.com/2016-08/`
+
+URIs like the Facebook-month example are used for two reasons. Firstly, we are collecting data for 'total like count of some users on Facebook', therefore no URL that can identify the entities actually exists. Secondly, it is useful to record the entity-per-date for ease of data processing and counting at a later date.
+
+### Occurred At
+
+The `occurred_at` field represents the date that the Event occurred. The precise meaning of 'occurred' varies from source to source:
+
+For some sources, an event occurrs on the publication of a `work`, and the `occurred_at` is the same as the issue date of the work. In these cases, the `occurred_at` value is supplied by the original Source (e.g. Twitter API or metadata on the blog).
+
+ - a tweet was published and it referenced a DOI
+ - a blog post was published and it referenced a DOI
+
+For some sources, an event occurrs at the point that an existing work is edited and the `occurred_at` is the same as the edit date. In these cases the `occurred_at` value is supplied by the original Source (e.g. Wikipedia API):
+
+ - a Wikipedia article was edited and it referenced a DOI
+
+For some sources, an event occurs at the point that a count is observed from a pre-aggregating source. In these cases, the `occurred_at` value is supplied by the Agent that makes the request to an external service, e.g. Facebook Agent:
+
+ - Facebook was polled for the count for a DOI
+ - Mendeley was polled for the count for a DOI
+
+Therefore `occurred_at` field comes from a different authority depending on the source, sometimes an internal service, sometimes an external one. Bear this in mind if you intend to rely on the precise time of an Event. 
+
+### Timestamp
+
+The `timestamp` field represents the date that the Event was processed. Every piece of data travels through an internal pipeline within the Event Data service. The timestamp records the time at which an Event was inserted into the Lagotto service, which is the central component that collects all Events.
+
+TODO: PIPELINE PICTURE
+
+The `timestamp` is used in the `collected_at` view in the Query API.
+
+The `timestamp` usually happens a short while after the event was collected. For some sources, such as Twitter, this can be a few minutes. For sources that operate in large batches, such as Facebook, this can be a day or two. Regardless of variation between agents, the `timestamp` represents the canonical time at which Event Data became aware of an Event.
+
+### Subject and Object Metadata
+
+Event Data allows Subject and Object metadata to be included. Where the Subject or Object metadata are DOIs, and therefore can be easily looked up from the Crossref or DataCite Metadata API, it is usually not included. In other cases, it is often included.
+
+See the list of (Sources in-depth)[#in-depth-sources] for a discussion of the various subject fields per source.
+
+## Sources in Depth {#in-depth-sources}
 
 
 
@@ -481,7 +672,7 @@ TODO
 | Operated by               |  |
 | Agent                     |  |
 
-DISCUSSION
+The Wordpress.com agent queries the Wordpress.com API for Landing Page Domains. It monitors blogs hosted on Wordpress.com that mention articles by their landing page or by DOI URL.
 
 #### Example Event
 
@@ -501,10 +692,11 @@ note not all wordpress
 
 TODO
 
-
-# In Depth
-
 ## Evidence 
+
+Every Event has an Evidence Record. Each Evidence Record corresponds to an input from an external source. Each Evidence Record has links to supporting data in the form of Artifacts.
+
+The Evidence Service links Events to their Evidence.
 
 ### Artifacts
 
@@ -577,11 +769,17 @@ This may be used to answer questions like:
  - When you gathered data for this DOI, e.g from Facebook, which URL did you use to query it?
  - The landing page for a DOI changed. At what point did you start using the new URL to query for it?
 
-**Note:** This Artifact is used by querying Agents such as the Facebok Agent. Other sources may report events for mappings that are not on this list.
+**Note:** This Artifact is used by querying Agents such as the Facebook Agent. Other sources may report events for mappings that are not on this list.
 
-##### Newsfeed List
+##### Newsfeed List {#artifact-newsfeed-list}
 
-This is a list of RSS and Atom newsfeed URLs. The list is manually curated, and is taken from blogs and blog aggregation services. The Artifact Record contains the list of URLs. There are no part files.
+This is a list of RSS and Atom newsfeed URLs. It is manually curated. Each part file contains a list of URLs that are RSS or Atom Newsfeeds. 
+
+We run the Newsfeed Detector software on our DOI Resolution logs to find websites that refer to DOIs. For each website we find, we probe it to try and discover if it has an RSS or Atom newsfeed that we can subscribe to.
+
+The list is manually curated from known blogs and updated every month or two with input from the Newsfeed Detector.
+
+If you think a newsfeed is missing from the list, please contact eventdata@crossref.org
 
 ##### Domain List
 
@@ -615,11 +813,15 @@ Every Event has a corresponding Evidence Record, which contains a link to all of
  - Query the Evidence Service to find the Evidence by visiting `http://service.eventdata.crossref.org/event/d41d8cd98f00b204e9800998ecf8427e/evidence`
  - You will see the list of Evidence Links in the response.
 
+### Evidence Records
 
+TODO
 
 # Appendix 1: Software in Use
 
-The Crossref Event Data system has a number of components. They are all open-source software.
+The Crossref Event Data system has a number of components. All parts of the system that are used to generate or distribute Events, Evidence, Artifacts are open source. 
+
+You can find the latest versions of running software via the Evidence Service.
 
 Crossref Event Data uses a collection of software. It is all open source. 
 
@@ -637,6 +839,7 @@ Crossref Event Data uses a collection of software. It is all open source.
 | Evidence Service      | Service to serve Evidence API.                                | https://github.com/crossref/event-data-evidence-service       | Crossref            |
 | Thamnophilus          | Collects and resolves DOIs to produce Artifacts.              | https://github.com/crossref/thamnophilus                      | Crossref            |
 | DOI Destinations      | Service to convert landing page URLs back into DOIs.          | https://github.com/crossref/doi-desetinations                 | Crossref            |
+| Newsfeed Detector     | Service to monitor Crossref resolution logs for blogs         | https://github.com/crossref/event-data-newsfeed-detector      | Crossref            |
 
 
 ### Lagotto
@@ -671,6 +874,15 @@ The Query API Loader is a service for maintaining the Query API.
 ### Thamnophilus
 ### DOI Destinations
 
+### Newsfeed Detector
+
+Status: Planned for development.
+
+This is internal software. It is used to generate the `newsfeed-list` Artifact. 
+
+The Newsfeed Detector analyzes our DOI Resolution Logs and builds a list of domain names that refer web traffic to the `doi.org` resolver. It monitors those domains and detects if they have RSS feeds.
+
+The Newsfeed List is manually curated using input from the Newsfeed Dector. For more information see the [`newsfeed-list` Artifact](#artifact-newsfeed-list).
 
 # Appendix: NISO Altmetrics Code of Conduct {#appendix-niso-coc}
 
@@ -699,6 +911,13 @@ The Query API Loader is a service for maintaining the Query API.
 ### 12: Provide a process by which data can be independently verified.
 
 ### 13: Provide a process for reporting and correcting data or metrics that are suspected to be inaccurate
+
+# Appendix: Code Examples {#appendix-code-examples}
+
+Here are some examples in Python.
+
+TODO
+
 
 # Appendix: FAQ
 
@@ -807,6 +1026,14 @@ URL
 
 UUID
   : universally unique identifier. Looks like `c0eb1c46-6a59-49c9-926b-a10667ddd9de`.
+
+## Retired words
+
+The following words have been used during the development of Event Data but are no longer official:
+
+ - Deposit - this is an internal entity used within Lagotto. It does not form part of the public DET service, although it may be of interest to users who want to look into the internals.
+ - "DOI Event Tracking" / "DET" - the old name for the Crossref Event Data service
+ - Relations - this is an internal entity used within Lagotto. CED does not use Relations.
 
 
 # Revision history
