@@ -2,8 +2,6 @@ mkdir ./build
 
 DATE=`date "+%Y/%m/%d"`
 
-cp ./*.png build/
-
 rm build/index.html
 
 cp templates/bootstrap.min.css build/

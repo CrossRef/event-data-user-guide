@@ -1,5 +1,5 @@
 ---
-title: Crossref Event Data Technical User Guide
+title: Crossref Event Data User Guide
 papersize: a4
 documentclass: book
 margin-left: 2cm
@@ -29,7 +29,7 @@ Everyone should read the introduction. You can jump ahead to "The Service" for a
 
 Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
 
-![](images/overview.png "Event Data Overview")
+<img src="images/overview.png" alt="Event Data Overview" class="img-responsive">
 
 Much of the activity around scholarly content happens outside of the formal literature. The scholarly community needs an infrastructure that collects, stores, and openly makes available these interactions. Crossref Event Data will monitor and collect links to scholarly content on the open web. The greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed.
 
@@ -60,7 +60,7 @@ Data comes from a wide range of sources and each source is subject to different 
 
 Every Event is the result of some data input from a source, and the entire process is completely open. For every Event we provide a full Evidence Record.
 
-![](images/introduction-evidence-flow.png "Event Data Evidence Flow")
+<img src="images/introduction-evidence-flow.svg" alt="Event Data Evidence Flow" class="img-responsive">
 
 Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an examplar altmetrics data provider, setting the standard in openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
 
@@ -96,10 +96,31 @@ Crossref Event Data is a system for collecting Events and distributing them. Up 
 
  - Every component in the CED system, internal and external, in CED is monitored. The Health Dashboard monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
 
+## Data Sources {#data-sources}
+
+Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. 
+
+| Name                   | Source Identifier   | Provider    | What does it contain? |
+|------------------------|---------------------|-------------|------------------|
+| Crossref to DataCite   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
+| Facebook               | facebook            | Crossref    | Count number of likes and comments for Items |
+| Mendeley               | mendeley            | Crossref    | Reader count number, etc from Mendeley |
+| Newsfeed               | newsfeed            | Crossref    | Mentions of Items on blogs and websites with syndication feeds |
+| Reddit                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
+| Twitter                | twitter             | Crossref    | Mentions of Items on Twitter |
+| Wikipedia              | wikipedia           | Crossref    | References of Items on Wikipedia |
+| Wordpress.com          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
+| DataCite to Crossref   | datacite_crossref   | DataCite    | Dataset citations from DataCite Items to Crossref Items |
+
+For detailed discussion of each one, see the [Sources In Depth](#in-depth-sources) section.
 
 ## Query API
 
 The Query API provides access to Event Data. It is simple REST API and uses JSON. Because there are up to a million events per month, every query is scoped by a date, in `YYYY-MM-DD` format. Even when scoped to a particular date, there can be tens of thousands of events. Therefore there are a number of filters available.
+
+When you write a client to work with the API it should be able to deal with responses in the tens of megabytes, preferably dealing with them as a stream. You may find that saving an API response directly to disk is sensible.
+
+### Timing and Freshness
 
 The Query has two date views: `collected` and `occurred`. See ['Occurred-at vs Collected-at'](#concept-timescales) for a more detailed discussion. Each is suitable for different use cases:
 
@@ -117,27 +138,7 @@ All queries are available on both views.
 
 The Query API is updated every day. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
 
-## Data Sources {#data-sources}
-
-Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. 
-
-| Name                   | Source Identifier   | Provided by |
-|------------------------|---------------------|-------------|
-| Crossref to DataCite   | crossref_datacite   | Crossref    |
-| Facebook               | facebook            | Crossref    |              
-| Mendeley               | mendeley            | Crossref    |
-| Newsfeed               | newsfeed            | Crossref    |
-| Reddit                 | reddit              | Crossref    |            
-| Twitter                | twitter             | Crossref    |
-| Wikipedia              | wikipedia           | Crossref    |
-| Wordpress.com          | wordpressdotcom     | Crossref    |    
-| DataCite to Crossref   | datacite_crossref   | DataCite    |
-
-For detailed discussion of each one, see the [Sources In Depth](#in-depth-sources) section.
-
 ### Available Queries
-
-Note: You can copy and paste these into your browser, but be aware that some responses can be up to 20MB, which may make the browser unresponsive.
 
 #### All data for a day
 
@@ -187,7 +188,7 @@ If you want to collect all events for a given date range, you can issue a set of
 
 Note that this is a form of pagination, which is a standard part of REST APIs. You can find code examples in the [Code Examples](#appendix-code-examples) section.
 
-## Data Format
+### Format of Event Records
 
 The response from the Query API will be a list of Events. An Event is of the form "this subject has this relation to this object". The list of relations is:
 
@@ -245,7 +246,7 @@ The following fields are available:
 
 All times in the API in ISO8601 UTC Zulu format.
 
-See [Precise meaning of Event fields](#in-depth-precise) for more detail on precisely what the fields of an Event mean under various circumstances.
+See [Event Records in Depth](#event-records-in-depth) for more detail on precisely what the fields of an Event mean under various circumstances.
 
 ## Evidence
 
@@ -322,7 +323,7 @@ Not all fields are compulsory, and the format will vary from Source to Source. H
  - `input-body` - the HTTP response of an external API as a string, or in some digested form
  - `events` - a list of Events that were produced, in internal Lagotto Deposit format. These may appear to be similar to Event format, but there are some differences. Note that the `events` section may be empty if the input resulted in no Events.
 
-### Getting Evidence Records
+### Getting Evidence Records
 
 If you have an Event and you want to see the Evidence for it, query by its ID.
 
@@ -340,13 +341,50 @@ You will recieve a page which includes a list of URLs for all Evidence Records f
 
 This can be useful if, for example, you want to see all inputs that were received from a particular source, whether or not they resulted in Events. Note that the time in the query corresponds to the `timestamp` field of the Evidence Record, and corresponds to the time the Evidence was processed. The times at which an Event occurred, the Event was collected, the Evidence was processed are different.
 
-## Health
+## Health Dashboard
 
-TODO
+Event Data connects to external systems and gathers data from them through a pipeline. Not all external services are available all the time, and some may experience fluctuations in service. The internal pipeline with the Event Data service may become congested or require maintenance from time to time. 
+
+The Event Data Health Dashboard proactively monitors all parts of the system and reports on activity, availability and completeness of data. The Dashboard will be available via a user interface and via an API through which users can access historical data.
 
 # 3 Concepts
 
+## Registered Content, URLs, Persistent Identifiers and DOIs
+
+Crossref has approximately 80 million items of Registered Content: articles, books, chapters etc. They are 'works' according to the [FRBR](http://archive.ifla.org/VII/s13/frbr/frbr1.htm#3.2) model. 
+
+When a Content Item is registered with Crossref or Datacite, it is assigned a Persistent Identifier (PID) in the form of a Crossref DOI or DataCite DOI. The PID permanently identifies the Content Item and is used when referring to, or linking between, Items. Other PIDs, such as PubMed ID (PMID) are available, but they are beyond the scope of Crossref Event Data.
+
+All items of Registered Content have a presence on the web, known as the Landing Page. It is usually hosted on the website of the publisher of the Item. This is the 'home' of the article, and it's what you see when you click on a DOI. Over time, Landing Pages can change as publishers reorganise their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
+
+<img src="images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
+
+Because DOIs silently redirect to Landing Pages, when people want to link to an Item, many people and services use the Landing Page not the DOI. Event Data therefore attempts to track Events via the Landing Page as well as via DOIs.
+
+### Event Data tracks Content Items not DOIs
+
+Crossref Event Data, like all Crossref services, uses the Crossref DOI to refer an item of Registered Content. Every Event that references a Registered Item uses its Crossref DOI. 
+
+Every Data Source uses 
+
+We track events using the most appropriate identifier for the Item according to the source. 
+
+
+
+Other services may use the DOI or the Landing Page. 
+
+
+
 ## Data Aggregator vs Provider
+
+The NISO Code of Conduct describes an 'altmetric data aggregator as':
+
+> Tools and platforms that aggregate and offer online events as well as derived metrics from altmetric data providers (e.g., Altmetric.com, Plum Analytics, PLOS ALM, ImpactStory, Crossref).
+
+TODO
+
+## Works vs Persistent Identifiers / DOIs
+
 
 
 
@@ -403,7 +441,7 @@ todo
 
 # 4 In Depth
 
-## Precise meaning of Event fields {#in-depth-precise}
+## Event Records in Depth #{event-records-in-depth}
 
 ### Subject and Object IDs
 
@@ -563,7 +601,7 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | facebook |
-| Matches by                | DOI |
+| Matches by                | Landing Page URL |
 | Consumes artifacts        | `high-urls`, `medium-urls`, `all-urls` |
 | Produces relation types   | `bookmarks`, `shares` |
 | Fields in Evidence Record | Complete API response |
@@ -574,23 +612,220 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 | Operated by               | Crossref |
 | Agent                     | event-data-facebook-agent |
 
-DISCUSSION
+The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has receieved at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
+
+Because of the structure of the Facebook API, it is necessary to make one API query per Item, which means that it can take a long time to work through the entire list of Items. This means that, whilst we try and poll as often and regularly as possible, the time between Facebook Events for a given Item can be unpredictable. 
+
+#### Freshness
+
+The Facebook Agent uses three categories of Item: `high-urls`, `medium-urls` and `all-urls` (see the [URL Artifact lists documentation](#artifact-url-list) for more detail). It processes the three categories in parallel. In each category it scans the current list of all Items with URLs from start to finish, and queries the Facebook API for each one. It does this in a loop, each time fetching the most recent list of URLs.
+
+The Facebook Agent works within rate limits of Facebook API. If the Facebook API indicates that the rate of traffic is too high then the Agent will lower the rate of querying and a complete scan will take longer.
+
+#### Subject URLs and PIDs
+
+As Facebook events are pre-aggregated and don't record the relationship between the liker and the Item, Events are recorded against Facebook as a whole. Because we don't expect to collect events more than once per month per Item, we create an entity that represents Facebook in a given month.
+
+Each "Facebook Month" is recorded as a separate subject PID, e.g. `https://facebook.com/2016/8`. This PID a URI and doesn't correspond to an extant URL. Note that the metadata contains the URL of `https://facebook.com`.
+
+This strikes the balance between recording data against a consistent Subject whilst allowing easy analysis of numbers on a per-month basis.
+
+If you just want to find 'all the Facebook data for this DOI' remember that you can filter by the `source_id`.
 
 #### Example Event
 
-TODO
+    {
+      "obj_id":"https://doi.org/10.1080/13600820802090512",
+      "occurred_at":"2016-08-11T00:00:30Z",
+      "subj_id":"https://facebook.com/2016/8",
+      "total":5681,
+      "id":"55492dc1-ce8a-4c5d-85d0-97a5192519c7",
+      "subj":{
+        "pid":"https:/facebook.com/2016/8",
+        "URL":"https://facebook.com",
+        "title":"Facebook activity for August 2016",
+        "type":"webpage",
+        "issued":"2016-08-01"
+      },
+      "message_action":"create",
+      "source_id":"facebook",
+      "timestamp":"2016-08-11T00:26:48Z",
+      "relation_type_id":"references"
+    }
 
 #### Example Evidence Record
 
 TODO
 
+#### Landing Page URLs vs DOI URLs
+
+Facebook Users may share links to Items two ways: they may link using the DOI URL, or they may link using the Landing Page URL. When a DOI is used, Facebook records and shows the DOI URL but records statistics against the Landing Page URL it resolves to. This means that Facebook doesn't necessarily maintain a one-to-one mapping between URLs and statistics for that URL.
+
+Event Data always uses the Landing page URL when it queries Facebook and never the DOI URL. If a Facebook user used the Landing Page URL then there would be no results for the DOI, and if they used the DOI, the statistics would be recorded against the Landing Page anyway.
+
+Here is a worked example using the Facebook Graph API v2.7. Note that these API results capture a point in time and the same results may not be returned now.
+
+Where a Facebook User has shared an Item using its DOI, Facebook's system resolves the DOI discover the Landing page. In cases where Facebook has seen the DOI URL it is possible to query using it, e.g. `https://graph.facebook.com/v2.7/http://doi.org/10.5555/12345678?access_token=XXXX` gives:
+
+    {
+      og_object: {
+        id: "10150995451832648",
+        title: "Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory",
+        type: "website",
+        updated_time: "2016-08-25T01:23:00+0000"
+      },
+      share: {
+        comment_count: 0,
+        share_count: 3
+      },
+      id: "http://doi.org/10.5555/12345678"
+    }
+
+If we query for the current Landing Page URL for the same Item we see the same results. `https://graph.facebook.com/v2.7/http://psychoceramics.labs.crossref.org/10.5555-12345678.html?access_token=XXXX` gives:
+
+    {
+      og_object: {
+        id: "10150995451832648",
+        title: "Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory",
+        type: "website",
+        updated_time: "2016-08-25T01:23:00+0000"
+      },
+      share: {
+        comment_count: 0,
+        share_count: 3
+      },
+      id: "http://psychoceramics.labs.crossref.org/10.5555-12345678.html"
+    }
+
+Here we see that Facebook considers the DOI URL and the Landing Page to have the same `id` of `10150995451832648`, because the DOI URL redirected to the Landing Page URL.
+
+DOIs can be expressed a number of different ways using different resolvers and protocols, e.g. `http://doi.org/10.5555/12345678`, `https://doi.org/10.5555/12345678`, `http://dx.oi.org/10.5555/12345678`, `https://dx.doi.org/10.5555/12345678`. These may all treated as different URLs by Facebook. Therefore there is no 'canonical' DOI URL from Facebook's point of view. As they all redirect to the same Landing Page, the Landing Page is the only thing that they have in common from Facebook's perspective.
+
+Where a user has shared the Item using its Landing Page, Facebook is not aware of the DOI. In this example, there is data for the Landing Page of an Item: `https://graph.facebook.com/v2.7/http://www.emeraldinsight.com/doi/abs/10.1108/RSR-11-2015-0046?access_token=XXXX`
+
+    {
+      og_object: {
+       id: "1034517766662581",
+        description: "Impact of web-scale discovery on reference inquiryArticle Options and ToolsView: PDFAdd to Marked ListDownload CitationTrack CitationsAuthor(s): Kimberly Copenhaver ( Eckerd College St. Petersburg United States ) Alyssa Koclanes ( Eckerd College St. Petersburg United States )Citation: Kimberly Copen…",
+        title: "Impact of web-scale discovery on reference inquiry: Reference Services Review: Vol 44, No 3",
+        type: "website",
+        updated_time: "2016-06-30T05:01:41+0000"
+      },
+        share: {
+        comment_count: 0,
+        share_count: 8
+      },
+      id: "http://www.emeraldinsight.com/doi/abs/10.1108/RSR-11-2015-0046"
+    }
+
+But a Query using its DOI fails `https://graph.facebook.com/v2.7/http://doi.org/10.1108/RSR-11-2015-0046?access_token=XXXX`:
+
+    {
+      id: "http://doi.org/10.1108/RSR-11-2015-0046"
+    }
+
+Therefore, whilst Facebook returns results for *some* DOIs, we use exclusively use the Landing Page URL to query Facebook for activity. This takes account of users sharing via the DOI and via the Landing Page.
+
+#### HTTP and HTTPS
+
+Many websites allow users to access the same content over HTTP and HTTPS, and serve up the same content. Whilst the web server may consider the two URLs equal in some way, Facebook doesn't automatically treat HTTPS and HTTP versions of the same URL as equal. The [WHATWG URL Specification](https://url.spec.whatwg.org/#url-equivalence) supports this position.
+
+If we take the example of a website that allows serving of both HTTP and HTTPS content, e.g. The Co-operative Bank, we see that Facebook assigns different OpenGraph IDs and different `share_count` results.
+
+`https://graph.facebook.com/v2.7/http://co-operativebank.co.uk?access_token=XXXX`
+
+    {
+      og_object: {
+        id: "10150337668163877",
+        description: "The Co-operative Bank provides personal banking services including current accounts, credit cards, online and mobile banking, personal loans, savings and more",
+        title: "Personal banking | Online banking | Co-op Bank",
+        type: "website",
+        updated_time: "2016-08-31T14:07:30+0000"
+      },
+      share: {
+        comment_count: 0,
+        share_count: 910
+      },
+      id: "http://co-operativebank.co.uk"
+    }
+
+`https://graph.facebook.com/v2.7/https://co-operativebank.co.uk?access_token=XXXX`
+
+    {
+      og_object: {
+        id: "742866445762882",
+        type: "website",
+        updated_time: "2014-09-11T17:38:25+0000"
+      },
+      share: {
+        comment_count: 0,
+        share_count: 0
+      },
+      id: "https://co-operativebank.co.uk"
+    }
+
+Other sites implement automatic redirects, and an HTTP URL will immediately redirect to an HTTPS version. For example, PLoS HTTP:
+
+`https://graph.facebook.com/v2.7/http://plos.org?access_token=XXXX`
+
+    {
+      og_object: {
+        id: "393605900711524",
+        description: "A Model for an Angular Velocity-Tuned Motion Detector Accounting for Deviations in the Corridor-Centering Response of the Bee",
+        title: "PLOS | Public Library Of Science",
+        type: "website",
+        updated_time: "2016-08-30T18:28:58+0000"
+      },
+      share: {
+        comment_count: 0,
+        share_count: 523
+      },
+      id: "http://plos.org"
+    }
+
+And the HTTPS version: 
+`https://graph.facebook.com/v2.7/https://plos.org?access_token=XXXX`
+
+    {
+      og_object: {
+        id: "393605900711524",
+        description: "A Model for an Angular Velocity-Tuned Motion Detector Accounting for Deviations in the Corridor-Centering Response of the Bee",
+        title: "PLOS | Public Library Of Science",
+        type: "website",
+        updated_time: "2016-08-30T18:28:58+0000"
+      }
+      share: {
+        comment_count: 0,
+        share_count: 523
+      },
+      id: "https://plos.org"
+    }
+
+Note the same `share_count` and `id`.
+
+Therefore Facebook considers HTTP and HTTPS URLs to be equivalent **if** the HTTP site redirects to HTTPS. 
+
+Crossref Event Data uses the Landing Page that the DOI resolved to. If this is HTTP, then we use HTTP, and this means we query Facebook for the same URL that Facebook users share. If the site subsequently adds HTTPS redirects but CED has an outdated HTTP Landing Page URL, the way Facebook treats redirects will ensure we get the correct results. 
+
+If a situation arises where the publisher serves the same Landing Page both over HTTP and HTTPS without redirecting, CED will use the Landing Page URL that the DOI resolves to. This may result in some views not being accounted for, but it is the most accurate and consistent.
+
 #### Methodology
 
-TODO
+The Agent has three parallel processes. They operate on three Artifacts: `high-urls`, `medium-urls` and `all-urls`. The last of these contains the mapping of all known DOI to URL mappings. The first two contain subsets of these.
+
+Each process:
+
+ 1. fetches the most recent version of the relevant URL List Artifact
+ 2. iterates over each the URL. It uses the Facebook Graph API 2.7 to query data for the Landing Page URL.
+ 3. the `comment_count` is recorded as an Event with the given `total` field and the `relation_type_id` of `shares`.
+ 4. the `comment_count` is subtracted from the `share_count` and the result is recorded as an Event with the given `total` field and the `relation_type_id` of `bookmarks`.
+ 5. When the end of the list is reached, it starts again at step 1.
+
 
 #### Further information
 
-TODO
+ - [Facebook Graph API](https://developers.facebook.com/docs/graph-api)
+ - [Facebook CED Agent](https://github.com/crossref/event-data-facebook-agent)
 
 
 
@@ -818,7 +1053,7 @@ note not all wordpress
 
 TODO
 
-## Evidence {#in-depth-evidence}
+## Evidence in Depth {#in-depth-evidence}
 
 Every Event has an Evidence Record. Each Evidence Record corresponds to an input from an external source. Each Evidence Record has links to supporting data in the form of Artifacts.
 
@@ -854,7 +1089,7 @@ The structure of each type of Artifact file is chosen to best suit the data, and
 | «software-name»        | The name and version of software | http://github.com/crossref/event-data-facebook-agent/tags/v2.5                                             |
 
 
-##### High Priority, Medium Priority, Entire DOI List
+##### High Priority, Medium Priority, Entire DOI List 
 
 This is a list of Crossref DOIs that are deemed to be high-priority, medium-priority respectively, and the list of all DOIs. The content of an Artifact Part File is a list of DOIs (expressed without a resolver, e.g. `10.5555/12345678`), one per line. 
 
@@ -872,7 +1107,7 @@ The Entire list contains all DOIs, over 80 million. Agents will try to collect d
 
 DOI Lists are produced by the Thamnophilus service.
 
-##### High-priority, Medium Priority, Entire URL list
+##### High-priority, Medium Priority, Entire URL list {#artifact-url-list}
 
 Every DOI resolves to a URL, at least in theory. The URL lists contain the mapping of DOIs to URLs (and vice versa) where there is a unique mapping. The content of the Part files are alternating lines of DOI, URL.
 
