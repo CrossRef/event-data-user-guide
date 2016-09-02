@@ -236,7 +236,7 @@ It looks like:
 
 The following fields are available:
 
- - `subj_id` - the subject of the relation as a URI, in this case a tweet.
+ - `subj_id` - the subject of the relation as a URI, in this case a tweet. This is normalized to use the `http://doi.org` DOI resolver and converted to upper case.
  - `relation_type_id` - the type of relation.
  - `obj_id` - the object of the relation as a URI, in this case a DOI.
  - `occurred_at` - the date and time when the Event occurred.
@@ -333,7 +333,7 @@ If you have an Event and you want to see the Evidence for it, query by its ID.
 
     http://service.eventdata.crossref.org/evidence/event/«event-id»
 
-You will recieve `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Link` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
+You will recieve `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Location` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
 
 Inside the Evidence Record you will find an `events` section which will contain one or more events, including the one you queried for. Note that one piece of Evidence may have produced a number of Events.
 
@@ -371,7 +371,7 @@ Event Data therefore attempts to track Events via the Landing Page URLs as well 
 
 Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. However it is important to understand that internally CED tracks Events around Items themselves.
 
-Data from different Sources uses different identifiers to refer to Items. Some use the DOI and some use the Landing Page. However the data comes in, CED matches the input to an Item and records the data against that.
+Input data collected from different Sources uses different identifiers to refer to Items. Some use the DOI and some use the Landing Page. However the data comes in, CED matches the input to an Item and records the data against that.
 
 ### DOIs are unique. Landing Pages aren't always.
 
@@ -387,7 +387,7 @@ Crossref items have a variety of Content Types including:
  - Journal
  - Section
 
-Some Items are considered to be part of other Items, for example an article may contain a figures, and each figure might be registered as a separate Item. In this case there would be one Item of type 'journal article' and several item of type 'component'. Each Item has a DOI. Because Publishers are free to decide how to structure their websites, the Landing Page for each Figure may or may not be the same as the Landing Page for the article.
+Some Items are considered to be part of other Items, for example an article may contain figures, and each figure might be registered as a separate Item. In this case there would be one Item of type 'journal article' and several item of type 'component'. Each Item has a DOI. Because Publishers are free to decide how to structure their websites, the Landing Page for each Figure may or may not be the same as the Landing Page for the article.
 
 Sometimes the Landing Page for a Book Chapter can be the same as the Landing Page for the whole book. And sometimes they are separate.
 
@@ -409,7 +409,7 @@ CED attempts to always store the most recent Landing Page.
 
 The Crossref metadata contains a 'Resource link' field. This is a URL that you are redirected to when you click on a Crossref DOI. It redirects to the Landing Page but it doesn't always do this directly. Publishers deposit links with Crossref, but they sometimes add their own internal redirects. 
 
-Let's take a simple example of a Crossref demonstration DOI. The Crossref DOI `10.5555/12345678` has the Resource link `http://psychoceramics.labs.crossref.org/10.5555-12345678.html`, which you can see in the [article metadata](http://api.crossref.org/works/10.5555/12345678/transform/application/vnd.crossref.unixsd+xml). If we follow the DOI, 
+Let's take a simple example of a Crossref demonstration DOI. The Crossref DOI `10.5555/12345678` has the Resource link `http://psychoceramics.labs.crossref.org/10.5555-12345678.html`, which you can see in the [article metadata](http://api.crossref.org/works/10.5555/12345678/transform/application/vnd.crossref.unixsd+xml). If we follow the DOI we see only one redirect, that from the DOI link.
 
 | URL | Comment |
 |-----|---------|
@@ -431,7 +431,7 @@ If we follow the DOI URL, we see the following chain of redirects.
 
 In cases like this, the final Landing Page is different to that registered with Crossref, so we can't know without following it. 
 
-Furthermore, we have no way to knowing when we know the landing page. This means that if we want to collect every Landing Page URL, we have to follow every single Resource link to discover where it leads.
+Furthermore, we have no automatic way to knowing when we do know the landing page. This means that if we want to collect every Landing Page URL, we have to follow every single Resource link to discover where it leads.
 
 ### Landing Page data can be out of date
 
@@ -478,7 +478,7 @@ Crossref will attempt to find Landing Pages for Items such as these, but only on
 
 Some services use DOIs directly to make references. Wikipedia, for example, has references all over the web, but where they link scholarly articles, the DOI is generally included. There are tools in the page editing workflow to encourage and suggest the incorporation of DOIs. Another data source that uses DOIs for references is DataCite, who link datasets to articles via their dataset metadata.
 
-Data that come from services like this can be very precise. We know that the person who made the citation intended to use the DOI to refer to the content item in question and we can reliably report that an Event occurred for this Crossref DOI.
+Data that come from services like this can be very precise. We know that the person who made the citation intended to use the DOI to refer to the Item in question and we can reliably report that an Event occurred for the Item with this Crossref DOI.
 
 ### External Parties Matching Content to DOIs {#concept-external-doi-mappings}
 
@@ -486,7 +486,7 @@ It is possible for an external party to store activity around Items and use thei
 
 An example of this is Mendeley, who use machine learning to cluster, group and classify articles.
 
-CED provides full Evidence for all Events, but is unable to provide visibility of mappings within external services. Data from these sources of this type should be interpreted with this in mind.
+CED provides all available Evidence for all Events, but is unable to provide visibility of mappings within external services. Data from these sources of this type should be interpreted with this in mind.
 
 ### Linked and Unlinked DOIs
 
@@ -501,19 +501,19 @@ In addition, when they are displayed in an HTML page, they can be hyperlinked. *
 
 Some services, such as Twitter, automatically link URLs. Some services, such as Wikipedia, provide tools that make linking the default, although there are still unlinked DOIs. 
 
-**Generally, Event Data will only find links in HTML that are correctly linked using a URL.**
+**Generally, Event Data will only find links in HTML that are correctly linked using a URL. It ignores unlinked DOIs.**
 
 ### Landing Page Domains {#concept-landing-page-domains}
 
-CED maintains a list of the domain names that belong to Landing Pages. This is called the ['domain-list' Artifact](#artifact-domain-list). It consists of around 15,000 domains that belong to Publishers. It is automatically generated but manually curated. Some Publishers create DOIs that resolve to domains such as `youtube.com`. These domains produce a large amount of false-positives. They also belong to organisations, such as YouTube, who have no involvement in scholarly publishing, which makes it unlikely that it would be impossible to extract data for them in any case. For these reasons, domains of this type are manually removed from the list.
+CED maintains a list of the domain names that belong to Landing Pages. This is called the [`domain-list` Artifact](#artifact-domain-list). It consists of around 15,000 domains that belong to Publishers. It is automatically generated but manually curated. Some Publishers create DOIs that resolve to domains such as `youtube.com`. These domains produce a large amount of false-positives. They also belong to organisations, such as YouTube, who have no involvement in scholarly publishing, which makes it unlikely that it would be possible to extract data for them in any case. For these reasons, domains of this type are manually removed from the Landing Page Domain list.
 
 This list is used for some sources as an initial pre-filter to indenfity URLs that might be Landing Pages. 
 
-The Artifact is updated on a regular basis. For more information see ['domain-list' Artifact](#artifact-domain-list).
+The Artifact is updated on a regular basis. For more information see [`domain-list` Artifact](#artifact-domain-list).
 
 ### Pre-filtering Domains {#concept-pre-filtering}
 
-The ['domain-list' Artifact](#artifact-domain-list) Artifact is used for pre-filtering event sources such as Twitter, Reddit and Wordpress.com.
+The [`domain-list` Artifact](#artifact-domain-list) Artifact is used for pre-filtering event sources such as Twitter, Reddit and Wordpress.com.
 
 When an Agent of this type connects to a data source it will conduct a search for this domain list. In the case of Twitter that means constructing a ruleset that includes all domains. In the case of Reddit and Wordpress.com it means conducting one search per domain. This initial filter returns a dataset which mentions one of the domains that is found to contain Landing Pages. From this pre-filtered dataset the Agent then examines each result for Events.
 
@@ -529,9 +529,9 @@ CED is an 'aggregator' by this definition. We offer 'online events' but we **do 
 
 ## Duplicate Data {#concept-duplicate}
 
-When an Event occurs in the wild it may be reported via more than one channel. For example, a blog may have an RSS feed that the Newsfeed agent subscribes to. It may also be included in a blog aggregator's results. In this case the action of publishing the blog post might result in two Events in CED.
+When an Event occurs in the wild it may be reported via more than one channel. For example, a blog may have an RSS feed that the Newsfeed agent subscribes to. It may also be included in a blog aggregator's results. In this case the action of publishing the blog post might result in two Events in CED. Note that two events that describe the same external action via two routes will have different Event IDs.
 
-It is important that CED reports events without trying to 'clean up' the data. The Evidence pipeline ensures that every input that hsould result in an Event, does result in an Event. 
+It is important that CED reports events without trying to 'clean up' the data. The Evidence pipeline ensures that every input that should result in an Event, does result in an Event. 
 
 ## Evidence First {#concept-evidence-first}
 
@@ -552,20 +552,20 @@ TODO
 
 # 4 In Depth
 
-## Event Records in Depth #{event-records-in-depth}
+## Event Records in Depth {#event-records-in-depth}
 
 ### Subject and Object IDs
 
-The `subj_id` and `obj_id` are both URIs that represent the subject and object of the Event respectively. In most cases they are resolvable URLs, but in some cases they can be URIs that represent entities but are not resolvable URLs.
+The `subj_id` and `obj_id` are URIs that represent the subject and object of the Event respectively. In most cases they are resolvable URLs, but in some cases they can be URIs that represent entities but are not resolvable URLs.
 
 Examples of resolvable `subj_id` or `obj_id`s are: 
 
- - DOIs, e.g. `http://doi.org/10.5555/12345678`
+ - DOIs, e.g. `https://doi.org/10.5555/12345678`
  - Twitter URLs, e.g. `http://twitter.com/statuses/763877751396954112`
 
 Examples of non-resolvable `subj_id` or `obj_id`s are:
 
- - Facebook-month, e.g. `http://facebook.com/2016-08/`
+ - Facebook-month, e.g. `https://facebook.com/2016/08/`
 
 URIs like the Facebook-month example are used for two reasons. Firstly, we are collecting data for 'total like count of some users on Facebook', therefore no URL that can identify the entities actually exists. Secondly, it is useful to record the entity-per-date for ease of data processing and counting at a later date.
 
@@ -595,7 +595,7 @@ The `timestamp` field represents the date that the Event was processed. Every pi
 
 TODO: PIPELINE PICTURE
 
-The `timestamp` is used in the `collected_at` view in the Query API.
+The `timestamp` is used in the `collected` view in the Query API.
 
 The `timestamp` usually happens a short while after the event was collected. For some sources, such as Twitter, this can be a few minutes. For sources that operate in large batches, such as Facebook, this can be a day or two. Regardless of variation between agents, the `timestamp` represents the canonical time at which Event Data became aware of an Event.
 
@@ -611,11 +611,11 @@ See the list of (Sources in-depth)[#in-depth-sources] for a discussion of the va
 
 ### Message Action
 
-Most of the time an Event can be read as "this relation was created". An Event records the relationship that came into being at a given point in time.
+Most of the time an Event can be read as "this relation was created or observed". An Event records the relationship that came into being at a given point in time.
 
 Sometimes these relationships come and go. For example, in Wikipeida, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
 
-The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records that the relation was removed.
+The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records the fact that that the relation was removed.
 
 ## Landing Pages in Depth {#in-depth-landing-pages}
 
@@ -637,7 +637,7 @@ This Artifact is a mapping of DOIs to the
 
 ## Artifact: URL-DOI list
 
-## DOI Reversal Service #{in-depth-doi-reversal}
+## DOI Reversal Service {#in-depth-doi-reversal}
 
 The DOI Reversal Service converts Landing Pages back into DOIs so they can be used to identify Items. It uses a variety of techniques including:
 
@@ -651,7 +651,7 @@ The process of DOI Reversal is not perfect and it will never be possible to matc
 
 ## Sources in Depth {#in-depth-sources}
 
-
+The following is a description of the Sources of data available in CED. Every data source requires an Agent to process the data, so the following section describes the format of data, the agent used to collect it and issues surrounding each source.
 
 ### Crossref to DataCite Links
 
@@ -673,9 +673,9 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 #### Example Event
 
     {
-      "obj_id":"https:\/\/doi.org\/10.13127\/ITACA\/2.1",
+      "obj_id":"https://doi.org/10.13127/ITACA/2.1",
       "occurred_at":"2016-08-19T20:30:00Z",
-      "subj_id":"https:\/\/doi.org\/10.1007\/S10518-016-9982-8",
+      "subj_id":"https://doi.org/10.1007/S10518-016-9982-8",
       "total":1,
       "id":"71e62cbd-28a8-4a41-9b74-7e58dca03efc",
       "message_action":"create",
@@ -716,9 +716,9 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 #### Example Event
 
     {
-      "obj_id":"https:\/\/doi.org\/10.1007\/S10518-016-9982-8",
+      "obj_id":"https://doi.org/10.1007/S10518-016-9982-8",
       "occurred_at":"2016-08-19T20:30:00Z",
-      "subj_id":"https:\/\/doi.org\/10.13127\/ITACA\/2.1",
+      "subj_id":"https://doi.org/10.13127/ITACA/2.1",
       "total":1,
       "id":"71e62cbd-28a8-4a41-9b74-7e58dca03efc",
       "message_action":"create",
@@ -734,8 +734,8 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 
 #### Notes
 
- - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See (Duplicate Data){#concept-duplicate}.
- - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See (Occurred-at vs collected-at)[#concept-timescales].
+ - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](#concept-duplicate).
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](#concept-timescales).
 
 
 
@@ -769,9 +769,9 @@ The Facebook Agent works within rate limits of Facebook API. If the Facebook API
 
 As Facebook events are pre-aggregated and don't record the relationship between the liker and the Item, Events are recorded against Facebook as a whole. Because we don't expect to collect events more than once per month per Item, we create an entity that represents Facebook in a given month.
 
-Each "Facebook Month" is recorded as a separate subject PID, e.g. `https://facebook.com/2016/8`. This PID a URI and doesn't correspond to an extant URL. Note that the metadata contains the URL of `https://facebook.com`.
+Each "Facebook Month" is recorded as a separate subject PID, e.g. `https://facebook.com/2016/8`. This PID is a URI and doesn't correspond to an extant URL. Note that the metadata contains the URL of `https://facebook.com`.
 
-This strikes the balance between recording data against a consistent Subject whilst allowing easy analysis of numbers on a per-month basis.
+This approach strikes the balance between recording data against a consistent Subject whilst allowing easy analysis of numbers on a per-month basis.
 
 If you just want to find 'all the Facebook data for this DOI' remember that you can filter by the `source_id`.
 
@@ -800,13 +800,13 @@ If you just want to find 'all the Facebook data for this DOI' remember that you 
 
 TODO
 
-#### Landing Page URLs vs DOI URLs
+#### Landing Page URLs vs DOI URLs in Facebook
 
 Facebook Users may share links to Items two ways: they may link using the DOI URL, or they may link using the Landing Page URL. When a DOI is used, Facebook records and shows the DOI URL but records statistics against the Landing Page URL it resolves to. This means that Facebook doesn't necessarily maintain a one-to-one mapping between URLs and statistics for that URL.
 
-Event Data always uses the Landing page URL when it queries Facebook and never the DOI URL. If a Facebook user used the Landing Page URL then there would be no results for the DOI, and if they used the DOI, the statistics would be recorded against the Landing Page anyway.
+Event Data always uses the Landing page URL when it queries Facebook and never the DOI URL. If a Facebook user shared an Item using its Landing Page URL then there would be no results for the DOI, and if they used the DOI, the statistics would be recorded against the Landing Page anyway.
 
-Here is a worked example using the Facebook Graph API v2.7. Note that these API results capture a point in time and the same results may not be returned now.
+Here is a justficiation of the above approach using examples from the Facebook Graph API v2.7. Note that these API results capture a point in time and the same results may not be returned now.
 
 Where a Facebook User has shared an Item using its DOI, Facebook's system resolves the DOI discover the Landing page. In cases where Facebook has seen the DOI URL it is possible to query using it, e.g. `https://graph.facebook.com/v2.7/http://doi.org/10.5555/12345678?access_token=XXXX` gives:
 
@@ -869,7 +869,7 @@ But a Query using its DOI fails `https://graph.facebook.com/v2.7/http://doi.org/
 
 Therefore, whilst Facebook returns results for *some* DOIs, we use exclusively use the Landing Page URL to query Facebook for activity. This takes account of users sharing via the DOI and via the Landing Page.
 
-#### HTTP and HTTPS
+#### HTTP and HTTPS in Facebook
 
 Many websites allow users to access the same content over HTTP and HTTPS, and serve up the same content. Whilst the web server may consider the two URLs equal in some way, Facebook doesn't automatically treat HTTPS and HTTP versions of the same URL as equal. The [WHATWG URL Specification](https://url.spec.whatwg.org/#url-equivalence) supports this position.
 
@@ -1048,7 +1048,7 @@ TODO
 
 #### Notes
 
-Becuase the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event.
+Becuase the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](#concept-duplicate).
 
 
 
@@ -1210,8 +1210,7 @@ An Artifact is an input to an Agent that's required to process its External Inpu
 
 Artifacts can be very large, for example the `all-doi` file may be up to 3GB, so they are split up into Artifact Part Files. An Artifact is represented by an Artifact Record, which contains pointers to all of its parts. 
 
-An Artifact Record is a text file that contains a list of URLs, one per line, of the parts that make it up. Therefore to download an artifact completely you must first download the Artifact record and then download each link within it. 
-
+An Artifact Record is a text file that contains a list of URLs, one per line, of the parts that make it up.
 
  Artifact files are split into parts becuase they are very large (for example the DOI file may be up to 3GB). To retrieve a complete Artifact, download the the Artifact Record and then download each link within it. Every Artifact file (both record and the parts) is made up of a name and an MD5 hash of its content, so you verify that recieved all the files correctly.
 
@@ -1244,7 +1243,7 @@ The Medium list contains DOIs that have been less recently published. Agents tha
 
 The Entire list contains all DOIs, over 80 million. Agents will try to collect data for all of these, but are limited by the size of the list.
 
-**Note:** Every crawl of a set of DOIs uses a DOI list Artifact ('high', 'medium' or 'entire'). Therefore, if you get the Artifact that was used for a given Event ID, you can check the list of DOIs that was used as part of the crawl.
+**Note:** Every crawl of a set of DOIs uses a DOI list Artifact ('high', 'medium' or 'all'). Therefore, if you get the Artifact that was used for a given Event ID, you can check the list of DOIs that was used as part of the crawl.
 
 **Note:** DOI list Artifacts are used to generate crawls for certain Agents. You may find Events with DOIs that were not part of the list.
 
@@ -1306,7 +1305,7 @@ The Evidence Service maintains a list of all of the artifacts.
 You can use the Evidence Service to retrieve the most recent version, or previous versions, of an artifact.
 
  - To retrieve the current newsfeed list, for example, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current` and you will be directed to the current Artifact Record. 
- - To retrieve the list of versions of the newsfeed, and what date they were created, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/list` and you will be shown a list of all versions with date stamps.
+ - To retrieve the list of versions of the newsfeed, and what date they were created, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/history` and you will be shown a list of all versions with date stamps.
  - To see when new versions of software components, e.g. Agents, were released.
 
 #### Finding Artifacts for an Event
