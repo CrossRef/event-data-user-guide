@@ -9,7 +9,7 @@ margin-bottom: 4cm
 fontfamily: "sans"
 ---
 
-v0.4 draft
+v0.4 draft - service early preview
 
 
 # Welcome
@@ -95,6 +95,10 @@ Crossref Event Data is a system for collecting Events and distributing them. Up 
  - Every Event that Crossref produces has an Evidence Record. These are available via the Evidence Service. It provides supporting evidence for every Event.
 
  - Every component in the CED system, internal and external, in CED is monitored. The Health Dashboard monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
+
+## Versions
+
+The current version of the service as whole is the same as the version of this User Guide. Each component of the Service, for example the Query API and the various Agents that collect data, have versions, and you can check the currently running version using the Evidence Service.
 
 ## Data Sources {#data-sources}
 
@@ -349,46 +353,126 @@ The Event Data Health Dashboard proactively monitors all parts of the system and
 
 # 3 Concepts
 
-## Registered Content, URLs, Persistent Identifiers and DOIs
+## Content Items, URLs, Persistent Identifiers and DOIs {#concept-items-urls-dois}
 
-Crossref has approximately 80 million items of Registered Content: articles, books, chapters etc. They are 'works' according to the [FRBR](http://archive.ifla.org/VII/s13/frbr/frbr1.htm#3.2) model. 
+Crossref has approximately 80 million Items of Registered Content: articles, books, chapters etc. A Content Item is a 'work' according to the [FRBR](http://archive.ifla.org/VII/s13/frbr/frbr1.htm#3.2) model. 
 
 When a Content Item is registered with Crossref or Datacite, it is assigned a Persistent Identifier (PID) in the form of a Crossref DOI or DataCite DOI. The PID permanently identifies the Content Item and is used when referring to, or linking between, Items. Other PIDs, such as PubMed ID (PMID) are available, but they are beyond the scope of Crossref Event Data.
 
-All items of Registered Content have a presence on the web, known as the Landing Page. It is usually hosted on the website of the publisher of the Item. This is the 'home' of the article, and it's what you see when you click on a DOI. Over time, Landing Pages can change as publishers reorganise their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
+<img src="images/doi-url-simple.svg" class="img-responsive">
 
-<img src="images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
+All items of Registered Content have a presence on the web, known as the Landing Page. This is the 'home' of the Item and it is hosted on the website of its publisher. It usually contains information about the Item, such as title, other bibliographic metadata, abstract, links to download the content, or possibly the whole article itself.
 
-Because DOIs silently redirect to Landing Pages, when people want to link to an Item, many people and services use the Landing Page not the DOI. Event Data therefore attempts to track Events via the Landing Page as well as via DOIs.
+The purpose of a DOI link is to automatically redirect to the Landing Page. This means that although many users click on DOIs, by the time it comes to share the an Item on social media, the user is on the Landing Page, and might share that URL not the DOI.
+
+Event Data therefore attempts to track Events via the Landing Page URLs as well as via DOI URLs.
 
 ### Event Data tracks Content Items not DOIs
 
-Crossref Event Data, like all Crossref services, uses the Crossref DOI to refer an item of Registered Content. Every Event that references a Registered Item uses its Crossref DOI. 
+Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. However it is important to understand that internally CED tracks Events around Items themselves.
 
-Every Data Source uses 
+Data from different Sources uses different identifiers to refer to Items. Some use the DOI and some use the Landing Page. However the data comes in, CED matches the input to an Item and records the data against that.
 
-We track events using the most appropriate identifier for the Item according to the source. 
+### DOIs are unique. Landing Pages aren't always.
 
+Crossref items have a variety of Content Types including:
 
+ - Journal Article
+ - Chapter
+ - Conference Paper
+ - Component
+ - Entry
+ - Book
+ - Journal Issue
+ - Journal
+ - Section
 
-Other services may use the DOI or the Landing Page. 
+Some Items are considered to be part of other Items, for example an article may contain a figures, and each figure might be registered as a separate Item. In this case there would be one Item of type 'journal article' and several item of type 'component'. Each Item has a DOI. Because Publishers are free to decide how to structure their websites, the Landing Page for each Figure may or may not be the same as the Landing Page for the article.
 
+Sometimes the Landing Page for a Book Chapter can be the same as the Landing Page for the whole book. And sometimes they are separate.
 
+<img src="images/doi-components.svg" class="img-responsive">
 
-## Data Aggregator vs Provider
+There is an exact one-to-one mapping between Items and their Persistent Identifiers (DOIs), but no exact one-to-one mapping between Items and their Landing Pages. When CED receives data for a Landing Page, it has to follow steps to assign the data to the correct Item.
 
-The NISO Code of Conduct describes an 'altmetric data aggregator as':
+For an in-depth discussion see [Landing Pages in Depth](#in-depth-landing-pages).
 
-> Tools and platforms that aggregate and offer online events as well as derived metrics from altmetric data providers (e.g., Altmetric.com, Plum Analytics, PLOS ALM, ImpactStory, Crossref).
+### Landing Page URLs can change.
 
-TODO
+Over time, Landing Pages can change as publishers reorganise their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
 
-## Works vs Persistent Identifiers / DOIs
+<img src="images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
 
+CED attempts to always store the most recent Landing Page.
 
+### Not all Landing Pages are known
 
+The Crossref metadata contains a 'Resource link' field. This is a URL that you are redirected to when you click on a Crossref DOI. It redirects to the Landing Page but it doesn't always do this directly. Publishers deposit links with Crossref, but they sometimes add their own internal redirects. 
 
-## DOIs and URLs
+Let's take a simple example of a Crossref demonstration DOI. The Crossref DOI `10.5555/12345678` has the Resource link `http://psychoceramics.labs.crossref.org/10.5555-12345678.html`, which you can see in the [article metadata](http://api.crossref.org/works/10.5555/12345678/transform/application/vnd.crossref.unixsd+xml). If we follow the DOI, 
+
+| URL | Comment |
+|-----|---------|
+| `http://doi.org/10.5555/12345678` | Initial DOI redirect from Resource link |
+| `http://psychoceramics.labs.crossref.org/10.5555-12345678.html` | Finished |
+
+In cases like this, the Landing Page is known to Crossref, as it's the same as the Resource link.
+
+Let's take another example, the PLoS DOI `10.1371/journal.pone.0160106`. The Resource link, which you can see in the [article metadata](http://api.crossref.org/works/10.1371/journal.pone.0160106/transform/application/vnd.crossref.unixsd+xml) is `http://dx.plos.org/10.1371/journal.pone.0160106`.
+
+If we follow the DOI URL, we see the following chain of redirects.
+
+| URL | Comment |
+|-----|---------|
+| `http://doi.org/10.1371/journal.pone.0160106` | Initial DOI redirect from Resource link |
+| `http://dx.plos.org/10.1371/journal.pone.0160106` | Internal redirect within PLos Site |
+| `http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0160106` | Internal redirect within PLos Site |
+| `http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160106` | Finished |
+
+In cases like this, the final Landing Page is different to that registered with Crossref, so we can't know without following it. 
+
+Furthermore, we have no way to knowing when we know the landing page. This means that if we want to collect every Landing Page URL, we have to follow every single Resource link to discover where it leads.
+
+### Landing Page data can be out of date
+
+In order to compile the mapping of DOIs to Landing Pages it's necessary to follow every single DOI. As there are over 80 million content items with DOIs, this is a time consuming process. Furthermore, Crossref has to respect rate limit on Publisher websites, which means that we can't do this simply do the crawl as fast as possible. 
+
+The data for the mapping of DOIs to Landing pages (and vice versa) is refreshed as often as possible, but it may be out of date. In order to account for this, the mappings are captured as versioned, immutable Artifacts within the CED system. This allows you to check exactly what mapping was in use at a given point in time.
+
+### It is not possible to discover all Landing Pages
+
+Publisher sites are re-organised from time to time, and there may be a delay in updating the Crossref metadata. This means that DOI links can break and it can be impossible to find the Landing Page for a period of time. 
+
+In other cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and peforming redirects using JavaScript. For example, trying to resolve the Elsevier DOI `10.1016/j.dld.2006.06.008` without cookies enabled produces:
+
+| URL | Comment |
+|-----|---------|
+| `http://doi.org/10.1016/j.dld.2006.06.008` | Initial DOI redirect|
+| `http://linkinghub.elsevier.com/retrieve/pii/S1590865806002556` | Internal redirect |
+| `http://linkinghub.elsevier.com/retrieve/articleSelectPrefsTemp?Redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&key=71835a2ddc744fbddf6d9a5a9003a4aced4b81a1` | Internal redirect |
+| `http://www.dldjournalonline.com/retrieve/pii/S1590865806002556` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&rc=0&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=1&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=2&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=3&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=4&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=5&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=6&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=7&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=8&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=9&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=10&redirect=http%3A%2F%2Fwww.dldjournalonline.com%2Fretrieve%2Fpii%2FS1590865806002556&code=ydld-site` | Internal redirect |
+| `http://secure.jbs.elsevierhealth.com/action/cookieAbsent` | Final error page |
+
+The final step in this chain is an error page stating that cookies are required and it is therefore impossible to resolve the DOI using HTTP.
+
+Crossref [Membership rules §10](http://www.crossref.org/02publishers/59pub_rules.html) state that 
+
+> links enabled by Crossref must resolve to a response page containing no less than complete bibliographic information about the target content
+
+Where publishers break these rules, we will alert them.
+
+Crossref will attempt to find Landing Pages for Items such as these, but only on a best-effort basis. If you find Event Data missing for a given Item, you can check the Artifacts to see if the mapping was included.
 
 ### Matching by DOIs {#concept-matching-dois}
 
@@ -396,9 +480,13 @@ Some services use DOIs directly to make references. Wikipedia, for example, has 
 
 Data that come from services like this can be very precise. We know that the person who made the citation intended to use the DOI to refer to the content item in question and we can reliably report that an Event occurred for this Crossref DOI.
 
-### Unabiguously linking DOIs to URLs {#concept-urls}
+### External Parties Matching Content to DOIs {#concept-external-doi-mappings}
 
-### External Parties Matching Content to DOIs {#concept-external-dois}
+It is possible for an external party to store activity around Items and use their own systems to match Items to DOIs, Landing Pages and other Identifiers. Although their APIs can be queried using DOIs, they might have recorded activity against the Item using its Landing Page or another Identifier. The internal mappings between various identifiers may change from time to time, which may mean that certain activity may be reported against one Item at one point in time and then against another Item at another point in time. Data may therefore change over time and this may be caused by algorithms being updated rather than user activity.
+
+An example of this is Mendeley, who use machine learning to cluster, group and classify articles.
+
+CED provides full Evidence for all Events, but is unable to provide visibility of mappings within external services. Data from these sources of this type should be interpreted with this in mind.
 
 ### Linked and Unlinked DOIs
 
@@ -411,18 +499,43 @@ DOIs can be expressed in a number of ways, for example:
 
 In addition, when they are displayed in an HTML page, they can be hyperlinked. **The Crossref DOI Display guidelines specify that a DOI should be a hyperlink**.
 
-Some services, such as Twitter, automatically link URLs. Some services, such as Wikipedia, provide tools that make linking the default, although there are still unlinked DOIs.
+Some services, such as Twitter, automatically link URLs. Some services, such as Wikipedia, provide tools that make linking the default, although there are still unlinked DOIs. 
 
-Generally, Event Data will only find links in HTML that are correctly linked using a URL.
+**Generally, Event Data will only find links in HTML that are correctly linked using a URL.**
 
-### Publisher Domains {#concept-publisher-domains}
+### Landing Page Domains {#concept-landing-page-domains}
+
+CED maintains a list of the domain names that belong to Landing Pages. This is called the ['domain-list' Artifact](#artifact-domain-list). It consists of around 15,000 domains that belong to Publishers. It is automatically generated but manually curated. Some Publishers create DOIs that resolve to domains such as `youtube.com`. These domains produce a large amount of false-positives. They also belong to organisations, such as YouTube, who have no involvement in scholarly publishing, which makes it unlikely that it would be impossible to extract data for them in any case. For these reasons, domains of this type are manually removed from the list.
+
+This list is used for some sources as an initial pre-filter to indenfity URLs that might be Landing Pages. 
+
+The Artifact is updated on a regular basis. For more information see ['domain-list' Artifact](#artifact-domain-list).
 
 ### Pre-filtering Domains {#concept-pre-filtering}
 
+The ['domain-list' Artifact](#artifact-domain-list) Artifact is used for pre-filtering event sources such as Twitter, Reddit and Wordpress.com.
+
+When an Agent of this type connects to a data source it will conduct a search for this domain list. In the case of Twitter that means constructing a ruleset that includes all domains. In the case of Reddit and Wordpress.com it means conducting one search per domain. This initial filter returns a dataset which mentions one of the domains that is found to contain Landing Pages. From this pre-filtered dataset the Agent then examines each result for Events.
+
+Every Agent that uses the `domain-list` Artifact includes a link to the version of the artifact they used when they conducted the query.
+
+## Data Aggregator vs Provider
+
+The NISO Code of Conduct describes an 'altmetric data aggregator as':
+
+> Tools and platforms that aggregate and offer online events as well as derived metrics from altmetric data providers (e.g., Altmetric.com, Plum Analytics, PLOS ALM, ImpactStory, Crossref).
+
+CED is an 'aggregator' by this definition. We offer 'online events' but we **do not provide metrics**. For some Data Sources that originate within Crossref, CED is also a 'Provider' according to the NISO definition.
 
 ## Duplicate Data {#concept-duplicate}
 
+When an Event occurs in the wild it may be reported via more than one channel. For example, a blog may have an RSS feed that the Newsfeed agent subscribes to. It may also be included in a blog aggregator's results. In this case the action of publishing the blog post might result in two Events in CED.
+
+It is important that CED reports events without trying to 'clean up' the data. The Evidence pipeline ensures that every input that hsould result in an Event, does result in an Event. 
+
 ## Evidence First {#concept-evidence-first}
+
+TODO
 
 ## Occurred-at vs collected-at {#concept-timescales}
 
@@ -431,13 +544,11 @@ Generally, Event Data will only find links in HTML that are correctly linked usi
 
 ## External Agents {#concept-external-agents}
 
+TODO
+
 ## Individual Events vs Pre-Aggregated {#concept-individual-aggregated}
 
-todo
-
-
-
-
+TODO
 
 # 4 In Depth
 
@@ -505,6 +616,38 @@ Most of the time an Event can be read as "this relation was created". An Event r
 Sometimes these relationships come and go. For example, in Wikipeida, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
 
 The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records that the relation was removed.
+
+## Landing Pages in Depth {#in-depth-landing-pages}
+
+For context please see [Content Items, URLs, Persistent Identifiers and DOIs](#concept-items-urls-dois).
+
+### Component DOIs
+
+
+
+### Conflicting Landing Pages
+
+### Conflict Resolution
+
+
+
+## Artifact: DOI-URL list
+
+This Artifact is a mapping of DOIs to the 
+
+## Artifact: URL-DOI list
+
+## DOI Reversal Service #{in-depth-doi-reversal}
+
+The DOI Reversal Service converts Landing Pages back into DOIs so they can be used to identify Items. It uses a variety of techniques including:
+
+ - looking up the Landing Page in the `url-doi` Artifact mapping.
+ - searching for a valid DOI embedded in the URL
+ - looking up SICIs embedded in the URL
+ - looking in the HTML metdata of the URL to see if a DOI is supplied
+
+The process of DOI Reversal is not perfect and it will never be possible to match 100%.
+
 
 ## Sources in Depth {#in-depth-sources}
 
@@ -841,7 +984,7 @@ Each process:
 | Freshness                 |  |
 | Data Source               |  |
 | Coverage                  |  |
-| Relevant concepts         | [Matching by DOIs](#concept-matching-dois), [External Parties Matching Content to DOIs](#concept-external-dois), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) |
+| Relevant concepts         | [Matching by DOIs](#concept-matching-dois), [External Parties Matching Content to DOIs](#concept-external-doi-mappings), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) |
 | Operated by               |  |
 | Agent                     |  |
 
@@ -877,7 +1020,7 @@ TODO
 | Freshness                 | half-hourly |
 | Data Source               | Multiple blog and aggregator RSS feeds |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Publisher Domains](#concept-publisher-domains), [Pre-filtering](#concept-pre-filtering) |
+| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Landing Page Domains](#concept-landing-page-domains), [Pre-filtering](#concept-pre-filtering), [DOI Reversal Service](#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
@@ -1089,7 +1232,7 @@ The structure of each type of Artifact file is chosen to best suit the data, and
 | «software-name»        | The name and version of software | http://github.com/crossref/event-data-facebook-agent/tags/v2.5                                             |
 
 
-##### High Priority, Medium Priority, Entire DOI List 
+##### High Priority, Medium Priority, Entire DOI List {#artifact-doi-list}
 
 This is a list of Crossref DOIs that are deemed to be high-priority, medium-priority respectively, and the list of all DOIs. The content of an Artifact Part File is a list of DOIs (expressed without a resolver, e.g. `10.5555/12345678`), one per line. 
 
@@ -1123,7 +1266,7 @@ The contents of this Artifact change over time for a number of reasons:
 The lists are used in a number of places:
 
  - Agents that query by landing page URL, e.g. Facebook . Like the DOI list, the three URL lists are used to schedule scans at high, medium and low frequencies.
- - The DOI Reversal Service, which transforms landing pages back into DOIS for Agents like Twitter
+ - The [DOI Reversal Service](#in-depth-doi-reversal), which transforms landing pages back into DOIS for Agents like Twitter
 
 This may be used to answer questions like:
 
@@ -1142,7 +1285,7 @@ The list is manually curated from known blogs and updated every month or two wit
 
 If you think a newsfeed is missing from the list, please contact eventdata@crossref.org
 
-##### Domain List
+##### Domain List {#artifact-domain-list}
 
 This is a list of domains that DOIs resolve to. The list is created by the Thamnophilus service, which crawls every DOI to find its landing page, and records the domain. The Artifact Part files contain a list of domain names, one per line.
 
@@ -1150,7 +1293,7 @@ The data is generated automatically but manually curated to some extent. As some
 
 By providing the domain list as an Artifact, you can answer questions like "why wasn't this landing page matched". 
 
-For more information see [Pre-filtering Domains](#concept-pre-filtering).
+For context see [Pre-filtering Domains](#concept-pre-filtering).
 
 ##### Software Name and Version
 
@@ -1388,14 +1531,14 @@ URL
 UUID
   : universally unique identifier. Looks like `c0eb1c46-6a59-49c9-926b-a10667ddd9de`.
 
-## Retired Terminology
+## Deprecated Terminology
 
 The following words have been used during the development of Event Data but are no longer official:
 
  - Deposit - this is an internal entity used within Lagotto. It does not form part of the public DET service, although it may be of interest to users who want to look into the internals.
  - "DOI Event Tracking" / "DET" - the old name for the Crossref Event Data service
  - Relations - this is an internal entity used within Lagotto. CED does not use Lagotto Relation objects. The concept of 'relations' is however.
-
+ - Publisher Domains - now referred to as Landing Page Domains
 
 # Revision history
 
