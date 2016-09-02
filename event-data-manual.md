@@ -367,9 +367,15 @@ The purpose of a DOI link is to automatically redirect to the Landing Page. This
 
 Event Data therefore attempts to track Events via the Landing Page URLs as well as via DOI URLs.
 
+### Event Data uses DOIs to refer to Items
+
+Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. The Query API uses DOIs to query for data associated with Items and each Event uses DOIs when referring to items.
+
+CED normalises DOIs into a standard form, using `HTTPS` and the `doi.org` resolver, e.g. `https://doi.org/10.5555/12345678`. Even through events may be collected via DOIs expressed in different forms, all Events contain DOIs in this form.
+
 ### Event Data tracks Content Items not DOIs
 
-Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. However it is important to understand that internally CED tracks Events around Items themselves.
+CED uses DOIs to refer to Items, but it is important to understand that internally CED tracks Events around Items themselves. CED does not "track DOIs".
 
 Input data collected from different Sources uses different identifiers to refer to Items. Some use the DOI and some use the Landing Page. However the data comes in, CED matches the input to an Item and records the data against that.
 
@@ -511,13 +517,46 @@ This list is used for some sources as an initial pre-filter to indenfity URLs th
 
 The Artifact is updated on a regular basis. For more information see [`domain-list` Artifact](#artifact-domain-list).
 
-### Pre-filtering Domains {#concept-pre-filtering}
+## Different levels of Data Source Specificity
 
-The [`domain-list` Artifact](#artifact-domain-list) Artifact is used for pre-filtering event sources such as Twitter, Reddit and Wordpress.com.
+External sources fall into four broad levels of specificity, in order of preference:
+
+1. Sources that provide only relevant Data.
+2. Sources that can be queried by pre-filtering Landing Page Domains.
+3. Sources that must be fetched in their entirety.
+4. Sources that must be queried once per Item.
+
+### Sources that send only relevant Data {#concept-relevant-source}
+
+Some sources, such as "DataCite Crossref" and "Crossref DataCite" are specialists in the Scholarly Publishing space. They send data to CED, and each item of Data that is sent can be converted into an Event. This is highly efficient, as it means that no data or time is wasted.
+
+### Pre-filtering URLS by their Domain {#concept-pre-filtering}
+
+Some sources, such as Twitter and Reddit support queries by domain. This means that the Agent has to issue each Query once per domain to perform a full scan of the corpus of Items. In these cases the [`domain-list` Artifact](#artifact-domain-list) Artifact is used. It contains around 15,000 domains. In these cases, some data is sent that cannot be matched to an Event, but the ratio is still very high.
 
 When an Agent of this type connects to a data source it will conduct a search for this domain list. In the case of Twitter that means constructing a ruleset that includes all domains. In the case of Reddit and Wordpress.com it means conducting one search per domain. This initial filter returns a dataset which mentions one of the domains that is found to contain Landing Pages. From this pre-filtered dataset the Agent then examines each result for Events.
 
 Every Agent that uses the `domain-list` Artifact includes a link to the version of the artifact they used when they conducted the query.
+
+### Sources that must be queried in their entirety {#concept-query-entirety}
+
+Some sources have no means of filtering or querying and must be downloaded in their entirety. These sources generally contain a high amount of relevant content, so the chance of being able to extract Events is high, and this method isn't wasteful.
+
+Examples of these sources are Newsfeeds. The Newsfeed agent consumes all the data in each Newsfeed and then filters them for Events. As Newsfeed List is curated to include only blogs that are likely to feature links to Items that can be extracted, this approach is reasonably efficient.
+
+### Sources that must be queried once per Item {#concept-once-per-item}
+
+Some sources don't allow queries of the above kind, meaning it is necessary to query once per item to retrieve all the data. This is a slow process, as there are over 80 million items and APIs have rate limits.
+
+Facebook and Mendeley are examples of this type of source. In the case of Mendeley, queries are made using the DOI and in the case of Facebook they use the Landing Page.
+
+To mitigate the problem of long crawl times, CED splits Items into three categories: 
+
+ - high interest Items
+ - medium interest Items
+ - all Items
+
+The three lists are polled in a loop independently, meaning that the smaller, higher interest Items have updates more often. See the [DOI List](#artifact-doi-list) and [URL List](#artifact-url-list) Artifacts and the documentation for the respective Sources for more details.
 
 ## Data Aggregator vs Provider
 
@@ -686,7 +725,7 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 
 #### Methodology
 
- - The Metadata API scans incoming Content Registration items and when it finds links to DataCite DOIs, it deposits them.
+ - The Metadata API scans incoming Content Registration items and when it finds links to DataCite DOIs, it adds the Events to CED.
  - It can also scan back-files for links.
 
 #### Notes
@@ -751,7 +790,7 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 | Freshness                 | Three schedules |
 | Data Source               | Facebook API |
 | Coverage                  | All DOIs where there is a unique URL mapping |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) |
+| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated), [Sources that must be queried once per Item](#concept-once-per-item) |
 | Operated by               | Crossref |
 | Agent                     | event-data-facebook-agent |
 
@@ -797,6 +836,8 @@ If you just want to find 'all the Facebook data for this DOI' remember that you 
     }
 
 #### Example Evidence Record
+
+An Evidence Record contains one response from a Facebook API. API requests are batched in groups of URLs, up to 50 at a time. Therefore an Evidence Record can result in multiple Events.
 
 TODO
 
@@ -978,17 +1019,17 @@ Each process:
 |---------------------------|----------------|
 | Name                      |  |
 | Matches by                | DOI |
-| Consumes artifacts        |  |
+| Consumes artifacts        | `high-dois`, `medium-dois`, `all-dois` |
 | Produces relation types   |  |
 | Fields in Evidence Record |  |
 | Freshness                 |  |
 | Data Source               |  |
 | Coverage                  |  |
-| Relevant concepts         | [Matching by DOIs](#concept-matching-dois), [External Parties Matching Content to DOIs](#concept-external-doi-mappings), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) |
+| Relevant concepts         | [Matching by DOIs](#concept-matching-dois), [External Parties Matching Content to DOIs](#concept-external-doi-mappings), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated), [Sources that must be queried once per Item](#concept-once-per-item) |
 | Operated by               |  |
 | Agent                     |  |
 
-DISCUSSION
+The Mendeley Agent polls Mendeley for every DOI and records the `reader_count` and `group_count` numbers. A Mendeley Event Data record should be read as "As of this date this Item has this many readers" or "as of this date this Item is in this many groups".
 
 #### Example Event
 
@@ -1000,11 +1041,15 @@ TODO
 
 #### Methodology
 
-TODO
+1. The Mendeley agent consumes three Artifacts: `high-dois`, `medium-dois` and `all-dois`. It runs a three parallel processes, one per list.
+2. For each list, the agent fetches the most recent version of the Artifact.
+3. It scans over the entire list, making one query per DOI.
+4. For each Item for which there is data, two Event is created with total values. The `reader_count` total is stored in an event with `relation_type_id` of `bookmarks`. The `group_count` total is stored in an event with the `relation_type_id` of `likes`.
+4. When it has finished the list, it starts again at step 1.
 
 #### Further information
 
-TODO
+ - [Mendeley API Documentation](http://dev.mendeley.com/methods/)
 
 
 
@@ -1020,7 +1065,7 @@ TODO
 | Freshness                 | half-hourly |
 | Data Source               | Multiple blog and aggregator RSS feeds |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Landing Page Domains](#concept-landing-page-domains), [Pre-filtering](#concept-pre-filtering), [DOI Reversal Service](#in-depth-doi-reversal) |
+| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Landing Page Domains](#concept-landing-page-domains), [Sources that must be queried in their entirety](#concept-query-entirety), [DOI Reversal Service](#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
@@ -1042,9 +1087,11 @@ TODO
 
 #### Methodology
 
- - Every hour, the latest 'newsfeed-list' Artifact is retrieved
- - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts
- - For every hyperlink in the blog post, the agent queries the DOI Reversal service to try and turn it into a DOI.
+ - Every hour, the latest 'newsfeed-list' Artifact is retrieved.
+ - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts.
+ - The content of the body in the RSS feed item are inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
+ - The URL of the blog post is retrieved and the body is inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
+ - For every DOI found an Event is created with a `relation_type_id` of `mentions`.
 
 #### Notes
 
@@ -1105,6 +1152,15 @@ TODO
 | Operated by               | Crossref |
 | Agent                     |  |
 
+The Twitter source identifies Items that have been mentioned in Tweets. It matches Items using their Landing Page or DOI URL. Each event contains subject metadata including:
+
+ - tweet author
+ - tweet content
+ - tweet type (tweet or retweet)
+ - tweet publication date
+
+When Items are matched using their Landing Page URL the URL Reversal Service is used.
+
 DISCUSSION
 
 #### Example Event
@@ -1117,7 +1173,10 @@ TODO
 
 #### Methodology
 
-TODO
+ 1. On a periodic basis the most recent version of the `domain-list` Artifact is retrieved. A set of Gnip PowerTrack rules are compiled and sent to Gnip.
+ 2. The Twitter agent connects to Gnip PowerTrack.
+ 3. All tweets matching the URL rule list are sent to the 
+
 
 #### Further information
 
@@ -1420,6 +1479,174 @@ The Newsfeed List is manually curated using input from the Newsfeed Dector. For 
 Here are some examples in Python.
 
 TODO
+
+# Appendix: Contributing to Event Data
+
+We welcome new Data Sources. Using the Lagotto Deposit API, third parties can easily push Events. We run a Sandbox instance for developers to work with and for integration testing. Please review the [API section](#using-the-api) for familiarity with the Deposit format. The [API is documented using Swagger](http://api.eventdata.crossref.org/api).
+
+### Preparation
+
+We would love to help you develop your Push Source.
+
+ 1. Contact us at eventdata@crossref.org to discuss your source. 
+ 1. Decide what kind of Relation Types best describe your data.
+ 1. Decide if your source supplies pre-aggregated or individual Events.
+
+### Tokens
+
+ 1. Sign in at [http://sandbox.api.eventdata.crossref.org](http://sandbox.api.eventdata.crossref.org).
+ 1. Email eventdata@crossref.org and we will enable your account for Push API access. Pushes won't work until we do this.
+ 1. Click on your name, select 'your account'. Copy your API key. You will use this to authenticate all of your push requests.
+ 1. Create a UUID for your agent. You can use your favourite GUID library or a service like [uuidgenerator.net](https://www.uuidgenerator.net/). This will be your Source Token, and will uniquely identify your agent. Don't re-use this for another agent.
+
+### Format
+
+ 1. One HTTP POST is made per deposit. The payload should be in JSON format, with the `Content-Type: application/json` header.
+ 1. Authentication using your token should use the header: `Authorization: Token token=«your-token»`.
+ 1. A Event is expressed as a Subject, Object, Relation Type, Total and Date. 
+    1. The Subject, `subj_id` must be a URL. It can be a DOI or a web page.  
+    1. The Object, `subj_id` must be a URL. It is usually a DOI.
+    1. The Total can be omitted, and it defaults to 1. For cases where the Deposit corresponds to countable information, you can supply an integer. 
+    1. If the Subject or Object is a DOI, CED will automatically look up the metadata. If not, you must supply minimal metadata as `subject` or `object` respectively.
+ 1. Create a UUID for your Deposit. Every deposit must have a unique UUID.
+
+### Sending Data
+
+ 1. Send your Deposit by POSTing to [`http://sandbox.api.eventdata.crossref.org/api/deposits`](http://sandbox.api.eventdata.crossref.org/api/deposits)
+ 1. You will receive a 202 on success or a 400 on failure. 
+ 1. You can check on the status of your deposit by visiting `http://sandbox.api.eventdata.crossref.org/api/deposits/«deposit-id»`
+ 1. Deposits will usually be processed within a few minutes. When the status changes from `waiting` to `done`, it has been fully processed. If there is an error processing, it will read `failed`.
+
+### Ready to go!
+
+ 1. When you are happy with your Agent, let us know and we will enable it in the Production service.
+ 1. Switch over from the Staging Environment, `staging.api.eventata.crossref.org` to the Production Environment, `api.eventdata.crossref.org`
+ 1. Enable your agent, push historical deposits if necessary, and start pushing new data!
+
+## Examples
+
+Here are some worked examples using cURL.
+
+### Example 1: Bigipedia
+
+Bigipedia is an online Encyclopedia. It cites DOIs in its reference list for its articles. Its source token is `b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff`. Bigipedia will tell CED every time a DOI is cited, and will send data every time a citation is added.
+
+In this example, Bigipedia informs us that the DOI is referenced by the article page. Note that because the subject is not a DOI, the metadata must be supplied in the `subj` key. 
+
+    $ curl "http://sandbox.api.eventdata.crossref.org/api/deposits" \
+           --verbose \
+           -H "Content-Type: application/json" \
+           -H "Authorization: Token token=591df7a9-5b32-4f1a-b23c-d54c19adf3fe" \
+           -X POST \
+           --data '{"deposit": {"uuid": "dbba925e-b47c-4732-a27b-0063040c079d",
+                                "source_token": "b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff",
+                                "subj_id": "http://bigipedia.com/pages/Chianto",
+                                "obj_id": "http://doi.org/10.3403/30164641u",
+                                "relation_type_id": "references",
+                                "source_id": "bigipedia",
+                                "subj": {"title": "Chianto",
+                                            "issued": "2016-01-02",
+                                             "URL": "http://bigipedia.com/pages/Chianto"}}}'
+
+Response:
+
+    HTTP/1.1 202 Accepted
+
+    {"meta":
+      {"status":"accepted",
+       "message-type":"deposit",
+       "message-version":"v7"},
+       "deposit":{
+         "id":"dbba925e-b47c-4732-a27b-0063040c079d",
+         "state":"waiting",
+         "message_type":"relation",
+         "message_action":"create",
+         "source_token":"b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff",
+         "subj_id":"http://bigipedia.com/pages/Chianto",
+         "obj_id":"http://doi.org/10.3403/30164641u",
+         "relation_type_id":"references",
+         "source_id":"bigipedia",
+         "total":1,
+         "occurred_at":"2016-04-19T15:26:02Z",
+         "timestamp":"2016-04-19T15:26:02Z",
+         "subj":{
+            "title":"Chianto",
+            "issued":"2016-01-02",
+            "URL":"http://bigipedia.com/pages/Chianto"},
+          "obj":{}}}
+
+You would be able to check on the status at `http://sandbox.api.eventdata.crossref.org/api/deposits/dbba925e-b47c-4732-a27b-0063040c079d`
+
+### Example 2: DOI Remember
+
+DOI Remember is a bookmarking service for DOIs. DOI Remember will tell CED how many times each DOI is cited. Every day it will send data for every DOI, stating how many times it is currently bookmarked. Its source token is `366273b5-d3d8-488b-afdc-940bcd0b9b87`.
+
+In this example, DOI Remember tells that as of the 1st of March 2016, 922 people have bookmarked the given DOI. The Subject is the 'DOI Remember' source as a whole. As its URL is not a DOI, subject metadata must be included. CED allows for the year `0000-01-01` for the issue date when it's not meaningful to provide one.
+    
+    $ curl "http://sandbox.api.eventdata.crossref.org/api/deposits" \
+           --verbose \
+           -H "Content-Type: application/json" \
+           -H "Authorization: Token token=22e49a7c-5edd-4873-a2b2-c541512c933a" \
+           -X POST \
+           --data '{"deposit": {"uuid": "c06fc051-5e29-4cd3-b46a-652c646a3582",
+                                "source_token": "366273b5-d3d8-488b-afdc-940bcd0b9b87",
+                                "subj_id": "http://doiremember.com",
+                                "obj_id": "http://doi.org/10.3403/30164641u",
+                                "total": 922,
+                                "occurred_at": "2016-03-01",
+                                "relation_type_id": "bookmarks",
+                                "source_id": "doi_remember",
+                                "subj":{
+                                  "title":"DOI Remember",
+                                  "issued":"0000-01-01",
+                                  "URL":"http://doiremember.com"}}}'
+
+### Example 3: Hansard Watch
+
+Hansard Watch is a service that monitors the UK House of Commons and sends an event every time a DOI is mentioned in Parliament. Every time it finds a new DOI mention it will send a link to the URL of the online Hansard page. Its source token is `a8d4efa6-868b-4230-9685-74b6c7c192bf`.
+
+In this example, the given Hansard page discusses the given DOI. It has a publication date.
+
+    $ curl "http://sandbox.api.eventdata.crossref.org/api/deposits" \
+       --verbose \
+       -H "Content-Type: application/json" \
+       -H "Authorization: Token token=b832bf3a-f5ca-4435-9a2b-09fec0f313a6" \
+       -X POST \
+       --data '{"deposit": {"uuid": "16acd857-82b8-493c-8e79-6ac0a67ce53b",
+                            "source_token": "a8d4efa6-868b-4230-9685-74b6c7c192bf",
+                            "subj_id": "https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches",
+                            "obj_id": "http://doi.org/10.3403/30164641u",
+                            "occurred_at": "2013-03-24",
+                            "relation_type_id": "discusses",
+                            "source_id": "hansard_watch",
+                            "subj":{
+                              "title":"Previous VAT on toasted sandwiches",
+                              "issued":"2013-03-24",
+                              "URL":"https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches"}}}'
+
+### Example 4: TrouserPress
+
+TrouserPress is an online hosted blogging platform. It's increasingly being used for Science Communication. Every time someone publishes a post that cites a DOI it will send a link to the URL of the blog post. Its source token is `d9a177bd-9906-4244-864d-1fb83d8c58ed`.
+
+In this example, the given TrouserPress article discusses the DOI.
+
+    curl "http://sandbox.api.eventdata.crossref.org/api/deposits" \
+       --verbose \
+       -H "Content-Type: application/json" \
+       -H "Authorization: Token token=22810d9a-8fae-4905-8d0d-ac7b98731646" \
+       -X POST \
+       --data '{"deposit": {"uuid": "baa93bc4-c832-4e19-aaac-d52ad827843a",
+                            "source_token": "d9a177bd-9906-4244-864d-1fb83d8c58ed",
+                            "subj_id": "http://trouser.press/jim/my-favourite-dois",
+                            "obj_id": "http://doi.org/10.3403/30164641u",
+                            "occurred_at": "2013-03-24",
+                            "relation_type_id": "discusses",
+                            "source_id": "trouser_press",
+                            "subj":{
+                              "title":"My Favourite DOIs",
+                              "author": "Jim",
+                              "issued":"2013-03-24",
+                              "URL":"http://trouser.press/jim/my-favourite-dois"}}}'
 
 
 # Appendix: FAQ
