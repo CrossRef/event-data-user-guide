@@ -21,7 +21,7 @@ Welcome to the Crossref Event Data User Guide. It contains everything you need t
  - "Concepts" covers some of the issues that should be understood before using Event Data.
  - "In Depth" describes all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience.
 
-Everyone should read the introduction. You can jump ahead to "The Service" for a detailed description of what CED provides, but for full understanding you should read "Concepts".
+Crossref Event Data is an open service and will be put to a wide range of uses so it's important to understand exactly what the data means. We aim to set the standard in openness and transparency so the documentation not only describes the service, but precisely how we generate it.
 
 **This document is pre-release. Some features described here are at preview stage and some are planned. The Event Data Service has not yet launched and is not feature-complete.**
 
@@ -660,21 +660,22 @@ The removal of a relation in Wikipedia doesn't constitute the removal of an Even
 
 For context please see [Content Items, URLs, Persistent Identifiers and DOIs](#concept-items-urls-dois).
 
-### Component DOIs
+## Landing Page Conflict Resolution
 
+The DOI-URL Mapping is a one-to-one mapping: every DOI is mentioned only once and every URL is mentioned only once. If we find two DOIs that resolve to the same URL, we use the following process:
 
+1. If a URL maps to only one DOI, that mapping is used.
+2. If two DOIs map to one DOI and one Item a parent of the other (indicated by the `parent_doi` tag in the metadata), then the parent DOI is used for the mapping.
+3. If two DOIs map to one URL we look in the the metadata for the `publication_type`. If one has a value of `full_text` and the other has a value of `abstract_only` or `bibliographic_record`, the Item with the `publication_type` of `full_text` is used.
+4. Failing that, the mapping is excluded.
 
-### Conflicting Landing Pages
+<img src="images/conflict-resolution.svg" alt="Conflict Resolution Examples" class="img-responsive">
 
-### Conflict Resolution
-
-
+Note that this process is used only when constructing the DOI-URL list, in order that URLs can be mapped to DOIs. If an Event that mentions e.g. a component DOI is produced by a source, the event will be recorded against the Item with that Component DOI.
 
 ## Artifact: DOI-URL list
 
-This Artifact is a mapping of DOIs to the 
-
-## Artifact: URL-DOI list
+The DOI-URL list is a one-to-one mapping of DOIs to Landing Page URLs. Both the DOI and URL columns are unique. This is used when querying services like Facebook, where we want to query unabiguously for every Item possible.
 
 ## DOI Reversal Service {#in-depth-doi-reversal}
 
@@ -1377,7 +1378,42 @@ Every Event has a corresponding Evidence Record, which contains a link to all of
 
 ### Evidence Records
 
-TODO
+An Agent is responsible for fetching data from an external data source and extracting Events from the input data. An Evidence Record is created by an Agent as the result of an input from an external data source. It contains the input, the resultant Events, and all the state and information necessary to support the resulting events.
+
+Every Evidence Record contains the following sections:
+
+ - `input` - the data that entered the system from an external source
+ - `artifacts` - the artifacts that were used in processing
+ - `agent` - the name and version of the Agent
+ - `state` - any relevant pieces of state 
+ - `working` - any internal working that is relevant to the processing of the input
+ - `events` - any resulting events
+
+The precise content of each of these sections varies from Agent to Agent.
+
+#### Input
+
+The Input contains the data input from the external source. It may contain the precise input an HTTP body, or some reduction of the input. The Input contains all information necessary to construct the Events.
+
+#### Artifacts
+
+The Artifacts that were consumed by the Agent in the course of processing the Input.
+
+#### Agent
+
+Internal data about the Agent, including the version number.
+
+#### State
+
+Any extra state information necessary to process the Input. For example, because the Newsfeed Agent often checks newsfeeds more regularly than they are updated, it might see the same blog post URL in the Newsfeed twice. 
+
+#### Working
+
+Any working data that the Agent produces in the course of generating the Event that might be useful to know. For example, the Newsfeed Agent provides the list of Blog URLs that it considered. If it is unable to retrieve a blog post URL, it will record it here.
+
+#### Events
+
+All the Events that were produced. These are in Lagotto Deposit format, which is very similar to the Event format. Each event has an ID, which can be used to track it.
 
 # Appendix 1: Software in Use
 
