@@ -574,20 +574,113 @@ It is important that CED reports events without trying to 'clean up' the data. T
 
 ## Evidence First {#concept-evidence-first}
 
-TODO
+Crossref Event Data contains data from external data providers, such as Twitter, Wikipedia and DataCite. Every Event is created with an Agent. In most cases, such as Twitter and Wikipedia, the Agent is operated by Crossref not by the original data provider. In some cases, such as DataCite, the data provider runs the Agent themselves.
+
+Converting external data into Events provides an evidence gap. It raises questions like:
+
+ - what data was recieved?
+ - how was it converted into Events?
+ - if some other service got the same data, why did it produce different results?
+
+<img src="images/evidence-first-evidence-gap.svg" alt="Evidence Gap" class="img-responsive">
+
+#### Bridging the Evidence Gap
+
+CED solves this by taking an **Evidence First** approach. For every piece of external data we recieve we create an Evidence Record. This contains all the relevant parts of the input data and all supporting information needed to process it. This means that we can provide evidence for every Event. 
+
+<img src="images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
+
+Evidence is important because it bridges primary data providers, who produce data but not events, with the Events in CED. The precise way that the conversion was performed enables consumers of the Events to understand exactly what they mean.
+
+When a number of other similar services may be using the same data to produce their own events, being able to compare both the input data that the two services were working from and the processes they used to process it enables the two services to be compared.
+
+#### Not all Events need Evidence {#evidence-not-all}
+
+Evidence bridges the gap between external data in a custom format and the resulting Events. There are two factors at play:
+
+ - the format of the data, which is in some external format and needs to be processed into to Events
+ - the fact that the original data source is controlled by a different party than the Agent that produces Events
+
+Some sources understand and produce Events directly. Examples of these are the `datacite_crossref` and `crossref_datacite` sources. In these cases, the Events themselves are considered to be Primary Data.
+
+We may also accept Events direct from external data sources, where the external source runs their own Agent and provides Events as primary data. In this case the Source may not be able or willing to provide any additional evidence beyond the Events themselves.
+
+For more information see [Evidence Records in Depth](#in-depth-evidence-records).
 
 ## Occurred-at vs collected-at {#concept-timescales}
 
- - citability
- - stability
+Every Event results from an action that was taken at some point in time. This is considered to be the time that the Event 'occurred'. Examples of the 'occurred' field:
+
+ - the time the Tweet was published
+ - the time the edit was made on Wikipedia
+ - the time that the Reddit comment was made
+ - the time that the blog post was published
+ - the time an article with a data citation was published
+
+Most Events are collected soon after they occur:
+
+ - tweets are collected within a few minutes of publication
+ - Wikipedia edits are collected within a few minutes of the edit
+ - Reddit comments are collected the day after they were made
+ - blog posts are collected within an hour of publication or syndication
+
+These are approximate guidelines. In some circumstances the Event may be collected some time after the it occurred:
+
+ - article back-files from years ago are scanned for citations
+ - a monthly data-dump comes in and it registers Events from the start of the month
+ - a historical data-dump is made available
+
+These two dates are represented as the `occurred_at` and `timestamp` fields on each Event. The Query API has two views which allow you to find Events filtered by both timescales.
+
+### Using the Query API over time
+
+The Query API is updated every day. Once data for a given date exists in the `collected` view of the Query API it will never change. Anything collected on a future day will be made available under that day's view.
+
+The Query API also contains an `occurred` view. This returns Events based on the date they occurred on. Because Events can be collected some time after they occurred, the data in this view can change.
+
+<img src="images/occurred-collected-timeline.svg" alt="Occurred at vs Collected at" class="img-responsive">
+
+When you use the **collected** view you should be aware that it may contain Events that occurred in the past.
+
+When you use the **occurred** view you should be aware that that the results may change over time, and that events may have happened in the past that have not yet been collected.
+
+### Stable dataset with `collected`
+
+The `collected` dataset provides a stable dataset that can be referenced. You can be confident that the data returned by a query URL won't change over time. You can also be confident that by collecting data for each day you will build a complete dataset of events collected over that period.
+
+The downside of this is that you will not be able to find Events that occurred on a given day without downloading a complete dataset.
+
+### Flexible data with `occurred`
+
+The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query URL will change over time, so you can't rely on the dataset to be stable and citable.
+
+The timestamp field is available on all Events, so you can see when they were collected and added to the dataset for a given day.
 
 ## External Agents {#concept-external-agents}
 
-TODO
+Most Agents are operated by Crossref (see [Data Sources](#data-sources)). Some are operated by external parties, for example DataCite. We welcome new data sources.
+
+Where Crossref operates the Agent we provide full Evidence records for each Event. Where the Agent is operated by an external party, they may or may not provide full Evidence. See [Not all Events need Evidence](#evidence-not-all) for further discussion.
 
 ## Individual Events vs Pre-Aggregated {#concept-individual-aggregated}
 
-TODO
+Most sources, such as Twitter, Wikipedia, DataCite etc, provide a view of indivdual Events. Some, like Mendeley or Facebook, are only able to capture snapshots of aggregate values. It is preferable to capture individual Events, and pre-aggregated Events are only produced where it is the only format available.
+
+The `occurred_at` field of individual Events is generally the time the original event happened, e.g.
+
+ - the tweet was published at this date and time
+ - the edit was made to the Wikipedia article at this date and time
+
+In the case of 'likes' on Facebook, we don't have access to each time an Item was liked (or unliked). We only have visibility of the total number of likes. Therefore for pre-aggregated Events the `occurred_at` field means:
+
+ - the Agent checked Facebook at this date and time and it reported the Item has 5 likes
+ - the Agent checked Mendeley at this date and time and it reported the Item is in 10 groups
+
+In Events like this, the `total` field records the number of pre-aggreagted events.
+
+These events don't record *when* an Item was liked, just the number of likes that exist on a given date. This means that if an Item has a Facebook Event with 100 likes in January and 150 likes in February, we don't know whether 50 extra people liked the Item, or if it was a combination of unlikes and new likes.
+
+Co-incidentally, sources like this also tend to be the type that must be polled once per Item which means that the time between Events for a given Item might be large, and the data might not be very recent. See see [Sources that must be queried once per Item](#concept-once-per-item).
 
 # 4 In Depth
 
@@ -632,7 +725,9 @@ Therefore `occurred_at` field comes from a different authority depending on the 
 
 The `timestamp` field represents the date that the Event was processed. Every piece of data travels through an internal pipeline within the Event Data service. The timestamp records the time at which an Event was inserted into the Lagotto service, which is the central component that collects all Events.
 
+<!---
 TODO: PIPELINE PICTURE
+-->
 
 The `timestamp` is used in the `collected` view in the Query API.
 
@@ -641,6 +736,8 @@ The `timestamp` usually happens a short while after the event was collected. For
 ### Subject and Object Metadata
 
 Event Data allows Subject and Object metadata to be included. Where the Subject or Object metadata are DOIs, and therefore can be easily looked up from the Crossref or DataCite Metadata API, it is usually not included. In other cases, it is often included.
+
+For some sources, such as Facebook, the subject ID may be a representative URI and not a URL, and doesn't correspond to a webpage. See [Subject URIs and PIDs in Facebook](#in-depth-facebook-uris) for more details.
 
 ### ID
 
@@ -805,7 +902,7 @@ The Facebook Agent uses three categories of Item: `high-urls`, `medium-urls` and
 
 The Facebook Agent works within rate limits of Facebook API. If the Facebook API indicates that the rate of traffic is too high then the Agent will lower the rate of querying and a complete scan will take longer.
 
-#### Subject URLs and PIDs
+#### Subject URIs and PIDs {#in-depth-facebook-uris}
 
 As Facebook events are pre-aggregated and don't record the relationship between the liker and the Item, Events are recorded against Facebook as a whole. Because we don't expect to collect events more than once per month per Item, we create an entity that represents Facebook in a given month.
 
@@ -836,11 +933,13 @@ If you just want to find 'all the Facebook data for this DOI' remember that you 
       "relation_type_id":"references"
     }
 
+<!--- 
 #### Example Evidence Record
 
 An Evidence Record contains one response from a Facebook API. API requests are batched in groups of URLs, up to 50 at a time. Therefore an Evidence Record can result in multiple Events.
 
 TODO
+-->
 
 #### Landing Page URLs vs DOI URLs in Facebook
 
@@ -1032,6 +1131,7 @@ Each process:
 
 The Mendeley Agent polls Mendeley for every DOI and records the `reader_count` and `group_count` numbers. A Mendeley Event Data record should be read as "As of this date this Item has this many readers" or "as of this date this Item is in this many groups".
 
+<!--
 #### Example Event
 
 TODO
@@ -1039,6 +1139,7 @@ TODO
 #### Example Evidence Record
 
 TODO
+-->
 
 #### Methodology
 
@@ -1078,6 +1179,7 @@ The Newsfeed agent monitors RSS and Atom feeds from blogs and blog aggregators. 
 
 You can see the latest version of the newsfeed-list by using the Evience Service: http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current 
 
+<!---
 #### Example Event
 
 TODO
@@ -1085,6 +1187,8 @@ TODO
 #### Example Evidence Record
 
 TODO
+
+-->
 
 #### Methodology
 
@@ -1100,7 +1204,7 @@ Becuase the Newsfeed Agent connects to blogs and blog aggregators, it is possibl
 
 
 
-
+<!---
 ### Reddit
 
 | Property                  | Value          |
@@ -1135,8 +1239,10 @@ TODO
 
 TODO
 
+-->
 
 
+<!---
 ### Twitter
 
 | Property                  | Value          |
@@ -1182,9 +1288,9 @@ TODO
 #### Further information
 
 TODO
+-->
 
-
-
+<!---
 ### Wikipedia
 
 | Property                  | Value          |
@@ -1275,6 +1381,8 @@ An Artifact Record is a text file that contains a list of URLs, one per line, of
  Artifact files are split into parts becuase they are very large (for example the DOI file may be up to 3GB). To retrieve a complete Artifact, download the the Artifact Record and then download each link within it. Every Artifact file (both record and the parts) is made up of a name and an MD5 hash of its content, so you verify that recieved all the files correctly.
 
 The structure of each type of Artifact file is chosen to best suit the data, and is described per-source below.
+
+-->
 
 #### List of artifact types
 
@@ -1376,7 +1484,7 @@ Every Event has a corresponding Evidence Record, which contains a link to all of
  - Query the Evidence Service to find the Evidence by visiting `http://service.eventdata.crossref.org/event/d41d8cd98f00b204e9800998ecf8427e/evidence`
  - You will see the list of Evidence Links in the response.
 
-### Evidence Records
+## Evidence Records in Depth {#in-depth-evidence-records}
 
 An Agent is responsible for fetching data from an external data source and extracting Events from the input data. An Evidence Record is created by an Agent as the result of an input from an external data source. It contains the input, the resultant Events, and all the state and information necessary to support the resulting events.
 
@@ -1391,23 +1499,23 @@ Every Evidence Record contains the following sections:
 
 The precise content of each of these sections varies from Agent to Agent.
 
-#### Input
+### Input
 
 The Input contains the data input from the external source. It may contain the precise input an HTTP body, or some reduction of the input. The Input contains all information necessary to construct the Events.
 
-#### Artifacts
+### Artifacts
 
 The Artifacts that were consumed by the Agent in the course of processing the Input.
 
-#### Agent
+### Agent
 
 Internal data about the Agent, including the version number.
 
-#### State
+### State
 
 Any extra state information necessary to process the Input. For example, because the Newsfeed Agent often checks newsfeeds more regularly than they are updated, it might see the same blog post URL in the Newsfeed twice. 
 
-#### Working
+### Working
 
 Any working data that the Agent produces in the course of generating the Event that might be useful to know. For example, the Newsfeed Agent provides the list of Blog URLs that it considered. If it is unable to retrieve a blog post URL, it will record it here.
 
@@ -1510,11 +1618,13 @@ The Newsfeed List is manually curated using input from the Newsfeed Dector. For 
 
 ### 13: Provide a process for reporting and correcting data or metrics that are suspected to be inaccurate
 
+<!---
 # Appendix: Code Examples {#appendix-code-examples}
 
 Here are some examples in Python.
 
 TODO
+-->
 
 # Appendix: Contributing to Event Data
 
