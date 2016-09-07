@@ -25,7 +25,7 @@ Crossref Event Data is an open service and will be put to a wide range of uses s
 
 **This document is pre-release. Some features described here are at preview stage and some are planned. The Event Data Service has not yet launched and is not feature-complete.**
 
-# 1 Introduction
+# Introduction
 
 Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
 
@@ -86,7 +86,7 @@ We will provide a Health Dashboard which will show how each component in the sys
 
 We will introduce a Service Level Agreement which will provide agreed service levels for responsiveness of the service. It will also include APIs for access to data.
 
-# 2 The Service
+# The Service
 
 Crossref Event Data is a system for collecting Events and distributing them. Up to 100,000 Events occur per day, which is approximately one per second. Events for most Data Sources are collected and produced by Crossref, but some are produced by our partners.
 
@@ -351,7 +351,7 @@ Event Data connects to external systems and gathers data from them through a pip
 
 The Event Data Health Dashboard proactively monitors all parts of the system and reports on activity, availability and completeness of data. The Dashboard will be available via a user interface and via an API through which users can access historical data.
 
-# 3 Concepts
+# Concepts
 
 ## Content Items, URLs, Persistent Identifiers and DOIs {#concept-items-urls-dois}
 
@@ -401,7 +401,7 @@ Sometimes the Landing Page for a Book Chapter can be the same as the Landing Pag
 
 There is an exact one-to-one mapping between Items and their Persistent Identifiers (DOIs), but no exact one-to-one mapping between Items and their Landing Pages. When CED receives data for a Landing Page, it has to follow steps to assign the data to the correct Item.
 
-For an in-depth discussion see [Landing Pages in Depth](#in-depth-landing-pages).
+For an in-depth discussion see [URLs in Depth](#in-depth-urls).
 
 ### Landing Page URLs can change.
 
@@ -682,11 +682,9 @@ These events don't record *when* an Item was liked, just the number of likes tha
 
 Co-incidentally, sources like this also tend to be the type that must be polled once per Item which means that the time between Events for a given Item might be large, and the data might not be very recent. See see [Sources that must be queried once per Item](#concept-once-per-item).
 
-# 4 In Depth
+# Event Records in Depth {#event-records-in-depth}
 
-## Event Records in Depth {#event-records-in-depth}
-
-### Subject and Object IDs
+## Subject and Object IDs
 
 The `subj_id` and `obj_id` are URIs that represent the subject and object of the Event respectively. In most cases they are resolvable URLs, but in some cases they can be URIs that represent entities but are not resolvable URLs.
 
@@ -701,7 +699,7 @@ Examples of non-resolvable `subj_id` or `obj_id`s are:
 
 URIs like the Facebook-month example are used for two reasons. Firstly, we are collecting data for 'total like count of some users on Facebook', therefore no URL that can identify the entities actually exists. Secondly, it is useful to record the entity-per-date for ease of data processing and counting at a later date.
 
-### Occurred At
+## Occurred At
 
 The `occurred_at` field represents the date that the Event occurred. The precise meaning of 'occurred' varies from source to source:
 
@@ -721,7 +719,7 @@ For some sources, an event occurs at the point that a count is observed from a p
 
 Therefore `occurred_at` field comes from a different authority depending on the source, sometimes an internal service, sometimes an external one. Bear this in mind if you intend to rely on the precise time of an Event. 
 
-### Timestamp
+## Timestamp
 
 The `timestamp` field represents the date that the Event was processed. Every piece of data travels through an internal pipeline within the Event Data service. The timestamp records the time at which an Event was inserted into the Lagotto service, which is the central component that collects all Events.
 
@@ -733,58 +731,25 @@ The `timestamp` is used in the `collected` view in the Query API.
 
 The `timestamp` usually happens a short while after the event was collected. For some sources, such as Twitter, this can be a few minutes. For sources that operate in large batches, such as Facebook, this can be a day or two. Regardless of variation between agents, the `timestamp` represents the canonical time at which Event Data became aware of an Event.
 
-### Subject and Object Metadata
+## Subject and Object Metadata
 
 Event Data allows Subject and Object metadata to be included. Where the Subject or Object metadata are DOIs, and therefore can be easily looked up from the Crossref or DataCite Metadata API, it is usually not included. In other cases, it is often included.
 
 For some sources, such as Facebook, the subject ID may be a representative URI and not a URL, and doesn't correspond to a webpage. See [Subject URIs and PIDs in Facebook](#in-depth-facebook-uris) for more details.
 
-### ID
+## ID
 
 The ID is generated by Agents, whether they're operated by Crossref or external parties. They are expressed as UUIDs and should be treated as opaque identifiers.
 
 See the list of (Sources in-depth)[#in-depth-sources] for a discussion of the various subject fields per source.
 
-### Message Action
+## Message Action
 
 Most of the time an Event can be read as "this relation was created or observed". An Event records the relationship that came into being at a given point in time.
 
 Sometimes these relationships come and go. For example, in Wikipeida, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
 
 The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records the fact that that the relation was removed.
-
-## Landing Pages in Depth {#in-depth-landing-pages}
-
-For context please see [Content Items, URLs, Persistent Identifiers and DOIs](#concept-items-urls-dois).
-
-## Landing Page Conflict Resolution
-
-The DOI-URL Mapping is a one-to-one mapping: every DOI is mentioned only once and every URL is mentioned only once. If we find two DOIs that resolve to the same URL, we use the following process:
-
-1. If a URL maps to only one DOI, that mapping is used.
-2. If two DOIs map to one DOI and one Item a parent of the other (indicated by the `parent_doi` tag in the metadata), then the parent DOI is used for the mapping.
-3. If two DOIs map to one URL we look in the the metadata for the `publication_type`. If one has a value of `full_text` and the other has a value of `abstract_only` or `bibliographic_record`, the Item with the `publication_type` of `full_text` is used.
-4. Failing that, the mapping is excluded.
-
-<img src="images/conflict-resolution.svg" alt="Conflict Resolution Examples" class="img-responsive">
-
-Note that this process is used only when constructing the DOI-URL list, in order that URLs can be mapped to DOIs. If an Event that mentions e.g. a component DOI is produced by a source, the event will be recorded against the Item with that Component DOI.
-
-## Artifact: DOI-URL list
-
-The DOI-URL list is a one-to-one mapping of DOIs to Landing Page URLs. Both the DOI and URL columns are unique. This is used when querying services like Facebook, where we want to query unabiguously for every Item possible.
-
-## DOI Reversal Service {#in-depth-doi-reversal}
-
-The DOI Reversal Service converts Landing Pages back into DOIs so they can be used to identify Items. It uses a variety of techniques including:
-
- - looking up the Landing Page in the `url-doi` Artifact mapping.
- - searching for a valid DOI embedded in the URL
- - looking up SICIs embedded in the URL
- - looking in the HTML metdata of the URL to see if a DOI is supplied
-
-The process of DOI Reversal is not perfect and it will never be possible to match 100%.
-
 
 ## Sources in Depth {#in-depth-sources}
 
@@ -1362,17 +1327,19 @@ note not all wordpress
 
 TODO
 
-## Evidence in Depth {#in-depth-evidence}
+-->
+
+# Evidence in Depth {#in-depth-evidence}
 
 Every Event has an Evidence Record. Each Evidence Record corresponds to an input from an external source. Each Evidence Record has links to supporting data in the form of Artifacts.
 
 The Evidence Service links Events to their Evidence.
 
-### Artifacts
+## Artifacts
 
 An Artifact is an input to an Agent that's required to process its External Input. It provides the necessary context or supporting data that enables an Agent to produce Events. 
 
-#### Structure of an Artifact file
+## Structure of an Artifact file
 
 Artifacts can be very large, for example the `all-doi` file may be up to 3GB, so they are split up into Artifact Part Files. An Artifact is represented by an Artifact Record, which contains pointers to all of its parts. 
 
@@ -1382,9 +1349,7 @@ An Artifact Record is a text file that contains a list of URLs, one per line, of
 
 The structure of each type of Artifact file is chosen to best suit the data, and is described per-source below.
 
--->
-
-#### List of artifact types
+### List of artifact types
 
 | Type name              | Description                      | Example URL                                                                                                |
 |------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1399,7 +1364,7 @@ The structure of each type of Artifact file is chosen to best suit the data, and
 | «software-name»        | The name and version of software | http://github.com/crossref/event-data-facebook-agent/tags/v2.5                                             |
 
 
-##### High Priority, Medium Priority, Entire DOI List {#artifact-doi-list}
+#### High Priority, Medium Priority, Entire DOI List {#artifact-doi-list}
 
 This is a list of Crossref DOIs that are deemed to be high-priority, medium-priority respectively, and the list of all DOIs. The content of an Artifact Part File is a list of DOIs (expressed without a resolver, e.g. `10.5555/12345678`), one per line. 
 
@@ -1417,7 +1382,7 @@ The Entire list contains all DOIs, over 80 million. Agents will try to collect d
 
 DOI Lists are produced by the Thamnophilus service.
 
-##### High-priority, Medium Priority, Entire URL list {#artifact-url-list}
+#### High-priority, Medium Priority, Entire URL list {#artifact-url-list}
 
 Every DOI resolves to a URL, at least in theory. The URL lists contain the mapping of DOIs to URLs (and vice versa) where there is a unique mapping. The content of the Part files are alternating lines of DOI, URL.
 
@@ -1442,7 +1407,7 @@ This may be used to answer questions like:
 
 **Note:** This Artifact is used by querying Agents such as the Facebook Agent. Other sources may report events for mappings that are not on this list.
 
-##### Newsfeed List {#artifact-newsfeed-list}
+#### Newsfeed List {#artifact-newsfeed-list}
 
 This is a list of RSS and Atom newsfeed URLs. It is manually curated. Each part file contains a list of URLs that are RSS or Atom Newsfeeds. 
 
@@ -1452,7 +1417,7 @@ The list is manually curated from known blogs and updated every month or two wit
 
 If you think a newsfeed is missing from the list, please contact eventdata@crossref.org
 
-##### Domain List {#artifact-domain-list}
+#### Domain List {#artifact-domain-list}
 
 This is a list of domains that DOIs resolve to. The list is created by the Thamnophilus service, which crawls every DOI to find its landing page, and records the domain. The Artifact Part files contain a list of domain names, one per line.
 
@@ -1462,11 +1427,11 @@ By providing the domain list as an Artifact, you can answer questions like "why 
 
 For context see [Pre-filtering Domains](#concept-pre-filtering).
 
-##### Software Name and Version
+#### Software Name and Version
 
 Every piece of software that's running as part of Event Data is an Artifact, including all of the Agents. An Agent will include a reference to it's currently running version in any Evidence Log records that it produces. Note that links will be to a tagged release in a source code repository (Github), therefore don't use the the Artifact Record structure.
 
-#### Artifacts in the Evidence Service
+### Artifacts in the Evidence Service
 
 The Evidence Service maintains a list of all of the artifacts.
 
@@ -1476,7 +1441,7 @@ You can use the Evidence Service to retrieve the most recent version, or previou
  - To retrieve the list of versions of the newsfeed, and what date they were created, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/history` and you will be shown a list of all versions with date stamps.
  - To see when new versions of software components, e.g. Agents, were released.
 
-#### Finding Artifacts for an Event
+### Finding Artifacts for an Event
 
 Every Event has a corresponding Evidence Record, which contains a link to all of the Artifacts that were used to construct the Event. Therefore, to find the list of newsfeeds that was used to produce a blog reference Event:
 
@@ -1484,7 +1449,7 @@ Every Event has a corresponding Evidence Record, which contains a link to all of
  - Query the Evidence Service to find the Evidence by visiting `http://service.eventdata.crossref.org/event/d41d8cd98f00b204e9800998ecf8427e/evidence`
  - You will see the list of Evidence Links in the response.
 
-## Evidence Records in Depth {#in-depth-evidence-records}
+# Evidence Records in Depth {#in-depth-evidence-records}
 
 An Agent is responsible for fetching data from an external data source and extracting Events from the input data. An Evidence Record is created by an Agent as the result of an input from an external data source. It contains the input, the resultant Events, and all the state and information necessary to support the resulting events.
 
@@ -1499,29 +1464,63 @@ Every Evidence Record contains the following sections:
 
 The precise content of each of these sections varies from Agent to Agent.
 
-### Input
+## Input
 
 The Input contains the data input from the external source. It may contain the precise input an HTTP body, or some reduction of the input. The Input contains all information necessary to construct the Events.
 
-### Artifacts
+## Artifacts
 
 The Artifacts that were consumed by the Agent in the course of processing the Input.
 
-### Agent
+## Agent
 
 Internal data about the Agent, including the version number.
 
-### State
+## State
 
 Any extra state information necessary to process the Input. For example, because the Newsfeed Agent often checks newsfeeds more regularly than they are updated, it might see the same blog post URL in the Newsfeed twice. 
 
-### Working
+## Working
 
 Any working data that the Agent produces in the course of generating the Event that might be useful to know. For example, the Newsfeed Agent provides the list of Blog URLs that it considered. If it is unable to retrieve a blog post URL, it will record it here.
 
-#### Events
+## Events
 
 All the Events that were produced. These are in Lagotto Deposit format, which is very similar to the Event format. Each event has an ID, which can be used to track it.
+
+# URLs in Depth {#in-depth-urls}
+
+For context please see [Content Items, URLs, Persistent Identifiers and DOIs](#concept-items-urls-dois).
+
+## Landing Page Conflict Resolution
+
+The DOI-URL Mapping is a one-to-one mapping: every DOI is mentioned only once and every URL is mentioned only once. If we find two DOIs that resolve to the same URL, we use the following process:
+
+1. If a URL maps to only one DOI, that mapping is used.
+2. If two DOIs map to one DOI and one Item a parent of the other (indicated by the `parent_doi` tag in the metadata), then the parent DOI is used for the mapping.
+3. If two DOIs map to one URL we look in the the metadata for the `publication_type`. If one has a value of `full_text` and the other has a value of `abstract_only` or `bibliographic_record`, the Item with the `publication_type` of `full_text` is used.
+4. Failing that, the mapping is excluded.
+
+<img src="images/conflict-resolution.svg" alt="Conflict Resolution Examples" class="img-responsive">
+
+Note that this process is used only when constructing the DOI-URL list, in order that URLs can be mapped to DOIs. If an Event that mentions e.g. a component DOI is produced by a source, the event will be recorded against the Item with that Component DOI.
+
+## Artifact: DOI-URL list
+
+The DOI-URL list is a one-to-one mapping of DOIs to Landing Page URLs. Both the DOI and URL columns are unique. This is used when querying services like Facebook, where we want to query unabiguously for every Item possible.
+
+## DOI Reversal Service {#in-depth-doi-reversal}
+
+The DOI Reversal Service converts Landing Pages back into DOIs so they can be used to identify Items. It uses a variety of techniques including:
+
+ - looking up the Landing Page in the `url-doi` Artifact mapping.
+ - searching for a valid DOI embedded in the URL
+ - looking up SICIs embedded in the URL
+ - looking in the HTML metdata of the URL to see if a DOI is supplied
+
+The process of DOI Reversal is not perfect and it will never be possible to match 100%.
+
+
 
 # Appendix 1: Software in Use
 
@@ -1862,43 +1861,43 @@ UUID
 # Appendix: Abbreviations
 
 API
- : Application Programming Interface. An interface for allowing one piece of software to connect to another. CED collects data from other APIs from other services and provides an API for allowing access to data.
+ :  Application Programming Interface. An interface for allowing one piece of software to connect to another. CED collects data from other APIs from other services and provides an API for allowing access to data.
 
 CED
- : Crossref Event Data
+ :  Crossref Event Data
 
 CoC
- : Code of Conduct
+ :  Code of Conduct
 
 DET
- : DOI Event Tracking, the original name for Crossref Event Data.
+ :  DOI Event Tracking, the original name for Crossref Event Data.
 
 DOI
- : Digital Object Identifier. An identifier given to a Content Item, e.g. http://doi.org/10.5555/12345678
+ :  Digital Object Identifier. An identifier given to a Content Item, e.g. http://doi.org/10.5555/12345678
 
 JSON 
- : JavaScript Object Notation. A common format for sending data. All data coming out of the CED API is in JSON format.
+ :  JavaScript Object Notation. A common format for sending data. All data coming out of the CED API is in JSON format.
 
 MEDRA
  :  Multilingual European DOI Registration Agency. A DOI Registration Agency.
 
 NISO
- : National Information Standards Organisation. A standards body who have created a Code of Conduct for altmetrics.
+ :  National Information Standards Organisation. A standards body who have created a Code of Conduct for altmetrics.
 
 ORCiD
- : Open Researcher and Contributor ID. A system for assigning identifiers to authors.
+ :  Open Researcher and Contributor ID. A system for assigning identifiers to authors.
 
 RA
- : DOI Registration Agency. For example Crossref or Datacite.
+ :  DOI Registration Agency. For example Crossref or Datacite.
 
 SLA
- : Service Level Agreement. An agreement that CED will provide predictable service via its API.
+ :  Service Level Agreement. An agreement that CED will provide predictable service via its API.
 
 TLA
- : Three letter abbreviation. 
+ :  Three letter abbreviation. 
 
 URL
- : Uniform Resource Locator. A path that points to a Research Object, e.g. `http://example.com`
+ :  Uniform Resource Locator. A path that points to a Research Object, e.g. `http://example.com`
 
 UUID
   : universally unique identifier. Looks like `c0eb1c46-6a59-49c9-926b-a10667ddd9de`.
