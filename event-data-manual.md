@@ -1,12 +1,5 @@
 ---
 title: Crossref Event Data User Guide
-papersize: a4
-documentclass: book
-margin-left: 2cm
-margin-right: 2cm
-margin-top: 2cm
-margin-bottom: 4cm
-fontfamily: "sans"
 ---
 
 v0.4 draft - service early preview
@@ -62,7 +55,7 @@ Every Event is the result of some data input from a source, and the entire proce
 
 <img src="images/introduction-evidence-flow.svg" alt="Event Data Evidence Flow" class="img-responsive">
 
-Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an examplar altmetrics data provider, setting the standard in openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
+Crossref Event Data was developed alongside the NISO recommendations for altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an exemplar altmetrics data provider, setting the standard in openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
 
 ## Accessing the Data 
 
@@ -70,7 +63,7 @@ Crossref Event Data is available via our Query API. The Query API allows you to 
 
  - give me all events that were collected on 2016-12-08
  - give me all events that occurred on 2015-12-08
- - give me all the facebook events that were collected on 2015-12-08
+ - give me all the Facebook events that were collected on 2015-12-08
  - give me all the events that occurred for this DOI on 2016-01-08
  - give me all the twitter events that occurred for this DOI on 2016-01-08
 
@@ -107,10 +100,10 @@ Event Data is a hub for the collection and distribution of Events and contains d
 | Name                   | Source Identifier   | Provider    | What does it contain? |
 |------------------------|---------------------|-------------|------------------|
 | Crossref to DataCite   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
-| Facebook               | facebook            | Crossref    | Count number of likes and comments for Items |
+| Facebook               | Facebook            | Crossref    | Count number of likes and comments for Items |
 | Mendeley               | mendeley            | Crossref    | Reader count number, etc from Mendeley |
 | Newsfeed               | newsfeed            | Crossref    | Mentions of Items on blogs and websites with syndication feeds |
-| Reddit                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
+| Reddit                 | Reddit              | Crossref    | Mentions and discussions of Items on Reddit |
 | Twitter                | twitter             | Crossref    | Mentions of Items on Twitter |
 | Wikipedia              | wikipedia           | Crossref    | References of Items on Wikipedia |
 | Wordpress.com          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
@@ -320,7 +313,7 @@ An Evidence Record looks like:
 
 Not all fields are compulsory, and the format will vary from Source to Source. However, the following fields are commonly found:
 
- - `timestamp` - the timestamp that the Evidence was recieved. This can be different from the `timestamps` and 'occurred_at` fields on the resulting Events. You should not normally use this field.
+ - `timestamp` - the timestamp that the Evidence was received. This can be different from the `timestamps` and 'occurred_at` fields on the resulting Events. You should not normally use this field.
  - `input-artifacts` - links to Artifacts that were used in processing the input
  - `input-status` - the HTTP status code of an external API response
  - `input-headers` - the HTTP headers of an external API response
@@ -333,7 +326,7 @@ If you have an Event and you want to see the Evidence for it, query by its ID.
 
     http://service.eventdata.crossref.org/evidence/event/«event-id»
 
-You will recieve `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Location` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
+You will receive `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Location` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
 
 Inside the Evidence Record you will find an `events` section which will contain one or more events, including the one you queried for. Note that one piece of Evidence may have produced a number of Events.
 
@@ -341,7 +334,7 @@ You can also query for Evidence Records by the date they occurred:
 
     http://service.eventdata.crossref.org/evidence/occurred/«YYYY-MM-DD»
 
-You will recieve a page which includes a list of URLs for all Evidence Records for that day. 
+You will receive a page which includes a list of URLs for all Evidence Records for that day. 
 
 This can be useful if, for example, you want to see all inputs that were received from a particular source, whether or not they resulted in Events. Note that the time in the query corresponds to the `timestamp` field of the Evidence Record, and corresponds to the time the Evidence was processed. The times at which an Event occurred, the Event was collected, the Evidence was processed are different.
 
@@ -357,7 +350,7 @@ The Event Data Health Dashboard proactively monitors all parts of the system and
 
 Crossref has approximately 80 million Items of Registered Content: articles, books, chapters etc. A Content Item is a 'work' according to the [FRBR](http://archive.ifla.org/VII/s13/frbr/frbr1.htm#3.2) model. 
 
-When a Content Item is registered with Crossref or Datacite, it is assigned a Persistent Identifier (PID) in the form of a Crossref DOI or DataCite DOI. The PID permanently identifies the Content Item and is used when referring to, or linking between, Items. Other PIDs, such as PubMed ID (PMID) are available, but they are beyond the scope of Crossref Event Data.
+When a Content Item is registered with Crossref or DataCite, it is assigned a Persistent Identifier (PID) in the form of a Crossref DOI or DataCite DOI. The PID permanently identifies the Content Item and is used when referring to, or linking between, Items. Other PIDs, such as PubMed ID (PMID) are available, but they are beyond the scope of Crossref Event Data.
 
 <img src="images/doi-url-simple.svg" class="img-responsive">
 
@@ -371,7 +364,7 @@ Event Data therefore attempts to track Events via the Landing Page URLs as well 
 
 Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. The Query API uses DOIs to query for data associated with Items and each Event uses DOIs when referring to items.
 
-CED normalises DOIs into a standard form, using `HTTPS` and the `doi.org` resolver, e.g. `https://doi.org/10.5555/12345678`. Even through events may be collected via DOIs expressed in different forms, all Events contain DOIs in this form.
+CED normalizes DOIs into a standard form, using `HTTPS` and the `doi.org` resolver, e.g. `https://doi.org/10.5555/12345678`. Even through events may be collected via DOIs expressed in different forms, all Events contain DOIs in this form.
 
 ### Event Data tracks Content Items not DOIs
 
@@ -405,7 +398,7 @@ For an in-depth discussion see [URLs in Depth](#in-depth-urls).
 
 ### Landing Page URLs can change.
 
-Over time, Landing Pages can change as publishers reorganise their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
+Over time, Landing Pages can change as publishers reorganize their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
 
 <img src="images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
 
@@ -431,8 +424,8 @@ If we follow the DOI URL, we see the following chain of redirects.
 | URL | Comment |
 |-----|---------|
 | `http://doi.org/10.1371/journal.pone.0160106` | Initial DOI redirect from Resource link |
-| `http://dx.plos.org/10.1371/journal.pone.0160106` | Internal redirect within PLos Site |
-| `http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0160106` | Internal redirect within PLos Site |
+| `http://dx.plos.org/10.1371/journal.pone.0160106` | Internal redirect within PLoS Site |
+| `http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0160106` | Internal redirect within PLoS Site |
 | `http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160106` | Finished |
 
 In cases like this, the final Landing Page is different to that registered with Crossref, so we can't know without following it. 
@@ -447,9 +440,9 @@ The data for the mapping of DOIs to Landing pages (and vice versa) is refreshed 
 
 ### It is not possible to discover all Landing Pages
 
-Publisher sites are re-organised from time to time, and there may be a delay in updating the Crossref metadata. This means that DOI links can break and it can be impossible to find the Landing Page for a period of time. 
+Publisher sites are reorganized from time to time, and there may be a delay in updating the Crossref metadata. This means that DOI links can break and it can be impossible to find the Landing Page for a period of time. 
 
-In other cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and peforming redirects using JavaScript. For example, trying to resolve the Elsevier DOI `10.1016/j.dld.2006.06.008` without cookies enabled produces:
+In other cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. For example, trying to resolve the Elsevier DOI `10.1016/j.dld.2006.06.008` without cookies enabled produces:
 
 | URL | Comment |
 |-----|---------|
@@ -511,9 +504,9 @@ Some services, such as Twitter, automatically link URLs. Some services, such as 
 
 ### Landing Page Domains {#concept-landing-page-domains}
 
-CED maintains a list of the domain names that belong to Landing Pages. This is called the [`domain-list` Artifact](#artifact-domain-list). It consists of around 15,000 domains that belong to Publishers. It is automatically generated but manually curated. Some Publishers create DOIs that resolve to domains such as `youtube.com`. These domains produce a large amount of false-positives. They also belong to organisations, such as YouTube, who have no involvement in scholarly publishing, which makes it unlikely that it would be possible to extract data for them in any case. For these reasons, domains of this type are manually removed from the Landing Page Domain list.
+CED maintains a list of the domain names that belong to Landing Pages. This is called the [`domain-list` Artifact](#artifact-domain-list). It consists of around 15,000 domains that belong to Publishers. It is automatically generated but manually curated. Some Publishers create DOIs that resolve to domains such as `youtube.com`. These domains produce a large amount of false-positives. They also belong to organizations, such as YouTube, who have no involvement in scholarly publishing, which makes it unlikely that it would be possible to extract data for them in any case. For these reasons, domains of this type are manually removed from the Landing Page Domain list.
 
-This list is used for some sources as an initial pre-filter to indenfity URLs that might be Landing Pages. 
+This list is used for some sources as an initial pre-filter to identify URLs that might be Landing Pages. 
 
 The Artifact is updated on a regular basis. For more information see [`domain-list` Artifact](#artifact-domain-list).
 
@@ -578,7 +571,7 @@ Crossref Event Data contains data from external data providers, such as Twitter,
 
 Converting external data into Events provides an evidence gap. It raises questions like:
 
- - what data was recieved?
+ - what data was received?
  - how was it converted into Events?
  - if some other service got the same data, why did it produce different results?
 
@@ -586,7 +579,7 @@ Converting external data into Events provides an evidence gap. It raises questio
 
 #### Bridging the Evidence Gap
 
-CED solves this by taking an **Evidence First** approach. For every piece of external data we recieve we create an Evidence Record. This contains all the relevant parts of the input data and all supporting information needed to process it. This means that we can provide evidence for every Event. 
+CED solves this by taking an **Evidence First** approach. For every piece of external data we receive we create an Evidence Record. This contains all the relevant parts of the input data and all supporting information needed to process it. This means that we can provide evidence for every Event. 
 
 <img src="images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
 
@@ -664,7 +657,7 @@ Where Crossref operates the Agent we provide full Evidence records for each Even
 
 ## Individual Events vs Pre-Aggregated {#concept-individual-aggregated}
 
-Most sources, such as Twitter, Wikipedia, DataCite etc, provide a view of indivdual Events. Some, like Mendeley or Facebook, are only able to capture snapshots of aggregate values. It is preferable to capture individual Events, and pre-aggregated Events are only produced where it is the only format available.
+Most sources, such as Twitter, Wikipedia, DataCite etc, provide a view of individual Events. Some, like Mendeley or Facebook, are only able to capture snapshots of aggregate values. It is preferable to capture individual Events, and pre-aggregated Events are only produced where it is the only format available.
 
 The `occurred_at` field of individual Events is generally the time the original event happened, e.g.
 
@@ -676,7 +669,7 @@ In the case of 'likes' on Facebook, we don't have access to each time an Item wa
  - the Agent checked Facebook at this date and time and it reported the Item has 5 likes
  - the Agent checked Mendeley at this date and time and it reported the Item is in 10 groups
 
-In Events like this, the `total` field records the number of pre-aggreagted events.
+In Events like this, the `total` field records the number of pre-aggregated events.
 
 These events don't record *when* an Item was liked, just the number of likes that exist on a given date. This means that if an Item has a Facebook Event with 100 likes in January and 150 likes in February, we don't know whether 50 extra people liked the Item, or if it was a combination of unlikes and new likes.
 
@@ -703,12 +696,12 @@ URIs like the Facebook-month example are used for two reasons. Firstly, we are c
 
 The `occurred_at` field represents the date that the Event occurred. The precise meaning of 'occurred' varies from source to source:
 
-For some sources, an event occurrs on the publication of a `work`, and the `occurred_at` is the same as the issue date of the work. In these cases, the `occurred_at` value is supplied by the original Source (e.g. Twitter API or metadata on the blog).
+For some sources, an event occurs on the publication of a `work`, and the `occurred_at` is the same as the issue date of the work. In these cases, the `occurred_at` value is supplied by the original Source (e.g. Twitter API or metadata on the blog).
 
  - a tweet was published and it referenced a DOI
  - a blog post was published and it referenced a DOI
 
-For some sources, an event occurrs at the point that an existing work is edited and the `occurred_at` is the same as the edit date. In these cases the `occurred_at` value is supplied by the original Source (e.g. Wikipedia API):
+For some sources, an event occurs at the point that an existing work is edited and the `occurred_at` is the same as the edit date. In these cases the `occurred_at` value is supplied by the original Source (e.g. Wikipedia API):
 
  - a Wikipedia article was edited and it referenced a DOI
 
@@ -747,7 +740,7 @@ See the list of (Sources in-depth)[#in-depth-sources] for a discussion of the va
 
 Most of the time an Event can be read as "this relation was created or observed". An Event records the relationship that came into being at a given point in time.
 
-Sometimes these relationships come and go. For example, in Wikipeida, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
+Sometimes these relationships come and go. For example, in Wikipedia, an edit can result in the removal of a reference from an article. In fact, we often see a history of references being added and removed as the result of a series of edits and sometimes reversions to previous versions.
 
 The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records the fact that that the relation was removed.
 
@@ -794,11 +787,11 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 #### Notes
 
  - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See (Duplicate Data){#concept-duplicate}.
- - Becuase the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See (Occurred-at vs collected-at)[#concept-timescales].
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See (Occurred-at vs collected-at)[#concept-timescales].
 
 
 
-### Datacite to CrossRef Links
+### DataCite to CrossRef Links
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -845,7 +838,7 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 
 | Property                  | Value          |
 |---------------------------|----------------|
-| Name                      | facebook |
+| Name                      | Facebook |
 | Matches by                | Landing Page URL |
 | Consumes artifacts        | `high-urls`, `medium-urls`, `all-urls` |
 | Produces relation types   | `bookmarks`, `shares` |
@@ -853,11 +846,11 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 | Freshness                 | Three schedules |
 | Data Source               | Facebook API |
 | Coverage                  | All DOIs where there is a unique URL mapping |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated), [Sources that must be queried once per Item](#concept-once-per-item) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](#concept-urls), [Individual Events vs Pre-Aggregated](#concept-individual-aggregated), [Sources that must be queried once per Item](#concept-once-per-item) |
 | Operated by               | Crossref |
 | Agent                     | event-data-facebook-agent |
 
-The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has receieved at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
+The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has received at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
 
 Because of the structure of the Facebook API, it is necessary to make one API query per Item, which means that it can take a long time to work through the entire list of Items. This means that, whilst we try and poll as often and regularly as possible, the time between Facebook Events for a given Item can be unpredictable. 
 
@@ -893,7 +886,7 @@ If you just want to find 'all the Facebook data for this DOI' remember that you 
         "issued":"2016-08-01"
       },
       "message_action":"create",
-      "source_id":"facebook",
+      "source_id":"Facebook",
       "timestamp":"2016-08-11T00:26:48Z",
       "relation_type_id":"references"
     }
@@ -912,7 +905,7 @@ Facebook Users may share links to Items two ways: they may link using the DOI UR
 
 Event Data always uses the Landing page URL when it queries Facebook and never the DOI URL. If a Facebook user shared an Item using its Landing Page URL then there would be no results for the DOI, and if they used the DOI, the statistics would be recorded against the Landing Page anyway.
 
-Here is a justficiation of the above approach using examples from the Facebook Graph API v2.7. Note that these API results capture a point in time and the same results may not be returned now.
+Here is a justification of the above approach using examples from the Facebook Graph API v2.7. Note that these API results capture a point in time and the same results may not be returned now.
 
 Where a Facebook User has shared an Item using its DOI, Facebook's system resolves the DOI discover the Landing page. In cases where Facebook has seen the DOI URL it is possible to query using it, e.g. `https://graph.facebook.com/v2.7/http://doi.org/10.5555/12345678?access_token=XXXX` gives:
 
@@ -1132,7 +1125,7 @@ TODO
 | Freshness                 | half-hourly |
 | Data Source               | Multiple blog and aggregator RSS feeds |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Landing Page Domains](#concept-landing-page-domains), [Sources that must be queried in their entirety](#concept-query-entirety), [DOI Reversal Service](#in-depth-doi-reversal) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](#concept-urls), [Duplicate Data](#concept-duplicate), [Landing Page Domains](#concept-landing-page-domains), [Sources that must be queried in their entirety](#concept-query-entirety), [DOI Reversal Service](#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
@@ -1142,7 +1135,7 @@ The Newsfeed agent monitors RSS and Atom feeds from blogs and blog aggregators. 
  - ScienceBlogging blog aggregator
  - BBC News
 
-You can see the latest version of the newsfeed-list by using the Evience Service: http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current 
+You can see the latest version of the newsfeed-list by using the Evidence Service: http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current 
 
 <!---
 #### Example Event
@@ -1165,7 +1158,7 @@ TODO
 
 #### Notes
 
-Becuase the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](#concept-duplicate).
+Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](#concept-duplicate).
 
 
 
@@ -1182,7 +1175,7 @@ Becuase the Newsfeed Agent connects to blogs and blog aggregators, it is possibl
 | Freshness                 |  |
 | Data Source               |  |
 | Coverage                  |  |
-| Relevant concepts         | [Unabiguously linking URLs to DOIs](#concept-urls), [Pre-filtering](#pre-filtering) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](#concept-urls), [Pre-filtering](#pre-filtering) |
 | Operated by               | Crossref |
 | Agent                     |  |
 
@@ -1321,7 +1314,7 @@ TODO
 
 TODO
 
-note not all wordpress
+note not all Wordpress
 
 #### Further information
 
@@ -1345,7 +1338,7 @@ Artifacts can be very large, for example the `all-doi` file may be up to 3GB, so
 
 An Artifact Record is a text file that contains a list of URLs, one per line, of the parts that make it up.
 
- Artifact files are split into parts becuase they are very large (for example the DOI file may be up to 3GB). To retrieve a complete Artifact, download the the Artifact Record and then download each link within it. Every Artifact file (both record and the parts) is made up of a name and an MD5 hash of its content, so you verify that recieved all the files correctly.
+ Artifact files are split into parts because they are very large (for example the DOI file may be up to 3GB). To retrieve a complete Artifact, download the the Artifact Record and then download each link within it. Every Artifact file (both record and the parts) is made up of a name and an MD5 hash of its content, so you verify that received all the files correctly.
 
 The structure of each type of Artifact file is chosen to best suit the data, and is described per-source below.
 
@@ -1386,7 +1379,7 @@ DOI Lists are produced by the Thamnophilus service.
 
 Every DOI resolves to a URL, at least in theory. The URL lists contain the mapping of DOIs to URLs (and vice versa) where there is a unique mapping. The content of the Part files are alternating lines of DOI, URL.
 
-This file is genreated by the Thamnophilus service, which maintains a list of all DOIs and follows each one to see where it leads. If two DOIs point to the same URL then then the mapping is considered ambiguous and it is not included in the Artifact.
+This file is generated by the Thamnophilus service, which maintains a list of all DOIs and follows each one to see where it leads. If two DOIs point to the same URL then then the mapping is considered ambiguous and it is not included in the Artifact.
 
 The contents of this Artifact change over time for a number of reasons:
 
@@ -1507,7 +1500,7 @@ Note that this process is used only when constructing the DOI-URL list, in order
 
 ## Artifact: DOI-URL list
 
-The DOI-URL list is a one-to-one mapping of DOIs to Landing Page URLs. Both the DOI and URL columns are unique. This is used when querying services like Facebook, where we want to query unabiguously for every Item possible.
+The DOI-URL list is a one-to-one mapping of DOIs to Landing Page URLs. Both the DOI and URL columns are unique. This is used when querying services like Facebook, where we want to query unambiguously for every Item possible.
 
 ## DOI Reversal Service {#in-depth-doi-reversal}
 
@@ -1516,7 +1509,7 @@ The DOI Reversal Service converts Landing Pages back into DOIs so they can be us
  - looking up the Landing Page in the `url-doi` Artifact mapping.
  - searching for a valid DOI embedded in the URL
  - looking up SICIs embedded in the URL
- - looking in the HTML metdata of the URL to see if a DOI is supplied
+ - looking in the HTML metadata of the URL to see if a DOI is supplied
 
 The process of DOI Reversal is not perfect and it will never be possible to match 100%.
 
@@ -1587,7 +1580,7 @@ This is internal software. It is used to generate the `newsfeed-list` Artifact.
 
 The Newsfeed Detector analyzes our DOI Resolution Logs and builds a list of domain names that refer web traffic to the `doi.org` resolver. It monitors those domains and detects if they have RSS feeds.
 
-The Newsfeed List is manually curated using input from the Newsfeed Dector. For more information see the [`newsfeed-list` Artifact](#artifact-newsfeed-list).
+The Newsfeed List is manually curated using input from the Newsfeed Detector. For more information see the [`newsfeed-list` Artifact](#artifact-newsfeed-list).
 
 # Appendix: NISO Altmetrics Code of Conduct {#appendix-niso-coc}
 
@@ -1642,7 +1635,7 @@ We would love to help you develop your Push Source.
  1. Sign in at [http://sandbox.api.eventdata.crossref.org](http://sandbox.api.eventdata.crossref.org).
  1. Email eventdata@crossref.org and we will enable your account for Push API access. Pushes won't work until we do this.
  1. Click on your name, select 'your account'. Copy your API key. You will use this to authenticate all of your push requests.
- 1. Create a UUID for your agent. You can use your favourite GUID library or a service like [uuidgenerator.net](https://www.uuidgenerator.net/). This will be your Source Token, and will uniquely identify your agent. Don't re-use this for another agent.
+ 1. Create a UUID for your agent. You can use your a GUID library of your choice or a service like [uuidgenerator.net](https://www.uuidgenerator.net/). This will be your Source Token, and will uniquely identify your agent. Don't re-use this for another agent.
 
 ### Format
 
@@ -1788,7 +1781,7 @@ In this example, the given TrouserPress article discusses the DOI.
                             "relation_type_id": "discusses",
                             "source_id": "trouser_press",
                             "subj":{
-                              "title":"My Favourite DOIs",
+                              "title":"My Top 10 DOIs",
                               "author": "Jim",
                               "issued":"2013-03-24",
                               "URL":"http://trouser.press/jim/my-favourite-dois"}}}'
@@ -1803,7 +1796,7 @@ Which Registration Agencies' DOIs does CED use?
  : CED is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most Data Sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some Data Sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual Data Sources for full details.
 
 How long is Data available?
- : Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'exipire'.
+ : Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
  
 What is an event?
  : An event can be described as 'an action that occurs concerning a Content Object'. Every kind of event is slightly different, see the Sources for details.
@@ -1850,7 +1843,7 @@ Event UUID
   : a UUID that corresponds to an event within Crossref Event Data. 
 
 Registration Agency
-  : An organisation that assigns DOIs. For example, Crossref and DataCite.
+  : An organization that assigns DOIs. For example, Crossref and DataCite.
 
 Registered Content
  : Content that has been registered with Crossref and assigned a Crossref DOI, e.g an article or book chapter.
@@ -1882,13 +1875,13 @@ MEDRA
  :  Multilingual European DOI Registration Agency. A DOI Registration Agency.
 
 NISO
- :  National Information Standards Organisation. A standards body who have created a Code of Conduct for altmetrics.
+ :  National Information Standards Organization. A standards body who have created a Code of Conduct for altmetrics.
 
 ORCiD
  :  Open Researcher and Contributor ID. A system for assigning identifiers to authors.
 
 RA
- :  DOI Registration Agency. For example Crossref or Datacite.
+ :  DOI Registration Agency. For example Crossref or DataCite.
 
 SLA
  :  Service Level Agreement. An agreement that CED will provide predictable service via its API.
