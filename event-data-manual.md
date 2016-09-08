@@ -1939,9 +1939,9 @@ The following words have been used during the development of Event Data but are 
 
 # Revision history
 
-| Date           | Version | Author                      |                                                   |
-|----------------|---------| ----------------------------|---------------------------------------------------|
-| 18-April-2016  | 0.1     | Joe Wass jwass@crossref.org | Initial MVP release                               |
-| 19-April-2016  | 0.2     | Joe Wass jwass@crossref.org | Add 'Contributing to Event Data'                  |
-| 16-August-2016 | 0.3     | Joe Wass jwass@crossref.org | Remove Relations & Deposits, update new Query API |
-| ??-August-2016 | 0.4     | Joe Wass jwass@crossref.org | Complete rewrite using new concepts and components|
+| Date              | Version | Author                      |                                                   |
+|-------------------|---------| ----------------------------|---------------------------------------------------|
+| 18-April-2016     | 0.1     | Joe Wass jwass@crossref.org | Initial MVP release                               |
+| 19-April-2016     | 0.2     | Joe Wass jwass@crossref.org | Add 'Contributing to Event Data'                  |
+| 16-August-2016    | 0.3     | Joe Wass jwass@crossref.org | Remove Relations & Deposits, update new Query API |
+| 08-September-2016 | 0.4     | Joe Wass jwass@crossref.org | Complete rewrite using new concepts and components|
