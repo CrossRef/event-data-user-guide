@@ -2,8 +2,7 @@
 title: Crossref Event Data User Guide
 ---
 
-v0.4 draft - service early preview
-
+Version 0.4 - Service Early Preview
 
 # Welcome
 
@@ -16,7 +15,7 @@ Welcome to the Crossref Event Data User Guide. It contains everything you need t
 
 Crossref Event Data is an open service and will be put to a wide range of uses so it's important to understand exactly what the data means. We aim to set the standard in openness and transparency so the documentation not only describes the service, but precisely how we generate it.
 
-**This document is pre-release. Some features described here are at preview stage and some are planned. The Event Data Service has not yet launched and is not feature-complete.**
+**The Event Data Service has not yet launched and is not feature-complete.** This document is pre-release: some features described here are at preview stage and some are planned for development. Terminology and features may change before final release.
 
 # Introduction
 
