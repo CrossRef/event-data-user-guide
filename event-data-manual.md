@@ -1534,6 +1534,7 @@ Crossref Event Data uses a collection of software. It is all open source.
 | DOI Destinations      | Service to convert landing page URLs back into DOIs.          | https://github.com/crossref/doi-desetinations                 | Crossref            |
 | Newsfeed Detector     | Service to monitor Crossref resolution logs for blogs         | https://github.com/crossref/event-data-newsfeed-detector      | Crossref            |
 
+<!---
 
 ### Lagotto
 
@@ -1576,6 +1577,8 @@ This is internal software. It is used to generate the `newsfeed-list` Artifact.
 The Newsfeed Detector analyzes our DOI Resolution Logs and builds a list of domain names that refer web traffic to the `doi.org` resolver. It monitors those domains and detects if they have RSS feeds.
 
 The Newsfeed List is manually curated using input from the Newsfeed Detector. For more information see the [`newsfeed-list` Artifact](#artifact-newsfeed-list).
+
+-->
 
 # Appendix: NISO Altmetrics Code of Conduct {#appendix-niso-coc}
 
@@ -1813,34 +1816,34 @@ In this example, the given TrouserPress article discusses the DOI.
 # Appendix: FAQ
 
 Does CED collect data for all DOIs in existence?
- : CED will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all Crossref DOIs. Different sources operate differently, so the data for some sources will be fresher than others.
+  : CED will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all Crossref DOIs. Different sources operate differently, so the data for some sources will be fresher than others.
  
 Which Registration Agencies' DOIs does CED use?
- : CED is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most Data Sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some Data Sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual Data Sources for full details.
+  : CED is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most Data Sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some Data Sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual Data Sources for full details.
 
 How long is Data available?
- : Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
+  : Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
  
 What is an event?
- : An event can be described as 'an action that occurs concerning a Content Object'. Every kind of event is slightly different, see the Sources for details.
+  : An event can be described as 'an action that occurs concerning a Content Object'. Every kind of event is slightly different, see the Sources for details.
 
 What format does the API data come in?
- : All APIs use JSON format
+  : All APIs use JSON format
 
 Do I have to pay for the data?
- : No, the public data via the Query API will be free. We will offer a paid-for Service Level Agreement that will provide more timely access to data.
+  : No, the public data via the Query API will be free. We will offer a paid-for Service Level Agreement that will provide more timely access to data.
 
 Will the data be auditable?
- : Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](#concept-evidence-first).
+  : Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](#concept-evidence-first).
 
 Can I use the data to feed into my commercial tool? 
- : Yes. We do not clean or aggregate the data we collect so that any commercial vendor has the opportunity to do this themselves in order to use the data in the way which best suits their needs.
+  : Yes. We do not clean or aggregate the data we collect so that any commercial vendor has the opportunity to do this themselves in order to use the data in the way which best suits their needs.
 
 Is your code base open source?
- : Yes, all the code we use is open source. See the [Software](#software) section.
+  : Yes, all the code we use is open source. See the [Software](#software) section.
 
 When will Event Data be launched?
- : We are aiming to launch toward the end of 2016.
+  :  We are aiming to launch toward the end of 2016.
 
 How do I access the data?
   : The Query API is currently the only way to access data. 
@@ -1859,7 +1862,7 @@ Altmetrics
   : [From Wikipedia](https://en.wikipedia.org/wiki/Altmetrics): In scholarly and scientific publishing, altmetrics are non-traditional metrics proposed as an alternative to more traditional citation impact metrics, such as impact factor and h-index. Proposed as generalization of article level metrics.
 
 Landing Page
- : The Publisher's page for an article (or dataset etc). Every DOI resolves to a landing page, but there may be more than one landing page per Article. The URLs of landing pages can change over time, and the DOI link should always point to the landing page.
+  : The Publisher's page for an article (or dataset etc). Every DOI resolves to a landing page, but there may be more than one landing page per Article. The URLs of landing pages can change over time, and the DOI link should always point to the landing page.
 
 Data Source
   : The provenance or type of Event Data. Data Sources include Wikipedia, Mendeley, Crossref, DataCite etc. A source is different to an agent, which is a piece of software that fetches data for a particular Data Source.
