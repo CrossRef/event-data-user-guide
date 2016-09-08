@@ -743,11 +743,11 @@ Sometimes these relationships come and go. For example, in Wikipedia, an edit ca
 
 The removal of a relation in Wikipedia doesn't constitute the removal of an Event, it means a new event that records the fact that that the relation was removed.
 
-## Sources in Depth {#in-depth-sources}
+# Sources in Depth {#in-depth-sources}
 
 The following is a description of the Sources of data available in CED. Every Data Source requires an Agent to process the data, so the following section describes the format of data, the agent used to collect it and issues surrounding each source.
 
-### Crossref to DataCite Links
+## Crossref to DataCite Links
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -764,7 +764,7 @@ The following is a description of the Sources of data available in CED. Every Da
 
 When members of Crossref (who are mostly Scholarly Publishers) deposit metadata, they can deposit links to datasets via their DataCite DOIs. The Crossref Metadata API monitors these links and sends them to Event Data. As this is an internal system there are no Artifacts as the data comes straight from the source.
 
-#### Example Event
+### Example Event
 
     {
       "obj_id":"https://doi.org/10.13127/ITACA/2.1",
@@ -778,19 +778,19 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
       "relation_type_id":"cites"
     }
 
-#### Methodology
+### Methodology
 
  - The Metadata API scans incoming Content Registration items and when it finds links to DataCite DOIs, it adds the Events to CED.
  - It can also scan back-files for links.
 
-#### Notes
+### Notes
 
  - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See (Duplicate Data){#concept-duplicate}.
  - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See (Occurred-at vs collected-at)[#concept-timescales].
 
 
 
-### DataCite to CrossRef Links
+## DataCite to CrossRef Links
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -807,7 +807,7 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 
 When members of DataCite deposit datasets, they can include links to Crossref Registered Content via their Crossref DOIs. The DataCite agent monitors these links and sends them to Event Data. As this is an External Agent, there are no Artifacts or Evidence Records.
 
-#### Example Event
+### Example Event
 
     {
       "obj_id":"https://doi.org/10.1007/S10518-016-9982-8",
@@ -821,19 +821,19 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
       "relation_type_id":"cites"
     }
 
-#### Methodology
+### Methodology
 
  - DataCite operate an Agent that scans its Metadata API for new citations to Crossref DOIs. When it finds links, it deposits them.
  - It can also scan for back-files
 
-#### Notes
+### Notes
 
  - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](#concept-duplicate).
  - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](#concept-timescales).
 
 
 
-### Facebook
+## Facebook
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -853,13 +853,13 @@ The Facebook Data Source polls Facebook for Items via their Landing Page URLs. I
 
 Because of the structure of the Facebook API, it is necessary to make one API query per Item, which means that it can take a long time to work through the entire list of Items. This means that, whilst we try and poll as often and regularly as possible, the time between Facebook Events for a given Item can be unpredictable. 
 
-#### Freshness
+### Freshness
 
 The Facebook Agent uses three categories of Item: `high-urls`, `medium-urls` and `all-urls` (see the [URL Artifact lists documentation](#artifact-url-list) for more detail). It processes the three categories in parallel. In each category it scans the current list of all Items with URLs from start to finish, and queries the Facebook API for each one. It does this in a loop, each time fetching the most recent list of URLs.
 
 The Facebook Agent works within rate limits of Facebook API. If the Facebook API indicates that the rate of traffic is too high then the Agent will lower the rate of querying and a complete scan will take longer.
 
-#### Subject URIs and PIDs {#in-depth-facebook-uris}
+### Subject URIs and PIDs {#in-depth-facebook-uris}
 
 As Facebook Events are pre-aggregated and don't record the relationship between the liker and the Item, Events are recorded against Facebook as a whole. Because we don't expect to collect Events more than once per month per Item, we create an entity that represents Facebook in a given month.
 
@@ -869,7 +869,7 @@ This approach strikes the balance between recording data against a consistent Su
 
 If you just want to find 'all the Facebook data for this DOI' remember that you can filter by the `source_id`.
 
-#### Example Event
+### Example Event
 
     {
       "obj_id":"https://doi.org/10.1080/13600820802090512",
@@ -891,14 +891,14 @@ If you just want to find 'all the Facebook data for this DOI' remember that you 
     }
 
 <!--- 
-#### Example Evidence Record
+### Example Evidence Record
 
 An Evidence Record contains one response from a Facebook API. API requests are batched in groups of URLs, up to 50 at a time. Therefore an Evidence Record can result in multiple Events.
 
 TODO
 -->
 
-#### Landing Page URLs vs DOI URLs in Facebook
+### Landing Page URLs vs DOI URLs in Facebook
 
 Facebook Users may share links to Items two ways: they may link using the DOI URL, or they may link using the Landing Page URL. When a DOI is used, Facebook records and shows the DOI URL but records statistics against the Landing Page URL it resolves to. This means that Facebook doesn't necessarily maintain a one-to-one mapping between URLs and statistics for that URL.
 
@@ -967,7 +967,7 @@ But a Query using its DOI fails `https://graph.facebook.com/v2.7/http://doi.org/
 
 Therefore, whilst Facebook returns results for *some* DOIs, we use exclusively use the Landing Page URL to query Facebook for activity. This takes account of users sharing via the DOI and via the Landing Page.
 
-#### HTTP and HTTPS in Facebook
+### HTTP and HTTPS in Facebook
 
 Many websites allow users to access the same content over HTTP and HTTPS, and serve up the same content. Whilst the web server may consider the two URLs equal in some way, Facebook doesn't automatically treat HTTPS and HTTP versions of the same URL as equal. The [WHATWG URL Specification](https://url.spec.whatwg.org/#url-equivalence) supports this position.
 
@@ -1050,7 +1050,7 @@ Crossref Event Data uses the Landing Page that the DOI resolved to. If this is H
 
 If a situation arises where the publisher serves the same Landing Page both over HTTP and HTTPS without redirecting, CED will use the Landing Page URL that the DOI resolves to. This may result in some views not being accounted for, but it is the most accurate and consistent.
 
-#### Methodology
+### Methodology
 
 The Agent has three parallel processes. They operate on three Artifacts: `high-urls`, `medium-urls` and `all-urls`. The last of these contains the mapping of all known DOI to URL mappings. The first two contain subsets of these.
 
@@ -1063,14 +1063,14 @@ Each process:
  5. When the end of the list is reached, it starts again at step 1.
 
 
-#### Further information
+### Further information
 
  - [Facebook Graph API](https://developers.facebook.com/docs/graph-api)
  - [Facebook CED Agent](https://github.com/crossref/event-data-facebook-agent)
 
 
-
-### Mendeley
+<!--
+## Mendeley
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1088,17 +1088,17 @@ Each process:
 
 The Mendeley Agent polls Mendeley for every DOI and records the `reader_count` and `group_count` numbers. A Mendeley Event Data record should be read as 'As of this date this Item has this many readers' or 'as of this date this Item is in this many groups'.
 
-<!--
-#### Example Event
+
+### Example Event
 
 TODO
 
-#### Example Evidence Record
+### Example Evidence Record
 
 TODO
 -->
 
-#### Methodology
+### Methodology
 
 1. The Mendeley agent consumes three Artifacts: `high-dois`, `medium-dois` and `all-dois`. It runs a three parallel processes, one per list.
 2. For each list, the agent fetches the most recent version of the Artifact.
@@ -1106,13 +1106,13 @@ TODO
 4. For each Item for which there is data, two Event is created with total values. The `reader_count` total is stored in an event with `relation_type_id` of `bookmarks`. The `group_count` total is stored in an event with the `relation_type_id` of `likes`.
 4. When it has finished the list, it starts again at step 1.
 
-#### Further information
+### Further information
 
  - [Mendeley API Documentation](http://dev.mendeley.com/methods/)
 
 
 
-### Newsfeed
+## Newsfeed
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1147,7 +1147,7 @@ TODO
 
 -->
 
-#### Methodology
+### Methodology
 
  - Every hour, the latest 'newsfeed-list' Artifact is retrieved.
  - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts.
@@ -1155,14 +1155,14 @@ TODO
  - The URL of the blog post is retrieved and the body is inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
  - For every DOI found an Event is created with a `relation_type_id` of `mentions`.
 
-#### Notes
+### Notes
 
 Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](#concept-duplicate).
 
 
 
 <!---
-### Reddit
+## Reddit
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1180,19 +1180,19 @@ Because the Newsfeed Agent connects to blogs and blog aggregators, it is possibl
 
 DISCUSSION
 
-#### Example Event
+### Example Event
 
 TODO
 
-#### Example Evidence Record
+### Example Evidence Record
 
 TODO
 
-#### Methodology
+### Methodology
 
 TODO
 
-#### Further information
+### Further information
 
 TODO
 
@@ -1200,7 +1200,7 @@ TODO
 
 
 <!---
-### Twitter
+## Twitter
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1227,28 +1227,28 @@ When Items are matched using their Landing Page URL the URL Reversal Service is 
 
 DISCUSSION
 
-#### Example Event
+### Example Event
 
 TODO
 
-#### Example Evidence Record
+### Example Evidence Record
 
 TODO
 
-#### Methodology
+### Methodology
 
  1. On a periodic basis the most recent version of the `domain-list` Artifact is retrieved. A set of Gnip PowerTrack rules are compiled and sent to Gnip.
  2. The Twitter agent connects to Gnip PowerTrack.
  3. All tweets matching the URL rule list are sent to the 
 
 
-#### Further information
+### Further information
 
 TODO
 -->
 
 <!---
-### Wikipedia
+## Wikipedia
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1266,24 +1266,24 @@ TODO
 
 DISCUSSION
 
-#### Example Event
+### Example Event
 
 TODO
 
-#### Example Evidence Record
+### Example Evidence Record
 
 TODO
 
-#### Methodology
+### Methodology
 
 TODO
 
-#### Further information
+### Further information
 
 TODO
 
 
-### Wordpress.com
+## Wordpress.com
 
 | Property                  | Value          |
 |---------------------------|----------------|
@@ -1301,21 +1301,21 @@ TODO
 
 The Wordpress.com agent queries the Wordpress.com API for Landing Page Domains. It monitors blogs hosted on Wordpress.com that mention articles by their landing page or by DOI URL.
 
-#### Example Event
+### Example Event
 
 TODO
 
-#### Example Evidence Record
+### Example Evidence Record
 
 TODO
 
-#### Methodology
+### Methodology
 
 TODO
 
 note not all Wordpress
 
-#### Further information
+### Further information
 
 TODO
 
