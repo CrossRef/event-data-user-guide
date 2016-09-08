@@ -54,7 +54,7 @@ Every Event is the result of some data input from a source, and the entire proce
 
 <img src='images/introduction-evidence-flow.svg' alt='Event Data Evidence Flow' class='img-responsive'>
 
-Crossref Event Data was developed alongside the NISO recommendations for altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an exemplar altmetrics data provider, setting the standard in openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
+Crossref Event Data was developed alongside the NISO recommendations for altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an example of openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](#appendix-niso-coc) in the appendix.
 
 ## Accessing the Data 
 
