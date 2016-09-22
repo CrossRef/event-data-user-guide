@@ -1136,29 +1136,161 @@ The Newsfeed agent monitors RSS and Atom feeds from blogs and blog aggregators. 
 
 You can see the latest version of the newsfeed-list by using the Evidence Service: http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current 
 
-<!---
-#### Example Event
-
-TODO
-
-#### Example Evidence Record
-
-TODO
-
--->
+NB some aggregators may proxy blog posts. Uniqueness is determined by the URL in the aggregator feed. The same blog proxied may show up different ways.
 
 ### Methodology
 
- - Every hour, the latest 'newsfeed-list' Artifact is retrieved.
- - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts.
- - The content of the body in the RSS feed item are inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
- - The URL of the blog post is retrieved and the body is inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
- - For every DOI found an Event is created with a `relation_type_id` of `mentions`.
+ - On a regular period, the latest 'newsfeed-list' Artifact is retrieved.
+   - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts.
+   - The content of the body in the RSS feed item are inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
+   - The URL of the blog post is retrieved and the body is inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
+   - For every DOI found an Event is created with a `relation_type_id` of `mentions`.
+
+The Evidence Record records:
+
+ - the newsfeed URL that was queried
+ - the blog URLs it found in the feed
+   - of which, which ones it has already seen, including when they were seen and on which feed
+   - of which, which ones it has not already seen
+ - full data from the feed for those articles it has not seen
+ - deposits
+ - artifacts
 
 ### Notes
 
 Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](#concept-duplicate).
 
+### Example Event
+
+    {
+      "obj_id": "https://doi.org/10.1002/2016gl070067",
+      "source_token": "c1bfb47c-39b8-4224-bb18-96edf85e3f7b",
+      "occurred_at": "2016-09-14T14:32:59.000Z",
+      "subj_id": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+      "action": "added",
+      "subj": {
+        "title": "The difficulty of predicting an ice-free Arctic",
+        "issued": "2016-09-14T14:32:59.000Z",
+        "pid": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+        "URL": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+        "type": "post-weblog"
+      },
+      "uuid": "21cb1532-e305-470a-b1dc-313f6d45c1b0",
+      "source_id": "newsfeed",
+      "relation_type_id": "discusses"
+    }
+
+### Example Evidence Record
+
+In this example record we see data from two blog feeds. One contained a Landing Page URL, one didn't. Lots of data has been removed. The original Evidence Record is 70KB.
+
+    {
+      "artifacts": [
+        "http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/versions/41ac1c7ecf505785411b0e0b498c4cef",
+        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c"
+      ],
+      "input": {
+        "newsfeed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Astronomy",
+        "blog-urls": [
+          "http://blogs.agu.org/geospace/2016/09/14/atlin-ophiolite-rocks/",
+          "https://cosmosmagazine.com/space/pluto-moon-charon-s-red-head-tinted-by-trapped-gas",
+          ...
+        ],
+        "blog-urls-seen": [
+          {
+            "seen-before": true,
+            "seen-before-date": "2016-09-14T18:39:14.000Z",
+            "seen-before-feed": "http://www.inoreader.com/stream/user/1005830516/tag/Science%20Communication",
+            "url": "https://cosmosmagazine.com/space/pluto-moon-charon-s-red-head-tinted-by-trapped-gas"
+          },
+          {
+            "seen-before": true,
+            "seen-before-date": "2016-09-14T18:26:44.000Z",
+            "seen-before-feed": "http://www.inoreader.com/stream/user/1005830516/tag/Physics",
+            "url": "http://chandra.si.edu/blog/node/617"
+          },
+          ...
+        ],
+        "blog-urls-unseen": [
+          "http://blogs.agu.org/geospace/2016/09/14/atlin-ophiolite-rocks/",
+          "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+          ...
+        ]
+      },
+      "processing": {
+        "http://blogs.agu.org/geospace/2016/09/14/atlin-ophiolite-rocks/": {
+          "data": {
+            "seen-before": false,
+            "seen-before-date": null,
+            "seen-before-feed": null,
+            "url": "http://blogs.agu.org/geospace/2016/09/14/atlin-ophiolite-rocks/",
+            "blog-item": {
+              "title": "The Atlin Ophiolite Rocks",
+              "link": "http://blogs.agu.org/geospace/2016/09/14/atlin-ophiolite-rocks/",
+              "id": "http://www.inoreader.com/article/3a9c6e7f898569f2",
+              "updated": "2016-09-14T17:32:57.000Z",
+              "summary": "<p>some html without useful links</p>",
+              "feed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Astronomy",
+              "fetch-date": "2016-09-14T18:39:15.137Z"
+            }
+          },
+          "dois": [],
+          "url-doi-matches": {
+            "https://www.researchgate.net/profile/Andreas_Beinlich": {
+              "doi": null,
+              "version": null
+            }
+          }
+        },
+        "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/": {
+          "data": {
+            "seen-before": false,
+            "seen-before-date": null,
+            "seen-before-feed": null,
+            "url": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+            "blog-item": {
+              "title": "The difficulty of predicting an ice-free Arctic",
+              "link": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+              "id": "http://www.inoreader.com/article/3a9c6e7f897cc57a",
+              "updated": "2016-09-14T14:32:59.000Z",
+              "summary": "<p>Some html <a href='http://onlinelibrary.wiley.com/doi/10.1002/2016GL070067/full'>link</a></p>",
+              "feed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Astronomy",
+              "fetch-date": "2016-09-14T18:39:15.137Z"
+            }
+          },
+          "dois": [
+            "10.1002/2016gl070067"
+          ],
+          "url-doi-matches": {
+            "http://onlinelibrary.wiley.com/doi/10.1002/2016GL070067/full": {
+              "doi": "10.1002/2016gl070067",
+              "version": null
+            }
+          }
+        },
+        ...
+      },
+      "deposits": [
+        {
+          "obj_id": "https://doi.org/10.1002/2016gl070067",
+          "source_token": "c1bfb47c-39b8-4224-bb18-96edf85e3f7b",
+          "occurred_at": "2016-09-14T14:32:59.000Z",
+          "subj_id": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+          "action": "added",
+          "subj": {
+            "title": "The difficulty of predicting an ice-free Arctic",
+            "issued": "2016-09-14T14:32:59.000Z",
+            "pid": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+            "URL": "http://blogs.agu.org/geospace/2016/09/14/difficulty-predicting-ice-free-arctic/",
+            "type": "post-weblog"
+          },
+          "uuid": "21cb1532-e305-470a-b1dc-313f6d45c1b0",
+          "source_id": "newsfeed",
+          "relation_type_id": "discusses"
+        },
+        ...
+      ]
+    }
 
 
 <!---
@@ -1190,7 +1322,17 @@ TODO
 
 ### Methodology
 
-TODO
+The Agent runs once a day and performs a search for every domain in the Domain List Artifact. It then tries to match results in URLs to Items.
+
+Every day:
+
+ - fetch the `domain-list` Artifact
+  - every domain
+   - fetch all search results (multiple pages)
+   - keep fetching results until all results for that day have been collected
+   - every result
+     - match landing page URLs
+
 
 ### Further information
 
