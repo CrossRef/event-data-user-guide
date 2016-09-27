@@ -321,19 +321,27 @@ Not all fields are compulsory, and the format will vary from Source to Source. H
 
 If you have an Event and you want to see the Evidence for it, query by its ID.
 
-    http://service.eventdata.crossref.org/evidence/event/«event-id»
+    http://evidence.eventdata.crossref.org/event/«event-id»/evidence
+
+e.g.
+
+    http://evidence.eventdata.crossref.org/events/06630d1f-3add-4478-a2c8-faa38728e0d8/evidence
 
 You will receive `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Location` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
 
 Inside the Evidence Record you will find an `events` section which will contain one or more Events, including the one you queried for. Note that one piece of Evidence may have produced a number of Events.
 
+<!---
 You can also query for Evidence Records by the date they occurred:
 
-    http://service.eventdata.crossref.org/evidence/occurred/«YYYY-MM-DD»
+    http://evidence.eventdata.crossref.org/evidence/occurred/«YYYY-MM-DD»
 
 You will receive a page which includes a list of URLs for all Evidence Records for that day. 
 
+
 This can be useful if, for example, you want to see all inputs that were received from a particular source, whether or not they resulted in Events. Note that the time in the query corresponds to the `timestamp` field of the Evidence Record, and corresponds to the time the Evidence was processed. The times at which an Event occurred, the Event was collected, the Evidence was processed are different.
+
+-->
 
 ## Status Dashboard
 
@@ -1134,18 +1142,110 @@ The Newsfeed agent monitors RSS and Atom feeds from blogs and blog aggregators. 
  - ScienceBlogging blog aggregator
  - BBC News
 
-You can see the latest version of the newsfeed-list by using the Evidence Service: http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current 
+You can see the latest version of the newsfeed-list by using the Evidence Service: [http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/current](http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/current). 
 
-<!---
+
 #### Example Event
 
-TODO
+
+    {
+      obj_id: "https://doi.org/10.1145/2933057.2933107",
+      occurred_at: "2016-09-26T00:25:08Z",
+      subj_id: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+      total: 1,
+      id: "170678af-92da-4375-967c-b056d828525d",
+      subj: {
+        pid: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+        title: "A Creeping Model Of Computation",
+        issued: "2016-09-26T00:25:08.000Z",
+        URL: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+        type: "post-weblog"
+      },
+      message_action: "create",
+      source_id: "newsfeed",
+      timestamp: "2016-09-26T00:30:18Z",
+      relation_type_id: "discusses"
+    },
 
 #### Example Evidence Record
 
-TODO
+[http://archive.eventdata.crossref.org/evidence/54bb341977cb2ed8906c5be25dd48cbc](http://archive.eventdata.crossref.org/evidence/54bb341977cb2ed8906c5be25dd48cbc)
 
--->
+    {
+      "artifacts": [
+        "http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/versions/41ac1c7ecf505785411b0e0b498c4cef",
+        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c"
+      ],
+      "input": {
+        "newsfeed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
+        "blog-urls": [
+          "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+          "http://feedproxy.google.com/~r/blogspot/wCeDd/~3/pY5hWW0nwXM/sunday-morning-video-bay-area-deep.html",
+          « ... removed ... »
+        ],
+        "blog-urls-seen": [
+          {
+            "seen-before": true,
+            "seen-before-date": "2016-09-25T15:59:24.000Z",
+            "seen-before-feed": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
+            "url": "http://feedproxy.google.com/~r/blogspot/wCeDd/~3/pY5hWW0nwXM/sunday-morning-video-bay-area-deep.html"
+          },
+          « ... removed ... »
+        ],
+        "blog-urls-unseen": [
+          "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/"
+        ]
+      },
+      "processing": {
+        "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/": {
+          "data": {
+            "seen-before": false,
+            "seen-before-date": null,
+            "seen-before-feed": null,
+            "url": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+            "blog-item": {
+              "title": "A Creeping Model Of Computation",
+              "link": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+              "id": "http://www.inoreader.com/article/3a9c6e7f83b41e90",
+              "updated": "2016-09-26T00:25:08.000Z",
+              "summary": "<p><br><em>Local rules can achieve global behavior</em><br> « ... removed ... »</p>",
+              "feed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
+              "fetch-date": "2016-09-26T00:29:20.616Z"
+            }
+          },
+          "dois": [
+            "10.1145/2933057.2933107"
+          ],
+          "url-doi-matches": {
+            "http://arxiv.org/abs/1603.07991": {
+              "doi": "10.1145/2933057.2933107",
+              "version": null
+            }
+          }
+        }
+      },
+      "deposits": [
+        {
+          "obj_id": "https://doi.org/10.1145/2933057.2933107",
+          "source_token": "c1bfb47c-39b8-4224-bb18-96edf85e3f7b",
+          "occurred_at": "2016-09-26T00:25:08.000Z",
+          "subj_id": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+          "action": "added",
+          "subj": {
+            "title": "A Creeping Model Of Computation",
+            "issued": "2016-09-26T00:25:08.000Z",
+            "pid": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+            "URL": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
+            "type": "post-weblog"
+          },
+          "uuid": "170678af-92da-4375-967c-b056d828525d",
+          "source_id": "newsfeed",
+          "relation_type_id": "discusses"
+        }
+      ]
+    }
+
+
 
 ### Methodology
 
@@ -1161,7 +1261,7 @@ Because the Newsfeed Agent connects to blogs and blog aggregators, it is possibl
 
 
 
-<!---
+
 ## Reddit
 
 | Property                  | Value          |
@@ -1169,52 +1269,150 @@ Because the Newsfeed Agent connects to blogs and blog aggregators, it is possibl
 | Name                      | event-data-reddit-agent |
 | Matches by                | DOI |
 | Consumes Artifacts        | `domain-list` |
-| Produces relation types   |  |
-| Fields in Evidence Record |  |
-| Freshness                 |  |
-| Data Source               |  |
-| Coverage                  |  |
+| Produces relation types   | `discusses` |
+| Freshness                 | Polling approximately every 30 minutes |
+| Data Source               | Reddit API |
+| Coverage                  | All landing page URLs and DOI URLs |
 | Relevant concepts         | [Unambiguously linking URLs to DOIs](#concept-urls), [Pre-filtering](#pre-filtering) |
 | Operated by               | Crossref |
-| Agent                     |  |
+| Agent                     | event-data-reddit-agent |
 
-DISCUSSION
-
-### Example Event
-
-TODO
-
-### Example Evidence Record
-
-TODO
+The Reddit agent queries the Reddit API for each domain in the Landing Page Domain list. It finds discussions and comments that mention Items via their landing pages or DOIs.
 
 ### Methodology
 
-TODO
+1. The Reddit agent runs a loop, with a delay of a 30 minutes between runs. 
+2. The most recent `domain-list` Artifact is fetched at the start of each loop.
+3. During the loop, for each domain in the `domain-list`
+   1. The Agent requests all data for the domain, ordered by date descending.
+   2. The Agent continues fetching pages of results until it finds inputs it has seen before.
+   3. The Agent looks at every result. Where it has not seen a link before, it tries to reverse it to an Item DOI.
+   4. Where an Item is found, an Event is created.
 
-### Further information
+### Example Event
 
-TODO
+    {
+      "obj_id": "https://doi.org/10.1523/JNEUROSCI.1907-16.2016",
+      "occurred_at": "2016-09-25T16:59:52Z",
+      "subj_id": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+      "total": 1,
+      "id": "7cc890a6-ca68-4d7c-8853-fb243aa59279",
+      "subj": {
+        "pid": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+        "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
+        "issued": "2016-09-25T16:59:52.000Z",
+        "URL": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+        "type": "post"
+      },
+      "message_action": "create",
+      "source_id": "reddit",
+      "timestamp": "2016-09-25T20:31:36Z",
+      "relation_type_id": "discusses"
+    }
 
--->
 
+### Example Evidence Record
 
-<!---
-## Twitter
+[http://evidence.eventdata.crossref.org/events/7cc890a6-ca68-4d7c-8853-fb243aa59279/evidence](http://evidence.eventdata.crossref.org/events/7cc890a6-ca68-4d7c-8853-fb243aa59279/evidence)
+
+    {
+      "agent": {
+        "name": "reddit",
+        "version": "0.1.1"
+      },
+      "run": "2016-09-25T20:24:01.392Z",
+      "artifacts": [
+        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c"
+      ],
+      "input": {
+        "https://oauth.reddit.com/domain/www.jneurosci.org/new.json?sort=new&after=": {
+          "after-token": "t3_46qn9t",
+          "items": [
+            {
+              "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
+              "id": "54fyzt",
+              "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
+              "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+              "created_utc": 1474822792,
+              "subreddit": "science",
+              "kind": "t3"
+            },
+            « ... removed ... »
+          ]
+        }
+      },
+      "processing": {
+        "items": [
+          {
+            "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
+            "id": "54fyzt",
+            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
+            "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+            "created_utc": 1474822792,
+            "subreddit": "science",
+            "kind": "t3",
+            "seen-before-date": null,
+            "url-doi-match": {
+              "doi": "10.1523/jneurosci.1907-16.2016",
+              "version": null,
+              "query": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc"
+            }
+          },
+          « ... removed ... »
+        ],
+        "interested-items": [
+          {
+            "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
+            "id": "54fyzt",
+            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
+            "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+            "created_utc": 1474822792,
+            "subreddit": "science",
+            "kind": "t3",
+            "seen-before-date": null,
+            "url-doi-match": {
+              "doi": "10.1523/jneurosci.1907-16.2016",
+              "version": null,
+              "query": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc"
+            }
+          }
+        ]
+      },
+      "deposits": [
+        {
+          "source_token": "a6c9d511-9239-4de8-a266-b013f5bd8764",
+          "uuid": "7cc890a6-ca68-4d7c-8853-fb243aa59279",
+          "action": "added",
+          "subj_id": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+          "subj": {
+            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
+            "issued": "2016-09-25T16:59:52.000Z",
+            "pid": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+            "URL": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
+            "type": "post"
+          },
+          "source_id": "reddit",
+          "relation_type_id": "discusses",
+          "obj_id": "https://doi.org/10.1523/jneurosci.1907-16.2016",
+          "occurred_at": "2016-09-25T16:59:52.000Z"
+        }
+      ]
+    }
+    
+### Twitter
 
 | Property                  | Value          |
 |---------------------------|----------------|
-| Name                      |  |
+| Name                      | Twitter |
 | Matches by                | DOI |
-| Consumes Artifacts        |  |
-| Produces relation types   |  |
-| Fields in Evidence Record |  |
-| Freshness                 |  |
-| Data Source               |  |
-| Coverage                  |  |
+| Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
+| Produces relation types   | `discusses` |
+| Freshness                 | continual |
+| Data Source               | Twitter via Gnip |
+| Coverage                  | All DOIs, all known Landing Pages |
 | Relevant concepts         | [Pre-filtering](#pre-filtering) |
 | Operated by               | Crossref |
-| Agent                     |  |
+| Agent                     | event-data-twitter-agent |
 
 The Twitter source identifies Items that have been mentioned in Tweets. It matches Items using their Landing Page or DOI URL. Each event contains subject metadata including:
 
@@ -1225,62 +1423,236 @@ The Twitter source identifies Items that have been mentioned in Tweets. It match
 
 When Items are matched using their Landing Page URL the URL Reversal Service is used.
 
-DISCUSSION
+#### Methodology
 
-### Example Event
-
-TODO
-
-### Example Evidence Record
-
-TODO
-
-### Methodology
-
- 1. On a periodic basis the most recent version of the `domain-list` Artifact is retrieved. A set of Gnip PowerTrack rules are compiled and sent to Gnip.
+ 1. On a periodic basis (approximately every 24 hours) the most recent version of the `domain-list` Artifact is retrieved. A set of Gnip PowerTrack rules are compiled and sent to Gnip. The list of rules specifies that Gnip should send all tweets that:
+   1. Mention a DOI URL
+   2. Mention a URL that uses an article Landing Page domain
+   3. Contain a DOI prefix, e.g. `10.5555`
  2. The Twitter agent connects to Gnip PowerTrack.
- 3. All tweets matching the URL rule list are sent to the 
+ 3. All Tweets that the agent recieves from PowerTrack have been sent because they match a rule. Gnip also extracts all URLs and follows them to their destination. All URLs extracted and sent along with the data for the Tweet.
+ 4. The Agent attempts to reverse every URL using the DOI Reversal Service. For every recognised DOI an Event is created.
+
+#### Example Event
+
+    {
+      "obj_id": "https://doi.org/10.1038/nature19798",
+      "occurred_at": "2016-09-26T15:23:13.000Z",
+      "subj_id": "http://twitter.com/randomshandom/statuses/780427511956180992",
+      "total": 1,
+      "id": "35ec2a67-a765-4f26-9c37-7f9eb9a1c7a8",
+      "subj": {
+        "pid": "http://twitter.com/randomshandom/statuses/780427511956180992",
+        "author": {
+          "literal": "http://www.twitter.com/randomshandom"
+        },
+        "title": "Evolution of global temperature over the past two million years https://t.co/HvxjIAERAh",
+        "issued": "",
+        "URL": "http://twitter.com/randomshandom/statuses/780427511956180992",
+        "type": "tweet"
+      },
+      "message_action": "create",
+      "source_id": "twitter",
+      "timestamp": "2016-09-26T15:23:13.000Z",
+      "relation_type_id": "discusses"
+    }
+
+#### Example Evidence Record
+
+[http://archive.eventdata.crossref.org/evidence/87d7ab90d497198f74d7b46d67faca15](http://archive.eventdata.crossref.org/evidence/87d7ab90d497198f74d7b46d67faca15)
+
+    {
+      artifacts: [
+        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c",
+        "http://evidence.eventdata.crossref.org/artifacts/doi-prefix-list/versions/797e77470ed94b2f7b336adab4cbaf19"
+      ],
+      input: {
+        tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        author: "http://www.twitter.com/randomshandom",
+        posted-time: "2016-09-26T15:23:13.000Z",
+        body: "Evolution of global temperature over the past two million years https://t.co/HvxjIAERAh",
+      urls: [
+        "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
+      ],
+      matching-rules: [
+        "url_contains:"//www.nature.com/""
+      ]
+    },
+    agent: {
+      name: "twitter",
+      version: "0.1.2"
+    },
+    working: {
+      matching-rules: [
+      "url_contains:"//www.nature.com/""
+      ],
+      matching-dois: [
+      {
+        doi: "10.1038/nature19798",
+        version: null,
+        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
+      }
+      ],
+      match-attempts: [
+      {
+        doi: "10.1038/nature19798",
+        version: null,
+        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
+      }
+      ],
+      original-tweet-author: null,
+      original-tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992"
+      },
+      deposits: [
+      {
+      obj_id: "https://doi.org/10.1038/nature19798",
+        source_token: "45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
+        occurred_at: "2016-09-26T15:23:13.000Z",
+        subj_id: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        action: "add",
+        subj: {
+        title: "Evolution of global temperature over the past two million years https://t.co/HvxjIAERAh",
+        author: {
+          literal: "http://www.twitter.com/randomshandom"
+        },
+        issued: "2016-09-26T15:23:13.000Z",
+        pid: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        URL: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        type: "tweet"
+      },
+      uuid: "35ec2a67-a765-4f26-9c37-7f9eb9a1c7a8",
+      source_id: "twitter",
+        relation_type_id: "discusses"
+      }
+      ]
+    }
 
 
-### Further information
 
-TODO
--->
-
-<!---
 ## Wikipedia
 
 | Property                  | Value          |
 |---------------------------|----------------|
-| Name                      |  |
+| Name                      | Wikipedia |
 | Matches by                | DOI |
 | Consumes Artifacts        |  |
-| Produces relation types   |  |
-| Fields in Evidence Record |  |
-| Freshness                 |  |
-| Data Source               |  |
-| Coverage                  |  |
+| Produces relation types   | `references` |
+| Freshness                 | continual |
+| Data Source               | Wikipedia Recent Changes Stream, Wikipedia RESTBase |
+| Coverage                  | All Wikimedia properties. DOI URL references only. |
 | Relevant concepts         | [Matching by DOIs](#concept-matching-dois)|
 | Operated by               | Crossref |
 | Agent                     | event-data-wikipedia-agent |
 
-DISCUSSION
+### Methodology
+
+1. The agent subscribes to the Recent Changes Stream using the wildcard "`*`". This includes all Wikimedia properties. 
+2. The Recent Changes Stream server sends the Agent every change to a page. Every change event includes the page title, the old and new revision and other data.
+3. For every change, the Agent fetches the HTML of the old and the new pages using the RESTBase API.
+    1. For every URL in the old version, the Agent looks for those that are DOI URLs.
+    2. For every URL in the new version, the Agent looks for those that are DOI URLs.
+4. DOIs are split into those that were added and those that were removed.
+    1. For every DOI that was removed an Event with the `action: "delete"` is produced.
+    2. For every DOI that was added an Event with the `action: "add"` is produced.
+
 
 ### Example Event
 
-TODO
+    {
+      obj_id: "https://doi.org/10.1093/EMBOJ/20.15.4132",
+      occurred_at: "2016-09-25T23:58:58Z",
+      subj_id: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+      total: 1,
+      id: "d24e5449-7835-44f4-b7e6-289da4900cd0",
+      subj: {
+        pid: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+        title: "Señalización paracrina",
+        issued: "2016-09-25T23:58:58.000Z",
+        URL: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+        type: "entry-encyclopedia"
+      },
+      message_action: "create",
+      source_id: "wikipedia",
+      timestamp: "2016-09-26T00:03:52Z",
+      relation_type_id: "references"
+    }
 
 ### Example Evidence Record
 
-TODO
+[http://archive.eventdata.crossref.org/evidence/d8043c407165bd3e07d11c5ca0d74955](http://archive.eventdata.crossref.org/evidence/d8043c407165bd3e07d11c5ca0d74955)
 
-### Methodology
+    {
+      artifacts: [ ],
+      agent: {
+        name: "wikipedia",
+        version: "0.1.5"
+      },
+      input: {
+        stream-input: {
+          bot: false, user: "J3D3",
+          id: 133112611,
+          timestamp: 1474847938,
+          wiki: "eswiki",
+          revision: {
+            new: 93906371, old: 93391161
+          },
+          server_script_path: "/w",
+          minor: false,
+          server_url: "https://es.wikipedia.org",
+          server_name: "es.wikipedia.org",
+          length: {
+            new: 51542, old: 51700
+          },
+          title: "Señalización paracrina",
+          type: "edit",
+          namespace: 0,
+          comment: "Traduciendo otra pequeña parte"
+        },
+        old-revision-id: 93391161,
+        new-revision-id: 93906371,
+        old-body: "<!DOCTYPE html> <html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://es.wikipedia.org/wiki/Special:Redirect/revision/93391161">« ... removed ... »</html>",
+        new-body: "<!DOCTYPE html> <html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://es.wikipedia.org/wiki/Special:Redirect/revision/93906371">« ... removed ... »</html>"
+      },
+      processing: {
+        canonical: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+        dois-added: [
+        « ... removed ... »
+        {
+          action: "add",
+          doi: "10.1016/S1097-2765(01)00421-X",
+          event-id: "48de8c32-a901-4cc5-b911-544c959332f5"
+        }
+      ],
+      dois-removed: [ ]
+      },
+        deposits: [
+        « ... removed ... »
+        {
+          obj_id: "https://doi.org/10.1016/s1097-2765(01)00421-x",
+          source_token: "36c35e23-8757-4a9d-aacf-345e9b7eb50d",
+          occurred_at: "2016-09-25T23:58:58.000Z",
+          subj_id: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+          action: "add",
+          subj: {
+            title: "Señalización paracrina",
+            issued: "2016-09-25T23:58:58.000Z",
+            pid: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+            URL: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
+            type: "entry-encyclopedia"
+          },
+          uuid: "48de8c32-a901-4cc5-b911-544c959332f5",
+          source_id: "wikipedia",
+          relation_type_id: "references"
+        }
+      ]
+    }
 
-TODO
+### Failure modes
 
-### Further information
+ - The stream has no catch-up. If the agent is disconnected (which can happen from time to time), then edit events may be missed.
+ - The RESTBase API occasionally does not contain the edit mentioned in the change. Although the Agent will retry several times, if it repeatedly receives an error for retriving either the old or the new versions, no event will be returned. This will be recorded in the Evidence Record as an empty input.
 
-TODO
+<!---
 
 
 ## Wordpress.com
@@ -1429,16 +1801,16 @@ The Evidence Service maintains a list of all of the Artifacts.
 
 You can use the Evidence Service to retrieve the most recent version, or previous versions, of an Artifact.
 
- - To retrieve the current newsfeed list, for example, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/current` and you will be directed to the current Artifact Record. 
- - To retrieve the list of versions of the newsfeed, and what date they were created, visit `http://service.eventdata.crossref.org/evidence/artifact/newsfeed-list/history` and you will be shown a list of all versions with date stamps.
+ - To retrieve the current newsfeed list, for example, visit `http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/current` and you will be directed to the current Artifact Record. 
+ - To retrieve the list of versions of the newsfeed, and what date they were created, visit `http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/versions` and you will be shown a list of all versions with date stamps.
  - To see when new versions of software components, e.g. Agents, were released.
 
 ### Finding Artifacts for an Event
 
 Every Event has a corresponding Evidence Record, which contains a link to all of the Artifacts that were used to construct the Event. Therefore, to find the list of newsfeeds that was used to produce a blog reference Event:
 
- - Retrieve the ID from the Event, e.g. `d41d8cd98f00b204e9800998ecf8427e`
- - Query the Evidence Service to find the Evidence by visiting `http://service.eventdata.crossref.org/event/d41d8cd98f00b204e9800998ecf8427e/evidence`
+ - Retrieve the ID from the Event, e.g. `06630d1f-3add-4478-a2c8-faa38728e0d8`
+ - Query the Evidence Service to find the Evidence by visiting `http://evidence.eventdata.crossref.org/events/06630d1f-3add-4478-a2c8-faa38728e0d8/evidence`
  - You will see the list of Evidence Links in the response.
 
 ## Evidence Records in Depth {#in-depth-evidence-records}
@@ -1945,3 +2317,5 @@ The following words have been used during the development of Event Data but are 
 | 19-April-2016     | 0.2     | Joe Wass jwass@crossref.org | Add 'Contributing to Event Data'                  |
 | 16-August-2016    | 0.3     | Joe Wass jwass@crossref.org | Remove Relations & Deposits, update new Query API |
 | 08-September-2016 | 0.4     | Joe Wass jwass@crossref.org | Complete rewrite using new concepts and components|
+| 27-September-2016 | 0.5     | Joe Wass jwass@crossref.org | Updated Evidence Record information |
+
