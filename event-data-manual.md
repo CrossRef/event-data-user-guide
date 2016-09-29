@@ -2,7 +2,7 @@
 title: Crossref Event Data User Guide
 ---
 
-Version 0.4 - Service Early Preview
+Version 0.5 - Service Early Preview
 
 # Welcome
 
@@ -16,6 +16,8 @@ Welcome to the Crossref Event Data User Guide. It contains everything you need t
 Crossref Event Data is an open service and will be put to a wide range of uses so it's important to understand exactly what the data means. We aim to set the standard in openness and transparency so the documentation not only describes the service, but precisely how we generate it.
 
 **The Event Data Service has not yet launched and is not feature-complete.** This document is pre-release: some features described here are at preview stage and some are planned for development. Terminology and features may change before final release.
+
+Contact eventdata@crossref.org if you have any questions or feedback.
 
 # Introduction
 
@@ -37,20 +39,20 @@ Every 'thing that happens' is recorded as an individual Event. We gather Events 
 
 Events from every Data Source take many forms, but they have a common set of attributes:
 
- - the subject of the event, e.g. Wikipedia article on Fish
- - the type of the relation, e.g. "cites"
- - the object of the event, e.g. article with DOI 10.5555/12345678
- - the date and time that the event occurred
- - the date and time that the event was collected and processed
- - a total (useful in the above Facebook example)
- - optional bibliographic metadata about the subject (e.g. Wikipedia article title, author, publication date)
- - optional bibliographic metadata about the object (e.g. article title, author, publication date)
+ - the **subject** of the event, e.g. Wikipedia article on Fish
+ - the **type of the relation**, e.g. "cites"
+ - the **object** of the event, e.g. article with DOI 10.5555/12345678
+ - the date and time that the event **occurred**
+ - the date and time that the event was **collected and processed**
+ - a **total** (useful in the above Facebook example)
+ - optional **bibliographic metadata** about the subject (e.g. Wikipedia article title, author, publication date)
+ - optional **bibliographic metadata** about the object (e.g. article title, author, publication date)
 
 ## Transparency and Data Quality
 
 Data comes from a wide range of sources and each source is subject to different types of processing. Transparency of each piece of Event Data is crucial: where it came from, why it was selected, how it was processed and how it got here. 
 
-Every Event is the result of some data input from a source, and the entire process is completely open. For every Event we provide a full Evidence Record.
+Every Event is the result of some data input from an external source, and the entire process is completely open. For every Event we provide a full Evidence Record.
 
 <img src='images/introduction-evidence-flow.svg' alt='Event Data Evidence Flow' class='img-responsive'>
 
@@ -64,7 +66,7 @@ Crossref Event Data is available via our Query API. The Query API allows you to 
  - give me all Events that occurred on 2015-12-08
  - give me all the Facebook Events that were collected on 2015-12-08
  - give me all the Events that occurred for this DOI on 2016-01-08
- - give me all the twitter Events that occurred for this DOI on 2016-01-08
+ - give me all the Twitter Events that occurred for this DOI on 2016-01-08
 
 We will add other mechanisms for retrieving Events when we introduce the Service Level Agreement.
 
@@ -86,7 +88,7 @@ Crossref Event Data is a system for collecting Events and distributing them. Up 
 
  - Every Event that Crossref produces has an Evidence Record. These are available via the Evidence Service. It provides supporting evidence for every Event.
 
- - Every component in the CED system, internal and external, in CED is monitored. The Status Dashboard monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
+ - Every component in the CED system, internal and external, monitored. The Status Dashboard monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
 
 ## Versions
 
@@ -99,10 +101,10 @@ Event Data is a hub for the collection and distribution of Events and contains d
 | Name                   | Source Identifier   | Provider    | What does it contain? |
 |------------------------|---------------------|-------------|------------------|
 | Crossref to DataCite   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
-| Facebook               | Facebook            | Crossref    | Count number of likes and comments for Items |
+| Facebook               | facebook            | Crossref    | Count number of likes and comments for Items |
 | Mendeley               | mendeley            | Crossref    | Reader count number, etc from Mendeley |
 | Newsfeed               | newsfeed            | Crossref    | Mentions of Items on blogs and websites with syndication feeds |
-| Reddit                 | Reddit              | Crossref    | Mentions and discussions of Items on Reddit |
+| Reddit                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
 | Twitter                | twitter             | Crossref    | Mentions of Items on Twitter |
 | Wikipedia              | wikipedia           | Crossref    | References of Items on Wikipedia |
 | Wordpress.com          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
@@ -112,7 +114,7 @@ For detailed discussion of each one, see the [Sources In Depth](#in-depth-source
 
 ## Query API
 
-The Query API provides access to Event Data. It is simple REST API and uses JSON. Because there are up to a million Events per month, every query is scoped by a date, in `YYYY-MM-DD` format. Even when scoped to a particular date, there can be tens of thousands of Events. Therefore there are a number of filters available.
+The Query API provides access to Event Data. It is simple REST API and uses JSON. Because there are up to a million Events per month, every query is paginated by a date, in `YYYY-MM-DD` format. Even when scoped to a particular day, there can be tens of thousands of Events. Therefore there are a number of filters available.
 
 When you write a client to work with the API it should be able to deal with responses in the tens of megabytes, preferably dealing with them as a stream. You may find that saving an API response directly to disk is sensible.
 
@@ -250,72 +252,88 @@ An Evidence Record generally corresponds to a single input that came from an ext
 
 An Artifact generally corresponds to an internal piece of data is produced by Crossref and consumed in the process of deriving Events from Evidence. For example, the list of DOIs or Newsfeed RSS feed URLs.
 
+An Evidence Record may correspond to more than one Event. One Event is linked only to one Evidence Record. CED may contain Events for which there is no Evidence, where the Event was provided by an external party.
+
 ### Format of Evidence Records
 
 An Evidence Record looks like:
 
-     {
-      "timestamp": "2016-08-12T00:41:11Z",
-      "input-artifacts": [
-        "http://evidence.eventdata.crossref.org/artifacts/domains-7215EE9C7D9DC229D2921A40E899EC5F",
-        "https://github.com/CrossRef/doi-destinations/version/234",
-        "https://github.com/CrossRef/event-data-twitter-agent/version/234",
-        "http://evidence.eventdata.crossref.org/artifacts/doi-url-7215EE9C7D9DC229D2921A40E899EC5F"
-        ]
-      "input-status": 200,
-      "input-headers": {
-        "x-fb-trace-id": "GKoDnoIcGvR",
-        "date": "Tue, 23 Aug 2016 08:27:28 GMT",
-        "x-fb-rev": "2520541",
-        "pragma": "no-cache",
-        «SNIPPED»
-      },
-      "input-body": {
-        "tweetId": "tag:search.twitter.com,2005:767511609329803264",
-          "author": "http://www.twitter.com/JAMAInternalMed",
-          "postedTime": "2016-08-22T00:00:01.000Z",
-          "body": "Physicians' utilization patterns of non-recommended services suggest consistent behavior https://t.co/KWintjzxaA https://t.co/1AGbQiFf5m",
-          "urls": [
-            "http://archinte.jamanetwork.com/article.aspx?articleid=2543749&utm_source=TWITTER&utm_medium=social_jn&utm_term=543832897&utm_content=content_engagement%7Carticle_engagement&utm_campaign=article_alert&linkId=27613815",
-            "https://twitter.com/JAMAInternalMed/status/767511609329803264/photo/1"
-        ],
-        "matchingRules": [
-            "url_contains:\"//archinte.jamanetwork.com/\""
-        ]},
-      "events": [
-        {
-          "obj_id": "https://doi.org/10.1056/NEJMP1608511",
-          "occurred_at": "2016-08-11T23:20:22Z",
-          "subj_id": "http://twitter.com/statuses/763877751396954112",
-          "total": 1,
-          "id": "1b5620e1-89c4-4d50-ac65-006babd07b4b",
-          "subj": {
-            "pid": "http://twitter.com/statuses/763877751396954112",
-            "author": {
-              "literal": "http://www.twitter.com/kdjhaveri"
-              },
-              "title": "RT @NEJM: Recently Published Online First: Caring for High-Need, High-Cost Patients — An Urgent Priority (Perspective) https://t.co/tla7lAd…",
-              "issued": "2016-08-11T23:20:22.000Z",
-              "URL": "http://twitter.com/statuses/763877751396954112",
-              "type": "tweet"
-            },
-          "message_action": "create",
-          "source_id": "twitter",
-          "timestamp": "2016-08-12T00:41:11Z",
-          "relation_type_id": "discusses"
-          }
-        ]
+    {
+      artifacts: [
+        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c",
+        "http://evidence.eventdata.crossref.org/artifacts/doi-prefix-list/versions/797e77470ed94b2f7b336adab4cbaf19"
+      ],
+      input: {
+        tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        author: "http://www.twitter.com/randomshandom",
+        posted-time: "2016-09-26T15:23:13.000Z",
+        body: "Evolution of global temperature over the past two million years https://t.co/HvxjIAERAh",
+      urls: [
+        "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
+      ],
+      matching-rules: [
+        "url_contains:"//www.nature.com/""
+      ]
+    },
+    agent: {
+      name: "twitter",
+      version: "0.1.2"
+    },
+    working: {
+      matching-rules: [
+      "url_contains:"//www.nature.com/""
+      ],
+      matching-dois: [
+      {
+        doi: "10.1038/nature19798",
+        version: null,
+        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
       }
+      ],
+      match-attempts: [
+      {
+        doi: "10.1038/nature19798",
+        version: null,
+        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
+      }
+      ],
+      original-tweet-author: null,
+      original-tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992"
+      },
+      deposits: [
+      {
+      obj_id: "https://doi.org/10.1038/nature19798",
+        source_token: "45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
+        occurred_at: "2016-09-26T15:23:13.000Z",
+        subj_id: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        action: "add",
+        subj: {
+        title: "Evolution of global temperature over the past two million years https://t.co/HvxjIAERAh",
+        author: {
+          literal: "http://www.twitter.com/randomshandom"
+        },
+        issued: "2016-09-26T15:23:13.000Z",
+        pid: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        URL: "http://twitter.com/randomshandom/statuses/780427511956180992",
+        type: "tweet"
+      },
+      uuid: "35ec2a67-a765-4f26-9c37-7f9eb9a1c7a8",
+      source_id: "twitter",
+        relation_type_id: "discusses"
+      }
+      ]
+    }
+
 
 
 Not all fields are compulsory, and the format will vary from Source to Source. However, the following fields are commonly found:
 
+ - `agent` - the name and version of the Agent that was running
  - `timestamp` - the timestamp that the Evidence was received. This can be different from the `timestamps` and 'occurred_at` fields on the resulting Events. You should not normally use this field.
  - `input-artifacts` - links to Artifacts that were used in processing the input
- - `input-status` - the HTTP status code of an external API response
- - `input-headers` - the HTTP headers of an external API response
- - `input-body` - the HTTP response of an external API as a string, or in some digested form
- - `events` - a list of Events that were produced, in internal Lagotto Deposit format. These may appear to be similar to Event format, but there are some differences. Note that the `events` section may be empty if the input resulted in no Events.
+ - `input` - the input that the Agent was working with. Varies between sources.
+ - `processing` - information about how the input data was processed. Can include previous state (e.g. whether a given link has been seen before, and when). Can include Landing Page URL to DOI mapping information, i.e. which URLs were found, which had successful mappings to DOIs, which ones failed.
+ - `deposits` - a list of Events that were produced, in internal Lagotto Deposit format. These may appear to be similar to Event format, but there are some differences. Note that the `events` section may be empty if the input resulted in no Events.
 
 ### Getting Evidence Records
 
@@ -328,8 +346,6 @@ e.g.
     http://evidence.eventdata.crossref.org/events/06630d1f-3add-4478-a2c8-faa38728e0d8/evidence
 
 You will receive `HTTP 302 Found` response which will provide the URL of the Evidence Record via the `Location` header. Configure your HTTP client to follow redirects and you will download the Evidence Record.
-
-Inside the Evidence Record you will find an `events` section which will contain one or more Events, including the one you queried for. Note that one piece of Evidence may have produced a number of Events.
 
 <!---
 You can also query for Evidence Records by the date they occurred:
@@ -361,7 +377,7 @@ When a Content Item is registered with Crossref or DataCite, it is assigned a Pe
 
 All items of Registered Content have a presence on the web, known as the Landing Page. This is the 'home' of the Item and it is hosted on the website of its publisher. It usually contains information about the Item, such as title, other bibliographic metadata, abstract, links to download the content, or possibly the whole article itself.
 
-The purpose of a DOI link is to automatically redirect to the Landing Page. This means that although many users click on DOIs, by the time it comes to share the an Item on social media, the user is on the Landing Page, and might share that URL not the DOI.
+The purpose of a DOI link is to automatically redirect to the Landing Page. This means that although many users click on DOIs, by the time it comes to share an Item on social media, the user is on the Landing Page, and might share that URL not the DOI.
 
 Event Data therefore attempts to track Events via the Landing Page URLs as well as via DOI URLs.
 
@@ -369,7 +385,7 @@ Event Data therefore attempts to track Events via the Landing Page URLs as well 
 
 Like all Crossref services, whenever CED refers to an Item it uses the DOI to identify it. The Query API uses DOIs to query for data associated with Items and each Event uses DOIs when referring to items.
 
-CED normalizes DOIs into a standard form, using `HTTPS` and the `doi.org` resolver, e.g. `https://doi.org/10.5555/12345678`. Even through Events may be collected via DOIs expressed in different forms, all Events contain DOIs in this form.
+CED normalizes DOIs into a standard form, using `HTTPS` and the `doi.org` resolver, e.g. `https://doi.org/10.5555/12345678`. Even though Events may be collected via DOIs expressed in different forms, all Events contain DOIs in this form.
 
 ### Event Data tracks Content Items not DOIs
 
@@ -447,7 +463,7 @@ The data for the mapping of DOIs to Landing pages (and vice versa) is refreshed 
 
 Publisher sites are reorganized from time to time, and there may be a delay in updating the Crossref metadata. This means that DOI links can break and it can be impossible to find the Landing Page for a period of time. 
 
-In other cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. For example, trying to resolve the the anonymyzed DOI `10.XXX/YYY.06.008` without cookies enabled produces:
+In other cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. For example, trying to resolve the anonymyzed DOI `10.XXX/YYY.06.008` without cookies enabled produces:
 
 | URL | Comment |
 |-----|---------|
@@ -624,7 +640,7 @@ Most Events are collected soon after they occur:
  - Reddit comments are collected the day after they were made
  - blog posts are collected within an hour of publication or syndication
 
-These are approximate guidelines. In some circumstances the Event may be collected some time after the it occurred:
+These are approximate guidelines. In some circumstances the Event may be collected some time after it occurred:
 
  - article back-files from years ago are scanned for citations
  - a monthly data-dump comes in and it registers Events from the start of the month
@@ -1403,7 +1419,7 @@ The Reddit agent queries the Reddit API for each domain in the Landing Page Doma
 
 | Property                  | Value          |
 |---------------------------|----------------|
-| Name                      | Twitter |
+| Name                      | twitter |
 | Matches by                | DOI |
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Produces relation types   | `discusses` |
@@ -1703,17 +1719,21 @@ The Evidence Service links Events to their Evidence.
 
 An Artifact is an input to an Agent that's required to process its External Input. It provides the necessary context or supporting data that enables an Agent to produce Events. 
 
-## Structure of an Artifact file
-
-Artifacts can be very large, for example the `all-doi` file may be up to 3GB, so they are split up into Artifact Part Files. An Artifact is represented by an Artifact Record, which contains pointers to all of its parts. 
-
-An Artifact Record is a text file that contains a list of URLs, one per line, of the parts that make it up.
-
- Artifact files are split into parts because they are very large (for example the DOI file may be up to 3GB). To retrieve a complete Artifact, download the Artifact Record and then download each link within it. Every Artifact file (both record and the parts) is made up of a name and an MD5 hash of its content, so you verify that received all the files correctly.
-
 The structure of each type of Artifact file is chosen to best suit the data, and is described per-source below.
 
 ### List of Artifact types
+
+You can see the complete list of Artifacts that is currently in use at the API endpoint [http://evidence.eventdata.crossref.org/artifacts](http://evidence.eventdata.crossref.org/artifacts).
+
+#### Currently Available
+
+| Type name              | Description                      | Example URL                                                                                                |
+|------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------|
+| doi-prefix-list        | List of DOI prefixes             | http://evidence.eventdata.crossref.org/artifacts/doi-prefix-list/versions/797e77470ed94b2f7b336adab4cbaf19 |
+| domain-list            | Landing Page Domain list         | http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c     |
+| newsfeed-list          | Newsfeed list                    | http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/versions/41ac1c7ecf505785411b0e0b498c4cef   |
+
+#### Planned
 
 | Type name              | Description                      | Example URL                                                                                                |
 |------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1723,9 +1743,31 @@ The structure of each type of Artifact file is chosen to best suit the data, and
 | high-urls              | High priority URL-DOI mapping    | http://evidence.eventdata.crossref.org/artifact/high-urls-d41d8cd98f00b204e9800998ecf8427e                 |
 | medium-urls            | Medium priority URL-DOI mapping  | http://evidence.eventdata.crossref.org/artifact/medium-urls-d41d8cd98f00b204e9800998ecf8427e               |
 | entire-urls            | Low priority URL-DOI mapping     | http://evidence.eventdata.crossref.org/artifact/entire-urls-d41d8cd98f00b204e9800998ecf8427e               |
-| newsfeed-list          | Newsfeed list                    | http://evidence.eventdata.crossref.org/artifact/newsfeed-d41d8cd98f00b204e9800998ecf8427e                  |
-| domain-list            | Landing Page Domain list         | http://evidence.eventdata.crossref.org/artifact/domain-list-d41d8cd98f00b204e9800998ecf8427e               |
 | «software-name»        | The name and version of software | http://github.com/crossref/event-data-facebook-agent/tags/v2.5                                             |
+
+#### DOI Prefix List #{artifact-doi-prefix-list}
+
+This is the list of DOI prefixes, e.g. `10.5555/`. It is used when looking for DOIs. It contains every DOI prefix for all Crossref Members.
+
+#### Newsfeed List {#artifact-newsfeed-list}
+
+This is a list of RSS and Atom newsfeed URLs. It is manually curated. Each part file contains a list of URLs that are RSS or Atom Newsfeeds. 
+
+We run the Newsfeed Detector software on our DOI Resolution logs to find websites that refer to DOIs. For each website we find, we probe it to try and discover if it has an RSS or Atom newsfeed that we can subscribe to.
+
+The list is manually curated from known blogs and updated every month or two with input from the Newsfeed Detector.
+
+If you think a newsfeed is missing from the list, please contact eventdata@crossref.org .
+
+#### Domain List {#artifact-domain-list}
+
+This is a list of domains that DOIs resolve to. The list is created by the Thamnophilus service, which crawls every DOI to find its landing page, and records the domain. The Artifact Part files contain a list of domain names, one per line.
+
+The data is generated automatically but manually curated to some extent. As some DOIs resolve to domains such as `google.com` and `youtube.com`, it is simply impractical to use them.
+
+By providing the domain list as an Artifact, you can answer questions like "why wasn't this landing page matched". 
+
+For context see [Pre-filtering Domains](#concept-pre-filtering).
 
 
 #### High Priority, Medium Priority, Entire DOI List {#artifact-doi-list}
@@ -1771,25 +1813,7 @@ This may be used to answer questions like:
 
 **Note:** This Artifact is used by querying Agents such as the Facebook Agent. Other sources may report Events for mappings that are not on this list.
 
-#### Newsfeed List {#artifact-newsfeed-list}
 
-This is a list of RSS and Atom newsfeed URLs. It is manually curated. Each part file contains a list of URLs that are RSS or Atom Newsfeeds. 
-
-We run the Newsfeed Detector software on our DOI Resolution logs to find websites that refer to DOIs. For each website we find, we probe it to try and discover if it has an RSS or Atom newsfeed that we can subscribe to.
-
-The list is manually curated from known blogs and updated every month or two with input from the Newsfeed Detector.
-
-If you think a newsfeed is missing from the list, please contact eventdata@crossref.org
-
-#### Domain List {#artifact-domain-list}
-
-This is a list of domains that DOIs resolve to. The list is created by the Thamnophilus service, which crawls every DOI to find its landing page, and records the domain. The Artifact Part files contain a list of domain names, one per line.
-
-The data is generated automatically but manually curated to some extent. As some DOIs resolve to domains such as `google.com` and `youtube.com`, it is simply impractical to use them.
-
-By providing the domain list as an Artifact, you can answer questions like "why wasn't this landing page matched". 
-
-For context see [Pre-filtering Domains](#concept-pre-filtering).
 
 #### Software Name and Version
 
