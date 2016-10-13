@@ -129,8 +129,8 @@ The Query has two date views: `collected` and `occurred`. See ['Occurred-at vs C
 
 The API base is therefore one of:
 
-  - `http://api.eventdata.crossref.org/occurred/`
-  - `http://api.eventdata.crossref.org/collected/`
+  - `http://query.api.eventdata.crossref.org/occurred/`
+  - `http://query.api.eventdata.crossref.org/collected/`
 
 All queries are available on both views.
 
