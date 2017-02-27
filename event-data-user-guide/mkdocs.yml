@@ -1,0 +1,15 @@
+site_name: Event Data User Guide
+theme: readthedocs
+pages:
+ - "Welcome": index.md
+ - "Introduction": introduction.md
+ - "The Service": service.md
+ - "Concepts": concepts.md
+ - "Event Records in Depth": events-in-depth.md
+ - "Sources in Depth": sources-in-depth.md
+ - "Evidence in Depth": evidence-in-depth.md
+ - "URLs in Depth": urls-in-depth.md
+ - "Appendix 1: Software in Use": app-software.md
+ - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
+ - "Appendix: Contributing to Event Data": app-contributing.md
+ - "Appendix: FAQ & Glossary": app-faq-gloss.md
