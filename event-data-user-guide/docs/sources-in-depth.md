@@ -1,7 +1,5 @@
 # Sources in Depth
 
-[TOC]
-
 The following is a description of the Sources of data available in CED. Every Data Source requires an Agent to process the data, so the following section describes the format of data, the agent used to collect it and issues surrounding each source.
 
 ## Crossref to DataCite Links

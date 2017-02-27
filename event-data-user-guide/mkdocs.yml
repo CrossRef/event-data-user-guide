@@ -1,5 +1,5 @@
 site_name: Event Data User Guide
-theme: readthedocs
+theme_dir: crossref_rtd
 pages:
  - "Welcome": index.md
  - "Introduction": introduction.md
