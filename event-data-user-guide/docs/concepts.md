@@ -326,7 +326,7 @@ Most Agents are operated by Crossref (see [Data Sources](service#data-sources)).
 
 Where Crossref operates the Agent we provide full Evidence records for each Event. Where the Agent is operated by an external party, they may or may not provide full Evidence. See [Not all Events need Evidence](evidence#evidence-not-all) for further discussion.
 
-<a name="concept-individual-aggregated">
+<a name="concept-individual-aggregated"></a>
 ## Individual Events vs Pre-Aggregated
 
 Most sources, such as Twitter, Wikipedia, DataCite etc, provide a view of individual Events. Some, like Mendeley or Facebook, are only able to capture snapshots of aggregate values. It is preferable to capture individual Events, and pre-aggregated Events are only produced where it is the only format available.

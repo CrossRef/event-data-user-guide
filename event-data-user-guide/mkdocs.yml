@@ -6,7 +6,14 @@ pages:
  - "The Service": service.md
  - "Concepts": concepts.md
  - "Event Records in Depth": events-in-depth.md
- - "Sources in Depth": sources-in-depth.md
+ # - "Sources in Depth": sources-in-depth.md
+ - "Sources":
+   - "Twitter": sources/twitter.md
+   - "Reddit": sources/reddit.md
+   - "Crossref - DataCite": sources/crossref_datacite.md
+   - "DataCite - Crossref": sources/datacite_crossref.md
+   - "Wikipedia": sources/wikipedia.md
+   - "Wordpress.com": sources/wordpress-dot-com.md
  - "Evidence in Depth": evidence-in-depth.md
  - "URLs in Depth": urls-in-depth.md
  - "Appendix 1: Software in Use": app-software.md
