@@ -64,8 +64,8 @@ The Query API is updated once a day. This means that from the time an Event is f
 
 ### Available Queries
 
-TODO REAL WORKING QUERIES
-
+<!-- TODO REAL WORKING QUERIES
+ -->
 <a name="quick-start" id="quick-start"></a>
 
 #### All data for a day
@@ -104,7 +104,7 @@ e.g.
 
 If you want to collect all Events for a given date range, you can issue a set of queries. E.g. to get all Wikipedia Events in November 2016, issue the following API query:
 
-TODO WORKING QUERY
+<!-- TODO WORKING QUERY -->
 
 `http://query.eventdata.crossref.org/occurred/2016-11-01/sources/reddit/events.json`
 
@@ -245,7 +245,7 @@ When Events are succesfully extracted, they are included along with the Action t
 Event Data Agents spend a lot of time visiting webpages. Every Evidence Record contains a log of all of the URLs that were visited, and the HTTP status codes that were received. If you see an inconsistency in the processing of an Event Record, you can look at the log to see if it was caused by an external URL timing out, blocking the agent etc.
 
 
-TODO DIAGRAM
+<!-- TODO DIAGRAM -->
 
 ### Example Evidence Record
 
