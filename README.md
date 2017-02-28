@@ -4,7 +4,7 @@ The guide is available to read at at http://www.eventdata.crossref.org/guide
 
 To build:
 
-  mkdocs build
+    mkdocs build
 
 ## License
 
