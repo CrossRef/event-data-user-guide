@@ -20,7 +20,29 @@ The Twitter source identifies Items that have been mentioned in Tweets. It match
  - tweet type (tweet or retweet)
  - tweet publication date
 
-When Items are matched using their Landing Page URL the URL Reversal Service is used.
+
+## Deletion
+
+When a Tweet or Twitter User is deleted we are obliged to delete the data from CED. When this happens we will delete the following fields:
+
+ - `subj_id` - the ID of the tweet
+ - `subj` - including the author and ID of the tweet
+
+The following fields are added:
+
+ - The `subj_id` is replaced with `https://www.twitter.com`.
+ - The `edited_at` field has a timestamp for when the edits were made.
+
+The rest of the Event is not deleted. The Evidence Record is also deleted. The effect of this is that a Tweet event goes from "this DOI was mentioned in this tweet" to "this DOI was mentioned in some tweet, but we don't know which one".
+
+The following [Twitter Compliance Events](http://support.gnip.com/apis/compliance_firehose2.0/overview.html) result in the removal of Twitter data from an Event:
+
+ - `delete` - delete all Events that contain this Tweet ID
+ - `user_delete` - delete all Events that were written by this Author
+ - `user_protect` - delete all Events that were written by this Author
+ - `user_suspend` - delete all EVents that were written by this Author
+
+There are 'un-delete' compliance events, but we don't act on them: once data is deleted, it's deleted.
 
 #### Methodology
 

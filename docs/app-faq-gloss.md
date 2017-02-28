@@ -36,7 +36,8 @@ How do I access the data?
 Does CED work with Multiple Resolution?
   : We plan to address and clarfiy how CED relates to Multiple Resolution in future.
 
-
+Does Event Data work with DOIs that include emoticons?
+  : No.
 
 # Appendix: Glossary
 
