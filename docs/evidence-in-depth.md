@@ -59,7 +59,7 @@ The data is generated automatically but manually curated to some extent. As some
 
 By providing the domain list as an Artifact, you can answer questions like "why wasn't this landing page matched". 
 
-For context see [Pre-filtering Domains](concept#concept-pre-filtering).
+For context see [Pre-filtering Domains](concepts#concept-pre-filtering).
 
 <a name="artifact-doi-list"></a>
 #### High Priority, Medium Priority, Entire DOI List
@@ -97,7 +97,7 @@ The contents of this Artifact change over time for a number of reasons:
 The lists are used in a number of places:
 
  - Agents that query by landing page URL, e.g. Facebook . Like the DOI list, the three URL lists are used to schedule scans at high, medium and low frequencies.
- - The [DOI Reversal Service](concept#in-depth-doi-reversal), which transforms landing pages back into DOIS for Agents like Twitter
+ - The [DOI Reversal Service](concepts#in-depth-doi-reversal), which transforms landing pages back into DOIS for Agents like Twitter
 
 This may be used to answer questions like:
 

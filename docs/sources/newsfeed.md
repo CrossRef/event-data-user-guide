@@ -10,7 +10,7 @@
 | Freshness                 | half-hourly |
 | Data Source               | Multiple blog and aggregator RSS feeds |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Unambiguously linking URLs to DOIs](concept#concept-urls), [Duplicate Data](concept#concept-duplicate), [Landing Page Domains](concept#concept-landing-page-domains), [Sources that must be queried in their entirety](concept#concept-query-entirety), [DOI Reversal Service](concept#in-depth-doi-reversal) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Duplicate Data](concepts#concept-duplicate), [Landing Page Domains](concepts#concept-landing-page-domains), [Sources that must be queried in their entirety](concepts#concept-query-entirety), [DOI Reversal Service](concepts#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
@@ -135,6 +135,6 @@ You can see the latest version of the newsfeed-list by using the Evidence Servic
 
 ### Notes
 
-Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](concept#concept-duplicate).
+Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](concepts#concept-duplicate).
 
 

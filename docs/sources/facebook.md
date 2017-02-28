@@ -12,11 +12,11 @@
 | Freshness                 | Three schedules |
 | Data Source               | Facebook API |
 | Coverage                  | All DOIs where there is a unique URL mapping |
-| Relevant concepts         | [Unambiguously linking URLs to DOIs](concept#concept-urls), [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated), [Sources that must be queried once per Item](concept#concept-once-per-item) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated), [Sources that must be queried once per Item](concepts#concept-once-per-item) |
 | Operated by               | Crossref |
 | Agent                     | event-data-facebook-agent |
 
-The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has received at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
+The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has received at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
 
 Because of the structure of the Facebook API, it is necessary to make one API query per Item, which means that it can take a long time to work through the entire list of Items. This means that, whilst we try and poll as often and regularly as possible, the time between Facebook Events for a given Item can be unpredictable. 
 

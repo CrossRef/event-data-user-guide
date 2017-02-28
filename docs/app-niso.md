@@ -26,7 +26,7 @@ Data is not aggreated.
 
 ### 7: Detail how often data are updated.
 
-Each Event has a timestamp which describes when the Event was collected. The [Occurred at vs Collected At](concept#concept-timescales) section explains that the 'collected' view in the Query API is updated daily, and once a day's data is provided, it never changes. It also details the 'occurred at' view and how to tell when Event Data was updated. The [Evidence Service](evidence-in-depth) automatic documentation of when Artifacts were updated.
+Each Event has a timestamp which describes when the Event was collected. The [Occurred at vs Collected At](concepts#concept-timescales) section explains that the 'collected' view in the Query API is updated daily, and once a day's data is provided, it never changes. It also details the 'occurred at' view and how to tell when Event Data was updated. The [Evidence Service](evidence-in-depth) automatic documentation of when Artifacts were updated.
 
 ### 8: Describe how data can be accessed
 

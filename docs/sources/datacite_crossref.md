@@ -10,7 +10,7 @@
 | Freshness                 | daily |
 | Data Source               | DataCite API |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [External Agents](#contept-external-agent), [Occurred-at vs collected-at](concept#concept-timescales) |
+| Relevant concepts         | [External Agents](#contept-external-agent), [Occurred-at vs collected-at](concepts#concept-timescales) |
 | Operated by               | DataCite |
 
 When members of DataCite deposit datasets, they can include links to Crossref Registered Content via their Crossref DOIs. The DataCite agent monitors these links and sends them to Event Data. As this is an External Agent, there are no Artifacts or Evidence Records.
@@ -36,5 +36,5 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 
 ### Notes
 
- - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concept#concept-duplicate).
- - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concept#concept-timescales).
+ - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concepts#concept-duplicate).
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concepts#concept-timescales).

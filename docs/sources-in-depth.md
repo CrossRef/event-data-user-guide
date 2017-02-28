@@ -13,7 +13,7 @@ The following is a description of the Sources of data available in CED. Every Da
 | Freshness                 | Daily |
 | Data Source               | Crossref Metadata API |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Occurred-at vs collected-at](concept#concept-timescales), [Duplicate Data](concept#concept-duplicate) |
+| Relevant concepts         | [Occurred-at vs collected-at](concepts#concept-timescales), [Duplicate Data](concepts#concept-duplicate) |
 | Operated by               | Crossref |
 | Agent                     | Cayenne |
 
@@ -40,8 +40,8 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 
 ### Notes
 
- - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concept#concept-duplicate).
- - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concept#concept-timescales).
+ - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concepts#concept-duplicate).
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concepts#concept-timescales).
 
 
 
@@ -57,7 +57,7 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 | Freshness                 | daily |
 | Data Source               | DataCite API |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [External Agents](#contept-external-agent), [Occurred-at vs collected-at](concept#concept-timescales) |
+| Relevant concepts         | [External Agents](#contept-external-agent), [Occurred-at vs collected-at](concepts#concept-timescales) |
 | Operated by               | DataCite |
 
 When members of DataCite deposit datasets, they can include links to Crossref Registered Content via their Crossref DOIs. The DataCite agent monitors these links and sends them to Event Data. As this is an External Agent, there are no Artifacts or Evidence Records.
@@ -83,8 +83,8 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 
 ### Notes
 
- - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concept#concept-duplicate).
- - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concept#concept-timescales).
+ - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concepts#concept-duplicate).
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concepts#concept-timescales).
 
 
 
@@ -100,11 +100,11 @@ When members of DataCite deposit datasets, they can include links to Crossref Re
 | Freshness                 | Three schedules |
 | Data Source               | Facebook API |
 | Coverage                  | All DOIs where there is a unique URL mapping |
-| Relevant concepts         | [Unambiguously linking URLs to DOIs](concept#concept-urls), [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated), [Sources that must be queried once per Item](concept#concept-once-per-item) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated), [Sources that must be queried once per Item](concepts#concept-once-per-item) |
 | Operated by               | Crossref |
 | Agent                     | event-data-facebook-agent |
 
-The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has received at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
+The Facebook Data Source polls Facebook for Items via their Landing Page URLs. It records how many 'likes' a given Item has received at that point in time, via its Landing Page URL. A Facebook Event records the current number of Likes an Item has on Facebook at a given point in time. It doesn't record who liked the Item or when then the liked it. See [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated) for further discussion. The timestamp represents the time at which the query was made. 
 
 Because of the structure of the Facebook API, it is necessary to make one API query per Item, which means that it can take a long time to work through the entire list of Items. This means that, whilst we try and poll as often and regularly as possible, the time between Facebook Events for a given Item can be unpredictable. 
 
@@ -338,7 +338,7 @@ Each process:
 | Freshness                 |  |
 | Data Source               |  |
 | Coverage                  |  |
-| Relevant concepts         | [Matching by DOIs](concept#concept-matching-dois), [External Parties Matching Content to DOIs](concept#concept-external-doi-mappings), [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated), [Sources that must be queried once per Item](concept#concept-once-per-item) |
+| Relevant concepts         | [Matching by DOIs](concepts#concept-matching-dois), [External Parties Matching Content to DOIs](concepts#concept-external-doi-mappings), [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated), [Sources that must be queried once per Item](concepts#concept-once-per-item) |
 | Operated by               |  |
 | Agent                     |  |
 
@@ -380,7 +380,7 @@ TODO
 | Freshness                 | half-hourly |
 | Data Source               | Multiple blog and aggregator RSS feeds |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Unambiguously linking URLs to DOIs](concept#concept-urls), [Duplicate Data](concept#concept-duplicate), [Landing Page Domains](concept#concept-landing-page-domains), [Sources that must be queried in their entirety](concept#concept-query-entirety), [DOI Reversal Service](concept#in-depth-doi-reversal) |
+| Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Duplicate Data](concepts#concept-duplicate), [Landing Page Domains](concepts#concept-landing-page-domains), [Sources that must be queried in their entirety](concepts#concept-query-entirety), [DOI Reversal Service](concepts#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
@@ -505,7 +505,7 @@ You can see the latest version of the newsfeed-list by using the Evidence Servic
 
 ### Notes
 
-Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](concept#concept-duplicate).
+Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](concepts#concept-duplicate).
 
 
 

@@ -37,7 +37,7 @@ When you write a client to work with the API it should be able to deal with resp
 
 ### Timing and Freshness
 
-As detailed in [Occurred-at vs collected-at](concept#concept-timescales), every Event has a 'occurred at' timestamp, but may be collected at a different time. The Query API therefore provides two views of time: `collected` and `occurred`.
+As detailed in [Occurred-at vs collected-at](concepts#concept-timescales), every Event has a 'occurred at' timestamp, but may be collected at a different time. The Query API therefore provides two views of time: `collected` and `occurred`.
 
 You may want to use `collected` when:
 
@@ -178,7 +178,7 @@ The following fields are available:
  - `source_id` - the ID of the source as listed in [Data Sources](service#data-sources).
  - `subj` - the subject metadata, optional. Depends on the Source.
  - `obj` - the object metadata, optional. Depends on the Source.
- - `total` - the pre-aggregated total that this represents, if this is from a pre-aggregated source such as Facebook. Usually 1. See [Individual Events vs Pre-Aggregated](concept#concept-individual-aggregated).
+ - `total` - the pre-aggregated total that this represents, if this is from a pre-aggregated source such as Facebook. Usually 1. See [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated).
  - `timestamp`- the date and time at which the Event was processed by Event Data.
  - `evidence-record` - a link to a document that describes how this Event was generated
 

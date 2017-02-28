@@ -9,7 +9,7 @@
 | Freshness                 | Daily |
 | Data Source               | Crossref Metadata API |
 | Coverage                  | All DOIs |
-| Relevant concepts         | [Occurred-at vs collected-at](concept#concept-timescales), [Duplicate Data](concept#concept-duplicate) |
+| Relevant concepts         | [Occurred-at vs collected-at](concepts#concept-timescales), [Duplicate Data](concepts#concept-duplicate) |
 | Operated by               | Crossref |
 | Agent                     | Cayenne |
 
@@ -36,6 +36,6 @@ When members of Crossref (who are mostly Scholarly Publishers) deposit metadata,
 
 ### Notes
 
- - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concept#concept-duplicate).
- - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concept#concept-timescales).
+ - Because the Agent can scan for back-files, it is possible that duplicate Events may be re-created. See [Duplicate Data](concepts#concept-duplicate).
+ - Because the Agent can scan for back-files, Events may be created with `occurred_at` in the past. See [Occurred-at vs collected-at](concepts#concept-timescales).
 

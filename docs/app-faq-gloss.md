@@ -19,7 +19,7 @@ Do I have to pay for the data?
   : No, the public data via the Query API will be free. We will offer a paid-for Service Level Agreement that will provide more timely access to data.
 
 Will the data be auditable?
-  : Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concept#concept-evidence-first).
+  : Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concepts#concept-evidence-first).
 
 Can I use the data to feed into my commercial tool? 
   : Yes. We do not clean or aggregate the data we collect so that any commercial vendor has the opportunity to do this themselves in order to use the data in the way which best suits their needs.

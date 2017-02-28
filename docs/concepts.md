@@ -345,4 +345,4 @@ In Events like this, the `total` field records the number of pre-aggregated Even
 
 These Events don't record *when* an Item was liked, just the number of likes that exist on a given date. This means that if an Item has a Facebook Event with 100 likes in January and 150 likes in February, we don't know whether 50 extra people liked the Item, or if it was a combination of unlikes and new likes.
 
-Co-incidentally, sources like this also tend to be the type that must be polled once per Item which means that the time between Events for a given Item might be large, and the data might not be very recent. See see [Sources that must be queried once per Item](concept#concept-once-per-item).
+Co-incidentally, sources like this also tend to be the type that must be polled once per Item which means that the time between Events for a given Item might be large, and the data might not be very recent. See see [Sources that must be queried once per Item](concepts#concept-once-per-item).

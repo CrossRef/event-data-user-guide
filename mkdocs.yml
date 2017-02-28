@@ -1,5 +1,6 @@
 site_name: Event Data User Guide
 theme_dir: crossref_rtd
+repo_url: https://github.com/CrossRef/event-data-user-guide
 pages:
  - "Welcome": index.md
  - "Introduction": introduction.md
