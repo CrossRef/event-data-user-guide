@@ -9,7 +9,7 @@ Crossref has approximately 80 million Items of Registered Content: articles, boo
 
 When a Content Item is registered with Crossref or DataCite, it is assigned a Persistent Identifier (PID) in the form of a Crossref DOI or DataCite DOI. The PID permanently identifies the Content Item and is used when referring to, or linking between, Items. Other PIDs, such as PubMed ID (PMID) are available, but they are beyond the scope of Crossref Event Data.
 
-<img src="/images/doi-url-simple.svg" class="img-responsive">
+<img src="../images/doi-url-simple.svg" class="img-responsive">
 
 All items of Registered Content have a presence on the web, known as the Landing Page. This is the 'home' of the Item and it is hosted on the website of its publisher. It usually contains information about the Item, such as title, other bibliographic metadata, abstract, links to download the content, or possibly the whole article itself.
 
@@ -47,7 +47,7 @@ Some Items are considered to be part of other Items, for example an article may 
 
 Sometimes the Landing Page for a Book Chapter can be the same as the Landing Page for the whole book. And sometimes they are separate.
 
-<img src="/images/doi-components.svg" class="img-responsive">
+<img src="../images/doi-components.svg" class="img-responsive">
 
 There is an exact one-to-one mapping between Items and their Persistent Identifiers (DOIs), but no exact one-to-one mapping between Items and their Landing Pages. When CED receives data for a Landing Page, it has to follow steps to assign the data to the correct Item.
 
@@ -57,7 +57,7 @@ For an in-depth discussion see [URLs in Depth](urls-in-depth).
 
 Over time, Landing Pages can change as publishers reorganize their websites. This is where a Persistent Identifier comes in useful, as it always redirects to the current Landing Page.
 
-<img src="/images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
+<img src="../images/doi-url.svg" alt="DOIs and Landing Pages" class="img-responsive">
 
 CED attempts to always store the most recent Landing Page.
 
@@ -243,13 +243,13 @@ Converting external data into Events provides an evidence gap. It raises questio
  - how was it converted into Events?
  - if some other service got the same data, why did it produce different results?
 
-<img src="/images/evidence-first-evidence-gap.svg" alt="Evidence Gap" class="img-responsive">
+<img src="../images/evidence-first-evidence-gap.svg" alt="Evidence Gap" class="img-responsive">
 
 #### Bridging the Evidence Gap
 
 CED solves this by taking an **Evidence First** approach. For every piece of external data we receive we create an Evidence Record. This contains all the relevant parts of the input data and all supporting information needed to process it. This means that we can provide evidence for every Event. 
 
-<img src="/images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
+<img src="../images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
 
 Evidence is important because it bridges the gap between generic primary Data Providers, such as Twitter, with the specialized Events in CED. They explain not only what data were used to construct an Event, but also the process by which the Event was created. Providing this explanation pinpoints the precise meaning of the Event within the individual context it comes from.
 
@@ -301,7 +301,7 @@ The Query API is updated every day. Once data for a given date exists in the `co
 
 The Query API also contains an `occurred` view. This returns Events based on the date they occurred on. Because Events can be collected some time after they occurred, the data in this view can change.
 
-<img src="/images/occurred-collected-timeline.svg" alt="Occurred at vs Collected at" class="img-responsive">
+<img src="../images/occurred-collected-timeline.svg" alt="Occurred at vs Collected at" class="img-responsive">
 
 When you use the **collected** view you should be aware that it may contain Events that occurred in the past.
 

@@ -11,7 +11,7 @@ The DOI-URL Mapping is a one-to-one mapping: every DOI is mentioned only once an
 3. If two DOIs map to one URL we look in the metadata for the `publication_type`. If one has a value of `full_text` and the other has a value of `abstract_only` or `bibliographic_record`, the Item with the `publication_type` of `full_text` is used.
 4. Failing that, the mapping is excluded.
 
-<img src="/images/conflict-resolution.svg" alt="Conflict Resolution Examples" class="img-responsive">
+<img src='../images/conflict-resolution.svg" alt="Conflict Resolution Examples" class="img-responsive">
 
 Note that this process is used only when constructing the DOI-URL list, in order that URLs can be mapped to DOIs. If an Event that mentions e.g. a component DOI is produced by a source, the event will be recorded against the Item with that Component DOI.
 

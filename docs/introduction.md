@@ -3,7 +3,7 @@
 
 Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting Events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
 
-<img src='/images/overview.png' alt='Event Data Overview' class='img-responsive'>
+<img src='../images/overview.png' alt='Event Data Overview' class='img-responsive'>
 
 Much of the activity around scholarly content happens outside of the formal literature. The scholarly community needs an infrastructure that collects, stores, and openly makes available these interactions. Crossref Event Data will monitor and collect links to scholarly content on the open web. The greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed.
 
@@ -34,7 +34,7 @@ Data comes from a wide range of sources and each source is subject to different 
 
 Every Event starts its journey somewhere, usually in an external source. Data from that external source is processed and analyzed, and, if we're lucky, one or more Events are created. The entire process is transparent: what data we were working from, what we extracted and how, and how that relates to each Event. Every Event that Crossref generates is linked back to an Evidence Record, which documents its journey.
 
-<img src='/images/introduction-evidence-flow.svg' alt='Event Data Evidence Flow' class='img-responsive'>
+<img src='../images/introduction-evidence-flow.svg' alt='Event Data Evidence Flow' class='img-responsive'>
 
 Crossref Event Data was developed alongside the NISO recommendations for altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an example of openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](app-niso.md) in the appendix.
 
