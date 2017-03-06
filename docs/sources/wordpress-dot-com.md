@@ -14,7 +14,7 @@
 | Operated by               |  |
 | Agent                     |  |
 
-The Wordpress.com agent queries the Wordpress.com API for Landing Page Domains. It monitors blogs hosted on Wordpress.com that mention articles by their landing page or by DOI URL.
+The Wordpress.com agent queries the Wordpress.com API for Landing Page Domains. It monitors blogs hosted on Wordpress.com that mention articles by their landing page or by DOI URL. The source **does not monitor generic Wordpress-powered sites**.
 
 ### Example Event
 

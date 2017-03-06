@@ -2,18 +2,22 @@
 
 Version 0.6.0 - Pre-beta
 
-> **We are aiming to enter Beta test soon. Please contact us if you want to participate.** Event Data has not yet launched and is not feature-complete. Some features described here are at preview stage and some are planned for development. 
+> **We are aiming to enter Beta test soon. Please contact us if you want to participate.**
+>
+> Event Data has not yet launched and is not feature-complete. Until we launch, the service described here may not be feature-complete.
 > Contact eventdata@crossref.org if you have any questions or feedback.
 
 
-Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. It is split into four sections:
+Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. 
 
- - 'Introduction' is a high level overview of the service and background and is suitable for everyone.
- - 'The Service' describes the Event Data service and how to use it.
- - 'Concepts' covers some of the issues that should be understood before using Event Data.
- - 'In Depth' describes all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience.
+ - [Introduction](introduction) is a high level overview of the service and background and is suitable for everyone.
+ - [The Service](service) describes the Event Data service and how to use it.
+ - [Concepts](concepts) covers some of the issues that should be understood before using Event Data.
+ - 'In Depth' sections describe all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience.
 
-Crossref Event Data is an open, flexible service, which can be put to many uses. We aim to set the standard in openness and transparency so the documentation not only describes the service, but precisely how we generate it. It's important to understand exactly what the data means and how it was collected to ensure you interpret it wisely. 
+If you're keen to get your hands on the data you can jump straight to the [Quick Start](quick-start) page.
+
+Crossref Event Data is an open, flexible service, which can be put to many uses. We aim to set the standard in openness and transparency. This User Guide describes the service and how it works. It also describes in detail how the data is collected. It's important to understand exactly what the data means and how it was collected to ensure you interpret it wisely. 
 
 # Revision history
 

@@ -1,16 +1,12 @@
 # The Service
 
-Crossref Event Data is a system for collecting Events and distributing them. The Query API delivers batches of Events based on queries, rather than individual events. Tens of thousands of events Events occur per day, of the order of one per second, though the rate fluctuates depending on the activity of the Agents and the underlying patterns in the source. 
+Crossref Event Data is a system for collecting Events and distributing them. The Query API delivers batches of Events based on queries, not individual items. Tens of thousands of events Events occur per day, of the order of one per second, though the rate fluctuates depending on the activity of the Agents and the underlying patterns in the source. 
 
- - The Query API provides an interface for accessing Events. It's a REST API that allows download of Events and supports various filters. 
+ - The **Query API** provides an interface for accessing Events. It's a REST API that allows download of Events and supports various filters. 
 
- - Every Event that Crossref produces has an Evidence Record. These are available via the Evidence Service. It provides supporting evidence for every Event.
+ - The **Evidence Registry** contains supporting evidence for every Event that is collected by Crossref. When an Event has evidence, it will link to an Evidence Record on the Evidence Registry.
 
- - Every component in the CED system, internal and external, monitored. The Status Service monitors all data flowing into the system, all parts of the processing pipeline, and the delivery mechanisms. It records the availability and activity of components and completeness of data.
-
-## Versions
-
-The current version of the service as whole is the same as the version of this User Guide. Each component of the Service, for example the Query API and the various Agents that collect data, have versions, and you can check the currently running version using the Evidence Service.
+ - The **Status Service** contains data about activity within the system, along with diagnostic reports. It records the availability and activity of components and completeness of data. You can consult it if you want information about the behaviour of the system at a given point in time. 
 
 <a name="data-sources"></a>
 ## Data Sources
@@ -19,25 +15,35 @@ Event Data is a hub for the collection and distribution of Events and contains d
 
 | Name                   | Source Identifier   | Provider    | What does it contain? |
 |------------------------|---------------------|-------------|------------------|
-| Crossref to DataCite   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
-| Newsfeed               | newsfeed            | Crossref    | Mentions of Items on blogs and websites with syndication feeds |
-| Reddit                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
-| Twitter                | twitter             | Crossref    | Mentions of Items on Twitter |
-| Wikipedia              | wikipedia           | Crossref    | References of Items on Wikipedia |
-| Wordpress.com          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
-| DataCite to Crossref   | datacite_crossref   | DataCite    | Dataset citations from DataCite Items to Crossref Items |
+| [Crossref to DataCite](sources/crossref_datacite)   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
+| [DataCite to Crossref](sources/datacite_crossref)   | datacite_crossref   | DataCite    | Dataset citations from DataCite Items to Crossref Items |
+| [Newsfeed](sources/newsfeed)               | newsfeed            | Crossref    | Links to Items on blogs and websites with syndication feeds |
+| [Reddit](sources/reddit)                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
+| [Twitter](sources/twitter)                | twitter             | Crossref    | Links to Items on Twitter |
+| [Web](sources/web)                    | web                 | Crossref    | Links of Items on web pages |
+| [Wikipedia](sources/wikipedia)              | wikipedia           | Crossref    | References of Items on Wikipedia |
+| [Wordpress.com](sources/wordpress-dot-com)          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
 
-For detailed discussion of each one, see the [Sources In Depth](sources-in-depth) section.
+For detailed discussion of each one, see its corresponding page.
 
 ## Query API
 
-Event Data presents a stream of Events. They can be accessed through the Query API, which allows you to retrieve a slice of data. The Query API is a simple JSON REST API. Because of the volume of Events, every query is paginated by a date, in `YYYY-MM-DD` format. Even when scoped to a particular day, there can be tens of thousands of Events. Therefore there are a number of filters available to help you narrow down what you're looking for.
+The [Quick Start guide](quickstart) shows you how to get your hands dirty quickly. Come back and read this section afterwards!
+
+CED has Events, and lots of them. Usually you'll be interested in getting all Events from a particular source, or range of DOIs, over a period of time. The Query API answers queries like:
+
+ - give me all Events that were collected in this date range
+ - give me all Events from Reddit
+ - give me all Events that concern a DOI with this prefix
+ - give me all Events ever
+
+The Query API is a simple JSON REST API. Because of the volume of Events, every query is paginated by a date, in `YYYY-MM-DD` format. We collect tens of thousands of Events per day. There are a number of filters available to help you narrow down the results.
 
 When you write a client to work with the API it should be able to deal with responses in the tens of megabytes, preferably dealing with them as a stream. You may find that saving an API response directly to disk is sensible.
 
-### Timing and Freshness
+### Two points of view
 
-As detailed in [Occurred-at vs collected-at](concepts#concept-timescales), every Event has a 'occurred at' timestamp, but may be collected at a different time. The Query API therefore provides two views of time: `collected` and `occurred`.
+As detailed in [Occurred-at vs collected-at](concepts#concept-timescales), every Event has a 'occurred at' timestamp, but may be collected at a different time. The Query API therefore provides two **views**: `collected` and `occurred`.
 
 You may want to use `collected` when:
 
@@ -55,12 +61,12 @@ You may want to use `occurred` when:
 
 The API base is therefore one of:
 
-  - `http://query.eventdata.crossref.org/occurred/`
-  - `http://query.eventdata.crossref.org/collected/`
+  - `https://query.eventdata.crossref.org/occurred/`
+  - `https://query.eventdata.crossref.org/collected/`
 
 All queries are available on both views.
 
-The Query API is updated once a day. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
+The Query API is updated once a day, shortly after midnight. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
 
 ### Available Queries
 

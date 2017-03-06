@@ -1,5 +1,6 @@
 site_name: Event Data User Guide
 theme_dir: crossref_rtd
+site_description: User Guide for Crossref Event Data
 repo_url: https://github.com/CrossRef/event-data-user-guide
 site_url: https://www.eventdata.crossref.org/guide/
 pages:
@@ -8,17 +9,27 @@ pages:
  - "The Service": service.md
  - "Concepts": concepts.md
  - "Event Records in Depth": events-in-depth.md
- # - "Sources in Depth": sources-in-depth.md
  - "Sources":
-   - "Twitter": sources/twitter.md
-   - "Reddit": sources/reddit.md
    - "Crossref - DataCite": sources/crossref_datacite.md
    - "DataCite - Crossref": sources/datacite_crossref.md
+   - "Newsfeed": sources/newsfeed.md
+   - "Reddit": sources/reddit.md
+   - "Twitter": sources/twitter.md
+   - "Web": sources/web.md
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
  - "Evidence in Depth": evidence-in-depth.md
  - "URLs in Depth": urls-in-depth.md
- - "Appendix 1: Software in Use": app-software.md
+ - "Connecting to Your System": 
+   - "Graph Database: Neo4J": connecting/graph-neo.md
+   - "JSON Document Store: MongoDb": connecting/json-document-mongo.md
+   - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
+   - "Streaming: Spark": connecting/streaming-spark.md
+   - "Lagotto": connecting/lagotto.md
+ -  "Appendix 1: Software in Use": app-software.md
  - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
  - "Appendix: Contributing to Event Data": app-contributing.md
- - "Appendix: FAQ & Glossary": app-faq-gloss.md
+ - "Appendix: FAQ": app-faq.md
+ - "Appendix: Glossary": app-gloss.md
+ - "Quick Start": quickstart.md
+ - "Terms of Use": terms.md

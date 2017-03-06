@@ -1,14 +1,15 @@
 
 # Introduction
 
-Crossref is home to over 80 million items of Registered Content (mostly journal articles, but we also have book chapters, conference papers etc). Crossref Event Data is a service for collecting Events that occur around these items. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
+Crossref Event Data is a service for collecting Events that occur around Registered Content. For example, when datasets are linked to articles, articles are mentioned on social media or referenced online.
 
 <img src='../images/overview.png' alt='Event Data Overview' class='img-responsive'>
 
-Much of the activity around scholarly content happens outside of the formal literature. The scholarly community needs an infrastructure that collects, stores, and openly makes available these interactions. Crossref Event Data will monitor and collect links to scholarly content on the open web. The greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed.
-
+Much of the activity around scholarly content happens outside of the formal literature. Crossref Event Data serves to monitor and collect links to scholarly content on the open web. The greater visibility provided by Crossref Event Data will help publishers, authors, bibliometricians and libraries to develop a fuller understanding of where and how scholarly content is being shared and consumed. It will also serve as an open platform on which anyone can build tools or services, or conduct research.
 
 ## Events
+
+<img src='../images/overview-example.png' alt='Blogs, Tweets and Articles' class='img-responsive'>
 
 Every time we notice that there is a new relationship between a piece of Registered Content and something out in the web, we record as an individual Event. We gather Events from a wide range of sources, but examples include:
 
@@ -16,6 +17,8 @@ Every time we notice that there is a new relationship between a piece of Registe
  - an article was referenced in Wikipedia using its Crossref DOI
  - an article was mentioned on Twitter using its Article Landing Page URL
  - an article has been liked on Facebook 55 times as of June 15th
+
+<img src='../images/subject-relation-object.png' alt='Subject - Relation - Object' class='img-responsive'>
 
 Events from every Data Source take many forms, but they have a common set of attributes:
 
@@ -34,7 +37,7 @@ Data comes from a wide range of sources and each source is subject to different 
 
 Every Event starts its journey somewhere, usually in an external source. Data from that external source is processed and analyzed, and, if we're lucky, one or more Events are created. The entire process is transparent: what data we were working from, what we extracted and how, and how that relates to each Event. Every Event that Crossref generates is linked back to an Evidence Record, which documents its journey.
 
-<img src='../images/introduction-evidence-flow.svg' alt='Event Data Evidence Flow' class='img-responsive'>
+<img src='../images/introduction-evidence-flow.png' alt='Event Data Evidence Flow' class='img-responsive'>
 
 Crossref Event Data was developed alongside the NISO recommendations for altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. CED aims to be an example of openness and transparency. You can read the [CED Code of Conduct Self-Reporting table](app-niso.md) in the appendix.
 
