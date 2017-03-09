@@ -14,6 +14,8 @@ If you're keen to get your hands on the data you can jump straight to the [Quick
 
 If you want to use CED for whatever reason, you are strongly encouraged to read the entire guide. CED is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it. 
 
+**Once you have got an understanding for CED, follow the [Getting Started](best-practice/getting-started) guide to piece it all together**.
+
 Click the 'Next' button at the bottom of this page to get started...
 
 # Revision history
@@ -27,4 +29,5 @@ Click the 'Next' button at the bottom of this page to get started...
 | 27-September-2016 | 0.5     | Joe Wass jwass@crossref.org | Updated Evidence Record information |
 | 09-November-2016  | 0.5.1   | Joe Wass jwass@crossref.org | Adjusted query API syntax |
 | 22-Feb-2017       | 0.6.1   | Joe Wass jwass@crossref.org | Pre-beta adjustments. Reflects major refactor of services. |
+| 09-Mar-2017       | 0.7.0   | Joe Wass jwass@crossref.org | Complete review of all documentation. Most of it overhauled. |
 

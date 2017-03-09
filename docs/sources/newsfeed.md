@@ -3,7 +3,7 @@
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | `newsfeed` |
-| Matches by                | Landing Page URL |
+| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
 | Consumes Artifacts        | `newsfeed-list` |
 | Produces relation types   | `mentions` |
 | Fields in Evidence Record |  |
@@ -14,127 +14,60 @@
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
-The Newsfeed agent monitors RSS and Atom feeds from blogs and blog aggregators. Crossref maintains a list of newsfeeds, including
+## What it is
+
+Links from blogs and other content with a newsfeed. A selection of RSS newsfeeds are monitored for Links to Events. 
+
+## What it does
+
+The Agent has a list of RSS feeds. It monitors each one for links to blog posts. If a blog post links to registered content, or mentions DOIs in the text, they are extracted into Events.
+
+## Where data comes from
+
+The `newsfeed-list` Artifact is consulted. On a regular basis the Agent retrieves the Artifact, then follows the link to every blog post or page mentioned. Data sources:
+
+1. The `newsfeed-list` Artifact, curated by Crossref.
+2. The content of each newsfeed. Each newsfeed may be operated by a different organisation. 
+3. The content of the individual blog posts.
+
+Example RSS feeds include:
 
  - ScienceSeeker blog aggregator
  - ScienceBlogging blog aggregator
- - BBC News
 
-You can see the latest version of the newsfeed-list by using the Evidence Service: [http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/current](http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/current). 
+## Example Event
 
+*Content to follow.*
 
-#### Example Event
+## Methodology
 
+On a regular basis (approximately every hour) the Newsfeed Agent starts a scan. Each scan:
 
-    {
-      obj_id: "https://doi.org/10.1145/2933057.2933107",
-      occurred_at: "2016-09-26T00:25:08Z",
-      subj_id: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-      total: 1,
-      id: "170678af-92da-4375-967c-b056d828525d",
-      subj: {
-        pid: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-        title: "A Creeping Model Of Computation",
-        issued: "2016-09-26T00:25:08.000Z",
-        URL: "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-        type: "post-weblog"
-      },
-      message_action: "create",
-      source_id: "newsfeed",
-      timestamp: "2016-09-26T00:30:18Z",
-      relation_type_id: "discusses"
-    },
+1. It retrieves the most recent version of the `newsfeed-list` Artifact.
+2. It scans over every RSS feed.
+3. It passes the URL of every Blog post to the Percolator.
 
-#### Example Evidence Record
+## Evidence Record
 
-[http://archive.eventdata.crossref.org/evidence/54bb341977cb2ed8906c5be25dd48cbc](http://archive.eventdata.crossref.org/evidence/54bb341977cb2ed8906c5be25dd48cbc)
+*Content to follow.*
 
-    {
-      "artifacts": [
-        "http://evidence.eventdata.crossref.org/artifacts/newsfeed-list/versions/41ac1c7ecf505785411b0e0b498c4cef",
-        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c"
-      ],
-      "input": {
-        "newsfeed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
-        "blog-urls": [
-          "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-          "http://feedproxy.google.com/~r/blogspot/wCeDd/~3/pY5hWW0nwXM/sunday-morning-video-bay-area-deep.html",
-          « ... removed ... »
-        ],
-        "blog-urls-seen": [
-          {
-            "seen-before": true,
-            "seen-before-date": "2016-09-25T15:59:24.000Z",
-            "seen-before-feed": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
-            "url": "http://feedproxy.google.com/~r/blogspot/wCeDd/~3/pY5hWW0nwXM/sunday-morning-video-bay-area-deep.html"
-          },
-          « ... removed ... »
-        ],
-        "blog-urls-unseen": [
-          "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/"
-        ]
-      },
-      "processing": {
-        "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/": {
-          "data": {
-            "seen-before": false,
-            "seen-before-date": null,
-            "seen-before-feed": null,
-            "url": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-            "blog-item": {
-              "title": "A Creeping Model Of Computation",
-              "link": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-              "id": "http://www.inoreader.com/article/3a9c6e7f83b41e90",
-              "updated": "2016-09-26T00:25:08.000Z",
-              "summary": "<p><br><em>Local rules can achieve global behavior</em><br> « ... removed ... »</p>",
-              "feed-url": "http://www.inoreader.com/stream/user/1005830516/tag/Artificial%20Intelligence%2C%20Computer%20Science",
-              "fetch-date": "2016-09-26T00:29:20.616Z"
-            }
-          },
-          "dois": [
-            "10.1145/2933057.2933107"
-          ],
-          "url-doi-matches": {
-            "http://arxiv.org/abs/1603.07991": {
-              "doi": "10.1145/2933057.2933107",
-              "version": null
-            }
-          }
-        }
-      },
-      "deposits": [
-        {
-          "obj_id": "https://doi.org/10.1145/2933057.2933107",
-          "source_token": "c1bfb47c-39b8-4224-bb18-96edf85e3f7b",
-          "occurred_at": "2016-09-26T00:25:08.000Z",
-          "subj_id": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-          "action": "added",
-          "subj": {
-            "title": "A Creeping Model Of Computation",
-            "issued": "2016-09-26T00:25:08.000Z",
-            "pid": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-            "URL": "https://rjlipton.wordpress.com/2016/09/25/a-creeping-model-of-computation/",
-            "type": "post-weblog"
-          },
-          "uuid": "170678af-92da-4375-967c-b056d828525d",
-          "source_id": "newsfeed",
-          "relation_type_id": "discusses"
-        }
-      ]
-    }
+## Edits / Deletion
 
+ - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
+## Quirks
 
-### Methodology
+## Failure modes
 
- - Every hour, the latest 'newsfeed-list' Artifact is retrieved.
- - For every feed URL in the list, the agent queries the newsfeed to see if there are any new blog posts.
- - The content of the body in the RSS feed item are inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
- - The URL of the blog post is retrieved and the body is inspected to look for DOIs and URLs. The Agent queries the DOI Reversal Service for each URL to try and convert it into a DOI.
- - For every DOI found an Event is created with a `relation_type_id` of `mentions`.
+ - RSS feeds may be taken offline.
+ - RSS feeds may contain incomplete data.
+ - RSS feeds may update too quickly for the Agent to keep up.
+ - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+ - Blog sites may block the Event Data Bot collecting Landing Pages.
+ - Blog sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
 
-### Notes
+## Further information
 
-Because the Newsfeed Agent connects to blogs and blog aggregators, it is possible that the same blog post may be picked up by two different routes. In this case, the same blog post may be reported in more than one event See [Duplicate Data](concepts#concept-duplicate).
-
+ - [RSS on Wikipedia](https://en.wikipedia.org/wiki/RSS)
 

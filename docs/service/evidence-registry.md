@@ -1,8 +1,6 @@
+# Evidence Registry
 
-
-## Evidence Registry
-
-The Evidence Registry stores all the Evidence that supports Events collected by Crossref. Other partners who share information via CED may not include Evidence Records. You can find a full discussion of Evidence in the [Evidence In Depth](../evidence-in-depth) section.
+The Evidence Registry stores all the Evidence that supports Events collected by Crossref. Other partners who share information via CED may not include Evidence Records. All Evidence Records are produced by the [Percolator](../sources/percolator).
 
 An Evidence Record generally corresponds to a single input or batch of inputs that came from an external API. For example:
 
@@ -11,7 +9,7 @@ An Evidence Record generally corresponds to a single input or batch of inputs th
 
 An Evidence Record may correspond to more than one Event and pne Event is linked to zero or one Evidence Records. CED may contain Events for which there is no Evidence, where the Event was provided by an external party. Likewise, if some data was processed and we could not extract Events from it, there will be an Evidence Record with no Events.
 
-### Format of Evidence Records
+## Format of Evidence Records
 
 An Evidence Record is a JSON document and it follows a familiar format.
 
@@ -60,7 +58,7 @@ Event Data Agents spend a lot of time visiting webpages. Every Evidence Record c
 
 ![Structure of an Evidence Record](../images/evidence-record-structure.png)
 
-### Example Evidence Record
+## Example Evidence Record
 
 Here is an example Evidence Record, adapted from [a real one in the API](https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f). As Evidence Records can be quite long, some lines were removed.
 
@@ -290,6 +288,6 @@ This one returned the `200 OK` status.
     }
 
 
-### Getting Evidence Records
+## Getting Evidence Records
 
 If an Event has an Evidence Record, it will be included in the `evidence-record` field. Follow this URL to retrieve the Evidence Record from the Evidence Registry.

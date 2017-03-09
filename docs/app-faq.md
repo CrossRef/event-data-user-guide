@@ -4,7 +4,7 @@
 
 ### Does CED collect data for all DOIs in existence?
   
-CED will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all Crossref DOIs. Different sources operate differently, so the data for some sources will be fresher than others.
+CED will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all DOIs in the 'doi-prefix' Artifact (currently Crossref, DataCite in future). Different sources operate differently, so the data for some sources will be fresher than others.
  
 ### Which Registration Agencies' DOIs does CED use?
 
@@ -28,7 +28,7 @@ No, the public data via the Query API will be free. We will offer a paid-for Ser
 
 ### Will the data be auditable?
 
-Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concepts#concept-evidence-first).
+Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concepts/trustworthiness-and-quality/#evidence-first).
 
 ### Can I use the data to feed into my commercial tool? 
 
@@ -36,11 +36,11 @@ Yes. We do not clean or aggregate the data we collect so that any commercial ven
 
 ### Is your code base open source?
 
-Yes, all the code we use is open source. See the [Software](#software) section.
+Yes, all the code we use is open source. See the [Software](app-software) section.
 
 ### When will Event Data be launched?
 
- We are aiming to launch toward the end of 2016.
+Check the [Event Data page](https://www.crossref.org/services-event-data) on the Crossref website.
 
 ### How do I access the data?
 
@@ -52,7 +52,7 @@ We plan to address and clarfiy how CED relates to Multiple Resolution in future.
 
 ### Does Event Data work with DOIs that include emoticons?
 
-No.
+Yes. 
 
 ### Will the API make data available in other formats?
 

@@ -3,7 +3,7 @@
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | `wordpressdotcom` |
-| Matches by                | DOI |
+| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
 | Consumes Artifacts        |  |
 | Produces relation types   |  |
 | Fields in Evidence Record |  |
@@ -14,22 +14,54 @@
 | Operated by               |  |
 | Agent                     |  |
 
-The Wordpress.com agent queries the Wordpress.com API for Landing Page Domains. It monitors blogs hosted on Wordpress.com that mention articles by their landing page or by DOI URL. The source **does not monitor generic Wordpress-powered sites**.
+## What it is
 
-### Example Event
+Links from Wordpress blogs **hosted on the wordpress.com domain**. 
 
-TODO
+## What it does
 
-### Example Evidence Record
+The Agent monitors the Wordpress API for blog posts that mention Items via DOI links or links to Landing Pages. Each blog post is checked for links to articles via plain text DOIs, DOI hyperlinks and landing page URL hyperlinks.
 
-TODO
+## Where data comes from
 
-### Methodology
+ - The `domain-list` Artifact is consulted. On a regular basis the Agent retrieves the Artifact, then follows the link to every blog post or page mentioned.
+ - The Wordpress.com API is searched for links to blogs
+ - Each individual blog
 
-TODO
+## Example Event
 
-note not all Wordpress
+*Content to follow*
 
-### Further information
+## Methodology
 
-TODO
+On a regular basis (approximately every six hours) the Wordpress Agent starts a scan. Each scan:
+
+1. It downloads a copy of the latest version of the `domain-list` artifact.
+2. For every domain in the domain list (including doi.org):
+    1. It queries the Wrodress API for blog posts that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
+    2. Every response from the Wordpress API includes a link to a blog post. This link is sent to the Percolator.
+    3. The Percolator follows the link and looks at the HTML of the page.
+
+## Evidence Record
+
+*Content to follow*
+
+## Edits / Deletion
+
+ - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+
+## Quirks
+
+Note that this only monitors blogs hosted on Wordpress' hosted wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
+
+## Failure modes
+
+ - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+ - Wordpress.com may block the Agent
+ - Wordpress.com may block the Percoaltor Bot
+
+## Further information
+
+ - [Wordpress.com](http://wordpress.com)
+

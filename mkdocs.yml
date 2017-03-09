@@ -13,18 +13,21 @@ pages:
    - "Status Service": service/status-service.md
    - "Evidence Registry": service/evidence-registry.md
    - "Artifact Registry": service/artifact-registry.md
- - "Concepts": concepts.md
- - "Events in Depth": events-in-depth.md
+ - "Concepts":
+   - "IDs and URLs on the Web": concepts/ids-and-urls.md
+   - "Sources and Agents": concepts/sources-and-agents.md
+   - "Time": concepts/time.md
+   - "Trustworthiness and Quality": concepts/trustworthiness-and-quality.md
  - "Sources":
-   - "Crossref - DataCite": sources/crossref_datacite.md
-   - "DataCite - Crossref": sources/datacite_crossref.md
+   - "Crossref": sources/crossref.md
+   - "DataCite": sources/datacite.md
    - "Newsfeed": sources/newsfeed.md
    - "Reddit": sources/reddit.md
    - "Twitter": sources/twitter.md
    - "Web": sources/web.md
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
- - "URLs in Depth": urls-in-depth.md
+   - "Percolator": sources/percolator.md
  - "Connecting to Your System": 
    - "Graph Database: Neo4J": connecting/graph-neo.md
    - "JSON Document Store: MongoDb": connecting/json-document-mongo.md
@@ -34,6 +37,7 @@ pages:
  - "Best Practice":
    - "For Publishers": best-practice/publishers-best-practice.md
    - "Keep your data up to date": best-practice/up-to-date.md
+   - "Getting Started": best-practice/getting-started.md
  -  "Appendix 1: Software in Use": app-software.md
  - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
  - "Appendix: Contributing to Event Data": app-contributing.md

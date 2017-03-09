@@ -3,7 +3,7 @@
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | twitter |
-| Matches by                | DOI |
+| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Produces relation types   | `discusses` |
 | Freshness                 | continual |
@@ -13,17 +13,74 @@
 | Operated by               | Crossref |
 | Agent                     | event-data-twitter-agent |
 
-The Twitter source identifies Items that have been mentioned in Tweets. It matches Items using their Landing Page or DOI URL. Each event contains subject metadata including:
+## What it is
 
- - tweet author ID
- - tweet id
- - tweet type (tweet or retweet)
- - tweet publication date
+Tweets that mention Items. Matched by Landing Page URL, DOI URL or plain DOI text.
+
+## What it does
+
+The Agent monitors the Twitter PowerTrack firehose. It queries for Tweets that look like they have a DOI in them, or which mention a Landing Page domain or DOI.org .
+
+## Where data comes from
+
+ - The `domain-list` artifact is used to construct rues.
+ - The Twitter PowerTrack API.
+
+## Example Event
+
+If a tweet is a retweet, the `original-tweet-url` and `original-tweet-author` are included.
+
+    {
+      "obj_id": "https://doi.org/10.1038/542391a",
+      "source_token": "45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
+      "occurred_at": "2017-02-25T23:51:44.000Z",
+      "subj_id": "http://twitter.com/anairam_o/statuses/835638443136929794",
+      "id": "0000a016-a3b7-4022-970e-a24a44603242",
+      "action": "add",
+      "subj": {
+        "pid": "http://twitter.com/anairam_o/statuses/835638443136929794",
+        "title": "Tweet 835638443136929794",
+        "issued": "2017-02-25T23:51:44.000Z",
+        "author": {
+          "url": "http://www.twitter.com/anairam_o"
+        },
+        "original-tweet-url": "http://twitter.com/anairam_o/statuses/835638443136929794",
+        "original-tweet-author": null
+      },
+      "source_id": "twitter",
+      "obj": {
+        "pid": "https://doi.org/10.1038/542391a",
+        "url": "http://www.nature.com/news/researchers-should-reach-beyond-the-science-bubble-1.21514"
+      },
+      "timestamp": "2017-02-25T23:52:32.877Z",
+      "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022580a35fb2-df4a-48c0-b2ea-a3380bb6ada2",
+      "relation_type_id": "discusses"
+    }
 
 
-## Deletion
+## Methodology
 
-When a Tweet or Twitter User is deleted we are obliged to delete the data from CED. When this happens we will delete the following fields:
+Whenever the relevant Artifacts change, the Twitter agent submits a set of rules to the PowerTrack API. It constructs rules that filter for:
+
+ - search for every DOI prefix in the `doi-prefixes` Artifact
+ - search for links in Tweets that mention any of the domains from the `domain-list` Artifact
+
+The Agent subscribes to the PowerTrack data stream. Twitter enriches the data by extracting links from Tweets and following / unwinding link redirects. It bundles Tweets into batches and sends them to the Percolator with the following fields:
+
+ - `plain-text-sensitive` - for extracting un-linked DOIs in the text
+ - `urls` - for landing page URLs or DOI URLs. 
+
+## Evidence Record
+
+An example Evidence Record can be found at https://evidence.eventdata.crossref.org/evidence/2017022580a35fb2-df4a-48c0-b2ea-a3380bb6ada2
+
+The Twitter agent batches Tweets up into small chunks, one chunk per Evidence Record.
+
+## Edits / Deletion
+
+Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+
+When a Tweet or Twitter User is deleted we are obliged to delete the data from CED. When this happens we will edit the Event and delete the following fields:
 
  - `subj_id` - the ID of the tweet
  - `subj` - including the author and ID of the tweet
@@ -40,107 +97,46 @@ The following [Twitter Compliance Events](http://support.gnip.com/apis/complianc
  - `delete` - delete all Events that contain this Tweet ID
  - `user_delete` - delete all Events that were written by this Author
  - `user_protect` - delete all Events that were written by this Author
- - `user_suspend` - delete all EVents that were written by this Author
+ - `user_suspend` - delete all Events that were written by this Author
 
-There are 'un-delete' compliance events, but we don't act on them: once data is deleted, it's deleted.
 
-#### Methodology
-
- 1. On a periodic basis (approximately every 24 hours) the most recent version of the `domain-list` Artifact is retrieved. A set of Gnip PowerTrack rules are compiled and sent to Gnip. The list of rules specifies that Gnip should send all tweets that:
-   1. Mention a DOI URL
-   2. Mention a URL that uses an article Landing Page domain
-   3. Contain a DOI prefix, e.g. `10.5555`
- 2. The Twitter agent connects to Gnip PowerTrack.
- 3. All Tweets that the agent recieves from PowerTrack have been sent because they match a rule. Gnip also extracts all URLs and follows them to their destination. All URLs extracted and sent along with the data for the Tweet.
- 4. The Agent attempts to reverse every URL using the DOI Reversal Service. For every recognised DOI an Event is created.
-
-#### Example Event
+If the above Tweet had been deleted, the Event would be edited to read:
 
     {
-      "obj_id": "https://doi.org/10.1038/nature19798",
-      "occurred_at": "2016-09-26T15:23:13.000Z",
-      "subj_id": "http://twitter.com/randomshandom/statuses/780427511956180992",
-      "total": 1,
-      "id": "35ec2a67-a765-4f26-9c37-7f9eb9a1c7a8",
-      "subj": {
-        "pid": "http://twitter.com/randomshandom/statuses/780427511956180992",
-        "author": {
-          "literal": "http://www.twitter.com/randomshandom"
-        },
-        "issued": "",
-        "URL": "http://twitter.com/randomshandom/statuses/780427511956180992",
-        "type": "tweet"
-      },
-      "message_action": "create",
+      "obj_id": "https://doi.org/10.1038/542391a",
+      "source_token": "45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
+      "occurred_at": "2017-02-25T23:51:44.000Z",
+      // tweet ID removed
+      "subj_id": "http://twitter.com/",
+      "id": "0000a016-a3b7-4022-970e-a24a44603242",
+      "action": "add",
+      // subj removed
       "source_id": "twitter",
-      "timestamp": "2016-09-26T15:23:13.000Z",
-      "relation_type_id": "discusses"
+      "obj": {
+        "pid": "https://doi.org/10.1038/542391a",
+        "url": "http://www.nature.com/news/researchers-should-reach-beyond-the-science-bubble-1.21514"
+      },
+      "timestamp": "2017-02-25T23:52:32.877Z",
+      "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022580a35fb2-df4a-48c0-b2ea-a3380bb6ada2",
+      "relation_type_id": "discusses",
+      // updated field set to 'deleted'
+      "updated": "deleted",
+      "updated-date": "2018-02-25T23:51:44.000Z"
     }
 
-#### Example Evidence Record
 
-[http://archive.eventdata.crossref.org/evidence/87d7ab90d497198f74d7b46d67faca15](http://archive.eventdata.crossref.org/evidence/87d7ab90d497198f74d7b46d67faca15)
+## Quirks
 
-    {
-      artifacts: [
-        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c",
-        "http://evidence.eventdata.crossref.org/artifacts/doi-prefix-list/versions/797e77470ed94b2f7b336adab4cbaf19"
-      ],
-      input: {
-        tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992",
-        author: "http://www.twitter.com/randomshandom",
-        posted-time: "2016-09-26T15:23:13.000Z"
-      urls: [
-        "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
-      ],
-      matching-rules: [
-        "url_contains:"//www.nature.com/""
-      ]
-    },
-    agent: {
-      name: "twitter",
-      version: "0.1.2"
-    },
-    working: {
-      matching-rules: [
-      "url_contains:"//www.nature.com/""
-      ],
-      matching-dois: [
-      {
-        doi: "10.1038/nature19798",
-        version: null,
-        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
-      }
-      ],
-      match-attempts: [
-      {
-        doi: "10.1038/nature19798",
-        version: null,
-        query: "http://www.nature.com/nature/journal/vaop/ncurrent/full/nature19798.html"
-      }
-      ],
-      original-tweet-author: null,
-      original-tweet-url: "http://twitter.com/randomshandom/statuses/780427511956180992"
-      },
-      deposits: [
-      {
-      obj_id: "https://doi.org/10.1038/nature19798",
-        source_token: "45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
-        occurred_at: "2016-09-26T15:23:13.000Z",
-        subj_id: "http://twitter.com/randomshandom/statuses/780427511956180992",
-        action: "add",
-        subj: {
-        author: {
-          literal: "http://www.twitter.com/randomshandom"
-        },
-        issued: "2016-09-26T15:23:13.000Z",
-        pid: "http://twitter.com/randomshandom/statuses/780427511956180992",
-        URL: "http://twitter.com/randomshandom/statuses/780427511956180992",
-        type: "tweet"
-      },
-      uuid: "35ec2a67-a765-4f26-9c37-7f9eb9a1c7a8",
-      source_id: "twitter",
-        relation_type_id: "discusses"
-      }
-      ]
-    }
+According to the agreement we have with Twitter, we are allowed to process the text of Tweets to extract events but we are not allowed to store or redistribute it. The text of the tweet is therefore passed to the Percolator and marked as 'sensitive'. This means that the SHA1 hash of the text appears in the Evidence Record as an `input-content-hash`, but not the text itself.
+
+If you are interested in the text of a Tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the Tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
+
+## Failure modes
+
+ - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+
+## Further information
+
+ - [Twitter Developer Documentation](https://dev.twitter.com/)
+

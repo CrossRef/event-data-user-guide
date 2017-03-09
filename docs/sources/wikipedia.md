@@ -3,7 +3,7 @@
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | Wikipedia |
-| Matches by                | DOI |
+| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
 | Consumes Artifacts        |  |
 | Produces relation types   | `references` |
 | Freshness                 | continual |
@@ -13,110 +13,50 @@
 | Operated by               | Crossref |
 | Agent                     | event-data-wikipedia-agent |
 
-### Methodology
+## What it is
 
-1. The agent subscribes to the Recent Changes Stream using the wildcard "`*`". This includes all Wikimedia properties. 
-2. The Recent Changes Stream server sends the Agent every change to a page. Every change event includes the page title, the old and new revision and other data.
-3. For every change, the Agent fetches the HTML of the old and the new pages using the RESTBase API.
-    1. For every URL in the old version, the Agent looks for those that are DOI URLs.
-    2. For every URL in the new version, the Agent looks for those that are DOI URLs.
-4. DOIs are split into those that were added and those that were removed.
-    1. For every DOI that was removed an Event with the `action: "delete"` is produced.
-    2. For every DOI that was added an Event with the `action: "add"` is produced.
+Items referenced on Wikipedia. Every time a page is edited, every referenced Item generates an Event. 
+
+## What it does
 
 
-### Example Event
+The Wikipedia Agent monitors edits to Wikipedia. It looks at every single edit to every page, and reports on the Items linked from each page version. It also records relationships between Wikipedia pages and their versions where relevant.
 
-    {
-      obj_id: "https://doi.org/10.1093/EMBOJ/20.15.4132",
-      occurred_at: "2016-09-25T23:58:58Z",
-      subj_id: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-      total: 1,
-      id: "d24e5449-7835-44f4-b7e6-289da4900cd0",
-      subj: {
-        pid: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-        title: "Señalización paracrina",
-        issued: "2016-09-25T23:58:58.000Z",
-        URL: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-        type: "entry-encyclopedia"
-      },
-      message_action: "create",
-      source_id: "wikipedia",
-      timestamp: "2016-09-26T00:03:52Z",
-      relation_type_id: "references"
-    }
+## Where data comes from
 
-### Example Evidence Record
+The Wikipedia EventStream sends a list of edits to Articles. The Percolator visits each one, getting the HTML from the Wikipedia RESTBase API, and looks for events in the rendered HTML.
 
-[http://archive.eventdata.crossref.org/evidence/d8043c407165bd3e07d11c5ca0d74955](http://archive.eventdata.crossref.org/evidence/d8043c407165bd3e07d11c5ca0d74955)
+## Example Event
 
-    {
-      artifacts: [ ],
-      agent: {
-        name: "wikipedia",
-        version: "0.1.5"
-      },
-      input: {
-        stream-input: {
-          bot: false, user: "J3D3",
-          id: 133112611,
-          timestamp: 1474847938,
-          wiki: "eswiki",
-          revision: {
-            new: 93906371, old: 93391161
-          },
-          server_script_path: "/w",
-          minor: false,
-          server_url: "https://es.wikipedia.org",
-          server_name: "es.wikipedia.org",
-          length: {
-            new: 51542, old: 51700
-          },
-          title: "Señalización paracrina",
-          type: "edit",
-          namespace: 0,
-          comment: "Traduciendo otra pequeña parte"
-        },
-        old-revision-id: 93391161,
-        new-revision-id: 93906371,
-        old-body: "<!DOCTYPE html> <html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://es.wikipedia.org/wiki/Special:Redirect/revision/93391161">« ... removed ... »</html>",
-        new-body: "<!DOCTYPE html> <html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://es.wikipedia.org/wiki/Special:Redirect/revision/93906371">« ... removed ... »</html>"
-      },
-      processing: {
-        canonical: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-        dois-added: [
-        « ... removed ... »
-        {
-          action: "add",
-          doi: "10.1016/S1097-2765(01)00421-X",
-          event-id: "48de8c32-a901-4cc5-b911-544c959332f5"
-        }
-      ],
-      dois-removed: [ ]
-      },
-        deposits: [
-        « ... removed ... »
-        {
-          obj_id: "https://doi.org/10.1016/s1097-2765(01)00421-x",
-          source_token: "36c35e23-8757-4a9d-aacf-345e9b7eb50d",
-          occurred_at: "2016-09-25T23:58:58.000Z",
-          subj_id: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-          action: "add",
-          subj: {
-            title: "Señalización paracrina",
-            issued: "2016-09-25T23:58:58.000Z",
-            pid: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-            URL: "https://es.wikipedia.org/wiki/Se%C3%B1alizaci%C3%B3n_paracrina",
-            type: "entry-encyclopedia"
-          },
-          uuid: "48de8c32-a901-4cc5-b911-544c959332f5",
-          source_id: "wikipedia",
-          relation_type_id: "references"
-        }
-      ]
-    }
+*Content to follow*
 
-### Failure modes
+## Methodology
 
+1. The Wikipdia Agent subcribes to the EventStream
+2. Every edit to every Article, that version of the Article is sent to the Percolator.
+3. The Percolator visits every page version. If the new version has any Items in it, referenced by DOI text, DOI hyperlink or landing page URL, it will create a new Event for every link. Events reference the specific version of the Wikipedia page.
+4. An Event that links the version of the page to the canonical URL using the `is_new_version_of` relation type will be produced under certain circumstances. This is provided as a courtesy for consumers of data who may wish to connect DOIs back to the canonical URL of the page. The link will be generated if either:
+    1. If there were any Events generated from the new version of the page.
+    2. If there were no Events in the new page, the Percolator will look at the old page. If there would have been events in the old version of the page, that means that links might have been removed. Recording an `is_new_version_of` for the new Version but no events indicates that the Agent saw the page and recorded no Events, i.e. they may have been removed.
+
+## Evidence Record
+
+*Content to follow*
+
+## Edits / Deletion
+
+ - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+
+## Quirks
+
+## Failure modes
+
+ - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
  - The stream has no catch-up. If the agent is disconnected (which can happen from time to time), then edit events may be missed.
  - The RESTBase API occasionally does not contain the edit mentioned in the change. Although the Agent will retry several times, if it repeatedly receives an error for retriving either the old or the new versions, no event will be returned. This will be recorded in the Evidence Record as an empty input.
+
+## Further information
+
+ - [EventStreams documentation](https://wikitech.wikimedia.org/wiki/EventStreams)
+ - [RESTBase API documentation](https://www.mediawiki.org/wiki/RESTBase)

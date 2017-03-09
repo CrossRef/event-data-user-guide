@@ -3,7 +3,7 @@
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | event-data-reddit-agent |
-| Matches by                | DOI |
+| Matches by                | Landing Page URL hyperlink, DOI hyperlink |
 | Consumes Artifacts        | `domain-list` |
 | Produces relation types   | `discusses` |
 | Freshness                 | Polling approximately every 30 minutes |
@@ -13,124 +13,78 @@
 | Operated by               | Crossref |
 | Agent                     | event-data-reddit-agent |
 
-The Reddit agent queries the Reddit API for each domain in the Landing Page Domain list. It finds discussions and comments that mention Items via their landing pages or DOIs.
+## What it is
 
-### Methodology
+Discussions of Items on Reddit "the front Page of the Internet". 
 
-1. The Reddit agent runs a loop, with a delay of a 30 minutes between runs. 
-2. The most recent `domain-list` Artifact is fetched at the start of each loop.
-3. During the loop, for each domain in the `domain-list`
-   1. The Agent requests all data for the domain, ordered by date descending.
-   2. The Agent continues fetching pages of results until it finds inputs it has seen before.
-   3. The Agent looks at every result. Where it has not seen a link before, it tries to reverse it to an Item DOI.
-   4. Where an Item is found, an Event is created.
+## What it does
 
-### Example Event
+The Agent monitors the Reddit API for discussions of Items via DOI links or links to Landing Pages. Only discussions that link to the article page are included. Free-form DOIs in comments are not collected.
 
-    {
-      "obj_id": "https://doi.org/10.1523/JNEUROSCI.1907-16.2016",
-      "occurred_at": "2016-09-25T16:59:52Z",
-      "subj_id": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-      "total": 1,
-      "id": "7cc890a6-ca68-4d7c-8853-fb243aa59279",
-      "subj": {
-        "pid": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-        "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
-        "issued": "2016-09-25T16:59:52.000Z",
-        "URL": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-        "type": "post"
+## Where data comes from
+
+The `domain-list` Artifact is consulted. On a regular basis the Agent retrieves the Artifact, then follows the link to every blog post or page mentioned. 
+
+The Reddit API provides access to conversations that happen on Reddit. 
+
+## Example Event
+
+    }
+      obj_id: "https://doi.org/10.1371/journal.pone.0172464",
+      source_token: "a6c9d511-9239-4de8-a266-b013f5bd8764",
+      occurred_at: "2017-02-24T18:49:47.000Z",
+      subj_id: "https://reddit.com/r/citral/comments/5vzabs/the_surrounding_landscape_influences_the/",
+      id: "018bbdb7-f4e3-4fc4-a85d-8e87dea741ba",
+      action: "add",
+      subj: {
+        pid: "https://reddit.com/r/citral/comments/5vzabs/the_surrounding_landscape_influences_the/",
+        type: "post",
+        title: "The surrounding landscape influences the diversity of leaf-litter ants in riparian cloud forest remnants",
+        issued: "2017-02-24T18:49:47.000Z"
       },
-      "message_action": "create",
-      "source_id": "reddit",
-      "timestamp": "2016-09-25T20:31:36Z",
-      "relation_type_id": "discusses"
+      source_id: "reddit",
+      obj: {
+        pid: "https://doi.org/10.1371/journal.pone.0172464",
+        url: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0172464"
+      },
+      timestamp: "2017-02-25T01:25:16.311Z",
+      evidence-record: "https://evidence.eventdata.crossref.org/evidence/201702254d2aa87a-a86a-4849-95f3-9df577697dcb",
+      relation_type_id: "discusses"
     }
 
+## Methodology
 
-### Example Evidence Record
+On a regular basis (approximately every six hours) the Reddit Agent starts a scan. Each scan:
 
-[http://evidence.eventdata.crossref.org/events/7cc890a6-ca68-4d7c-8853-fb243aa59279/evidence](http://evidence.eventdata.crossref.org/events/7cc890a6-ca68-4d7c-8853-fb243aa59279/evidence)
+1. It downloads a copy of the latest version of the `domain-list` artifact.
+2. For every domain in the domain list (including doi.org):
+    1. It queries the Reddit API for all activities that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
+    2. Every response from the Reddit API includes the text of the comment and the URL.
+    3. Every item results in plain-text candidates and candidate landing page URL for the Percolator.
+3. Every domain scan results in an input to the Percolator. Pages of API results correspond to pages in an Evidence Record.
 
-    {
-      "agent": {
-        "name": "reddit",
-        "version": "0.1.1"
-      },
-      "run": "2016-09-25T20:24:01.392Z",
-      "artifacts": [
-        "http://evidence.eventdata.crossref.org/artifacts/domain-list/versions/1b2bcc1f6e77196b9b40be238675101c"
-      ],
-      "input": {
-        "https://oauth.reddit.com/domain/www.jneurosci.org/new.json?sort=new&after=": {
-          "after-token": "t3_46qn9t",
-          "items": [
-            {
-              "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
-              "id": "54fyzt",
-              "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
-              "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-              "created_utc": 1474822792,
-              "subreddit": "science",
-              "kind": "t3"
-            },
-            « ... removed ... »
-          ]
-        }
-      },
-      "processing": {
-        "items": [
-          {
-            "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
-            "id": "54fyzt",
-            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
-            "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-            "created_utc": 1474822792,
-            "subreddit": "science",
-            "kind": "t3",
-            "seen-before-date": null,
-            "url-doi-match": {
-              "doi": "10.1523/jneurosci.1907-16.2016",
-              "version": null,
-              "query": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc"
-            }
-          },
-          « ... removed ... »
-        ],
-        "interested-items": [
-          {
-            "url": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc",
-            "id": "54fyzt",
-            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
-            "permalink": "/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-            "created_utc": 1474822792,
-            "subreddit": "science",
-            "kind": "t3",
-            "seen-before-date": null,
-            "url-doi-match": {
-              "doi": "10.1523/jneurosci.1907-16.2016",
-              "version": null,
-              "query": "http://www.jneurosci.org/content/36/38/9933.abstract?etoc"
-            }
-          }
-        ]
-      },
-      "deposits": [
-        {
-          "source_token": "a6c9d511-9239-4de8-a266-b013f5bd8764",
-          "uuid": "7cc890a6-ca68-4d7c-8853-fb243aa59279",
-          "action": "added",
-          "subj_id": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-          "subj": {
-            "title": "Many supposed features of Alzheimers are artifacts of the mouse models used. The findings of over 3000 publications may need to be re-evaluated.",
-            "issued": "2016-09-25T16:59:52.000Z",
-            "pid": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-            "URL": "https://reddit.com/r/science/comments/54fyzt/many_supposed_features_of_alzheimers_are/",
-            "type": "post"
-          },
-          "source_id": "reddit",
-          "relation_type_id": "discusses",
-          "obj_id": "https://doi.org/10.1523/jneurosci.1907-16.2016",
-          "occurred_at": "2016-09-25T16:59:52.000Z"
-        }
-      ]
-    }
+## Evidence Record
+
+An example Evidence Record can be found at https://evidence.eventdata.crossref.org/evidence/201702254d2aa87a-a86a-4849-95f3-9df577697dcb
+
+ - Each Evidence Record corresponds to a scan of a particular domain. 
+ - Each Page corresponds to a page of API results.
+ - Each Page's URL is the API URL queried.
+
+## Edits / Deletion
+
+ - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+
+## Quirks
+
+There are no particular quirks to the Reddit agent.
+
+## Failure modes
+
+ - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+
+
+## Further information
+
+- [Reddit homepage](https://www.reddit.com/)

@@ -123,3 +123,7 @@ You store the events. One month later, you re-query for any Events that were upd
 **Events are only edited in exceptional circumstances** and the Query API will usually send an empty reply, confirming that you don't need to update your data. If it does, you should over-write your stored Events with the new ones. 
 
 **If you retrieve Events and store them, you should regularly check up to see if they have been updated.** We don't anticipate this will happen very often, but when it does happen, it is important that you stay up-to-date. See the Best Practice section for guidance.
+
+### Editing and Evidence
+
+Every Evidence Record that results in an Event will contain a copy of that Event (minus the timestamp, which is applied later). If an update is made to an Event, it will not be recorded in the original Event Record.
