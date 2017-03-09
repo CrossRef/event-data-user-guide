@@ -86,5 +86,5 @@ We were only collecting for those two sources on that day. Now let's group by th
       ],
       [
 
-That's all for now. The [Service](service) section describes the Query API and connected services in depth.
+That's all for now. The [Query API](query-api) page describes the Query API and connected services in depth.
 

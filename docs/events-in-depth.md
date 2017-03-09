@@ -1,4 +1,62 @@
-# Event Records in Depth
+# Events in Depth
+<!-- TODO -->
+A sample Event can be read:
+
+ - a Work with the DOI `https://doi.org/10.1090/bull/1556`
+ - was `discussed`
+ - in the comment `https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/ `
+ - on `reddit`
+ - the title of the discussion is `"Five stages of accepting constructive mathematics, by Andrej Bauer [abstract + link to PDF]"`
+ - the post was made at `2016-10-12T07:20:40.000Z`
+ - and was collected / processed at `2017-20-20T07:20:40.000Z`
+ - the ID of the Event is `615cf92e-9922-4868-9b62-a51b8efd29ee`
+ - by looking at the `subj`, we can see that the article was referenced using its Article Landing page `http://www.ams.org/journals/bull/0000-000-00/S0273-0979-2016-01556-4/home.html` rather than the DOI in this case.
+ - you can visit `https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f` to find out more about how the Event was extracted.
+
+It looks like:
+
+    {
+      "obj_id": "https://doi.org/10.1090/bull/1556",
+      "source_token": "a6c9d511-9239-4de8-a266-b013f5bd8764",
+      "occurred_at": "2016-10-12T07:20:40.000Z",
+      "subj_id": "https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/",
+      "id": "615cf92e-9922-4868-9b62-a51b8efd29ee",
+      "action": "add",
+      "subj": {
+        "pid": "https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/",
+        "type": "post",
+        "title": "Five stages of accepting constructive mathematics, by Andrej Bauer [abstract + link to PDF]",
+        "issued": "2016-10-12T07:20:40.000Z"
+      },
+      "source_id": "reddit",
+      "obj": {
+        "pid": "https://doi.org/10.1090/bull/1556",
+        "url": "http://www.ams.org/journals/bull/0000-000-00/S0273-0979-2016-01556-4/home.html"
+      },
+      "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f",
+      "relation_type_id": "discusses",
+      "timestamp": "2017-20-20T07:20:40.000Z"
+    }
+   
+
+The following fields are available:
+
+ - `subj_id` - the subject of the relation as a URI, in this case a discussion on Reddit. This is normalized to use the `https://doi.org` DOI resolver and converted to upper case.
+ - `relation_type_id` - the type of relation.
+ - `obj_id` - the object of the relation as a URI, in this case a DOI.
+ - `occurred_at` - the date and time when the Event occurred.
+ - `id` - the unique ID of the event. This is used to identify the event in Event Data. Is used to trace Evidence for an Event. 
+ - `message-action` - what action does this represent? Can be `create` or `delete`. There are currently no sources that use `delete`.
+ - `source_id` - the ID of the source as listed in [Data Sources](service#data-sources).
+ - `subj` - the subject metadata, optional. Depends on the Source.
+ - `obj` - the object metadata, optional. Depends on the Source.
+ - `total` - the pre-aggregated total that this represents, if this is from a pre-aggregated source such as Facebook. Usually 1. See [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated).
+ - `timestamp`- the date and time at which the Event was processed by Event Data.
+ - `evidence-record` - a link to a document that describes how this Event was generated
+
+All times in the API in ISO8601 UTC Zulu format.
+
+See [Event Records in Depth](events-in-depth) for more detail on precisely what the fields of an Event mean under various circumstances.
 
 ## Subject and Object IDs
 

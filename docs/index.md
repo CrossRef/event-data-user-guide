@@ -4,20 +4,17 @@ Version 0.6.0 - Pre-beta
 
 > **We are aiming to enter Beta test soon. Please contact us if you want to participate.**
 >
-> Event Data has not yet launched and is not feature-complete. Until we launch, the service described here may not be feature-complete.
+> Event Data has not yet launched. Until then, the service described here may not be feature-complete.
 > Contact eventdata@crossref.org if you have any questions or feedback.
 
 
-Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. 
-
- - [Introduction](introduction) is a high level overview of the service and background and is suitable for everyone.
- - [The Service](service) describes the Event Data service and how to use it.
- - [Concepts](concepts) covers some of the issues that should be understood before using Event Data.
- - 'In Depth' sections describe all the technical detail required to understand and integrate with the service from top to bottom and is suitable for a technical or research audience.
+Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. **This guide is suitable for everyone**. Hopefully it will provide everything from a gentle introduction right down to the the tiny details. Read the chapters of this guide in order for a complete tour of CED.
 
 If you're keen to get your hands on the data you can jump straight to the [Quick Start](quick-start) page.
 
-Crossref Event Data is an open, flexible service, which can be put to many uses. We aim to set the standard in openness and transparency. This User Guide describes the service and how it works. It also describes in detail how the data is collected. It's important to understand exactly what the data means and how it was collected to ensure you interpret it wisely. 
+If you want to use CED for whatever reason, you are strongly encouraged to read the entire guide. CED is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it. 
+
+Click the 'Next' button at the bottom of this page to get started...
 
 # Revision history
 

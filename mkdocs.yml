@@ -6,9 +6,15 @@ site_url: https://www.eventdata.crossref.org/guide/
 pages:
  - "Welcome": index.md
  - "Introduction": introduction.md
- - "The Service": service.md
+ - "The Service":
+   - "The Event Data Service": service/ced-service.md
+   - "Query API": service/query-api.md
+   - "Quick Start": service/quickstart.md
+   - "Status Service": service/status-service.md
+   - "Evidence Registry": service/evidence-registry.md
+   - "Artifact Registry": service/artifact-registry.md
  - "Concepts": concepts.md
- - "Event Records in Depth": events-in-depth.md
+ - "Events in Depth": events-in-depth.md
  - "Sources":
    - "Crossref - DataCite": sources/crossref_datacite.md
    - "DataCite - Crossref": sources/datacite_crossref.md
@@ -18,7 +24,6 @@ pages:
    - "Web": sources/web.md
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
- - "Evidence in Depth": evidence-in-depth.md
  - "URLs in Depth": urls-in-depth.md
  - "Connecting to Your System": 
    - "Graph Database: Neo4J": connecting/graph-neo.md
@@ -26,10 +31,12 @@ pages:
    - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
    - "Streaming: Spark": connecting/streaming-spark.md
    - "Lagotto": connecting/lagotto.md
+ - "Best Practice":
+   - "For Publishers": best-practice/publishers-best-practice.md
+   - "Keep your data up to date": best-practice/up-to-date.md
  -  "Appendix 1: Software in Use": app-software.md
  - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
  - "Appendix: Contributing to Event Data": app-contributing.md
  - "Appendix: FAQ": app-faq.md
  - "Appendix: Glossary": app-gloss.md
- - "Quick Start": quickstart.md
  - "Terms of Use": terms.md

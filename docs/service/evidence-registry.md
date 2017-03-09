@@ -1,211 +1,19 @@
-# The Service
 
-Crossref Event Data is a system for collecting Events and distributing them. The Query API delivers batches of Events based on queries, not individual items. Tens of thousands of events Events occur per day, of the order of one per second, though the rate fluctuates depending on the activity of the Agents and the underlying patterns in the source. 
-
- - The **Query API** provides an interface for accessing Events. It's a REST API that allows download of Events and supports various filters. 
-
- - The **Evidence Registry** contains supporting evidence for every Event that is collected by Crossref. When an Event has evidence, it will link to an Evidence Record on the Evidence Registry.
-
- - The **Status Service** contains data about activity within the system, along with diagnostic reports. It records the availability and activity of components and completeness of data. You can consult it if you want information about the behaviour of the system at a given point in time. 
-
-<a name="data-sources"></a>
-## Data Sources
-
-Event Data is a hub for the collection and distribution of Events and contains data from a selection of Data Sources. 
-
-| Name                   | Source Identifier   | Provider    | What does it contain? |
-|------------------------|---------------------|-------------|------------------|
-| [Crossref to DataCite](sources/crossref_datacite)   | crossref_datacite   | Crossref    | Dataset citations from Crossref Items to DataCite Items |
-| [DataCite to Crossref](sources/datacite_crossref)   | datacite_crossref   | DataCite    | Dataset citations from DataCite Items to Crossref Items |
-| [Newsfeed](sources/newsfeed)               | newsfeed            | Crossref    | Links to Items on blogs and websites with syndication feeds |
-| [Reddit](sources/reddit)                 | reddit              | Crossref    | Mentions and discussions of Items on Reddit |
-| [Twitter](sources/twitter)                | twitter             | Crossref    | Links to Items on Twitter |
-| [Web](sources/web)                    | web                 | Crossref    | Links of Items on web pages |
-| [Wikipedia](sources/wikipedia)              | wikipedia           | Crossref    | References of Items on Wikipedia |
-| [Wordpress.com](sources/wordpress-dot-com)          | wordpressdotcom     | Crossref    | References of Items on Wordpress.com blogs |
-
-For detailed discussion of each one, see its corresponding page.
-
-## Query API
-
-The [Quick Start guide](quickstart) shows you how to get your hands dirty quickly. Come back and read this section afterwards!
-
-CED has Events, and lots of them. Usually you'll be interested in getting all Events from a particular source, or range of DOIs, over a period of time. The Query API answers queries like:
-
- - give me all Events that were collected in this date range
- - give me all Events from Reddit
- - give me all Events that concern a DOI with this prefix
- - give me all Events ever
-
-The Query API is a simple JSON REST API. Because of the volume of Events, every query is paginated by a date, in `YYYY-MM-DD` format. We collect tens of thousands of Events per day. There are a number of filters available to help you narrow down the results.
-
-When you write a client to work with the API it should be able to deal with responses in the tens of megabytes, preferably dealing with them as a stream. You may find that saving an API response directly to disk is sensible.
-
-### Two points of view
-
-As detailed in [Occurred-at vs collected-at](concepts#concept-timescales), every Event has a 'occurred at' timestamp, but may be collected at a different time. The Query API therefore provides two **views**: `collected` and `occurred`.
-
-You may want to use `collected` when:
-
- - you want to run a daily query to fetch *all* Events in the system to build your own copy of the complete database
- - you want to be sure that you get all of the data
- - you only want to know about each event once
- - you're not interested in a particular time-range in which Events might have occurred
- - you want to reference or cite a dataset that never changes
-
-You may want to use `occurred` when:
-
- - you're interested in a particular time period when you think Events occurred
- - you are happy to re-issue queries for the given date-range (because Events may have subsequently been collected for that period)
-
-
-The API base is therefore one of:
-
-  - `https://query.eventdata.crossref.org/occurred/`
-  - `https://query.eventdata.crossref.org/collected/`
-
-All queries are available on both views.
-
-The Query API is updated once a day, shortly after midnight. This means that from the time an Event is first collected to the time when it is available on the Query API can be up to 24 hours. Once a `collected` result is available it should never change, but `occurred` results can.
-
-### Available Queries
-
-<!-- TODO REAL WORKING QUERIES
- -->
-<a name="quick-start" id="quick-start"></a>
-
-#### All data for a day
-
-    http://query.eventdata.crossref.org/«view»/«date»/events.json
-
-e.g.
-
-    http://query.eventdata.crossref.org/collected/2017-02-23/events.json
-
-#### All data for a particular source for a day
-
-    http://query.eventdata.crossref.org/«view»/«date»/sources/«source»/events.json
-
-e.g.
-
-    http://query.eventdata.crossref.org/collected/2017-02-23/sources/reddit/events.json
-
-#### All data for a DOI for a day
-
-    http://query.eventdata.crossref.org/«view»/«date»/works/«doi»/events.json
-
-e.g.
-
-    http://query.eventdata.crossref.org/collected/2017-02-23/works/10.3389/FNINS.2015.00404/events.json
-
-#### All data for a DOI for a day for a given source
-
-    http://query.eventdata.crossref.org/«view»/«date»/works/«doi»/sources/«source»/events.json
-
-e.g.
-
-    http://query.eventdata.crossref.org/collected/2016-11-01/sources/wikipedia/works/10.3389/FNINS.2015.00404/events.json
-
-### Querying a Date Range
-
-If you want to collect all Events for a given date range, you can issue a set of queries. E.g. to get all Wikipedia Events in November 2016, issue the following API query:
-
-<!-- TODO WORKING QUERY -->
-
-`http://query.eventdata.crossref.org/occurred/2016-11-01/sources/reddit/events.json`
-
-The response contains the 'next date' link:
-
-    meta: {
-      status: "ok",
-      message-type: "event-list",
-      total: 77,
-      total-pages: 1,
-      page: 1,
-      previous: "http://query.eventdata.crossref.org/collected/2016-10-31/sources/reddit/events.json",
-      next: "http://query.eventdata.crossref.org/collected/2016-11-02/sources/reddit/events.json"
-    }
-
-Follow the 'next' link until you have all the data you want.
-
-Note that this is a form of pagination, which is a standard feature of REST APIs. You can find code examples in the [Code Examples](#appendix-code-examples) section.
-
-### Format of Event Records
-
-The response from the Query API will be a list of Events. An Event is of the form 'this subject has this relation to this object'. The most up-to-date list of supported relations is available in [Lagotto](https://github.com/lagotto/lagotto/blob/master/db/seeds/production/relation_types.yml), but the documentation for each Source in this document lists all relation types that the Source produces.
-
-A sample Event can be read:
-
- - a Work with the DOI `https://doi.org/10.1090/bull/1556`
- - was `discussed`
- - in the comment `https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/ `
- - on `reddit`
- - the title of the discussion is `"Five stages of accepting constructive mathematics, by Andrej Bauer [abstract + link to PDF]"`
- - the post was made at `2016-10-12T07:20:40.000Z`
- - and was collected / processed at `2017-20-20T07:20:40.000Z`
- - the ID of the Event is `615cf92e-9922-4868-9b62-a51b8efd29ee`
- - by looking at the `subj`, we can see that the article was referenced using its Article Landing page `http://www.ams.org/journals/bull/0000-000-00/S0273-0979-2016-01556-4/home.html` rather than the DOI in this case.
- - you can visit `https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f` to find out more about how the Event was extracted.
-
-It looks like:
-
-    {
-      "obj_id": "https://doi.org/10.1090/bull/1556",
-      "source_token": "a6c9d511-9239-4de8-a266-b013f5bd8764",
-      "occurred_at": "2016-10-12T07:20:40.000Z",
-      "subj_id": "https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/",
-      "id": "615cf92e-9922-4868-9b62-a51b8efd29ee",
-      "action": "add",
-      "subj": {
-        "pid": "https://reddit.com/r/math/comments/572xbh/five_stages_of_accepting_constructive_mathematics/",
-        "type": "post",
-        "title": "Five stages of accepting constructive mathematics, by Andrej Bauer [abstract + link to PDF]",
-        "issued": "2016-10-12T07:20:40.000Z"
-      },
-      "source_id": "reddit",
-      "obj": {
-        "pid": "https://doi.org/10.1090/bull/1556",
-        "url": "http://www.ams.org/journals/bull/0000-000-00/S0273-0979-2016-01556-4/home.html"
-      },
-      "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f",
-      "relation_type_id": "discusses",
-      "timestamp": "2017-20-20T07:20:40.000Z"
-    }
-   
-
-The following fields are available:
-
- - `subj_id` - the subject of the relation as a URI, in this case a discussion on Reddit. This is normalized to use the `https://doi.org` DOI resolver and converted to upper case.
- - `relation_type_id` - the type of relation.
- - `obj_id` - the object of the relation as a URI, in this case a DOI.
- - `occurred_at` - the date and time when the Event occurred.
- - `id` - the unique ID of the event. This is used to identify the event in Event Data. Is used to trace Evidence for an Event. 
- - `message-action` - what action does this represent? Can be `create` or `delete`. There are currently no sources that use `delete`.
- - `source_id` - the ID of the source as listed in [Data Sources](service#data-sources).
- - `subj` - the subject metadata, optional. Depends on the Source.
- - `obj` - the object metadata, optional. Depends on the Source.
- - `total` - the pre-aggregated total that this represents, if this is from a pre-aggregated source such as Facebook. Usually 1. See [Individual Events vs Pre-Aggregated](concepts#concept-individual-aggregated).
- - `timestamp`- the date and time at which the Event was processed by Event Data.
- - `evidence-record` - a link to a document that describes how this Event was generated
-
-All times in the API in ISO8601 UTC Zulu format.
-
-See [Event Records in Depth](events-in-depth) for more detail on precisely what the fields of an Event mean under various circumstances.
 
 ## Evidence Registry
 
-The Evidence Registry stores all the Evidence that supports Events collected by Crossref. Other partners who share information via CED may not include Evidence Records. You can find a full discussion of Evidence in the [Evidence In Depth](evidence-in-depth) section.
+The Evidence Registry stores all the Evidence that supports Events collected by Crossref. Other partners who share information via CED may not include Evidence Records. You can find a full discussion of Evidence in the [Evidence In Depth](../evidence-in-depth) section.
 
 An Evidence Record generally corresponds to a single input or batch of inputs that came from an external API. For example:
 
  - there is one Record per queried domain from the Reddit API
  - Tweets are collected into small batches
 
-An Evidence Record may correspond to more than one Event. One Event is linked only to one Evidence Record. CED may contain Events for which there is no Evidence, where the Event was provided by an external party. Likewise, if some data was processed and we could not extract Events from it, there will be an Evidence Record with no Events.
+An Evidence Record may correspond to more than one Event and pne Event is linked to zero or one Evidence Records. CED may contain Events for which there is no Evidence, where the Event was provided by an external party. Likewise, if some data was processed and we could not extract Events from it, there will be an Evidence Record with no Events.
 
 ### Format of Evidence Records
 
-An Evidence Record is a JSON document and it follows a familiar format:
+An Evidence Record is a JSON document and it follows a familiar format.
 
 An Evidence Record comes from a single Agent, so it includes identifying fields:
 
@@ -250,8 +58,7 @@ When Events are succesfully extracted, they are included along with the Action t
 
 Event Data Agents spend a lot of time visiting webpages. Every Evidence Record contains a log of all of the URLs that were visited, and the HTTP status codes that were received. If you see an inconsistency in the processing of an Event Record, you can look at the log to see if it was caused by an external URL timing out, blocking the agent etc.
 
-
-<!-- TODO DIAGRAM -->
+![Structure of an Evidence Record](../images/evidence-record-structure.png)
 
 ### Example Evidence Record
 
@@ -485,12 +292,4 @@ This one returned the `200 OK` status.
 
 ### Getting Evidence Records
 
-If an Event has an Evidence Record, it will be included in the `evidence-record` field. Follow this URL to retrieve the Evidence Record from the Evdience Registry.
-
-## Status Service
-
-*This feature will be available at launch.*
-
-Event Data connects to external systems and gathers data from them through a pipeline. Not all external services are available all the time, and some may experience fluctuations in service. The internal pipeline with the Event Data service may become congested or require maintenance from time to time. 
-
-The Event Data Status Service proactively monitors all parts of the system and reports on activity, availability and completeness of data. The Dashboard will be available via a user interface and via an API through which users can access historical data.
+If an Event has an Evidence Record, it will be included in the `evidence-record` field. Follow this URL to retrieve the Evidence Record from the Evidence Registry.
