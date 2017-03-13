@@ -7,14 +7,15 @@
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Produces relation types   | `mentions` |
 | Freshness                 | random |
-| Data Source               | Any web page |
-| Coverage                  | All DOIs, all known Landing Pages |
+| Freshness                 | every few hours |
+| Coverage                  | Random collection of web pages |
+| Identifies links by       | Linked DOIs, unlinked DOIs, linked landing page domains |
 | Operated by               | Crossref |
 | Agent                     | event-data-web-agent |
 
 ## What it is
 
-Events from any web page we think is relevant. We monitor a list of URLs that we think might have links to Items via their DOIs or Landing Pages, and follow them to see if we can find any.
+Events from any web page we think might be relevant. We monitor a list of URLs that we think might have links to Items via their DOIs or Landing Pages, and follow them to see if we can find any.
 
 The list of URLs can come from a range of sources, including those submitted by users. If you have such a list, feel free to contact us.
 
@@ -25,7 +26,12 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
 ## Where data comes from
 
  - A list of URLs that we compile internally, and that are submitted by users.
- - Each web page.
+ - The content of each web page on the list.
+
+We will never follow a link:
+
+ - when we believe it belongs to a publisher / member
+ - when we believe that it might belong to 
 
 ## Example Event
 
@@ -46,6 +52,7 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
 ## Edits / Deletion
 
  - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+ - If we mistakenly collect Events for a publisher site, the publisher may reasonably ask us to remove them.
 
 ## Quirks
 

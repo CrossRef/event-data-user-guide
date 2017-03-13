@@ -4,19 +4,19 @@
 |---------------------------|----------------|
 | Name                      | `newsfeed` |
 | Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
-| Consumes Artifacts        | `newsfeed-list` |
+| Consumes Artifacts        | `newsfeed-list`, `domain-list` |
 | Produces relation types   | `mentions` |
-| Fields in Evidence Record |  |
-| Freshness                 | half-hourly |
+| Freshness                 | every few hours |
 | Data Source               | Multiple blog and aggregator RSS feeds |
-| Coverage                  | All DOIs |
+| Coverage                  | All blogs in RSS feeds |
+| Identifies links by       | Linked DOIs, unlinked DOIs, linked landing page domains |
 | Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Duplicate Data](concepts#concept-duplicate), [Landing Page Domains](concepts#concept-landing-page-domains), [Sources that must be queried in their entirety](concepts#concept-query-entirety), [DOI Reversal Service](concepts#in-depth-doi-reversal) |
 | Operated by               | Crossref |
 | Agent                     | event-data-newsfeed-agent |
 
 ## What it is
 
-Links from blogs and other content with a newsfeed. A selection of RSS newsfeeds are monitored for Links to Events. 
+Links from blogs and other content with a newsfeed. 
 
 ## What it does
 

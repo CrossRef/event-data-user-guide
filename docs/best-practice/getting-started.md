@@ -19,7 +19,7 @@ So you've read and understood the CED user Guide. How do you actually get starte
 
 ## Preparation
 
-1. Create on an appropriate data management plan, if necessary
+1. Create an appropriate data management plan, if necessary
     - If you're retaining Events for a period of time you should plan to re-run update queries every few months.
     - If you're going to publish research, you should aim to update the data before publication to ensure the data you're working with is as accurate as possible.
     - If you're creating derivative one-off results, you should consider if it's important to keep these up to date.

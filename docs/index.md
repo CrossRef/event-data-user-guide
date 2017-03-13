@@ -1,6 +1,6 @@
 # Event Data
 
-Version 0.6.0 - Pre-beta
+Version 0.7.0 - Pre-beta
 
 > **We are aiming to enter Beta test soon. Please contact us if you want to participate.**
 >

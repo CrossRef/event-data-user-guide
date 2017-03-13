@@ -11,6 +11,8 @@ Every Event results from an action that was taken at some point in time. This is
  - the time that the blog post was published
  - the time an article with a data citation was published
 
+In some cases, the occurrence time is reported by the Source. In other cases, such as the Web source, the occurrence time isn't available and it's recorded by the Agent as the point point in time when it visited the page.
+
 Usually Events are collected soon after they occur, but we make no guarantees. For example, agents may recieve archives of old data, or re-scan old date ranges, or reprocess inputs that couldn't be processed in the past.
 
 Every Event also has a 'collected' time. This is the time when the Agent submitted an Event to the Event Data Service. Depending on load, there may be a delay between when the Agent ingested some data and when it was timestamped. 

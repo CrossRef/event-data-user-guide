@@ -1,15 +1,15 @@
-# DataCite to CrossRef Links
+# DataCite Metadata
 
 | Property                  | Value          |
 |---------------------------|----------------|
-| Name                      | datacite_crossref |
+| Name                      | datacite |
 | Consumes Artifacts        | none |
-| Matches by                | DOI in XML |
+| Matches by                | DOI references in DataCite XML |
 | Produces relation types   | cites |
-| Fields in Evidence Record | no evidence record |
 | Freshness                 | daily |
-| Data Source               | DataCite API |
+| Data Source               | DataCite Metadata deposited by DataCite members |
 | Coverage                  | All DOIs |
+| Identifies links by       | References in DataCite schema |
 | Relevant concepts         | [External Agents](#contept-external-agent), [Occurred-at vs collected-at](concepts#concept-timescales) |
 | Operated by               | DataCite |
 
@@ -56,6 +56,8 @@ No evidence record is created because the events come straight from the data sou
 We do not anticipate that Events are ever deleted or edited.
 
 ## Quirks
+
+None.
 
 ## Failure modes
 

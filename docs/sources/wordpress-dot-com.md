@@ -4,15 +4,14 @@
 |---------------------------|----------------|
 | Name                      | `wordpressdotcom` |
 | Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
-| Consumes Artifacts        |  |
-| Produces relation types   |  |
-| Fields in Evidence Record |  |
-| Freshness                 |  |
-| Data Source               |  |
-| Coverage                  |  |
+| Consumes Artifacts        | `domain-list` |
+| Produces relation types   | `mentions` |
+| Freshness                 | every few hours |
+| Data Source               | Wordpress.com API |
+| Coverage                  | All blogs hosted on Wordpress |
 | Relevant concepts         | [Pre-filtering](#pre-filtering) |
-| Operated by               |  |
-| Agent                     |  |
+| Operated by               | Crossref |
+| Agent                     | event-data-wordpress-agent |
 
 ## What it is
 

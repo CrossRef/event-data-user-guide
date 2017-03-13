@@ -4,11 +4,11 @@
 |---------------------------|----------------|
 | Name                      | Wikipedia |
 | Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
-| Consumes Artifacts        |  |
+| Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Produces relation types   | `references` |
-| Freshness                 | continual |
+| Freshness                 | Delay of up to 1 hour |
 | Data Source               | Wikipedia Recent Changes Stream, Wikipedia RESTBase |
-| Coverage                  | All Wikimedia properties. DOI URL references only. |
+| Coverage                  | All Wikimedia properties. |
 | Relevant concepts         | [Matching by DOIs](#concept-matching-dois)|
 | Operated by               | Crossref |
 | Agent                     | event-data-wikipedia-agent |

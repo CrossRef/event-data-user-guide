@@ -6,7 +6,7 @@
 | Matches by                | Landing Page URL hyperlink, DOI hyperlink |
 | Consumes Artifacts        | `domain-list` |
 | Produces relation types   | `discusses` |
-| Freshness                 | Polling approximately every 30 minutes |
+| Freshness                 | every few hours |
 | Data Source               | Reddit API |
 | Coverage                  | All landing page URLs and DOI URLs |
 | Relevant concepts         | [Unambiguously linking URLs to DOIs](#concept-urls), [Pre-filtering](#pre-filtering) |

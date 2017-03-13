@@ -1,14 +1,15 @@
-# Crossref to DataCite Links
+# Crossref Metadata
 
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | crossref |
 | Consumes Artifacts        | none |
-| Matches by                | DOI in XML |
+| Matches by                | DOI references in Crossref XML |
 | Produces relation types   | cites |
 | Freshness                 | Daily |
-| Data Source               | Crossref Metadata API |
+| Data Source               | Crossref Metadata deposited by Crossref Members |
 | Coverage                  | All DOIs |
+| Identifies links by       | References in Crossref Schema |
 | Relevant concepts         | [Occurred-at vs collected-at](concepts#concept-timescales), [Duplicate Data](concepts#concept-duplicate) |
 | Operated by               | Crossref |
 | Agent                     | Cayenne |
@@ -58,6 +59,8 @@ No evidence record is created because the events come straight from the data sou
 We do not anticipate that Events are ever deleted or edited.
 
 ## Quirks
+
+None.
 
 ## Failure modes
 

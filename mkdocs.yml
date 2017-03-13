@@ -6,21 +6,27 @@ site_url: https://www.eventdata.crossref.org/guide/
 pages:
  - "Welcome": index.md
  - "Introduction": introduction.md
+ - "What's in CED?":
+   - "About the Data": data/about-the-data.md
+   - "Events": data/events.md
+   - "IDs and URLs on the Web": data/ids-and-urls.md
+   - "Transparency, Authority and Trust": data/transparency-authority-trust.md
+   - "Evidence Records": data/evidence-records.md
+   - "Artifacts": data/artifacts.md
+   - "Reports": data/reports.md
+   - "Time": data/time.md
+   - "Updates": data/updates.md
  - "The Service":
    - "The Event Data Service": service/ced-service.md
    - "Query API": service/query-api.md
    - "Quick Start": service/quickstart.md
-   - "Status Service": service/status-service.md
+   - "Reports Service": service/reports-service.md
    - "Evidence Registry": service/evidence-registry.md
    - "Artifact Registry": service/artifact-registry.md
- - "Concepts":
-   - "IDs and URLs on the Web": concepts/ids-and-urls.md
-   - "Sources and Agents": concepts/sources-and-agents.md
-   - "Time": concepts/time.md
-   - "Trustworthiness and Quality": concepts/trustworthiness-and-quality.md
  - "Sources":
-   - "Crossref": sources/crossref.md
-   - "DataCite": sources/datacite.md
+   - "How Sources and Agents Work": sources/how-agents-work.md
+   - "Crossref Metadata": sources/crossref.md
+   - "DataCite Metadata": sources/datacite.md
    - "Newsfeed": sources/newsfeed.md
    - "Reddit": sources/reddit.md
    - "Twitter": sources/twitter.md

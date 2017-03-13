@@ -12,7 +12,7 @@ Crossref Event Data monitors and corrects links to scholarly content that we fou
 ## Events
 
 
-Every time we notice that there is a new relationship between a piece of Registered Content and something out in the web, we record as an individual Event. We gather Events from a wide range of sources, but examples include:
+Every time we notice that there is a new relationship between a piece of Registered Content and something out in the web, we record that as an individual Event. We gather Events from a wide range of sources, but examples include:
 
  - an article was linked from DataCite dataset via its Crossref DOI
  - an article was referenced in Wikipedia using its Crossref DOI
@@ -73,9 +73,7 @@ The Query API allows you to collect Event Data in bulk, and to check up to make 
 
 ## Reliability and Monitoring
 
-*This feature will be available at launch.*
-
-We will provide a Status Service which will show how each component in the system and each external source is functioning. CED integrates with a number of external Data Sources, and is transparent about how we interact with them.
+The Reports Service shows how each component in the system and each external source is functioning. CED integrates with a number of external Data Sources, and is transparent about how we interact with them.
 
 ## Interpretation
 

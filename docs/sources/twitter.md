@@ -6,9 +6,10 @@
 | Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Produces relation types   | `discusses` |
-| Freshness                 | continual |
+| Freshness                 | Delay of up to 1 hour |
 | Data Source               | Twitter via Gnip |
-| Coverage                  | All DOIs, all known Landing Pages |
+| Coverage                  | All tweets that mention current DOI prefix list or landing page domain list |
+| Identifies links by       | Linked DOIs, unlinked DOIs, linked landing page domains |
 | Relevant concepts         | [Pre-filtering](#pre-filtering) |
 | Operated by               | Crossref |
 | Agent                     | event-data-twitter-agent |
