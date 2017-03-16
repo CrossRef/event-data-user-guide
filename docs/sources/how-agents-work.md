@@ -24,7 +24,7 @@ Some Agents consume data from a specific source and then pass it on to the Perco
 
 ![Event journeys](../images/journeys.png)
 
-The documentation for each source is decribed in terms of the Events that it produces, but you should be aware that Events are produced by the Agent and the Percolator working together. You can read more on the [Percolator](percolator) page.
+The documentation for each source is described in terms of the Events that it produces, but you should be aware that Events are produced by the Agent and the Percolator working together. You can read more on the [Percolator](percolator) page.
 
 <a name="concept-query-entirety"></a>
 ## Sources that must be queried in their entirety

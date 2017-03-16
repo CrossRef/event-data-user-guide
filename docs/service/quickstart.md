@@ -1,5 +1,9 @@
 # Quick Start
 
+> **Note: Until we launch Beta no data will be available in the API.**
+> 
+> Please contact eventdata@crossref.org and we'll let you know.
+
 Please ensure you have read [The Service](service) and [Concepts](concepts) before using this data for anything serious! Additionally, you should consult the documentation for each Source you intend to use.
 
 Most of the time you will want to grab the dataset in bulk, or for a paricular source, or a particular DOI prefix. You can then filter it, load it into your own data store, etc. Check the [Crossref blog](https://www.crossref.org/categories/event-data/) for ideas. We collect a few tens of thousands of Events per day, so that can weigh in at over 10MB of data per day. Bear this in mind if you point a browser at the URLs.

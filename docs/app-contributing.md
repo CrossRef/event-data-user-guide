@@ -12,7 +12,7 @@ We would love to help you develop your Push Source.
 
 ### Authorization
 
-All authorization is done with JWT. We will send you a token for staging and when you are ready, another one for production.
+All authorisation is done with JWT. We will send you a token for staging and when you are ready, another one for production.
 
 ### Sending Events to the Bus
 
@@ -21,7 +21,7 @@ If you can create ready-made Events, send them directly to the Event Bus. This i
  - https://bus-staging.eventdata.crossref.org/events
  - https://bus.eventdata.crossref.org/events
 
-You will recieve an HTTP 201 on success.
+You will receive an HTTP 201 on success.
 
 The [Event Bus is open source and available on Github](https://github.com/crossref/event-data-event-bus).
 

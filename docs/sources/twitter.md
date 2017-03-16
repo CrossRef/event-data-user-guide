@@ -24,7 +24,7 @@ The Agent monitors the Twitter PowerTrack firehose. It queries for Tweets that l
 
 ## Where data comes from
 
- - The `domain-list` artifact is used to construct rues.
+ - The `domain-list` Artifact is used to construct rues.
  - The Twitter PowerTrack API.
 
 ## Example Event

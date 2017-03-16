@@ -32,7 +32,7 @@ The Wikipedia EventStream sends a list of edits to Articles. The Percolator visi
 
 ## Methodology
 
-1. The Wikipdia Agent subcribes to the EventStream
+1. The Wikipedia Agent subscribes to the EventStream
 2. Every edit to every Article, that version of the Article is sent to the Percolator.
 3. The Percolator visits every page version. If the new version has any Items in it, referenced by DOI text, DOI hyperlink or landing page URL, it will create a new Event for every link. Events reference the specific version of the Wikipedia page.
 4. An Event that links the version of the page to the canonical URL using the `is_new_version_of` relation type will be produced under certain circumstances. This is provided as a courtesy for consumers of data who may wish to connect DOIs back to the canonical URL of the page. The link will be generated if either:
@@ -54,7 +54,7 @@ The Wikipedia EventStream sends a list of edits to Articles. The Percolator visi
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
  - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
  - The stream has no catch-up. If the agent is disconnected (which can happen from time to time), then edit events may be missed.
- - The RESTBase API occasionally does not contain the edit mentioned in the change. Although the Agent will retry several times, if it repeatedly receives an error for retriving either the old or the new versions, no event will be returned. This will be recorded in the Evidence Record as an empty input.
+ - The RESTBase API occasionally does not contain the edit mentioned in the change. Although the Agent will retry several times, if it repeatedly receives an error for retrieving either the old or the new versions, no event will be returned. This will be recorded in the Evidence Record as an empty input.
 
 ## Further information
 

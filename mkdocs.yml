@@ -35,8 +35,8 @@ pages:
    - "Wordpress.com": sources/wordpress-dot-com.md
    - "Percolator": sources/percolator.md
  - "Connecting to Your System": 
-   - "Graph Database: Neo4J": connecting/graph-neo.md
-   - "JSON Document Store: MongoDb": connecting/json-document-mongo.md
+   - "Graph Database: Neo4J": connecting/graph-database.md
+   - "JSON Document Store: MongoDb": connecting/json-document-store.md
    - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
    - "Streaming: Spark": connecting/streaming-spark.md
    - "Lagotto": connecting/lagotto.md

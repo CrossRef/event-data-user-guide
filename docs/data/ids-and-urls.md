@@ -28,7 +28,7 @@ If you are a publisher, refer to the [Best Practice for Publishers](../best-prac
 
 ## You might want to know the difference
 
-When we match an Event becuase someone discussed an Item using its DOI, the only processing that takes place is normalizing the DOI and checking that it exists. You can see the full process in the Evidence Record for that Event, even though there's not much to it.
+When we match an Event because someone discussed an Item using its DOI, the only processing that takes place is normalising the DOI and checking that it exists. You can see the full process in the Evidence Record for that Event, even though there's not much to it.
 
 When we match an Event because someone used a Landing Page, the Agent has to do some work to match it to a DOI. When we do this, we are making an implicit assertion that "this landing page is for this DOI". We are confident in the accuracy of our Agents, but it's important to understand that this is an automated process and might not be 100% reliable.
 
@@ -57,7 +57,7 @@ The reverse is true: sometimes two DOIs point to the same landing page. This can
 
 We periodically scan our DOIs, take a sample and find the domains that are used by Publishers. This is documented in our Artifacts, which have versions and date stamps. We therefore might miss events in the time between a new domain being used and the Artifact being updated.
 
-If a publisher stops using an article landing page domain we will not remove it from the list. Agents may at any time go back and re-process old data, or recieve dumps of historical data. People may retweet old tweets that point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows.
+If a publisher stops using an article landing page domain we will not remove it from the list. Agents may at any time go back and re-process old data, or receive dumps of historical data. People may retweet old tweets that point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows.
 
 ### We don't match all domains
 
@@ -90,7 +90,7 @@ If we follow the DOI URL, we see the following chain of redirects.
 In cases like this, the final Landing Page is different to that registered with Crossref, so we can't know without following it. 
 
 
-In some cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. For example, trying to resolve the anonymyzed DOI `10.XXX/YYY.06.008` without cookies enabled produces:
+In some cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. For example, trying to resolve the anonymised DOI `10.XXX/YYY.06.008` without cookies enabled produces:
 
 | URL | Comment |
 |-----|---------|

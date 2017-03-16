@@ -6,7 +6,7 @@
 
 ### Altmetrics
 
- [From Wikipedia](https://en.wikipedia.org/wiki/Altmetrics): In scholarly and scientific publishing, altmetrics are non-traditional metrics proposed as an alternative to more traditional citation impact metrics, such as impact factor and h-index. Proposed as generalization of article level metrics.
+ [From Wikipedia](https://en.wikipedia.org/wiki/Altmetrics): In scholarly and scientific publishing, altmetrics are non-traditional metrics proposed as an alternative to more traditional citation impact metrics, such as impact factor and h-index. Proposed as generalisation of article level metrics.
 
 ### Landing Page
 
@@ -14,7 +14,7 @@
 
 ### Data Source
 
- The provenance or type of Event Data. Data Sources include Wikipedia, Mendeley, Crossref, DataCite etc. A source is different to an agent, which is a piece of software that fetches data for a particular Data Source.
+ The provenance or type of Event Data. Data Sources include Wikipedia, Crossref, DataCite etc. A source is different to an agent, which is a piece of software that fetches data for a particular Data Source.
 
 ### Event UUID
 
@@ -22,7 +22,7 @@
 
 ### Registration Agency
 
- An organization that assigns DOIs. For example, Crossref and DataCite.
+ An organisation that assigns DOIs. For example, Crossref and DataCite.
 
 ### Registered Content
 
@@ -64,7 +64,7 @@
 
 ### NISO
 
- National Information Standards Organization. A standards body who have created a Code of Conduct for altmetrics.
+ National Information Standards Organisation. A standards body who have created a Code of Conduct for altmetrics.
 
 ### ORCiD
 

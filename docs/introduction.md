@@ -53,7 +53,7 @@ Events from every Data Source take many forms, but they have a common set of att
 
 Data comes from a wide range of sources and each source is subject to different types of processing. Transparency of each piece of Event Data is crucial: *where* it came from, *why* it was selected, and *how* it was processed and by *whom*.
 
-Every Event starts its journey somewhere, usually in an external source. Data from that external source is processed and analyzed, and, if we're lucky, one or more Events are created. The entire process is transparent: what data we were working from, what we extracted and how, and how that relates to each Event. Nearly all Events that Crossref generates are linked back to an Evidence Record, which documents its journey.
+Every Event starts its journey somewhere, usually in an external source. Data from that external source is processed and analysed, and, if we're lucky, one or more Events are created. The entire process is transparent: what data we were working from, what we extracted and how, and how that relates to each Event. Nearly all Events that Crossref generates are linked back to an Evidence Record, which documents its journey.
 
 <img src='../images/introduction-evidence-flow.png' alt='Event Data Evidence Flow' class='img-responsive'>
 

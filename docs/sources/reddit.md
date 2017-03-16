@@ -56,7 +56,7 @@ The Reddit API provides access to conversations that happen on Reddit.
 
 On a regular basis (approximately every six hours) the Reddit Agent starts a scan. Each scan:
 
-1. It downloads a copy of the latest version of the `domain-list` artifact.
+1. It downloads a copy of the latest version of the `domain-list` Artifact.
 2. For every domain in the domain list (including doi.org):
     1. It queries the Reddit API for all activities that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
     2. Every response from the Reddit API includes the text of the comment and the URL.

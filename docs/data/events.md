@@ -3,7 +3,7 @@
 Events are extensible but have a core set of fields. The reference a subject and an objet via a Persistent Identifier, or PID. For Registered Content, the PID is the DOI. For arbitrary webpages, this is the URL of the webpage.
 
  - `subj_id` - the subject PID
- - `relation_type_id` - the type of the relationshpi between the subject and object
+ - `relation_type_id` - the type of the relationship between the subject and object
  - `obj_id` - the object PID
  - `timestamp` - ISO 8601 UTC Z timestamp of when the Event entered CED
  - `occurred_at` - ISO 8601 UTC Z timestamp of when the Event is reported to have occurred
@@ -23,4 +23,4 @@ In addition to this, there may be a `subj` and `obj` field that represent the bi
  - `author` - author of the comment, blog etc
  - `url` - URL where this was found
 
-We typically only include metadata that you are unable to get elsewhere. Where the subject or object is a DOI, we will not include the metadata because you can easily look it up using the Crossref or DataCite APIs and it could go out of date if recorded. We also store a large amount of metadata associated with each DOI, and including it all would baloon the data to many times its size.
+We typically only include metadata that you are unable to get elsewhere. Where the subject or object is a DOI, we will not include the metadata because you can easily look it up using the Crossref or DataCite APIs and it could go out of date if recorded. We also store a large amount of metadata associated with each DOI, and including it all would balloon the data to many times its size.

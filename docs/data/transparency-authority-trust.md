@@ -85,7 +85,7 @@ CED solves this by taking an **Evidence First** approach. For every piece of ext
 
 <img src="../../images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
 
-Evidence is important because it bridges the gap between generic primary Data Providers, such as Twitter, with the specialized Events in CED. They explain not only what data were used to construct an Event, but also the process by which the Event was created. Providing this explanation pinpoints the precise meaning of the Event within the individual context it comes from.
+Evidence is important because it bridges the gap between generic primary Data Providers, such as Twitter, with the specialised Events in CED. They explain not only what data were used to construct an Event, but also the process by which the Event was created. Providing this explanation pinpoints the precise meaning of the Event within the individual context it comes from.
 
 A number data providers (including, for example, CED) may produce equivalent data. Evidence enables two events from different providers to be compared and helps to explain any discrepancies. It allows the consumer to check whether they were working from the same input data, and whether they processed it the same way.
 
@@ -97,7 +97,7 @@ Evidence bridges the gap between external data in a custom format and the result
  - the format of the data, which is in some external format and needs to be processed into to Events
  - the fact that the original Data Source is controlled by a different party than the Agent that produces Events
 
-Some sources understand and produce Events directly. Examples of these are the Datacite Metadata and Crossref Metadata sources. In these cases, the Events themselves are considered to be Primary Data.
+Some sources understand and produce Events directly. Examples of these are the DataCite Metadata and Crossref Metadata sources. In these cases, the Events themselves are considered to be Primary Data.
 
 We may also accept Events directly from external Data Sources, where the external source runs their own Agent and provides Events as primary data. In this case the Source may not be able or willing to provide any additional evidence beyond the Events themselves.
 

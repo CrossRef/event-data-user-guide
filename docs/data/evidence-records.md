@@ -43,7 +43,7 @@ An Action may have zero or more Observations. For example, a Tweet will have tex
 
 Every Action also has an ID, which is calculated differently for each source. If the same Action is reported twice (e.g. duplicate data is sent from an upstream API), the `duplicate` field will be set on the Action, showing a link to the previous Evidence Record where the action occurred. When a Duplicate Action happens, no Events are extracted.
 
-Note that this is not a guarantee that the same 'thing' may be observed in different Events. It is possible that two Agents independenly see the same thing and report on it. If, for example, a Reddit page appeared in an RSS feed, it might be picked up by both the Reddit and the Newsfeed agents, producing two Events. In each case, the Agent, source ID, and supporting Evidence Record would be different, and describe the process by which the Event came into being.
+Note that this is not a guarantee that the same 'thing' may be observed in different Events. It is possible that two Agents independently see the same thing and report on it. If, for example, a Reddit page appeared in an RSS feed, it might be picked up by both the Reddit and the Newsfeed agents, producing two Events. In each case, the Agent, source ID, and supporting Evidence Record would be different, and describe the process by which the Event came into being.
 
 Actions are collected together into pages of lists of Actions. This model suits all Agents:
 
@@ -52,7 +52,7 @@ Actions are collected together into pages of lists of Actions. This model suits 
 
 Finally, there are always little bits of extra information that come from sources that it's useful to have. The Evidence Record, Page and Action objects can all have an `extra` field to accommodate these.
 
-When Events are succesfully extracted, they are included along with the Action that gave rise to them. They are then sent through the Event Data system for you to consume.
+When Events are successfully extracted, they are included along with the Action that gave rise to them. They are then sent through the Event Data system for you to consume.
 
 The Event Data Bot spends a lot of time visiting webpages on behalf of Event Data Agents. Every Evidence Record contains a log of all of the URLs that were visited, and the HTTP status codes that were received. If you see an inconsistency in the processing of an Event Record, you can look at the log to see if it was caused by an external URL timing out, blocking the agent etc.
 
@@ -220,7 +220,7 @@ Subject metadata is included.
                     "url": "http://www.ams.org/journals/bull/2008-45-04/S0273-0979-08-01223-8/home.html"
                   },
                   
-Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent IDentifier), as all pieces of Registered Content are in CED. However, the URL field demonstrates that we actually found a link to the Article via its landing page.
+Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent Identifier), as all pieces of Registered Content are in CED. However, the URL field demonstrates that we actually found a link to the Article via its landing page.
                   
                   "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f",
                   

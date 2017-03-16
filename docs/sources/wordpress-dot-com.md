@@ -35,9 +35,9 @@ The Agent monitors the Wordpress API for blog posts that mention Items via DOI l
 
 On a regular basis (approximately every six hours) the Wordpress Agent starts a scan. Each scan:
 
-1. It downloads a copy of the latest version of the `domain-list` artifact.
+1. It downloads a copy of the latest version of the `domain-list` Artifact.
 2. For every domain in the domain list (including doi.org):
-    1. It queries the Wrodress API for blog posts that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
+    1. It queries the Wordpress API for blog posts that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
     2. Every response from the Wordpress API includes a link to a blog post. This link is sent to the Percolator.
     3. The Percolator follows the link and looks at the HTML of the page.
 
@@ -58,7 +58,7 @@ Note that this only monitors blogs hosted on Wordpress' hosted wordpress.com pla
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
  - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
  - Wordpress.com may block the Agent
- - Wordpress.com may block the Percoaltor Bot
+ - Wordpress.com may block the Percolator Bot
 
 ## Further information
 

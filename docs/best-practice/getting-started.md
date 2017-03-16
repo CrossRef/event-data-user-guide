@@ -11,7 +11,7 @@ So you've read and understood the CED user Guide. How do you actually get starte
     - If you want to do a one-off query, you may be interested in the `occurred` view.
     - If you want to maintain an up-to-date database, you may be interested in the `collected` view.
     - If you are interested in on-going data, you should decide how often you want to pull data from the API.
-    - If you use the `occurred` view for a particular date, you should be aware that events that occured on that date may be collected in future.
+    - If you use the `occurred` view for a particular date, you should be aware that events that occurred on that date may be collected in future.
 3. Decide what you want to actually do with the data.
     - If you want to monitor for events, a time-series database may be of use.
     - If you want to collect data for later, a JSON document store may be of use.
@@ -24,7 +24,7 @@ So you've read and understood the CED user Guide. How do you actually get starte
     - If you're going to publish research, you should aim to update the data before publication to ensure the data you're working with is as accurate as possible.
     - If you're creating derivative one-off results, you should consider if it's important to keep these up to date.
 2. Decide on an appropriate data transparency plan.
-    - If you're deriving further analysis, such as for research or for an open platform, you should consider tracability of your outputs back to the Events you recieved.
+    - If you're deriving further analysis, such as for research or for an open platform, you should consider traceability of your outputs back to the Events you received.
 3. Select an appropriate query for the Query API based on what data you want to get.
 
 ## Collect data
@@ -32,7 +32,7 @@ So you've read and understood the CED user Guide. How do you actually get starte
 1. Create the appropriate integration for your use case. This may be:
     - a one-off import
     - a daily job to ingest the new data
-1. Remeber to stick to your data management plan and poll for updated data.
+1. Remember to stick to your data management plan and poll for updated data.
 2. If you are performing analysis, consult the Status Service for any background issues or factors that may have affected the collection of data.
 
 ## Feedback

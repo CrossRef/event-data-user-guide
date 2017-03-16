@@ -22,7 +22,7 @@ The [Evidence In Depth](evidence-in-depth) section describes the complete audit 
 
 ### 6: Describe how data are aggregated
 
-Data is not aggreated.
+Data is not aggregated.
 
 ### 7: Detail how often data are updated.
 
@@ -42,7 +42,7 @@ There is only one version of the data. All consumers receive the same data regar
 
 ### 11: Describe the data-quality monitoring process.
 
-The Evidence Service allows anyone to perform audits on Event Data. The Status Service monitors the performance and activity of all parts of the system. We will run an automatic service to analyze the outputs to ensure they correlate to the inputs.
+The Evidence Service allows anyone to perform audits on Event Data. The Status Service monitors the performance and activity of all parts of the system. We will run an automatic service to analyse the outputs to ensure they correlate to the inputs.
 
 ### 12: Provide a process by which data can be independently verified.
 

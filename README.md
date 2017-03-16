@@ -6,6 +6,10 @@ To build:
 
     mkdocs build
 
+To upload:
+
+    aws s3 sync site s3://event-data-www/guide/
+
 ## License
 
 Copyright © Crossref

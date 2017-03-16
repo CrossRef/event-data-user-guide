@@ -1,4 +1,4 @@
-# Appendix: FAQ and Glossary
+# Appendix: FAQ
 
 [TOC]
 
@@ -48,7 +48,7 @@ The Query API is currently the only way to access data.
 
 ### Does CED work with Multiple Resolution?
 
-We plan to address and clarfiy how CED relates to Multiple Resolution in future.
+We plan to address and clarify how CED relates to Multiple Resolution in future.
 
 ### Does Event Data work with DOIs that include emoticons?
 

@@ -1,17 +1,17 @@
 # About the Data
 
-The Crossref Event Data is centered around Events, but contains supporting data and metadata. You will find:
+The Crossref Event Data is centred around Events, but contains supporting data and metadata. You will find:
 
  - Events, which record activity
  - Evidence Records, which provide an evidence trail
- - Artifacts, whihc show some of the inputs that were used
+ - Artifacts, which show some of the inputs that were used
  - Reports, which document the behaviour of the system
 
 This section describes in detail exactly what data exists in CED, and what you should bear in mind when using it.
 
 ## Where the data comes from
 
-Data comes from different sources, via different routes. For some sources, like Crossref Metadata and DataCite Metadata, we recieve Events directly from the source. For others, we operate a bot to go and look for Events.
+Data comes from different sources, via different routes. For some sources, like Crossref Metadata and DataCite Metadata, we receive Events directly from the source. For others, we operate a bot to go and look for Events.
 
 ![Event journeys](../images/journeys.png)
 
@@ -25,7 +25,7 @@ Crossref Event Data is a system for capturing data about non-traditional interac
 
 "Webpages" represent a wide variety of things. CED is interested in non-traditional scholarship, so the bot avoids websites that belong to members of Crossref and DataCite. We maintain a list of domains that the Event Data Bot will not visit because we know they belong to Publishers. This exclusion is done on a best-effort basis.
 
-We exlude other webpages that we believe are part of databases, library systems etc. As we monitor a potentially limitless set of websites, this with is done with heuristics, again on a best-effort basis.
+We exclude other webpages that we believe are part of databases, library systems etc. As we monitor a potentially limitless set of websites, this with is done with heuristics, again on a best-effort basis.
 
 <a name="data-sources"></a>
 ## Data Sources

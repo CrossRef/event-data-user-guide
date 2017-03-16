@@ -42,6 +42,6 @@ Some Publisher sites require JavaScript to be enabled, and don't show any conten
 **Actions:**
 
 - Allow your site to be accessed without JavaScript.
-- If you are unable to do do this, at least include the <meta name="dc.identifier">` tag in the HTML header.
+- If you are unable to do do this, at least include the `<meta name="dc.identifier">` tag in the HTML header.
 
 

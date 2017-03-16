@@ -15,7 +15,7 @@ When you write a client to work with the API it should be able to deal with resp
 
 ### Two points of view
 
-Every Event ocurred at point in time, and was collected at a different point in time. Both of these dates are useful to you. You can read about this in more depth in [Occurred-at vs collected-at](concepts#concept-timescales). The Query API therefore provides two **views**: `collected` and `occurred`.
+Every Event occurred at point in time, and was collected at a different point in time. Both of these dates are useful to you. You can read about this in more depth in [Occurred-at vs collected-at](concepts#concept-timescales). The Query API therefore provides two **views**: `collected` and `occurred`.
 
 You may want to use `collected` when:
 
