@@ -10,35 +10,33 @@ Most of the time you will want to grab the dataset in bulk, or for a paricular s
 
 This quick start is going to show you how to fetch data and then do some rudimentary querying with it using the popular [JQ tool](https://stedolan.github.io/jq/).
 
-Data is available on a per-day basis. To fetch everything that was collected on the 21st of February 2017 (14,815 Events):
+Data is available on a per-day basis. To fetch 10,000 Events from Event Data, collected at any time:
 
-      curl https://query.eventdata.crossref.org/collected/2017-02-27/events.json > 2017-02-21.json
+    curl "https://query.eventdata.crossref.org/events?rows=10000" > all-events.json
 
-That gives us all 10,760 events that were collected on that day.
+That returns 10,000 events (out of a possible 1,363,971 at the time of writing).
 
-If you're only interested in Reddit (25 Events), you can filter that:
+If you're only interested in Reddit, you can filter that:
 
-    curl https://query.eventdata.crossref.org/collected/2017-02-27/sources/reddit/events.json > 2017-02-21-reddit.json
+    curl "https://query.eventdata.crossref.org/events?rows=10000&filter=source:reddit" > reddit-events.json
 
-If you're only interested in PLOS articles (981 Events), you can filter by their prefix:
+If you're only interested in PLOS articles (4013 Events), you can filter by their prefix:
 
-    curl  https://query.eventdata.crossref.org/collected/2017-02-27/prefixes/10.1371/events.json > 2017-02-21-plos.json
+    curl "https://query.eventdata.crossref.org/events?rows=10000&filter=source:reddit,prefix:10.1371" > reddit-plos.json
 
-Now you've got a day's worth of data to crunch. Let's continue with the whole day's worth.
+Now you've got a few thousand Events to crunch.
 
 We can pipe it through `jq` to format it nicely. I've cut its head off at 28 lines:
 
-    $ jq . 2017-02-21.json | head -n 28
+
+    $ jq . reddit-plos.json | head -n 28
     {
-      "meta": {
-        "status": "ok",
-        "message-type": "event-list",
-        "total": 14815,
-        "total-pages": 1,
-        "page": 1,
-        "previous": "https://query.eventdata.crossref.org/collected/2017-02-26/events.json",
-        "next": "https://query.eventdata.crossref.org/collected/2017-02-28/events.json"
-      },
+      "status": "ok",
+      "message-type": "event-list",
+      "message": {
+      "next-cursor": "00efbd43-5140-4bbb-969d-0d4d8ee5f8d5",
+      "total-results": 4013,
+      "items-per-page": 10000,
       "events": [
         {
           "obj_id": "https://doi.org/10.1007/s00266-017-0820-4",
@@ -57,8 +55,9 @@ We can pipe it through `jq` to format it nicely. I've cut its head off at 28 lin
             "original-tweet-url": "http://twitter.com/UrgoTouch_es/statuses/836203902781517829",
             "original-tweet-author": "http://www.twitter.com/UrgoTouch_es"
           },
+    }
 
-Note the previous and next links. You can use these to navigate your query back and forward through time on the API.
+Note the `cursor`. You can use these to navigate your query back and forward through time on the API.
 
 I'm going to use JQ to select the `events`, then I'm going to return all of the distinct source names.
 
