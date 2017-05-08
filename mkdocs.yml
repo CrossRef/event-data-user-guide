@@ -10,12 +10,14 @@ pages:
    - "About the Data": data/about-the-data.md
    - "Events": data/events.md
    - "IDs and URLs on the Web": data/ids-and-urls.md
+   - "Event Data as a Graph Data Structure": data/graph.md
    - "Transparency, Authority and Trust": data/transparency-authority-trust.md
    - "Evidence Records": data/evidence-records.md
    - "Artifacts": data/artifacts.md
    - "Reports": data/reports.md
    - "Time": data/time.md
    - "Updates": data/updates.md
+   - "Duplication and Redundancy": data/duplication.md
  - "The Service":
    - "The Event Data Service": service/ced-service.md
    - "Query API": service/query-api.md
@@ -35,7 +37,7 @@ pages:
    - "Wordpress.com": sources/wordpress-dot-com.md
    - "Percolator": sources/percolator.md
  - "Connecting to Your System": 
-   - "Graph Database: Neo4J": connecting/graph-database.md
+   - "Connecting CED to a Graph Database": connecting/graph-database.md
    - "JSON Document Store: MongoDb": connecting/json-document-store.md
    - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
    - "Streaming: Spark": connecting/streaming-spark.md

@@ -9,6 +9,10 @@ The Crossref Event Data is centred around Events, but contains supporting data a
 
 This section describes in detail exactly what data exists in CED, and what you should bear in mind when using it.
 
+## Why Events?
+
+The Event Data service includes data from a diversity of sources and styles. TODO
+
 ## Where the data comes from
 
 Data comes from different sources, via different routes. For some sources, like Crossref Metadata and DataCite Metadata, we receive Events directly from the source. For others, we operate a bot to go and look for Events.

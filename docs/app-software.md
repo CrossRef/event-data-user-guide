@@ -26,3 +26,12 @@ Crossref Event Data uses a collection of software. It is all open source.
 | Query API Server          | Serve up the Query API                                          |https://github.com/CrossRef/event-data-query-api-server           | jwass@crossref.org  |
 
 Check the 'Connecting to your system' page for advice on ingesting Event Data into your own software. 
+
+## Data flow through the system
+
+This chart shows the flow of data through the system. A [PDF](/images/ced-data-flow.pdf) shows more detail.
+
+![Event Data Flows](/images/ced-data-flow.png)
+
+
+
