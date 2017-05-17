@@ -41,7 +41,7 @@ Every source has different characteristics which must be taken into account when
 
 ## Repeated Observations
 
-TODO
+The Web agent may check the same webpage more than once over time. In this case it may make the same observations repeatedly. If you find an Event that a duplicate or very similar to one made a while ago, this may be the reason.
 
 ## Crossref Event Data tries not to produce Duplicate Events.
 

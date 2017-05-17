@@ -1,6 +1,6 @@
 # Getting Started
 
-So you've read and understood the CED user Guide. How do you actually get started using Crossref Event Data?
+So you've read and understood the Event Data user Guide. How do you actually get started using Crossref Event Data?
 
 ## Intentions
 

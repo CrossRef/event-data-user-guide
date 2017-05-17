@@ -1,7 +1,7 @@
 # Time
 
 <a name="concept-timescales"></a>
-## Occurred-at vs collected-at
+## Occurred-at, collected-at and updated-at
 
 Every Event results from an action that was taken at some point in time. This is considered to be the time that the Event 'occurred'. Examples of the 'occurred' field:
 
@@ -17,11 +17,13 @@ Usually Events are collected soon after they occur, but we make no guarantees. F
 
 Every Event also has a 'collected' time. This is the time when the Agent submitted an Event to the Event Data Service. Depending on load, there may be a delay between when the Agent ingested some data and when it was timestamped. 
 
-These two dates are represented as the `occurred_at` and `timestamp` fields on each Event. The Query API has two views which allow you to find Events filtered by both timescales.
+We try to avoid changing an Event after it has been collected, but in some circumstances, for example when we are contractually obliged to, we will edit an Event. Read more in [Updates](/data/updates). 
+
+These three dates are represented as the `occurred_at`, `timestamp` and `updated_date` fields on each Event. The Query API has two views which allow you to find Events filtered by both `occurred_at` and `timestamp` timescales. It also lets you query for Events that have been updated since a given date.
 
 ### Using the Query API over time
 
-The Query API is updated every day. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a day's worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited in exceptional circumstances). 
+The Query API is updated every day. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a day's worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited for compliance reasons). 
 
 The Query API also contains an `occurred` view. This returns Events based on the date they **occurred** on. Because Events can be collected some time after they occurred, the data in this view can change.
 
@@ -42,3 +44,7 @@ The downside of this is that you will not be able to find Events that occurred o
 The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query URL will change over time, so you can't rely on the dataset to be stable and citable.
 
 The timestamp field is available on all Events, so you can see when they were collected and added to the dataset for a given day.
+
+### Updates
+
+Update dates are cross-cutting. You can issue a query that simultaneously specifies collected dates, occurred dates and update dates. If you store the result of a query in a database you should periodically re-run the query, along with the `from-updated-date` of the last time you ran the query, to refresh your data with Events that were updated since the last time you ran it.

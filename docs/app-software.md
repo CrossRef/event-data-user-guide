@@ -15,7 +15,7 @@ Crossref Event Data uses a collection of software. It is all open source.
 | Percolator                | Produces Evidence and Events from data Agents send              | https://github.com/CrossRef/event-data-percolator                | jwass@crossref.org  |
 | Wordpress.com Agent       | Agent to monitor Wordpress.com for Events.                      | https://github.com/crossref/event-data-wordpressdotcom-agent     | jwass@crossref.org  |
 | Twitter Compliance Logger | Collect Compliance events to ensure we abide by them            | https://github.com/CrossRef/event-data-twitter-compliance-logger | jwass@crossref.org  |
-| Event Data Integration    | End-to-end demonstration of the CED internal system with Docker | https://github.com/CrossRef/event-data-integration               | jwass@crossref.org  |
+| Event Data Integration    | End-to-end demonstration of the Event Data internal system with Docker | https://github.com/CrossRef/event-data-integration               | jwass@crossref.org  |
 | Crossref Agent Framework  | Clojure framework for Crossref Agents                           | https://github.com/CrossRef/event-data-agent-framework           | jwass@crossref.org  |
 | Newsfeed Agent            | Agent to monitor newsfeeds for blogs (RSS, Atom) for Events     | https://github.com/crossref/event-data-newsfeed-agent            | jwass@crossref.org  |
 | Event Data Reports        | Create daily reports on internal system activity                | https://github.com/CrossRef/event-data-reports                   | jwass@crossref.org  |
@@ -29,9 +29,9 @@ Check the 'Connecting to your system' page for advice on ingesting Event Data in
 
 ## Data flow through the system
 
-This chart shows the flow of data through the system. A [PDF](/images/ced-data-flow.pdf) shows more detail.
+This chart shows the flow of data through the system. A [PDF](/images/Event Data-data-flow.pdf) shows more detail.
 
-![Event Data Flows](/images/ced-data-flow.png)
+![Event Data Flows](/images/Event Data-data-flow.png)
 
 
 

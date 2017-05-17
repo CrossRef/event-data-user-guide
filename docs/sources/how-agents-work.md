@@ -3,7 +3,7 @@
 <a name="concept-relevant-source"></a>
 ### Sources that send only relevant Data
 
-Some sources, such as "DataCite Metadata" and "Crossref Metadata" are specialists in the Scholarly Publishing space. They send data to CED, and each item of Data that is sent can be converted into an Event. This is highly efficient, as it means that no data or time is wasted.
+Some sources, such as "DataCite Metadata" and "Crossref Metadata" are specialists in the Scholarly Publishing space. They send data to Event Data, and each item of Data that is sent can be converted into an Event. This is highly efficient, as it means that no data or time is wasted.
 
 <a name="concept-pre-filtering"></a>
 ## Pre-filtering URLS by their Domain

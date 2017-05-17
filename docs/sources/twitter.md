@@ -81,7 +81,7 @@ The Twitter agent batches Tweets up into small chunks, one chunk per Evidence Re
 
 Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
-When a Tweet or Twitter User is deleted we are obliged to delete the data from CED. When this happens we will edit the Event and delete the following fields:
+When a Tweet or Twitter User is deleted we are obliged to delete the data from Event Data. When this happens we will edit the Event and delete the following fields:
 
  - `subj_id` - the ID of the tweet
  - `subj` - including the author and ID of the tweet

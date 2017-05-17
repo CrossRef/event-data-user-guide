@@ -19,7 +19,7 @@ Links from DataCite's bibliographic metadata to Crossref DOIs. Such links are us
 
 ## What it does
 
-The Agent monitors deposits as they come in from DataCite members and sends any links to DataCite DOIs into CED.
+The Agent monitors deposits as they come in from DataCite members and sends any links to DataCite DOIs into Event Data.
 
 ## Where data comes from
 
@@ -45,11 +45,11 @@ Metadata deposits from Crossref members, usually publishers.
 2. The agent monitors new deposits (or back-fills).
 3. When a link is found an Event is created if:
     - it is to a non-DataCite DOI
-    - it has not already been reported to CED
+    - it has not already been reported to Event Data
 
 ## Evidence Record
 
-No evidence record is created because the events come straight from the data source into CED.
+No evidence record is created because the events come straight from the data source into Event Data.
 
 ## Edits / Deletion
 

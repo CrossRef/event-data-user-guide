@@ -2,11 +2,11 @@
 
 ### 1: List all available data and metrics (providers and aggregators) and altmetric data providers from which data are collected (aggregators).
 
-CED is a platform for collecting event data. The data are gathered through a combination of actively collecting data from non-scholarly sources and allowing scholarly sources to send data. It focuses on events ("these things happened") not aggregations ("this many things happened") or metrics ("you got this score"). You can find the list of Sources in [Sources](service#data-sources).
+Event Data is a platform for collecting event data. The data are gathered through a combination of actively collecting data from non-scholarly sources and allowing scholarly sources to send data. It focuses on events ("these things happened") not aggregations ("this many things happened") or metrics ("you got this score"). You can find the list of Sources in [Sources](service#data-sources).
 
 ### 2: Provide a clear definition of each metric.
 
-Crossref CED reports raw Events, not metrics. The [Sources in Depth](sources-in-depth) provides a detailed discussion of each Source and exactly what Events from the Source means.
+Crossref Event Data reports raw Events, not metrics. The [Sources in Depth](sources-in-depth) provides a detailed discussion of each Source and exactly what Events from the Source means.
 
 ### 3: Describe the method(s) by which data are generated or collected and how data are maintained over time.
 

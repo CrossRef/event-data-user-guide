@@ -1,20 +1,32 @@
 # Event Data
 
-Version 0.7.0 - Pre-beta
+Version 0.1.0RC1 - Nearly Beta!
 
-> **We are aiming to enter Beta test soon. Please contact us if you want to participate.**
->
-> Event Data has not yet launched. Until then, the service described here may not be feature-complete.
-> Contact eventdata@crossref.org if you have any questions or feedback.
+> **We are going to open Beta Testing very soon!**
 
+## A note about Beta:
 
-Welcome to the Crossref Event Data User Guide. It contains everything you need to know about Crossref Event Data (and probably a little more), from a high-level overview down to the details in-depth. **This guide is suitable for everyone**. Hopefully it will provide everything from a gentle introduction right down to the the tiny details. Read the chapters of this guide in order for a complete tour of CED.
+Event Data has not yet launched as a production service, but will available under Beta very soon. This means:
 
-If you're keen to get your hands on the data you can jump straight to the [Quick Start](quick-start) page. Although we will provide Event Data via CC-0 license waiver, we may sometimes need to pass on to you the terms of use or privacy policies directly from our data sources. For example, in order to use the data from Twitter which we provide in Event Data, please ensure you comply with Twitter's [Privacy Policy](https://twitter.com/privacy?lang=en). We also ask you to please ensure you have read our own privacy statement, [Crossref Privacy Policy](https://www.crossref.org/privacy/). Every Event we provide in Event Data will include a DOI which will point you to a page where all the information and links you need regarding re-use will be available. This page will available at Beta launch. 
+- **We'd love to hear from you**. You can email eventdata@crossref.org .
+- It is freely available, but we recommend you contact us to register as a Beta tester so we can keep you in the loop.
+- The service isn't feature-complete and there may be funtionality mentioned in this Guide that is not yet implemented.
+- We cannot guarantee the stability of the service.
+- You may find bugs. If you do, please contact us.
 
-If you want to use CED for whatever reason, you are strongly encouraged to read the entire guide. CED is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it. 
+## This guide is for everyone
 
-**Once you have got an understanding for CED, follow the [Getting Started](best-practice/getting-started) guide to piece it all together**.
+Welcome to the Crossref Event Data User Guide. It's written for **everyone**, and covers everything you need to know (and maybe a little more) from the top-level concepts down to the nuts and bolts. When it gets too technical, stop reading! However, if you plan to integrate Event Data into your service, database or research, you should read the guide in its entirety.
+
+This Guide is a living document, and if you have questions or suggestions you can email eventdata@crossref.org or create issues and pull requests on the Github repository, which is linked at the top of every page.
+
+## Quick Start
+
+If you're keen to get your hands on the data you can jump straight to the [Quick Start](/service/quick-start) page. Please bear in mind that the service is in Beta.
+
+Although we will provide Event Data under open licenses, we may sometimes need to pass on to you the terms of use or privacy policies directly from our data sources. For example, in order to use the data from Twitter which we provide in Event Data, please ensure you comply with Twitter's [Privacy Policy](https://twitter.com/privacy?lang=en). We also ask you to please ensure you have read our own [Crossref Privacy Policy](https://www.crossref.org/privacy/). Every Event we provide in Event Data will include a `terms` and `license` link which will point you to a page where all the information and links you need regarding re-use will be available.
+
+If after the Quick Start you decide to use Event Data, you are strongly encouraged to read the entire Guide. Event Data is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it. 
 
 Click the 'Next' button at the bottom of this page to get started...
 
@@ -30,4 +42,5 @@ Click the 'Next' button at the bottom of this page to get started...
 | 09-November-2016  | 0.5.1   | Joe Wass jwass@crossref.org | Adjusted query API syntax |
 | 22-Feb-2017       | 0.6.1   | Joe Wass jwass@crossref.org | Pre-beta adjustments. Reflects major refactor of services. |
 | 09-Mar-2017       | 0.7.0   | Joe Wass jwass@crossref.org | Complete review of all documentation. Most of it overhauled. |
+| 06-May-2017       | 1.0.0   | Joe Wass jwass@crossref.org | Beta! |
 

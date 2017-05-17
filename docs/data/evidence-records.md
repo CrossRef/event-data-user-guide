@@ -4,59 +4,103 @@ Evidence Records bridge the evidence gap between Events and the external data so
 
 An Evidence Record generally corresponds to a single input or batch of inputs that came from an external API. For example:
 
- - there is one Record per queried domain from the Reddit API
- - Tweets are collected into small batches
+ - There is one Evidence Record per domain query made against the Reddit API.
+ - Tweets are collected into small batches, approximately 10 per Evidence Record.
 
-An Evidence Record may correspond to one or more Events; one Event is linked to zero or one Evidence Records. CED may contain Events for which there is no Evidence, where the Event was provided by an external party. Likewise, if some data was processed and we could not extract Events from it, there will be an Evidence Record with no Events.
+An Evidence Record may correspond to one or more Events; one Event is linked to zero or one Evidence Records. Event Data may contain Events for which there is no Evidence, where the Event was provided by an external party. Likewise, if some data was processed and we could not extract Events from it, there will be an Evidence Record with no Events.
 
 ## Format of Evidence Records
 
-An Evidence Record is a JSON document and it follows a familiar format.
+An Evidence Record is a JSON document and it follows a core extensible format. When an Evidence Record is used to generate an Event, it contains **all** of the information used to create that Event.
 
-An Evidence Record comes from a single Agent, so it includes identifying fields:
+Each Evidence Record comes from a single Agent, so it includes identifying fields:
 
  - `source-token`: a token that uniquely identifies the Agent
  - `source-id`: the source that identifies where the data ultimately came from
  - `agent`: supplementary information about the Agent, such as its version number and the Artifacts that it consumed to produce this Record
 
-An Evidence Record also contains Actions. An example of an Action:
+ An Evidence Record contains Actions. An example of an Action:
 
  - a comment was posted on Reddit
  - a Tweet was published
  - an edit was made to a Wikipedia page
 
-An Action contains information about the thing that happened. This corresponds to the *Subject* of an Event.
+An Action contains information about the thing that happened. This corresponds to the *Subject* of an Event. 
 
  - the URL of the Subject (comment, tweet or page)
  - the relation type that the subject has to anything that we found in it. E.g. a Wikipedia page always `references`, a Tweet always `discusses`
  - the time that the Action is reported to have occurred
  - metadata about the Subject, such as the title
 
-An Action also comes with Observations. Because there are a diverse range of types of input data in CED, different observations can be made. For example:
+### Observations
 
- - a Tweet has text content, in which we want to look for links and possibly convert into DOIs
- - Tweet also has a list of URLs, which we want to possibly convert into DOIs
- - a Newsfeed item from an RSS feed as a URL to the blog, which we want to visit and look for links
- - a Reddit discussion has one URL, which want to possibly convert into a DOI
+Each Action also comes with one or more Observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an Observation:
 
-An Action may have zero or more Observations. For example, a Tweet will have text content, but also a number of links. Sometimes we have to remove the actual input from the Evidence Record, but when we do, the `sensitive` flag is set to `true` and a hash of the message content is included. You are welcome to follow the URL to retrieve the content yourself and compare the hash.
+ - the text of a Tweet (which may contain plaintext DOIs)
+ - the automatically extracted URLs from a Tweet (which could be DOIs or Article Landing pages)
+ - the URL of a Blog Post from an RSS newsfeed (which must be visited to see the content of the blog post)
 
-Every Action also has an ID, which is calculated differently for each source. If the same Action is reported twice (e.g. duplicate data is sent from an upstream API), the `duplicate` field will be set on the Action, showing a link to the previous Evidence Record where the action occurred. When a Duplicate Action happens, no Events are extracted.
+As you can see from the Tweet example, an it's possible to make different observations of different types about the same input. In some cases, such as Twitter, we do not have the permission to include the text, so it is removed before the Evidence Record is saved. In this case the `sensitive` flag on the Evidence Record is set to `true` and a SHA1 hash of the content is included. This means that if you want to verify the Evidence Record you can retrieve the Tweet text yourself and compare the hash. If the hash matches, you know you were working from the same input text as the Agent.
+
+The following Observation types are available:
+
+ - `plaintext` - some text that could contain plain-text DOIs, DOI URLs or Landing Page URLs
+ - `html` - some HTML that could contain plain-text DOIs, DOI URLs or Landing Page URLs
+ - `content-url` - the URL of a webpage that could point to a webpage that could contain plain-text DOIs, DOI URLs or Landing Page URLs
+ - `url` - a URL that could itself be a DOI or Article Landing Page
+
+### Deduplication and Action IDs
+
+Every Action also has an ID, which is generated differently for each source. Action IDs are usually calculated from the URL of the object in question (Tweet URL, blog post URL etc).
+
+If the same Action is reported twice (e.g. duplicate data is sent from the Twitter API, or two different RSS feeds link to the same blog post), the `duplicate` field will be set on the Action, showing a link to the previous Evidence Record where the action occurred. When a Duplicate Action happens, no Events are extracted.
 
 Note that this is not a guarantee that the same 'thing' may be observed in different Events. It is possible that two Agents independently see the same thing and report on it. If, for example, a Reddit page appeared in an RSS feed, it might be picked up by both the Reddit and the Newsfeed agents, producing two Events. In each case, the Agent, source ID, and supporting Evidence Record would be different, and describe the process by which the Event came into being.
 
-Actions are collected together into pages of lists of Actions. This model suits all Agents:
+See [Duplication and Redundancy](/data/duplication) for further discussion.
+
+### Observations to Candidates to Matches to Events
+
+Each Observation may or may not ultimately yield Events. 
+
+The First step is to create a set of Candidates for each Observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an article landing page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
+
+The set of available candidate types are:
+
+ - `doi-url` - a full DOI URL
+ - `pii` - a Publication Item Identifier
+ - `plain-doi` - a text DOI like `10.5555/123456789`
+ - `shortdoi-url` - a shortDOI like `http://doi.org/dvx`
+ - `landing-page-url` - the URL of an Article Landing Page
+
+The next step is to try and match every Candidate into a known DOI. It does this by trying to reverse the Landing Page back into a DOI, and by verifying that every DOI exists and cleaning it up.
+
+Once Matches have been made, they are combined with the information in the Action (for example the subject ID and URL and any bibliographic metadata) to produce Events. When Events are successfully extracted, they are included along with the Action that gave rise to them. They are then sent through the Event Data system for you to consume.
+
+Note that Events do not have a `terms` or `timestamp` field at this point - they are added at the next step of the journey. Also note that Events may be altered between the Evidence Record and the Query API, for example for compliance reasons. You should never take Events directly from Evidence Records, except for verifying the provenance trail.
+
+### Page Structure
+
+Actions are collected together into pages of lists. This model suits all Agents:
 
  - the Reddit API responds to a query with pages of results. Each API page corresponds to a page in the Evidence Record.
  - the Twitter agent always sends a single page containing a batch of Tweet Actions.
 
-Finally, there are always little bits of extra information that come from sources that it's useful to have. The Evidence Record, Page and Action objects can all have an `extra` field to accommodate these.
+ ![Structure of an Evidence Record](../images/evidence-record-structure.png)
 
-When Events are successfully extracted, they are included along with the Action that gave rise to them. They are then sent through the Event Data system for you to consume.
+### Extras
+
+Finally, there are always little bits of extra information that come from sources that it's useful to have. The Evidence Record, Page and Action objects can all have an `extra` field to accommodate these.
 
 The Event Data Bot spends a lot of time visiting webpages on behalf of Event Data Agents. Every Evidence Record contains a log of all of the URLs that were visited, and the HTTP status codes that were received. If you see an inconsistency in the processing of an Event Record, you can look at the log to see if it was caused by an external URL timing out, blocking the agent etc.
 
-![Structure of an Evidence Record](../images/evidence-record-structure.png)
+### Journey
+
+Every Evidence Record goes on a journey from from the initial input, created by the Agent, through to the finished item that you can get from the Registry.
+
+
+![Evidence Record Journey](../images/evidence-record-journey.png)
+
 
 ## Example Evidence Record
 
@@ -220,7 +264,7 @@ Subject metadata is included.
                     "url": "http://www.ams.org/journals/bull/2008-45-04/S0273-0979-08-01223-8/home.html"
                   },
                   
-Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent Identifier), as all pieces of Registered Content are in CED. However, the URL field demonstrates that we actually found a link to the Article via its landing page.
+Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent Identifier), as all pieces of Registered Content are in Event Data. However, the URL field demonstrates that we actually found a link to the Article via its landing page.
                   
                   "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f",
                   
@@ -290,4 +334,4 @@ This one returned the `200 OK` status.
 
 ## Getting Evidence Records
 
-If an Event has an Evidence Record, it will be included in the `evidence` field. Follow this URL to retrieve the Evidence Record from the Evidence Registry.
+If an Event has an Evidence Record, it will be included in the `evidence_record` field. Follow this URL to retrieve the Evidence Record from the Evidence Registry.

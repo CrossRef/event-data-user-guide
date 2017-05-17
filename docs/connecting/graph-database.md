@@ -1,4 +1,4 @@
-# Connecting CED to a Graph Database
+# Connecting Event Data to a Graph Database
 
 Content to follow.
 

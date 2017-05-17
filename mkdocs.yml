@@ -9,7 +9,7 @@ pages:
  - "What's in CED?":
    - "About the Data": data/about-the-data.md
    - "Events": data/events.md
-   - "IDs and URLs on the Web": data/ids-and-urls.md
+   - "IDs and URLs and the Web": data/ids-and-urls.md
    - "Event Data as a Graph Data Structure": data/graph.md
    - "Transparency, Authority and Trust": data/transparency-authority-trust.md
    - "Evidence Records": data/evidence-records.md
@@ -29,13 +29,14 @@ pages:
    - "How Sources and Agents Work": sources/how-agents-work.md
    - "Crossref Metadata": sources/crossref.md
    - "DataCite Metadata": sources/datacite.md
+   - "Hypothes.is": sources/hypothesis.md
    - "Newsfeed": sources/newsfeed.md
    - "Reddit": sources/reddit.md
+   - "StackExchange": sources/stackexchange.md
    - "Twitter": sources/twitter.md
    - "Web": sources/web.md
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
-   - "Percolator": sources/percolator.md
  - "Connecting to Your System": 
    - "Connecting CED to a Graph Database": connecting/graph-database.md
    - "JSON Document Store: MongoDb": connecting/json-document-store.md

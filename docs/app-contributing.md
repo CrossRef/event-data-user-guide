@@ -39,7 +39,7 @@ The [Percolator is open source and available on Github](https://github.com/cross
 
 ### Example 1: Bigipedia
 
-Bigipedia is an online Encyclopedia. It cites DOIs in its reference list for its articles. Its source token is `b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff`. Bigipedia will tell CED every time a DOI is cited, and will send data every time a citation is added.
+Bigipedia is an online Encyclopedia. It cites DOIs in its reference list for its articles. Its source token is `b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff`. Bigipedia will tell Event Data every time a DOI is cited, and will send data every time a citation is added.
 
 In this example, Bigipedia informs us that the DOI is referenced by the article page. Note that because the subject is not a DOI, the metadata must be supplied in the `subj` key. 
 
@@ -60,9 +60,9 @@ In this example, Bigipedia informs us that the DOI is referenced by the article 
 
 ### Example 2: DOI Remember
 
-DOI Remember is a bookmarking service for DOIs. DOI Remember will tell CED how many times each DOI is cited. Every day it will send data for every DOI, stating how many times it is currently bookmarked. Its source token is `366273b5-d3d8-488b-afdc-940bcd0b9b87`.
+DOI Remember is a bookmarking service for DOIs. DOI Remember will tell Event Data how many times each DOI is cited. Every day it will send data for every DOI, stating how many times it is currently bookmarked. Its source token is `366273b5-d3d8-488b-afdc-940bcd0b9b87`.
 
-In this example, DOI Remember tells that as of the 1st of March 2016, 922 people have bookmarked the given DOI. The Subject is the 'DOI Remember' source as a whole. As its URL is not a DOI, subject metadata must be included. CED allows for the year `0000-01-01` for the issue date when it's not meaningful to provide one.
+In this example, DOI Remember tells that as of the 1st of March 2016, 922 people have bookmarked the given DOI. The Subject is the 'DOI Remember' source as a whole. As its URL is not a DOI, subject metadata must be included. Event Data allows for the year `0000-01-01` for the issue date when it's not meaningful to provide one.
     
     $ curl "http://bus.eventdata.crossref.org/events" \
            --verbose \

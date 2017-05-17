@@ -2,7 +2,7 @@
 
 ### Agent
 
- A piece of software that gathers data for a particular Data Source and pushes it into CED. These can be operated by Crossref, DataCite or a third party.
+ A piece of software that gathers data for a particular Data Source and pushes it into Event Data. These can be operated by Crossref, DataCite or a third party.
 
 ### Altmetrics
 
@@ -36,9 +36,9 @@
 
 ### API
 
- Application Programming Interface. An interface for allowing one piece of software to connect to another. CED collects data from other APIs from other services and provides an API for allowing access to data.
+ Application Programming Interface. An interface for allowing one piece of software to connect to another. Event Data collects data from other APIs from other services and provides an API for allowing access to data.
 
-### CED
+### Event Data
 
  Crossref Event Data
 
@@ -56,7 +56,7 @@
 
 ### JSON 
 
- JavaScript Object Notation. A common format for sending data. All data coming out of the CED API is in JSON format.
+ JavaScript Object Notation. A common format for sending data. All data coming out of the Event Data API is in JSON format.
 
 ### MEDRA
 
@@ -80,7 +80,7 @@ Publisher Item Identifier, an identifier used internally by some Publishers.
 
 ### SLA
 
- Service Level Agreement. An agreement that CED will provide predictable service via its API.
+ Service Level Agreement. An agreement that Event Data will provide predictable service via its API.
 
 ### SICI
 
@@ -104,5 +104,5 @@ The following words have been used during the development of Event Data but are 
 
  - Deposit - this is an internal entity used within Lagotto. It does not form part of the public DET service, although it may be of interest to users who want to look into the internals.
  - 'DOI Event Tracking' / 'DET' - the old name for the Crossref Event Data service
- - Relations - this is an internal entity used within Lagotto. CED does not use Lagotto Relation objects. The concept of a 'relation' is present in the Event object as a description of how a subject and an object are related.
+ - Relations - this is an internal entity used within Lagotto. Event Data does not use Lagotto Relation objects. The concept of a 'relation' is present in the Event object as a description of how a subject and an object are related.
  - Publisher Domains - now referred to as Landing Page Domains
