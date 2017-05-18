@@ -4,7 +4,7 @@ Version 1.0.0
 
 > **Beta service is live!**
 
-## A note about Beta:
+## A note about Beta
 
 Crossref Event Data has not yet launched as a production service, but is currently available in Beta. This means:
 
