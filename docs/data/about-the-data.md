@@ -59,6 +59,7 @@ For detailed discussion of each Agent, see its corresponding page.
 | [Hypothes.is](/sources/hypothesis)          | hypothesis        | Crossref    |
 | [Newsfeed](/sources/newsfeed)               | newsfeed          | Crossref    | Links to Items on blogs and websites with syndication feeds |
 | [Reddit](/sources/reddit)                   | reddit            | Crossref    | Mentions and discussions of Items on Reddit |
+| [Reddit Links](/sources/reddit-links)       | reddit-links      | Crossref    | Mentions in pages shared on Reddit. |
 | [StackExchange](/sources/stackexchange)     | stackexchange     | Crossref    | 
 | [Twitter](/sources/twitter)                 | twitter           | Crossref    | Links to Items on Twitter |
 | [Web](/sources/web)                         | web               | Crossref    | Links of Items on web pages |

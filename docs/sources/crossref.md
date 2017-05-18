@@ -1,28 +1,30 @@
-# Crossref Metadata
+# Crossref Links
 
 | Property                  | Value          |
 |---------------------------|----------------|
 | Name                      | crossref |
 | Consumes Artifacts        | none |
-| Matches by                | DOI references in Crossref XML |
-| Produces relation types   | cites |
-| Freshness                 | Daily |
+| Matches by                | DOI references and relationships in Crossref Metadata |
+| Produces relation types   | references |
+| Freshness                 | Hourly |
 | Data Source               | Crossref Metadata deposited by Crossref Members |
-| Coverage                  | All DOIs |
+| Coverage                  | From all Crossref DOIs to all DataCite DOIs |
 | Identifies links by       | References in Crossref Schema |
-| Relevant concepts         | [Occurred-at vs collected-at](concepts#concept-timescales), [Duplicate Data](concepts#concept-duplicate) |
 | Operated by               | Crossref |
-| Agent                     | Cayenne |
+| Agent                     | Crossref Links |
+| Agent Source Token        | 8676e950-8ac5-4074-8ac3-c0a18ada7e99 |
 
 ## What it is
 
-Links from Crossref's bibliographic metadata to other objects. In the first instance, this is links to DataCite DOIs. Such links are usually data citation between an article in Crossref and a dataset in DataCite.
+Links from Crossref DOIs to DataCite DOIs. These are recorded in the metadata for Crosref's Registered Content. The data is ultimatley supplied by Crossref members who are the publishers and 'owners' of the Registered Content.
+
+Only Relations between Crossref DOIs and DataCite DOIs are included. If you want other metadata you can find it in the [Crossref Metadata REST API](https://www.crossref.org/services/metadata-delivery/rest-api/).
 
 In future we may add links to other objects, such as ORCID IDs and Clinical Trial Numbers.
 
 ## What it does
 
-The Agent monitors deposits as they come in from Crossref members and sends any links to DataCite DOIs into Event Data.
+The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent in an Event.
 
 ## Where data comes from
 
@@ -35,7 +37,7 @@ Metadata deposits from Crossref members, usually publishers.
       "occurred_at":"2016-08-19T20:30:00Z",
       "subj_id":"https://doi.org/10.1007/S10518-016-9982-8",
       "total":1,
-      "id":"71e62cbd-28a8-4a41-9b74-7e58dca03efc",
+      "id":"8676e950-8ac5-4074-8ac3-c0a18ada7e99",
       "message_action":"create",
       "source_id":"crossref",
       "timestamp":"2016-08-19T22:14:33Z",
@@ -64,7 +66,7 @@ None.
 
 ## Failure modes
 
- - Member may remove references, in which case we will not create a new Event
+ - Member may remove references before the Agent first scans the data, in which case we will not create a new Event
  - Member may deposit incorrect metadata.
 
 ## Further information

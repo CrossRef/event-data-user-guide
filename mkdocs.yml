@@ -32,6 +32,7 @@ pages:
    - "Hypothes.is": sources/hypothesis.md
    - "Newsfeed": sources/newsfeed.md
    - "Reddit": sources/reddit.md
+   - "Reddit Links": sources/reddit-links.md
    - "StackExchange": sources/stackexchange.md
    - "Twitter": sources/twitter.md
    - "Web": sources/web.md

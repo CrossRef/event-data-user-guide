@@ -1,6 +1,6 @@
 # Event Data
 
-Version 0.1.0RC1 - Nearly Beta!
+Version 1.0.0RC1 - Nearly Beta!
 
 > **We are going to open Beta Testing very soon!**
 

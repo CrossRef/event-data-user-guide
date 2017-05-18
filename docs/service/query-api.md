@@ -8,7 +8,7 @@ In most cases you will want to retrieve a large batch of Events so you can perfo
 
 The following query parameters are available:
 
- - `rows` — the number of Events you want to retrieve per page. The default, and recommended value is 10,000, which allows you to retrieve large numbers of Events quickly. There are typically between 10,000 and 100,000 Events collected per day.
+ - `rows` — the number of Events you want to retrieve per page. The default, and recommended, value is 10,000, which allows you to retrieve large numbers of Events quickly. There are typically between 10,000 and 100,000 Events collected per day.
  - `filter` — supply a filter that allows you to restrict results.
  - `cursor` — allows you to iterate through a search result set.
  - `from-updated-date` — a special filter that includes updated and deleted Events, to allow you to keep your data-set up to date.
@@ -59,7 +59,7 @@ Ten Events for the DOI prefix 10.1186
 
     http://query.eventdata.crossref.org/events?rows=10&filter=prefix:10.1186
 
-All Events ever! Note that these queries have a large page size and might give your web browser trouble. First page:
+All Events ever! Note that you will need to use the cursor to iterate through the result set.
 
     http://query.eventdata.crossref.org/events?rows=10000
 
@@ -81,7 +81,7 @@ You store the events. One month later, you re-query for any Events that were upd
 
     http://query.eventdata.crossref.org/events?rows=10&filter=source:twitter&from-update-date:2017-02-02
 
-**Events are only edited in exceptional circumstances** and the Query API will usually send an empty reply, confirming that you don't need to update your data. If it does, you should over-write your stored Events with the new ones. 
+**We only edit Events when we absolutely need to** and the Query API will usually send an empty reply, confirming that you don't need to update your data. If it does, you should over-write your stored Events with the new ones. 
 
 **If you retrieve Events and store them, you should regularly check up to see if they have been updated.** We don't anticipate this will happen very often, but when it does happen, it is important that you stay up-to-date. See the Best Practice section for guidance.
 

@@ -1,41 +1,39 @@
 # How Sources and Agents Work
 
-<a name="concept-relevant-source"></a>
-### Sources that send only relevant Data
+Every Event starts its life in a Source. Because of the diversity of Agents, Sources and Events, it's difficult to give a single definition of a source, so here are some examples:
 
-Some sources, such as "DataCite Metadata" and "Crossref Metadata" are specialists in the Scholarly Publishing space. They send data to Event Data, and each item of Data that is sent can be converted into an Event. This is highly efficient, as it means that no data or time is wasted.
+ - The Twitter API is a Source because it provides information about Tweets.
+ - Newsfeeds (e.g. RSS or Atom feeds of blogs) are Sources because they provide pointers to blog posts. They don't provide the content of the blog posts, but tell the Agent where to look.
+ - DataCite is a source because it provides links between DOIs and Crossref DOIs. It provides DOI to DOI links.
 
-<a name="concept-pre-filtering"></a>
-## Pre-filtering URLS by their Domain
+Every Source has one or more Agents dedicated to it. Each Agent connects to its Source and produces Events. The kind of data that the Source makes available, and the way that the Agent processes it, vary.
 
-Some sources, such as Twitter and Reddit support queries by domain. This means that the Agent has to issue each Query once per domain to perform a full scan of the corpus of Items. In these cases the `domain-list` Artifact is used. It contains around 15,000 domains. In these cases, some data is sent that cannot be matched to an Event, but the ratio is still very high.
+ - Some Sources send content which is refined by the Agent. This is how the Twitter and Reddit Agents work.
+ - Some Sources send pointers to content, which the Agent then visits. This is how the Wikipedia and Newsfeeds Agents work.
+ - Some Sources are custom-built to send Events directly. This is how the Crossref and DataCite Agents work.
 
-When an Agent of this type connects to a Data Source it will conduct a search for this domain list. In the case of Twitter that means constructing a ruleset that includes all domains. In the case of Reddit and Wordpress.com it means conducting one search per domain. This initial filter returns a dataset which mentions one of the domains that is found to contain Landing Pages. From this pre-filtered dataset the Agent then examines each result for Events.
+A source not only identifies a concrete external service, Twitter, but also a conceptual view of the data. For example:
 
-Every Agent that uses the `domain-list` Artifact includes a link to the version of the Artifact they used when they conducted the query.
+ - The `newsfeed` source covers all newsfeeds that we track.
+ - The `reddit` source covers comments and activity that occur on Reddit.
+ - The `reddit-links` source covers the content of links (e.g. blog posts) that people share on Reddit. 
 
-## Agents, the Percolator and the Event Data Bot
+## Common features in Agents
 
-Some Agents consume data from a specific source and then pass it on to the Percolator. The Percolator does three jobs:
+There are some common features and patterns that occur accross Agents. 
 
- - it contains the Event Data Bot, which visits webpages and looks for landing pages and DOIs
- - it transforms Landing Page URLs back into DOIs
- - it builds and saves Evidence Records
+### Issuing Queries for Landing Page Domains
 
-![Event journeys](../images/journeys.png)
+Many of the links that we track use the [Landing Page URL of the Article](/data/ids-and-urls). We maintain an Artifact which contains all of the Domains we're interested in. Some external APIs, such as Reddit, allow queries to be issued for links by their domain. In cases like this, the Agent will periodically scan the API, issuing a query for each Landing Page domain.
 
-The documentation for each source is described in terms of the Events that it produces, but you should be aware that Events are produced by the Agent and the Percolator working together. You can read more on the [Percolator](percolator) page.
+### Following links
 
-<a name="concept-query-entirety"></a>
-## Sources that must be queried in their entirety
+Some sources send links to things that must be consulted. For example, each RSS newsfeed contains links to Blog posts that must be processed to extract links. The Wikipedia Agent recieves a stream of Wikipedia page URLs, each of which must be visited to extract links.
 
-Some sources have no means of filtering or querying and must be downloaded in their entirety. These sources generally contain a high amount of relevant content, so the chance of being able to extract Events is high, and this method isn't wasteful.
+### Events and Evidence Records
 
-Examples of these sources are Newsfeeds. The Newsfeed agent consumes all the data in each Newsfeed and then filters them for Events. As Newsfeed List is curated to include only blogs that are likely to feature links to Items that can be extracted, this approach is reasonably efficient.
+Most Agents don't produce Events directly. Instead they produce Evidence Records, which are further processed into Events at a later. This means that the Agent only does the job of converting external data into the standard Evidence Record format.
 
-<a name="concept-external-agents"></a>
-## External Agents
+An internal component, called the Percolator, does the job of processing the Evidence Record into Events and inserting them into the system. You can read about the process in [Evidence Records](/data/evidence-records). 
 
-Most Agents are operated by Crossref or DataCite (see [Data Sources](service#data-sources)). Some are operated by external parties. We welcome new Data Sources.
-
-Where Crossref operates the Agent we provide full Evidence records for each Event. Where the Agent is operated by another party, they may or may not provide full Evidence. See [Not all Events need Evidence](evidence#evidence-not-all) for further discussion.
+Some Agents, such as Crossref Links and DataCite Links, create Events directly from their internal databases and skip the Evidence Record stage. In future, Agents operated by external parties may also do this. The reason for this is that Evidence Records exist to document how external data was processed, and to make transparent the internal processes within Event Data. When the data comes directly from the external source, we perform no extra processing, so there is nothing to document. External services which operate Agents may choose to run record their own form of Evidence, but these will be different to the standardized Crossref Event Data Evidence Records.
