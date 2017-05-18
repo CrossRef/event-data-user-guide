@@ -5,14 +5,15 @@
 | Name                      | crossref |
 | Consumes Artifacts        | none |
 | Matches by                | DOI references and relationships in Crossref Metadata |
-| Produces relation types   | references |
-| Freshness                 | Hourly |
+| Produces relation types   | `references` and other types found in the Crossref schema |
+| Freshness                 | Multiple times per day |
 | Data Source               | Crossref Metadata deposited by Crossref Members |
 | Coverage                  | From all Crossref DOIs to all DataCite DOIs |
 | Identifies links by       | References in Crossref Schema |
 | Operated by               | Crossref |
 | Agent                     | Crossref Links |
 | Agent Source Token        | 8676e950-8ac5-4074-8ac3-c0a18ada7e99 |
+| License                   | "Made available without restriction". |
 
 ## What it is
 
