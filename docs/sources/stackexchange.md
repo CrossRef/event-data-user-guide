@@ -31,14 +31,14 @@ The StackExchange Agent aims to cover all StackExchange sites. To do this it run
 Regular scan:
 
  - Retrieves the list of StackExchange sites we're interested in from the `stackexchange-sites` Artifact
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`.
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`.
  - For each site and each domain, make a search query for questions and answers on that site that mention that domain.
  - For each link found, attempt to match that to a DOI.
 
 Full scan:
 
  - Retrieves the full list of all StackExchange sites from StackExchange API.
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`.
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`.
  - For each site and each domain, make a search query for questions and answers on that site that mention that domain.
  - For each link found, attempt to match that to a DOI.
 
