@@ -21,19 +21,17 @@
 
 ## What it is
 
-Links from Crossref DOIs to DataCite DOIs. These are recorded in the metadata for Crosref's Registered Content. The data is ultimatley supplied by Crossref members who are the publishers and 'owners' of the Registered Content.
+Links from DataCite DOIs to Crossref DOIs. These are recorded in the metadata for DataCite's Registered Content. The data is ultimatley supplied by DataCite members who are the publishers and 'owners' of the Registered Content.
 
-Only Relations between Crossref DOIs and DataCite DOIs are included. If you want other metadata you can find it in the [Crossref Metadata REST API](https://www.crossref.org/services/metadata-delivery/rest-api/).
-
-In future we may add links to other objects, such as ORCID IDs and Clinical Trial Numbers.
+Only Relations between DataCite DOIs and Crossref DOIs are included. If you want other metadata you can find it in DataCite's APIs.
 
 ## What it does
 
-The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent in an Event.
+The Agent monitors all relationships in DataCite metadata deposited by members. Where a relation is made between a DataCite DOI and a Crossref DOI, that link is sent in an Event.
 
 ## Where data comes from
 
-Metadata deposits from Crossref members, usually publishers.
+Metadata deposits from DataCite members, usually publishers and libraries.
 
 ## Example Event
 
@@ -53,10 +51,10 @@ Metadata deposits from Crossref members, usually publishers.
 
 ## Methodology
 
-1. A member makes an XML deposit with Crossref.
+1. A member makes an XML deposit with DataCite.
 2. The agent monitors new deposits (or back-fills).
 3. When a link is found an Event is created if:
-    - it is to a non-Crossref DOI
+    - it is to a non-DataCite DOI
     - it has not already been reported to Event Data
 
 ## Evidence Record
@@ -78,4 +76,4 @@ None.
 
 ## Further information
 
- - [Crossref Schema documentation](https://support.crossref.org/hc/en-us/categories/201744683-Metadata-and-Schema)
+ - [DataCite schema](https://schema.datacite.org/)
