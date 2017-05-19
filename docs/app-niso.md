@@ -14,7 +14,7 @@ The Data Contributors section of the User Guide provides a detailed discussion o
 
 ### 4: Describe all known limitations of the data.
 
-The Data Contributors section of the User Guide provides a detailed discussion of each Source and the limits of the Data it produces.
+The Data Contributors section of the User Guide provides a detailed discussion of each Source and the limits of the data it produces.
 
 ### 5: Provide a documented audit trail of how and when data generation and collection methods change over time and list all known effects of these changes. Documentation should note whether changes were applied historically or only from change date forward.
 
