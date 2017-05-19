@@ -6,7 +6,7 @@ Event Data tracks relationships between research objects. Some are pages out on 
 
 Event Data Agents are on the look out for links to Registered Content Items, but people on the Web use a variety of methods to refer to them. They could use a hyperlinked DOI (one you can click), or a plain-text DOI (one you can't click). They could also use the Article Landing Page (the page you get to when you click on a DOI). Every source is different: we tend to see most people using Article Landing Pages on Twitter, but on Wikipedia DOIs are frequently used.
 
-Every Agent will attempt to match Registered Content Items in as broad a manner as possible by looking for linked and unlinked DOIs and article landing page URLs. We maintain a list of domain names that belong to publishers (see the [Artifact](../service/artifact-registry) page for more information) and track and query for those domains. When we see a URL that could be a landing page, we attempt to match it to a DOI.
+Every Agent will attempt to match Registered Content Items in as broad a manner as possible by looking for linked and unlinked DOIs and Article Landing Page URLs. We maintain a list of domain names that belong to publishers (see the [Artifact](../service/artifact-registry) page for more information) and track and query for those domains. When we see a URL that could be a landing page, we attempt to match it to a DOI.
 
 ## Landing page matching isn't perfect
 
@@ -53,7 +53,7 @@ The reverse is true: sometimes two DOIs point to the same landing page. This can
 
 We periodically scan our DOIs, take a sample and find the domains that are used by publishers. This is documented in our Artifacts, which have versions and date stamps. We therefore might miss Events in the time between a new domain being used and the Artifact being updated.
 
-If a publisher stops using an article landing page domain, we will not remove it from the list. Agents may at any time go back and re-process old data, or work with dumps of historical data. People may retweet old tweets which point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows. As with all Artifacts, you can browse all past versions to see how it changes over time. 
+If a publisher stops using an Article Landing Page domain, we will not remove it from the list. Agents may at any time go back and re-process old data, or work with dumps of historical data. People may retweet old tweets which point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows. As with all Artifacts, you can browse all past versions to see how it changes over time. 
 
 ### We don't match all domains
 
@@ -61,7 +61,7 @@ Some DOIs have been registered to domains such as `youtube.com`. We have no way 
 
 ### We don't know all of the landing page URLs, and it's not possible to discover them all
 
-Every DOI has a Resource URL, which is where you are sent when you click on a DOI hyperlink. This is known to Crossref and can be retrieved from the DOI system. However, in a large number of cases, this is not the final destination URL. Many publishers operate their own internal linking and redirecting services, which mean that when you click on a DOI you are sent through a series of redirects before ending up at the destination article landing page.
+Every DOI has a Resource URL, which is where you are sent when you click on a DOI hyperlink. This is known to Crossref and can be retrieved from the DOI system. However, in a large number of cases, this is not the final destination URL. Many publishers operate their own internal linking and redirecting services, which mean that when you click on a DOI you are sent through a series of redirects before ending up at the destination Article Landing Page.
 
 Let's take a simple example of a Crossref demonstration DOI. The Crossref DOI `10.5555/12345678` has the Resource URL `http://psychoceramics.labs.crossref.org/10.5555-12345678.html`, which you can see in the [article metadata](http://api.crossref.org/works/10.5555/12345678/transform/application/vnd.crossref.unixsd+xml). If we follow the DOI we see only one redirect, that from the DOI link.
 
@@ -123,7 +123,7 @@ The job of matching landing page URLs back to DOIs is done by the Percolator, wh
 
  - Looking for a DOI embedded in the URL, such as in the above PLOS example `http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160106`
  - Looking for a PII ([Publisher Item Identifier](https://en.wikipedia.org/wiki/Publisher_Item_Identifier)) embedded in the URL and matching that back to a DOI using the Publisher's deposited metadata.
- - Visiting the page and looking for a [Dublin Core Identifier](https://en.wikipedia.org/wiki/Dublin_Core) tag in the HTML. Including this in article landing pages is recommended best practice.
+ - Visiting the page and looking for a [Dublin Core Identifier](https://en.wikipedia.org/wiki/Dublin_Core) tag in the HTML. Including this in Article Landing Pages is recommended best practice.
 
 The third option, visiting the site to look up the metadata, is used in a large proportion of cases.
 

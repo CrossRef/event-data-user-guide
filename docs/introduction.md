@@ -6,7 +6,7 @@ The Event Data service captures this activity and acts as a hub for the storage 
 
 This data is of interest to a wide range of people: Publishers may want to know how their articles are being shared, Authors might want to know when people are talking about their articles, Researchers may want to conduct bibliometrics research. And that's just the obvious uses.
 
-When a relationship is observed between a Crossref-registered content item and a specific web activity, the data is expressed in the service as an 'Event'. The Service provides Events from a variety of web sources. Each web source is referred to as a 'Data Contributor'. The Events, and all original data from the Data Contributor, are available via an API.
+When a relationship is observed between a Crossref-Registered Content Item and a specific web activity, the data is expressed in the service as an 'Event'. The Service provides Events from a variety of web sources. Each web source is referred to as a 'Data Contributor'. The Events, and all original data from the Data Contributor, are available via an API.
 
 Registered Content is the name we give to items that are registered with Crossref, and to which DOIs have been assigned. This includes Articles, Books and Datasets. When the phrase 'Registered Content Item' is used, you can usually think of a journal article, but be aware that it can apply to any piece of content that was registered with Crossref.
 

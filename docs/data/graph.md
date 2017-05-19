@@ -188,7 +188,7 @@ It is lightweight and good for initial investigations, but discards most of the 
  - Relationship between subject URL and object URL is an edge
  - Relationships between subject URL and subject PID, and between object URL and object PID are edges
 
-By linking the `subj.url` to the `obj.url`, this model records what actually happened, e.g. a Reddit post linking to an article Landing Page URL. The `subj_id` and `obj_id` are also included and linked, so we can see which conceptual article is meant by the URL.
+By linking the `subj.url` to the `obj.url`, this model records what actually happened, e.g. a Reddit post linking to an Article Landing Page URL. The `subj_id` and `obj_id` are also included and linked, so we can see which conceptual article is meant by the URL.
 
 Note that every subject and object has a PID, but doesn't necessarily have a URL. In this case you might consider falling back to the PID.
 
@@ -207,9 +207,9 @@ This model represents the activity more accurately, but still discards informati
 
 This model represents the link between the conceptual items via their PIDs and also includes the URLs. This model includes more information but, like model 1, doesn't describe exactly which URLs were used in a given link.
 
-This is similar to model 1, except that the relationship is modelled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
+This is similar to model 1, except that the relationship is modelled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the Article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
 
-Event Data uses DOIs to represent registered content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
+Event Data uses DOIs to represent Registered Content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
 
 ### 4: The Event as the central node.
 

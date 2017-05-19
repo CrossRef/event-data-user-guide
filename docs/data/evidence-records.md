@@ -37,7 +37,7 @@ An Action contains information about the thing that happened. This corresponds t
 Each Action also comes with one or more Observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an Observation:
 
  - the text of a tweet (which may contain plaintext DOIs)
- - the automatically extracted URLs from a tweet (which could be DOIs or article Landing Pages)
+ - the automatically extracted URLs from a tweet (which could be DOIs or Article Landing Pages)
  - the URL of a blog post from an RSS newsfeed (which must be visited to see the content of the blog post)
 
 As you can see from the tweet example, it's possible to make different observations of different types about the same input. In some cases, such as Twitter, we do not have the permission to include the text, so it is removed before the Evidence Record is saved. In this case, the `sensitive` flag on the Evidence Record is set to `true` and a SHA1 hash of the content is included. This means that if you want to verify the Evidence Record you can retrieve the tweet text yourself from Twitter and compare the hash. If the hash matches, you know you were working from the same input text as the Agent.
@@ -47,7 +47,7 @@ The following Observation types are available:
  - `plaintext` - some text that could contain plain text DOIs, DOI URLs or Landing Page URLs
  - `html` - some HTML that could contain plain text DOIs, DOI URLs or Landing Page URLs
  - `content-url` - the URL of a webpage that could point to a webpage that could contain plain text DOIs, DOI URLs or Landing Page URLs
- - `url` - a URL that could itself be a DOI or an article Landing Page
+ - `url` - a URL that could itself be a DOI or an Article Landing Page
 
 ### Deduplication and Action IDs
 
@@ -63,7 +63,7 @@ See [Duplication and Redundancy](/data/duplication) for further discussion.
 
 Each Observation may or may not ultimately yield Events. 
 
-The first step is to create a set of Candidates for each Observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an article Landing Page in the HTML of that page.
+The first step is to create a set of Candidates for each Observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an Article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
 
 The set of available candidate types are:
 
@@ -71,7 +71,7 @@ The set of available candidate types are:
  - `pii` - a Publication Item Identifier
  - `plain-doi` - a text DOI like `10.5555/123456789`
  - `shortdoi-url` - a shortDOI like `http://doi.org/dvx`
- - `landing-page-url` - the URL of an article Landing Page
+ - `landing-page-url` - the URL of an Article Landing Page
 
 The next step is to try and match every Candidate into a known DOI. It does this by trying to reverse the Landing Page back into a DOI, and by verifying that every DOI exists and cleaning it up.
 
@@ -214,7 +214,7 @@ Now we come to another Action. This time we were able to get Events!
                 }
               ],
 
-Another article Landing Page URL observation, with a Candidate.
+Another Article Landing Page URL observation, with a Candidate.
 
               "matches": [
                 {
@@ -224,7 +224,7 @@ Another article Landing Page URL observation, with a Candidate.
                 }
               ],
 
-The Agent was able to successfully match the candidate article Landing Page to a DOI! Therefore the following Event was created.
+The Agent was able to successfully match the candidate Article Landing Page to a DOI! Therefore the following Event was created.
               
               "events": [
                 {
@@ -292,7 +292,7 @@ Now we're back to the Action, including some of the data that went on to be incl
         }
       ],
       
-The Percolator is the component that does the work of building the Evidence Record and extracting all the Events. You should treat it as 'part of the agent'. It is common to all Crossref Event Data Agents. Here it includes some data of its own: the version number of the Percolator software, and the version of the Artifact it used to convert article Landing Pages back to DOIs.
+The Percolator is the component that does the work of building the Evidence Record and extracting all the Events. You should treat it as 'part of the agent'. It is common to all Crossref Event Data Agents. Here it includes some data of its own: the version number of the Percolator software, and the version of the Artifact it used to convert Article Landing Pages back to DOIs.
       
       "percolator": {
         "artifacts": {

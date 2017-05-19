@@ -33,7 +33,7 @@ The list of URLs can come from a range of sources, including those submitted by 
 
 ## What it does
 
-A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked article landing pages in the HTML of each page.
+A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked Article Landing Pages in the HTML of each page.
 
 ## Where data comes from
 

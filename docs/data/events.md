@@ -63,7 +63,7 @@ The Event may include metadata about its subject and/or object. For example:
 
 We typically only include metadata that you are unable to get elsewhere and that is unlikely to change. Where the `subj_id` or `obj_id` is a DOI, we will not include the metadata because you can easily look it up using the Crossref or DataCite APIs and it could go out of date if recorded. We also store a large amount of metadata associated with each DOI, and including it all would balloon the data to many times its size.
 
-Note that the `url` can be different to the `pid`. For example if a webpage links to a Registered Content Item via its article landing page, the Agent will represent that Item using its DOI in the `obj_id` and `obj.pid` but will include the landing page URL in the `subj.url`. This allows you to unambiguously identify the Registered Content Item in question, whilst also retaining the detail about how it was linked. For more information see [IDs and URLs and the Web](/data/ids-and-urls).
+Note that the `url` can be different to the `pid`. For example if a webpage links to a Registered Content Item via its Article Landing Page, the Agent will represent that Item using its DOI in the `obj_id` and `obj.pid` but will include the landing page URL in the `subj.url`. This allows you to unambiguously identify the Registered Content Item in question, whilst also retaining the detail about how it was linked. For more information see [IDs and URLs and the Web](/data/ids-and-urls).
 
 
 

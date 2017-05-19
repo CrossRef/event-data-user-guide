@@ -19,7 +19,7 @@
 
 ## What it is
 
-Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of Registered Content (for example Article Landing pages) and the mentioning of Registered Content (for example DOIs) in the text of annotations.
+Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of Registered Content (for example Article Landing Pages) and the mentioning of Registered Content (for example DOIs) in the text of annotations.
 
 ## What it does
 

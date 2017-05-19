@@ -25,7 +25,7 @@ Links from blogs and other content with a newsfeed.
 
 ## What it does
 
-The Agent has a list of RSS feeds. It monitors each one for links to blog posts. If a blog post links to registered content, or mentions DOIs in the text, they are extracted into Events.
+The Agent has a list of RSS feeds. It monitors each one for links to blog posts. If a blog post links to Registered Content, or mentions DOIs in the text, they are extracted into Events.
 
 ## Where data comes from
 

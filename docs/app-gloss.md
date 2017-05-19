@@ -10,7 +10,7 @@
 
 ### Landing Page
 
- The Publisher's page for an article (or dataset etc). Every DOI resolves to a landing page, but there may be more than one landing page per Article. The URLs of landing pages can change over time, and the DOI link should always point to the landing page.
+ The Publisher's page for an article (or dataset etc). Every DOI resolves to a landing page, but there may be more than one landing page per article. The URLs of landing pages can change over time, and the DOI link should always point to the landing page.
 
 ### Data Source
 

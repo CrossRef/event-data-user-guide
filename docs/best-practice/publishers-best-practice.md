@@ -1,6 +1,6 @@
 # Best Practice for Publishers
 
-If you follow this best practice you will give Event Data the best chance of registering Events for your registered content. There are several factors that can impair, or completely prevent, us collecting Event Data. This is also all general good advice for running a website.
+If you follow this best practice you will give Event Data the best chance of registering Events for your Registered Content. There are several factors that can impair, or completely prevent, us collecting Event Data. This is also all general good advice for running a website.
 
 We collect data and generate reports about domains for which we are prevented from gathering Event Data. Please contact us for further information.
 

@@ -26,10 +26,10 @@ Every subject-relation-object Event is an assertion made by the Agent. When deci
 
 ## Landing Page to DOI mappings
 
-When an Event links to a DOI but the URL in the corresponding `obj` metadata is different, the Agent has made a judgment about an article Landing Page. The Event therefore contains two assertions:
+When an Event links to a DOI but the URL in the corresponding `obj` metadata is different, the Agent has made a judgment about an Article Landing Page. The Event therefore contains two assertions:
 
- - this webpage mentions this article Landing Page
- - this article Landing Page corresponds to this DOI
+ - this webpage mentions this Article Landing Page
+ - this Article Landing Page corresponds to this DOI
 
 The Evidence Record for each Event documents this mapping in some detail.
 

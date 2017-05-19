@@ -31,9 +31,9 @@ The same content may be served on separate domains on the web. For example, some
 
 ### DOIs vs Landing Pages
 
-The Crosref Agents attempt to convert Every link or mention of an item to an Event. On some pages, for example Wikipedia, the same reference may be linked several different ways. An Agent treats each of these links independently, which means that you may see more than one link between a given Wikipedia page and an Article by their `subj_id` field, but the `subj.url` will indicate different URLs.
+The Crosref Agents attempt to convert Every link or mention of an item to an Event. On some pages, for example Wikipedia, the same reference may be linked several different ways. An Agent treats each of these links independently, which means that you may see more than one link between a given Wikipedia page and an article by their `subj_id` field, but the `subj.url` will indicate different URLs.
 
-How you interpret these is up to you. For some use-cases, it is important to be able to tell the difference between links via an article Landing Page and the DOI. In some cases, for example component DOIs or DOIs that represent versioned content, the DOI could more specific than the article Landing Page. In other cases, it's not so important, so duplicates can be removed based on the `subj_id` and `obj_id`.
+How you interpret these is up to you. For some use-cases, it is important to be able to tell the difference between links via an Article Landing Page and the DOI. In some cases, for example component DOIs or DOIs that represent versioned content, the DOI could more specific than the Article Landing Page. In other cases, it's not so important, so duplicates can be removed based on the `subj_id` and `obj_id`.
 
 ## Duplication as Corroboration
 
