@@ -14,18 +14,18 @@
 | Looks in                  | The link that corredsponds to each discussion |
 | Name                      | Reddit Links |
 | Operated by               | Crossref |
-| Produces Evidence Records | Yes. |
+| Produces Evidence Records | Yes |
 | Produces relation types   | `discusses` |
 | Source ID                 | `reddit` |
 | Updates or deletions      | None expected |
 
 ## What it is
 
-Users share and discuss links on Reddit. The Reddit Source looks at the links that are shared and detects if any of them are DOIs or links to Article Landing Pages. It is different to the Reddit Links Source in that it looks for discussions of Registered Content (rather than discussions of webpages that themselves discuss Registered Content).
+Users share and discuss links on Reddit. The Reddit Source looks at the links that are shared and detects if any of them are DOIs or links to article Landing Pages. It is different to the Reddit Links Source in that it looks for discussions of Registered Content (rather than discussions of webpages that themselves discuss Registered Content).
 
 ## What it does
 
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
  - Makes a query to the Reddit API for discussions that occurred for pages on that domain.
  - For each link discussed, attempts to reverse it back to a DOI.
 
