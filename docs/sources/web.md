@@ -65,9 +65,9 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
       "relation_type_id": "mentions"
     }
 
-## Methodology
-
 ## Evidence Record
+
+The Evidence Record contains obserations of type `content-url` which correspond to every URL visited.
 
 ## Edits / Deletion
 
