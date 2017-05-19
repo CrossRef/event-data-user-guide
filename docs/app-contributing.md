@@ -1,6 +1,6 @@
 # Appendix: Contributing to Event Data
 
-We welcome new Data Contributors. We have two interfaces: the Event Bus which accepts raw Events, or the Percolator, which does some work to reverse landing pages and text back into Events.
+We welcome new Data Contributors. We have two interfaces: the Event Bus which accepts raw Events, or the Percolator, which does some work to reverse Landing Pages and text back into Events.
 
 ### Preparation
 
@@ -10,7 +10,7 @@ We would love to help you develop your Push Source.
  1. Decide what kind of Relation Types best describe your data.
  1. We will give you authentication tokens for staging and production, and an agent ID.
 
-### Authorization
+### Authorisation
 
 All authorisation is done with JWT. We will send you a token for staging and when you are ready, another one for production.
 
@@ -29,9 +29,9 @@ The [Event Bus is open source and available on Github](https://github.com/crossr
 
 If you have data that you think is useful but not enough to make Events, you could send it to the Percolator. The Percolator accepts inputs as input Evidence Records, and will:
  
- - convert landing pages into DOIs
+ - convert Landing Pages into DOIs
  - verify that DOIs really exist
- - extract landing pages and DOIs from supplied HTML snippets, text snippets, or follow URLs to do this
+ - extract Landing Pages and DOIs from supplied HTML snippets, text snippets, or follow URLs to do this
 
 If you use the Percolator then your input will be converted into an Evidence Record and enter the Evidence Registry.
 
