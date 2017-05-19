@@ -2,7 +2,7 @@
 
 The [Quick Start guide](quickstart) shows you how to get your hands dirty quickly. Come back and read this section afterwards!
 
-In most cases you will want to retrieve a large batch of Events so you can perform further processing on them. The Query API provides access to all Events with filters to restrict the results based on source, date-range, DOI etc. 
+In most cases you will want to retrieve a large batch of Events so you can perform further processing on them. The Query API provides access to all Events, with filters to restrict the results based on source, date-range, DOI etc. 
 
 ## Query Parameters
 
@@ -77,7 +77,7 @@ For example, on the 2nd of February 2017 you retrieve events from Twitter:
 
     http://query.eventdata.crossref.org/events?rows=10&filter=source:twitter
 
-You store the events. One month later, you re-query for any Events that were updated since you last queried:
+You store the Events. One month later, you re-query for any Events that were updated since you last queried:
 
     http://query.eventdata.crossref.org/events?rows=10&filter=source:twitter&from-update-date:2017-02-02
 
