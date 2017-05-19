@@ -25,7 +25,7 @@ Authors of blog posts hosted on the Wordpress.com platform link to Registered Co
 
 ## What it does
 
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
  - Makes a query to the Wordpress.com API for blog posts that mentioned that domain.
  - For each result, visits the blog post and attempts to extract links from the HTML of the blog post.
 
@@ -63,7 +63,7 @@ Authors of blog posts hosted on the Wordpress.com platform link to Registered Co
 
 ## Quirks
 
-Note that this only monitors blogs hosted on Wordpress' hosted wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
+Note that this only monitors blogs hosted on Wordpress' wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
 
 ## Failure modes
 
