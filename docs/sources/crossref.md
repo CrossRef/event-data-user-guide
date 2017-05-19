@@ -1,4 +1,4 @@
-# Crossref Links
+# Crossref Metadata
 
 | | |
 |---------------------------|-|
@@ -12,7 +12,7 @@
 | Identifies                | DOIs |
 | License                   | Made available without restriction |
 | Looks in                  | References in Crossref Schema |
-| Name                      | Crossref Links |
+| Name                      | Crossref Metadata |
 | Operated by               | Crossref |
 | Produces Evidence Records | No |
 | Produces relation types   | `references` and other types found in the Crossref schema |
@@ -29,11 +29,11 @@ In future we may add links to other objects, such as ORCID IDs and Clinical Tria
 
 ## What it does
 
-The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent in an Event.
+The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent as an Event.
 
 ## Where data comes from
 
-Metadata deposits from Crossref members, usually publishers.
+Metadata deposits from Crossref members, usually Publishers.
 
 ## Example Event
 
