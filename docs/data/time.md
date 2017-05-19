@@ -41,7 +41,7 @@ The downside of this is that you will not be able to find Events that occurred o
 
 ### Flexible data with `occurred`
 
-The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query URL will change over time, so you can't rely on the dataset to be stable and citable.
+The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query API URL will change over time, so you can't rely on the dataset to be stable and citable.
 
 The timestamp field is available on all Events, so you can see when they were collected and added to the dataset for a given day.
 
