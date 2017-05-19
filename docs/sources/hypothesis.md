@@ -3,7 +3,7 @@
 | Agent Source Token        | `8075957f-e0da-405f-9eee-7f35519d7c4c` |
 | Consumes Artifacts        | `domain-list` |
 | Subject Coverage          | All Hypothes.is annotations that are available to the public |
-| Object Coverage           | All DOIs, Landing Page URLs, plain-text DOIs. |
+| Object Coverage           | All DOIs, Landing Page URLs, plain text DOIs. |
 | Data Contributor          | Hypothes.is |
 | Data Origin               | Annotations made by Hypothes.is users, via the Hypothes.is API |
 | Freshness                 | Every few hours. |
@@ -19,17 +19,17 @@
 
 ## What it is
 
-Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of Registered Content (for example Article Landing Pages) and the mentioning of Registered Content (for example DOIs) in the text of annotations.
+Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of Registered Content (for example article Landing Pages) and the mentioning of Registered Content (for example DOIs) in the text of annotations.
 
 ## What it does
 
 When looking for annotations of Registered Content:
 
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
  - Makes a query to the Hypothes.is API for annotations to URLs on that domain.
  - For each result, attempts to reverse that URL back to a Registered Content Item, recording an Event with the `annotates` relation type.
 
- - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
  - Makes a query to the Hypothes.is API for annotations that contain URLs on that domain in the text of the annotation.
  - For each result, looks in the text for links to Registered Content and records Events with the `discusses` relation type.
 
@@ -110,7 +110,7 @@ Discusses:
 
 ## Quirks
 
-Note that this only monitors blogs hosted on Wordpress' hosted wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
+Note that this only monitors blogs hosted on Wordpress' wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
 
 ## Failure modes
 
