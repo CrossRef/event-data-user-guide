@@ -1,8 +1,8 @@
 # Quick Start
 
-> **Note: Please read the Beta notice on the [Welcome](/) page.**
+> **Note: Please read the Beta notice on the [Welcome](/) page. Until Event Data is in production mode, we do not recommend building any commercial or customer-based tools off the data**
 
-After this page please ensure you have read this guide thoroughly before using this data for anything serious! Additionally, you should consult the documentation for each Source you intend to use.
+After this page, please ensure you have read this guide thoroughly before using this data for anything serious! Additionally, you should consult the documentation for each Source you intend to use.
 
 Most of the time you will want to grab the dataset in bulk, or for a paricular source, or a particular DOI prefix. You can then filter it, load it into your own data store, etc. Check the [Crossref blog](https://www.crossref.org/categories/event-data/) for ideas. We collect a few tens of thousands of Events per day, so that can weigh in at over 10MB of data per day. Bear this in mind if you point a browser at the URLs.
 
@@ -12,7 +12,7 @@ Data is available on a per-day basis. To fetch 10,000 Events from Event Data, co
 
     curl "https://query.eventdata.crossref.org/events?rows=10000" > all-events.json
 
-That returns 10,000 events (out of a possible 1,363,971 at the time of writing).
+That returns 10,000 Events (out of a possible 1,363,971 at the time of writing).
 
 If you're only interested in Reddit, you can filter that:
 
