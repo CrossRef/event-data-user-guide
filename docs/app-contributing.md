@@ -1,6 +1,6 @@
 # Appendix: Contributing to Event Data
 
-We welcome new Data Sources. We have two interfaces: the Event Bus which accepts raw events, or the Percolator, which does some work to reverse landing pages and text back into Events.
+We welcome new Data Contributors. We have two interfaces: the Event Bus which accepts raw Events, or the Percolator, which does some work to reverse landing pages and text back into Events.
 
 ### Preparation
 

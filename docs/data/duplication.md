@@ -23,7 +23,7 @@ In the first case, you could interpret two or more completely identical Events a
 
 ### Duplicate Events from the same input
 
-Two Agents might have looked at the same piece of data and produced the same Event. They might have processed them under different circumstances. For example, an agent that specifically monitors Wikipedia may have generated an Event for a DOI that occurs on the page. A general purpose web agent might also have become aware of a page, and might have visited it and found the same DOI. In this situation you might find two events for the same DOI in the page.
+Two Agents might have looked at the same piece of data and produced the same Event. They might have processed them under different circumstances. For example, an agent that specifically monitors Wikipedia may have generated an Event for a DOI that occurs on the page. A general purpose web agent might also have become aware of a page, and might have visited it and found the same DOI. In this situation you might find two Events for the same DOI in the page.
 
 ### Duplicate inputs
 

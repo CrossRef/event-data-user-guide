@@ -4,7 +4,7 @@ It's very rare that an Event will be modified once it's created, but it does hap
 
 Once an Event has been created, we won't remove it from our system. However, there are some circumstances where we may edit it or mark it as 'retracted'.
 
-If you retrieve events from Event Data, or you perform calculations based on data from Event Data, you should check back to make sure the original data hasn't changed. Examples of when you might like to check:
+If you retrieve Events from Event Data, or you perform calculations based on data from Event Data, you should check back to make sure the original data hasn't changed. Examples of when you might like to check:
 
  - if you are publishing a research paper, make a final check before publication
  - if you producing on-going data derived from Event Data, you may want to re-check every month or so
@@ -14,7 +14,7 @@ Data can change for a number of reasons:
  - if a Tweet was deleted by its author, we are obliged to remove it from Event Data
  - if we ran a report that indicated that we produced obviously incorrect data as a result of a software bug, we may mark Events as having been deleted or edited.
 
-When an event is updated, we will add the an `updated` field, an `updated-date` field and an `updated-reason`. The `updated` field will have a value of:
+When an Event is updated, we will add the an `updated` field, an `updated-date` field and an `updated-reason`. The `updated` field will have a value of:
 
  - `deleted`
    - when a Tweet is deleted. We will remove the Tweet content (tweet ID and author) but retain all other parts of the Event

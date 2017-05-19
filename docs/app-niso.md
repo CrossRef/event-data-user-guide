@@ -2,7 +2,7 @@
 
 ### 1: List all available data and metrics (providers and aggregators) and altmetric data providers from which data are collected (aggregators).
 
-Event Data is a platform for collecting event data. The data are gathered through a combination of actively collecting data from non-scholarly sources and allowing scholarly sources to send data. It focuses on events ("these things happened") not aggregations ("this many things happened") or metrics ("you got this score"). You can find the list of Sources in [Sources](service#data-sources).
+Event Data is a system for collecting Events and also a platform to allow other providers to publish their own Events. The data are gathered through a combination of actively collecting data from non-scholarly sources and allowing scholarly sources to send data. It focuses on Events ("these things happened") not aggregations ("this many things happened") or metrics ("you got this score"). You can find the list of Sources in [Sources](service#data-sources).
 
 ### 2: Provide a clear definition of each metric.
 
@@ -10,11 +10,11 @@ Crossref Event Data reports raw Events, not metrics. The [Sources in Depth](sour
 
 ### 3: Describe the method(s) by which data are generated or collected and how data are maintained over time.
 
-The [Sources in Depth](sources-in-depth) provides a detailed discussion of each Source and exactly what Events from the Source means. 
+The Data Contributors section of the User Guide provides a detailed discussion of each Source and exactly what Events from the Source means. 
 
 ### 4: Describe all known limitations of the data.
 
-The [Sources in Depth](sources-in-depth) provides a detailed discussion of each Source and the limits of the Data it produces.
+The Data Contributors section of the User Guide provides a detailed discussion of each Source and the limits of the Data it produces.
 
 ### 5: Provide a documented audit trail of how and when data generation and collection methods change over time and list all known effects of these changes. Documentation should note whether changes were applied historically or only from change date forward.
 
@@ -50,6 +50,6 @@ All data is available on the Query API and Evidence API.
 
 ### 13: Provide a process for reporting and correcting data or metrics that are suspected to be inaccurate
 
-Crossref support will be able to handle requests. We can attempt to reprocess raw data to re-generate events. We can back-fill missing events with appropriate date-stamps. As we are not aggregating events into metrics or scores, we will not provide scores which might later need adjustment.
+Crossref support will be able to handle requests. We can attempt to reprocess raw data to re-generate Events. We can back-fill missing Events with appropriate date-stamps. As we are not aggregating Events into metrics or scores, we will not provide scores which might later need adjustment.
 
 If there are any interruptions or other notices, they will be recorded via the Status Service.

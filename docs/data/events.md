@@ -9,7 +9,7 @@ Each Event is a JSON-representable object. Events have a core set of fields and 
 | `obj_id`           | URI         | No  | Object Persistent ID. |
 | `timestamp`        | Timestamp   | No  | Timestamp of when the Event was created. |
 | `occurred_at`      | Timestamp   | No  | Timestamp of when the Event is reported to have occurred |
-| `id`               | UUID        | No  | Unique ID for the event |
+| `id`               | UUID        | No  | Unique ID for the Event |
 | `source_id`        | string      | No  | A name for the source |
 | `source_token`     | UUID        | No  | Unique ID that identifies the Agent that generated the Event. |
 | `terms`            | URL         | Yes | Terms of use for using the API at the point that you acquire the Event. |

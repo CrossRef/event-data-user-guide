@@ -1,6 +1,6 @@
-# How Sources and Agents Work
+# How Data Contributors, Sources and Agents Work
 
-Every Event starts its life in a Data Contributor. We use the term 'Source' to refer to the Data Contributor and in some cases a particular way of looking at their data. Most Data Contributors are represented by a single Source, but where a Data Contributor has more than one type of data they may be represented by more than one Source. For example, Twitter is a Data Contributor and we have a corresponding `twitter` source. Reddit is another Data Contributor, but we have two Sources: `reddit` for the content of discussions that happen on reddit and `reddit-links` for the content of pages that are linked to from Reddit.
+Every Event starts its life in a Data Contributor. This section of the User Guide describes each Data Contributor and the kind of Events you may find for each. The term 'Source' is an internal label for the Data Contributor and in some cases a particular way of looking at their data. It's the way we identify where each Event came from. Most Data Contributors are represented by a single Source, but where a Data Contributor has more than one type of data they may be represented by more than one Source. For example, Twitter is a Data Contributor and we have a corresponding `twitter` source. Reddit is another Data Contributor, but we have two Sources: `reddit` for the content of discussions that happen on reddit and `reddit-links` for the content of pages that are linked to from Reddit.
 
 Every Source usually has one or more Agents dedicated to it. Each Agent connects to its Source and produces Events. The kind of data that the Source makes available, and the way that the Agent processes it, vary.
 

@@ -25,8 +25,8 @@ pages:
    - "Reports Service": service/reports-service.md
    - "Evidence Registry": service/evidence-registry.md
    - "Artifact Registry": service/artifact-registry.md
- - "Sources":
-   - "How Sources and Agents Work": sources/how-agents-work.md
+ - "Data Contributors":
+   - "How Data Contributors, Sources and Agents Work": sources/how-agents-work.md
    - "Crossref Metadata": sources/crossref.md
    - "DataCite Metadata": sources/datacite.md
    - "Hypothes.is": sources/hypothesis.md

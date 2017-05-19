@@ -11,9 +11,9 @@ So you've read and understood the Event Data user Guide. How do you actually get
     - If you want to do a one-off query, you may be interested in the `occurred` view.
     - If you want to maintain an up-to-date database, you may be interested in the `collected` view.
     - If you are interested in on-going data, you should decide how often you want to pull data from the API.
-    - If you use the `occurred` view for a particular date, you should be aware that events that occurred on that date may be collected in future.
+    - If you use the `occurred` view for a particular date, you should be aware that Events that occurred on that date may be collected in future.
 3. Decide what you want to actually do with the data.
-    - If you want to monitor for events, a time-series database may be of use.
+    - If you want to monitor for Events, a time-series database may be of use.
     - If you want to collect data for later, a JSON document store may be of use.
     - If you want to look at links between things, a graph store may be of use.
 

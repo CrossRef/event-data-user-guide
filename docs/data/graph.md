@@ -35,7 +35,7 @@ You can model Event Data as a graph, and you can combine it with data from other
 
 But although each Event corresponds to a connection, that doesnt't always mean just two nodes an an edge. In order to construct a graph, you must choose how you represent Events as nodes and edges, and to do that it's necessary to _interpret_ the Events. How you interpret them is up to you, and will depend on what you're trying to achieve. Models go from very simple but easy to navigate, to very detailed but possibly hard to interrogate or query.
 
-Let's take an example event:
+Let's take an example Event:
 
     {"obj_id":"https://doi.org/10.3201/eid2202.151250",
      "source_token":"a6c9d511-9239-4de8-a266-b013f5bd8764",
@@ -236,7 +236,7 @@ This model is the richest so far, but issuing queries between subject and object
 
 ![Model 5](/images/graph-5.png)
 
-In this model we mix #3 and #4. We can make simple queries like 'find nodes that mention this DOI' or 'find DOIs that this node references', but once we find a connection we can then say 'which event(s) connect these two nodes'. This model includes duplicate data, but allows a combination of lightweight querying with supporting evidence. 
+In this model we mix #3 and #4. We can make simple queries like 'find nodes that mention this DOI' or 'find DOIs that this node references', but once we find a connection we can then say 'which Event(s) connect these two nodes'. This model includes duplicate data, but allows a combination of lightweight querying with supporting evidence. 
 
 ### 6: Event node with relationships between all other nodes.
 

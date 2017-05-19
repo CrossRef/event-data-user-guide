@@ -4,7 +4,7 @@
 
 ### Does Event Data collect data for all DOIs in existence?
   
-Event Data will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all DOIs in the 'doi-prefix' Artifact (currently Crossref, DataCite in future). Different sources operate differently, so the data for some sources will be fresher than others.
+Event Data will accept Events for DOIs issued by any RA (for example, DataCite), and will poll for all DOIs in the 'doi-prefix' Artifact (currently Crossref, DataCite in future). Different Agents operate differently, so the data for some sources will be fresher than others.
  
 ### Which Registration Agencies' DOIs does Event Data use?
 
@@ -14,9 +14,9 @@ Event Data is is a joint venture by Crossref and DataCite. It is able to collect
 
 Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
  
-### What is an event?
+### What is an Event?
 
-An event can be described as 'an action that occurs concerning a Content Object'. Every kind of event is slightly different, see the Sources for details.
+An Event can be described as 'an action that occurs concerning a Content Object'. Every kind of event is slightly different, see the Sources for details.
 
 ### What format does the API data come in?
 

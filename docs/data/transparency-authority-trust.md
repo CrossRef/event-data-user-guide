@@ -55,7 +55,7 @@ The NISO Code of Conduct describes an 'altmetric data aggregator' as:
 
 > Tools and platforms that aggregate and offer online Events as well as derived metrics from altmetric data providers (e.g., Altmetric.com, Plum Analytics, PLOS ALM, ImpactStory, Crossref).
 
-Event Data is an 'aggregator' by this definition. We offer 'online events' but we **do not provide metrics**. For some data sources that originate within Crossref, Event Data is also a 'Provider' according to the NISO definition.
+Event Data is an 'aggregator' by this definition. We offer 'online Events' but we **do not provide metrics**. For some data sources that originate within Crossref, Event Data is also a 'Provider' according to the NISO definition.
 
 <a name="concept-evidence-first"></a>
 ## Evidence First

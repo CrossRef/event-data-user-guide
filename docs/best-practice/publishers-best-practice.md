@@ -31,13 +31,13 @@ Including good metadata is general best practice for scholarly publishing. Follo
 
 ## Don't require cookies
 
-Some Publisher sites don't allow browsers to visit unless cookies are enabled, and block visitors that don't accept them. If your site does this, we will be unable to collect DOIs for your events.
+Some Publisher sites don't allow browsers to visit unless cookies are enabled, and block visitors that don't accept them. If your site does this, we will be unable to collect DOIs for your Events.
 
 **Action:** Allow your site to be accessed without cookies.
 
 ## Don't require JavaScript to read your pages
 
-Some Publisher sites require JavaScript to be enabled, and don't show any content to browsers that don't execute JavaScript. The Event Data Bot does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your events.
+Some Publisher sites require JavaScript to be enabled, and don't show any content to browsers that don't execute JavaScript. The Event Data Bot does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your Events.
 
 **Actions:**
 

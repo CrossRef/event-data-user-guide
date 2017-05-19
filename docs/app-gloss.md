@@ -18,7 +18,7 @@
 
 ### Event UUID
 
- A UUID that corresponds to an event within Crossref Event Data. 
+ A UUID that corresponds to an Event within Crossref Event Data. 
 
 ### Registration Agency
 
