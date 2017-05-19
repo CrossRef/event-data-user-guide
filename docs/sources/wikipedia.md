@@ -5,7 +5,7 @@
 | Agent Source Token        | `36c35e23-8757-4a9d-aacf-345e9b7eb50d` |
 | Consumes Artifacts        | |
 | Subject Coverage          | All Wikimedia properties whose changes are published via [MediaWiki Event Streams](https://wikitech.wikimedia.org/wiki/EventStreams)|
-| Object Coverage           | All DOIs, all Article Landing Pages |
+| Object Coverage           | All DOIs, all article Landing Pages |
 | Data Contributor          | Wikimedia Foundation |
 | Data Origin               | Edits of articles on Wikimedia properties, e.g. Wikipedias. Via the Wikipedia MediaWiki Event Streams and the Media WikiRESTBase API.|
 | Freshness                 | Continuous. |
@@ -116,7 +116,7 @@ We don't expect to have to edit or delete any Events.
 
 There are a number of initatives in the community concerning citation and referencing in Wikipedia, leading to various ways in which links may be made in the WikiText source of the article. The Agent monitors the final rendered HTML, so transcends these different methods.
 
-Due to the way that references are sometimes made (for example, both landing pages and DOIs), an article may contain two references to the same Registered Content Item. Because these are treated differently by Event Data, you should pay careful attention to the `obj.url` field.
+Due to the way that references are sometimes made (for example, both Landing Pages and DOIs), an article may contain two references to the same Registered Content Item. Because these are treated differently by Event Data, you should pay careful attention to the `obj.url` field.
 
 We record every edit for which we find relevant references. This means that if a page is edited in a way that doesn't change the references, we will still record it as normal.
 
