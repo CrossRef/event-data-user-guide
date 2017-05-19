@@ -5,7 +5,7 @@
 | Agent Source Token        | `45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231` |
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
 | Subject Coverage          | All tweets |
-| Object Coverage           | All DOIs, all Article Landing Pages |
+| Object Coverage           | All DOIs, all article Landing Pages |
 | Data Contributor          | Twitter via the Gnip PowerTrack service |
 | Data Origin               | Tweet text and associated metadata |
 | Freshness                 | Continual |
@@ -17,7 +17,7 @@
 | Produces Evidence Records | Yes |
 | Produces relation types   | `discusses` |
 | Source ID                 | `twitter` |
-| Updates or deletions      | Deletions if a Tweet is deleted |
+| Updates or deletions      | Deletions if a tweet is deleted |
 
 ## What it is
 
@@ -76,7 +76,7 @@ We then attempt to match all links to Registered Content Items.
       "relation_type_id": "discusses"
     }
 
-You can see that this is a retweet because of the presence fo the `original-tweet-url`.
+You can see that this is a retweet because of the presence of the `original-tweet-url`.
 
 ## Evidence Record
 
@@ -87,7 +87,7 @@ The Agent collects tweets into batches and sends a number per Evidence Record.
 
 ## Edits / Deletion
 
-Some tweets are deleted by their authors after they are published. We observe single-digit percentage deletion rates in Event Data. Twitter publishes a stream deleted tweet IDs, which we check against our database. If we find that a tweet has been deleted, we will edit the Event:
+Some tweets are deleted by their authors after they are published. We observe single-digit percentage deletion rates in Event Data. Twitter publishes a stream of deleted tweet IDs, which we check against our database. If we find that a tweet has been deleted, we will edit the Event:
 
  - The `updated` field is set to indicate the timestamp when we took the action.
  - The `updated_type` field is set to `deleted`.
@@ -95,15 +95,15 @@ Some tweets are deleted by their authors after they are published. We observe si
  - The `subj_id` will be updated to remove the tweet ID (it is considered to be sensitive information), and will just show `https://twitter.com`
  - The `subj` metadata will be removed.
 
-Events that have been subject to compliance actions will not be included in new query results from the Query API. They will will be available via the `from-updated-date` query to allow you to perform your own compliance actions. If you store Twitter Events from Event Data, you should perform periodic checks to see if you should update your own data.
+Events that have been subject to compliance actions will not be included in new query results from the Query API. They will be available via the `from-updated-date` query to allow you to perform your own compliance actions. If you store Twitter Events from Event Data, you should perform periodic checks to see if you should update your own data.
 
 ## Quirks
 
 The rules sent to Gnip PowerTack are manually updated. We aim to keep them in sync with the `domain-list` Artifact, but they may lag slightly.
 
-According to the agreement we have with Twitter, we are allowed to process the text of Tweets to extract events but we are not allowed to store or redistribute it. The text of the tweet is therefore passed to the Percolator and marked as 'sensitive'. This means that the SHA1 hash of the text appears in the Evidence Record as an `input-content-hash`, but not the text itself.
+According to the agreement we have with Twitter, we are allowed to process the text of tweets to extract events but we are not allowed to store or redistribute it. The text of the tweet is therefore passed to the Percolator and marked as 'sensitive'. This means that the SHA1 hash of the text appears in the Evidence Record as an `input-content-hash`, but not the text itself.
 
-If you are interested in the text of a Tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the Tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
+If you are interested in the text of a tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
 
 
 ## Failure modes
