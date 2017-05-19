@@ -5,7 +5,7 @@
 | Agent Source Token        | `d9c55bad-73db-4860-be18-520d3891b01f` |
 | Consumes Artifacts        | `domain-list` |
 | Subject Coverage          | Any webpage. |
-| Object Coverage           | All DOIs, all Article Landing Pages |
+| Object Coverage           | All DOIs, all article Landing Pages |
 | Data Contributor          | Various |
 | Data Origin               | Authors of webpages |
 | Freshness                 | Infrequent |
@@ -21,9 +21,9 @@
 
 ## What it is
 
-The 'Web' source is a catch-all name we give to Events collected from the Web when we folllow links that fall outside any other source. As with all other sources, we don't visit webpages that belong to Crossref members.
+The Web source is a catch-all name we give to Events collected from the Web when we folllow links that fall outside any other source. As with all other sources, we don't visit webpages that belong to Crossref members.
 
-Many Agents such as Reddit Links, Newsfeed, Wikipedia follow links
+Many Agents such as Reddit Links, Newsfeed, Wikipedia follow links.
 
 ## What it is
 
@@ -33,7 +33,7 @@ The list of URLs can come from a range of sources, including those submitted by 
 
 ## What it does
 
-A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked Article Landing Pages in the HTML of each page.
+A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked a›rticle Landing Pages in the HTML of each page.
 
 ## Where data comes from
 
