@@ -12,7 +12,7 @@
 | Identifies                | DOIs |
 | License                   | Creative Commons [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | References in DataCite Schema |
-| Name                      | DataCite Links |
+| Name                      | DataCite Metadata |
 | Operated by               | DataCite |
 | Produces Evidence Records | No |
 | Produces relation types   | `references` and other types found in the DataCite schema |
