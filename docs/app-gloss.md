@@ -10,9 +10,9 @@
 
 ### Landing Page
 
- The Publisher's page for an article (or dataset etc). Every DOI resolves to a landing page, but there may be more than one landing page per article. The URLs of landing pages can change over time, and the DOI link should always point to the landing page.
+ The Publisher's page for an item of Registered Content (for example, an article or a dataset etc). Every DOI resolves to a Landing Page, but there may be more than one Landing Page per content item. The URLs of Landing Pages can change over time, and the DOI link should always point to the Landing Page.
 
-### Data Source
+### Data Source / Data Contributor
 
  The provenance or type of Event Data. Data Sources include Wikipedia, Crossref, DataCite etc. A source is different to an agent, which is a piece of software that fetches data for a particular Data Source.
 
@@ -48,11 +48,11 @@
 
 ### DET
 
- DOI Event Tracking, the original name for Crossref Event Data.
+ Means 'DOI Event Tracking', the original name for Crossref Event Data.
 
 ### DOI
 
- Digital Object Identifier. An identifier given to a Content Item, e.g. http://doi.org/10.5555/12345678
+ Digital Object Identifier. An identifier given to a Registered Content Item, e.g. http://doi.org/10.5555/12345678
 
 ### JSON 
 
@@ -102,7 +102,7 @@ Publisher Item Identifier, an identifier used internally by some Publishers.
 
 The following words have been used during the development of Event Data but are no longer official:
 
- - Deposit - this is an internal entity used within Lagotto. It does not form part of the public DET service, although it may be of interest to users who want to look into the internals.
+ - Deposit - this is an internal entity used within Lagotto. It does not form part of the public Event Data service, although it may be of interest to users who want to look into the internals.
  - 'DOI Event Tracking' / 'DET' - the old name for the Crossref Event Data service
  - Relations - this is an internal entity used within Lagotto. Event Data does not use Lagotto Relation objects. The concept of a 'relation' is present in the Event object as a description of how a subject and an object are related.
  - Publisher Domains - now referred to as Landing Page Domains
