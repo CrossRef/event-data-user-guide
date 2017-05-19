@@ -107,6 +107,10 @@ Discusses:
 ## Edits / Deletion
 
  - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+ 
+## Quirks
+
+None known.
 
 ## Failure modes
 
