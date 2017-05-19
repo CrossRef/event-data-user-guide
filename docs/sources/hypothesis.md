@@ -108,10 +108,6 @@ Discusses:
 
  - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
-## Quirks
-
-Note that this only monitors blogs hosted on Wordpress' wordpress.com platform. It does not monitor all blogs that use the Wordpress software.
-
 ## Failure modes
 
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
