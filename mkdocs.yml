@@ -38,16 +38,16 @@ pages:
    - "Web": sources/web.md
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
- - "Connecting to Your System": 
-   - "Connecting CED to a Graph Database": connecting/graph-database.md
-   - "JSON Document Store: MongoDb": connecting/json-document-store.md
-   - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
-   - "Streaming: Spark": connecting/streaming-spark.md
-   - "Lagotto": connecting/lagotto.md
- - "Best Practice":
-   - "For Publishers": best-practice/publishers-best-practice.md
-   - "Keep your data up to date": best-practice/up-to-date.md
-   - "Getting Started": best-practice/getting-started.md
+ # - "Connecting to Your System": 
+ #   - "Connecting CED to a Graph Database": connecting/graph-database.md
+ #   - "JSON Document Store: MongoDb": connecting/json-document-store.md
+ #   - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
+ #   - "Streaming: Spark": connecting/streaming-spark.md
+ #   - "Lagotto": connecting/lagotto.md
+ # - "Best Practice":
+ #   - "For Publishers": best-practice/publishers-best-practice.md
+ #   - "Keep your data up to date": best-practice/up-to-date.md
+ #   - "Getting Started": best-practice/getting-started.md
  -  "Appendix 1: Software in Use": app-software.md
  - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
  - "Appendix: Contributing to Event Data": app-contributing.md
