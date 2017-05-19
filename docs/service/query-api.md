@@ -11,7 +11,7 @@ The following query parameters are available:
  - `rows` — the number of Events you want to retrieve per page. The default, and recommended, value is 10,000, which allows you to retrieve large numbers of Events quickly. There are typically between 10,000 and 100,000 Events collected per day.
  - `filter` — supply a filter that allows you to restrict results.
  - `cursor` — allows you to iterate through a search result set.
- - `from-updated-date` — a special filter that includes updated and deleted Events, to allow you to keep your data-set up to date.
+ - `from-updated-date` — a special filter that includes updated and deleted Events, to allow you to keep your dataset up to date.
 
 ## Filter parameters
 
