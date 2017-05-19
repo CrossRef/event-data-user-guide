@@ -44,4 +44,6 @@ Some Publisher sites require JavaScript to be enabled, and don't show any conten
 - Allow your site to be accessed without JavaScript.
 - If you are unable to do do this, at least include the `<meta name="dc.identifier">` tag in the HTML header.
 
+## Review Terms of use
 
+You should be familiar with the [Terms of Use](https://www.crossref.org/services/event-data/terms/).

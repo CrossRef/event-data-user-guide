@@ -1,8 +1,6 @@
 # Keep up to date with Event Data
 
-It's very rare that an Event will be modified once it's created, but it does happen from time to time. 
-
-Once an Event has been created, we won't remove it from our system. However, there are some circumstances where we may edit it or mark it as 'retracted'.
+Once an Event has been created, we won't remove it from our system. However, there are some circumstances where we may edit it or mark it as deleted. We try to avoid editing Events once they are created but in some cases, notably Twitter, we routinely do this because of our obligations.
 
 If you retrieve Events from Event Data, or you perform calculations based on data from Event Data, you should check back to make sure the original data hasn't changed. Examples of when you might like to check:
 
@@ -22,17 +20,4 @@ When an Event is updated, we will add the an `updated` field, an `updated-date` 
  - `edited`
    - when we identified obviously faulty data but it can be corrected
 
-By default the Query API does not return Events with `"update": "deleted"`, though you can request them by supplying the `deleted=true` parameter.
-
-## How to check
-
-Content to follow.
-
-## When to check
-
-Content to follow.
-
-## What to do
-
-Content to follow.
-
+For further discussion see [Updates](/data/updates). For more details of how to do this check the [Query API](/service/query-api/) documentation.

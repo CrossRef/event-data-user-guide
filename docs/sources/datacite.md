@@ -1,4 +1,4 @@
-# DataCite Links
+# DataCite Metadata
 
 |-|-|
 |---------------------------|-|

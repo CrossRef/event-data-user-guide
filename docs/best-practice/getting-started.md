@@ -35,6 +35,10 @@ So you've read and understood the Event Data user Guide. How do you actually get
 1. Remember to stick to your data management plan and poll for updated data.
 2. If you are performing analysis, consult the Status Service for any background issues or factors that may have affected the collection of data.
 
+## Review Terms of use
+
+You should be familiar with the [Terms of Use](https://www.crossref.org/services/event-data/terms/).
+
 ## Feedback
 
 We would love to know how you are using Crossref Event Data and what you're doing with it. We are also happy to discuss your plans and give advice where useful.
