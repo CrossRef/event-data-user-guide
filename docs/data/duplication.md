@@ -33,7 +33,7 @@ The same content may be served on separate domains on the web. For example, some
 
 The Crosref Agents attempt to convert Every link or mention of an item to an Event. On some pages, for example Wikipedia, the same reference may be linked several different ways. An Agent treats each of these links independently, which means that you may see more than one link between a given Wikipedia page and an Article by their `subj_id` field, but the `subj.url` will indicate different URLs.
 
-How you interpret these is up to you. For some use-cases, it is important to be able to tell the difference between links via an article landing page and the DOI. In some cases, for example component DOIs or DOIs that represent versioned content, the DOI could more specific than Article Landing Page. In other cases, it's not so important, so duplicates can be removed based on the `subj_id` and `obj_id`.
+How you interpret these is up to you. For some use-cases, it is important to be able to tell the difference between links via an article Landing Page and the DOI. In some cases, for example component DOIs or DOIs that represent versioned content, the DOI could more specific than the article Landing Page. In other cases, it's not so important, so duplicates can be removed based on the `subj_id` and `obj_id`.
 
 ## Duplication as Corroboration
 
@@ -41,8 +41,8 @@ Every source has different characteristics which must be taken into account when
 
 ## Repeated Observations
 
-The Web agent may check the same webpage more than once over time. In this case it may make the same observations repeatedly. If you find an Event that a duplicate or very similar to one made a while ago, this may be the reason.
+The Web source Agent may check the same webpage more than once over time. In this case it may make the same observations repeatedly. If you find an Event that has a duplicate, or is very similar to another Event made a while ago, this may be the reason.
 
-## Crossref Event Data tries not to produce Duplicate Events.
+## Crossref Event Data tries not to produce duplicate Events.
 
 All of the above said, all Agents operated by Crossref co-operate to avoid producing duplicate Events. 
