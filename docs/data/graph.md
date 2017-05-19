@@ -86,7 +86,7 @@ We can also identify several potential arcs in the Event. In order of obviousnes
 1. From the `subj_id`, `relation_type_id` and `obj_id` fields:
     - Content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - discusses
-    - the Content Item with DOI `https://doi.org/10.3201/eid2202.151250`
+    - the Registered Content Item with DOI `https://doi.org/10.3201/eid2202.151250`
 2. From the `subj.id` field:
     - The content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - referred to the subject
