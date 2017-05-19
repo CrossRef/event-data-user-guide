@@ -79,7 +79,7 @@ We can identify several potential nodes that this Event mentions. In order of ob
 13. The license at the URL `https://creativecommons.org/publicdomain/zero/1.0/`
 
 
-Some of these are specific to the Reddit source. Some may or may not be relevant to you. Notice that we have a gap between the concept of the Article and its two identifiers https://doi.org/10.3201/eid2202.151250 and http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article.
+Some of these are specific to the Reddit source. Some may or may not be relevant to you. Notice that we have a gap between the concept of the article and its two identifiers https://doi.org/10.3201/eid2202.151250 and http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article.
 
 We can also identify several potential arcs in the Event. In order of obviousness:
 
@@ -163,7 +163,7 @@ You could also run two databases, one for running simple efficient queries and o
 
 ## Six ways you can model Event Data
 
-Here are six illustrations of practical ways you could model Events in a graph database. Each have upsides and downsides.
+Here are six illustrations of practical ways you could model Events in a graph database. Each has upsides and downsides.
 
 ### 1: `subj_id` &rarr; `obj_id`
 
@@ -188,7 +188,7 @@ It is lightweight and good for initial investigations, but discards most of the 
  - Relationship between subject URL and object URL is an edge
  - Relationships between subject URL and subject PID, and between object URL and object PID are edges
 
-By linking the `subj.url` to the `obj.url`, this model records what actually happened, e.g. a Reddit post linking to an article landing page URL. The `subj_id` and `obj_id` are also included and linked, so we can see which conceptual article is meant by the URL.
+By linking the `subj.url` to the `obj.url`, this model records what actually happened, e.g. a Reddit post linking to an article Landing Page URL. The `subj_id` and `obj_id` are also included and linked, so we can see which conceptual article is meant by the URL.
 
 Note that every subject and object has a PID, but doesn't necessarily have a URL. In this case you might consider falling back to the PID.
 
@@ -207,7 +207,7 @@ This model represents the activity more accurately, but still discards informati
 
 This model represents the link between the conceptual items via their PIDs and also includes the URLs. This model includes more information but, like model 1, doesn't describe exactly which URLs were used in a given link.
 
-This is similar to model 1, except that the relationship is modelled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the article landing page, but it does represent that it mentioned the article, and that the article has the landing page URL.
+This is similar to model 1, except that the relationship is modelled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
 
 Event Data uses DOIs to represent registered content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
 
@@ -228,7 +228,7 @@ In previous models the place of an Event is represented implicitly as an arc. In
 Questions you can ask of this model are:
 
  - If this node is the subject of an Event node, give me all nodes that are the object of the Event node
- - If this node is an Article DOI, find all URL nodes that are the subj_url of nodes of which this is an a subj_PID. In other words, find the landing page URL for this article DOI.
+ - If this node is an article DOI, find all URL nodes that are the subj_url of nodes of which this is an a subj_PID. In other words, find the Landing Page URL for this article DOI.
 
 This model is the richest so far, but issuing queries between subject and object nodes requires an extra 'hop' to find the intermediary Event node. 
 
@@ -242,7 +242,7 @@ In this model we mix #3 and #4. We can make simple queries like 'find nodes that
 
 ![Model 6](/images/graph-6.png)
 
-This model combines all of the above. It represents the relationships between PID nodes and their URLs, between pairs of PID nodes, using the `relation_type_id` as the type of node. It also connects the Event to all of the nodes to allow queries like 'which Events(s) connect these two PIDs' but also 'in which Event was it asserted that this DOI has this landing page URL'.
+This model combines all of the above. It represents the relationships between PID nodes and their URLs, between pairs of PID nodes, using the `relation_type_id` as the type of node. It also connects the Event to all of the nodes to allow queries like 'which Events(s) connect these two PIDs' but also 'in which Event was it asserted that this DOI has this Landing Page URL'.
 
 ## Over to you
 
