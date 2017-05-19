@@ -1,18 +1,23 @@
 # Newsfeed
 
-| Property                  | Value          |
-|---------------------------|----------------|
-| Name                      | `newsfeed` |
-| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
-| Consumes Artifacts        | `newsfeed-list`, `domain-list` |
-| Produces relation types   | `mentions` |
-| Freshness                 | every few hours |
-| Data Source               | Multiple blog and aggregator RSS feeds |
-| Coverage                  | All blogs in RSS feeds |
-| Identifies links by       | Linked DOIs, unlinked DOIs, linked landing page domains |
-| Relevant concepts         | [Unambiguously linking URLs to DOIs](concepts#concept-urls), [Duplicate Data](concepts#concept-duplicate), [Landing Page Domains](concepts#concept-landing-page-domains), [Sources that must be queried in their entirety](concepts#concept-query-entirety), [DOI Reversal Service](concepts#in-depth-doi-reversal) |
+| | |
+|---------------------------|-|
+| Agent Source Token        | `c1bfb47c-39b8-4224-bb18-96edf85e3f7b` |
+| Consumes Artifacts        | `newsfeed-list` |
+| Subject Coverage          | Blog posts mentioned in RSS and Atom feeds on `newsfeed-list`  |
+| Object Coverage           | All DOIs, Landing Page URLs, plain-text DOIs. |
+| Data Contributor          | Curators of RSS and Atom feed aggregators. Authors of blog posts. |
+| Data Origin               | RSS and Atom feeds, and the blog posts they point to. |
+| Freshness                 | Every few hours. |
+| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | HTML of webpages (mostly blog posts) linked to from RSS and Atom feeds. |
+| Name                      | Newsfeed |
 | Operated by               | Crossref |
-| Agent                     | event-data-newsfeed-agent |
+| Produces Evidence Records | Yes |
+| Produces relation types   | `discusses` |
+| Source ID                 | `newsfeed` |
+| Updates or deletions      | None expected |
 
 ## What it is
 
@@ -49,13 +54,15 @@ On a regular basis (approximately every hour) the Newsfeed Agent starts a scan. 
 
 ## Evidence Record
 
-*Content to follow.*
+ - Includes batches of `landing-page-url` type observations.
 
 ## Edits / Deletion
 
  - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
 ## Quirks
+
+ - Links to blog posts are followed. If a summary of the blog post is included in the RSS feed, it is not consulted.
 
 ## Failure modes
 

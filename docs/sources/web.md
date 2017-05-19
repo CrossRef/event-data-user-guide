@@ -1,16 +1,29 @@
 # Web
 
-| Property                  | Value          |
-|---------------------------|----------------|
-| Name                      | web |
-| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
-| Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
-| Produces relation types   | `mentions` |
-| Freshness                 | Undefined |
-| Coverage                  | Random collection of web pages |
-| Identifies links by       | Linked DOIs, unlinked DOIs, linked landing page domains |
+| | |
+|---------------------------|-|
+| Agent Source Token        | `d9c55bad-73db-4860-be18-520d3891b01f` |
+| Consumes Artifacts        | `domain-list` |
+| Subject Coverage          | Any webpage. |
+| Object Coverage           | All DOIs, all Article Landing Pages |
+| Data Contributor          | Various |
+| Data Origin               | Authors of webpages |
+| Freshness                 | Infrequent |
+| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | Text of webpages. |
+| Name                      | Web |
 | Operated by               | Crossref |
-| Agent                     | event-data-web-agent |
+| Produces Evidence Records | Yes |
+| Produces relation types   | `mentions` |
+| Source ID                 | `web` |
+| Updates or deletions      | None expected |
+
+## What it is
+
+The 'Web' source is a catch-all name we give to Events collected from the Web when we folllow links that fall outside any other source. As with all other sources, we don't visit webpages that belong to Crossref members.
+
+Many Agents such as Reddit Links, Newsfeed, Wikipedia follow links
 
 ## What it is
 
@@ -29,30 +42,45 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
 
 ## Example Event
 
-*Content to follow.*
+    {
+      "obj_id": "https://doi.org/10.1017/s0963180100005168",
+      "source_token": "d9c55bad-73db-4860-be18-520d3891b01f",
+      "occurred_at": "2017-03-13T10:10:38Z",
+      "subj_id": "http://philpapers.org/rec/ANNAAS",
+      "id": "00003c22-1571-4bd3-924b-0438f6f7ff54",
+      "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170313e86bef03-4556-4ecc-8401-0e71af4d0bb6",
+      "terms": "https://doi.org/10.13003/CED-terms-of-use",
+      "action": "add",
+      "subj": {
+        "pid": "http://philpapers.org/rec/ANNAAS",
+        "work"-type: "webpage",
+        "url": "http://philpapers.org/rec/ANNAAS"
+      },
+      "source_id": "web",
+      "obj": {
+        "pid": "https://doi.org/10.1017/s0963180100005168",
+        "url": "https://doi.org/10.1017/s0963180100005168"
+      },
+      "timestamp": "2017-03-13T10:11:19Z",
+      "relation_type_id": "mentions"
+    }
 
 ## Methodology
 
-1. A list of URLs is maintained manually.
-2. We remove URLs that belong to any domain in the `domain-list` Artifact. This means that we do not visit webpages that belong to Publishers.
-3. We remove URLs that might be picked up via other sources, e.g. Wikipedia and Reddit
-4. The Web agent pics batches of URLs the URL list and sends them to the Percolator.
-5. The Percolator visits each URL to look for Events.
-
 ## Evidence Record
-
-*Content to follow.*
 
 ## Edits / Deletion
 
- - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
- - If we mistakenly collect Events for a publisher site, the publisher may reasonably ask us to remove them.
+We may mark Events as deleted if we subsequently find that the `subj_id` doesn't conform to the Event Data aims (e.g. if it belongs to a member). 
 
 ## Quirks
 
-The selection of URLs doesn't follow any particular pattern. 
+ - The selection of URLs doesn't follow any particular pattern. 
 
 ## Failure modes
 
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+
+## Further information
+
+None.

@@ -1,19 +1,23 @@
 # Crossref Links
 
-| Property                  | Value          |
-|---------------------------|----------------|
-| Name                      | crossref |
+| | |
+|---------------------------|-|
+| Agent Source Token        | `8676e950-8ac5-4074-8ac3-c0a18ada7e99` |
 | Consumes Artifacts        | none |
-| Matches by                | DOI references and relationships in Crossref Metadata |
-| Produces relation types   | `references` and other types found in the Crossref schema |
-| Freshness                 | Multiple times per day |
-| Data Source               | Crossref Metadata deposited by Crossref Members |
-| Coverage                  | From all Crossref DOIs to all DataCite DOIs |
-| Identifies links by       | References in Crossref Schema |
+| Subject coverage          | All Crossref DOIs |
+| Object Coverage           | All DataCite DOIs |
+| Data Contributor          | Crossref |
+| Data Origin               | Crossref Metadata deposited by Crossref Members |
+| Freshness                 | Every few hours |
+| Identifies                | DOIs |
+| License                   | Made available without restriction |
+| Looks in                  | References in Crossref Schema |
+| Name                      | Crossref Links |
 | Operated by               | Crossref |
-| Agent                     | Crossref Links |
-| Agent Source Token        | 8676e950-8ac5-4074-8ac3-c0a18ada7e99 |
-| License                   | "Made available without restriction". |
+| Produces Evidence Records | No |
+| Produces relation types   | `references` and other types found in the Crossref schema |
+| Source ID                 | `crossref` |
+| Updates or deletions      | None expected |
 
 ## What it is
 
@@ -42,6 +46,7 @@ Metadata deposits from Crossref members, usually publishers.
       "message_action":"create",
       "source_id":"crossref",
       "timestamp":"2016-08-19T22:14:33Z",
+      "terms": "https://doi.org/10.13003/CED-terms-of-use",
       "relation_type_id":"cites"
     }
 

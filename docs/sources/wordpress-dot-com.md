@@ -1,53 +1,65 @@
 # Wordpress.com
 
-| Property                  | Value          |
-|---------------------------|----------------|
-| Name                      | `wordpressdotcom` |
-| Matches by                | Landing Page URL hyperlink, DOI hyperlink, DOI text |
+| | |
+|---------------------------|-|
+| Agent Source Token        | `7750d578-d74d-4e92-9348-cd443cbb7afa` |
 | Consumes Artifacts        | `domain-list` |
-| Produces relation types   | `mentions` |
-| Freshness                 | every few hours |
-| Data Source               | Wordpress.com API |
-| Coverage                  | All blogs hosted on Wordpress |
-| Relevant concepts         | [Pre-filtering](#pre-filtering) |
+| Subject Coverage          | All blogs hosted on Wordpress.com that are listed in the search. |
+| Object Coverage           | All DOIs, Landing Page URLs, plain-text DOIs. |
+| Data Contributor          | Authors of blogs on the Wordpress.com platform. |
+| Data Origin               | Wordpress.com search results API, and the blog posts they point to that are hosted on Wordpress.com |
+| Freshness                 | Every few hours. |
+| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | HTML of Blog posts |
+| Name                      | Wordpress.com |
 | Operated by               | Crossref |
-| Agent                     | event-data-wordpress-agent |
+| Produces Evidence Records | Yes |
+| Produces relation types   | `discusses` |
+| Source ID                 | `wordpressdotcom` |
+| Updates or deletions      | None expected |
 
 ## What it is
 
-Links from Wordpress blogs **hosted on the wordpress.com domain**. 
+Authors of blog posts hosted on the Wordpress.com platform link to Registered Content Items. The Wordpress.com Agent monitors the service to look for these links.
 
 ## What it does
 
-The Agent monitors the Wordpress API for blog posts that mention Items via DOI links or links to Landing Pages. Each blog post is checked for links to articles via plain text DOIs, DOI hyperlinks and landing page URL hyperlinks.
-
-## Where data comes from
-
- - The `domain-list` Artifact is consulted. On a regular basis the Agent retrieves the Artifact, then follows the link to every blog post or page mentioned.
- - The Wordpress.com API is searched for links to blogs
- - Each individual blog
+ - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`
+ - Makes a query to the Wordpress.com API for blog posts that mentioned that domain.
+ - For each result, visits the blog post and attempts to extract links from the HTML of the blog post.
 
 ## Example Event
 
-*Content to follow*
-
-## Methodology
-
-On a regular basis (approximately every six hours) the Wordpress Agent starts a scan. Each scan:
-
-1. It downloads a copy of the latest version of the `domain-list` Artifact.
-2. For every domain in the domain list (including doi.org):
-    1. It queries the Wordpress API for blog posts that relate to that domain. The request is sorted by recently occurred. It consumes all pages of data to cover the time period since the last scan.
-    2. Every response from the Wordpress API includes a link to a blog post. This link is sent to the Percolator.
-    3. The Percolator follows the link and looks at the HTML of the page.
+    {
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "obj_id": "https://doi.org/10.1007/s12122-016-9232-5",
+    "source_token": "7750d578-d74d-4e92-9348-cd443cbb7afa",
+    "occurred_at": "2017-04-01T00:33:21Z",
+    "subj_id": "https://unionreaderblog.wordpress.com/2017/04/01/the-2011-industrial-relations-reform-and-nominal-wage-adjustments-in-greece-524/",
+    "id": "00011980-a1c3-4b85-a5b4-84cf3082f51c",
+    "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170406-wordpressdotcom-8a2287c9-e16e-4e19-aa7c-275ac249c4f6",
+    "terms": "https://doi.org/10.13003/CED-terms-of-use",
+    "action": "add",
+    "subj": {
+      "pid": "https://unionreaderblog.wordpress.com/2017/04/01/the-2011-industrial-relations-reform-and-nominal-wage-adjustments-in-greece-524/",
+      "type": "post-weblog",
+      "title": "The 2011 Industrial Relations Reform and Nominal Wage Adjustments in Greece"
+    },
+    "source_id": "wordpressdotcom",
+      "obj": {
+      "pid": "https://doi.org/10.1007/s12122-016-9232-5",
+      "url": "https://doi.org/10.1007/s12122-016-9232-5"
+    },
+    "timestamp": "2017-04-06T13:34:23Z",
+    "relation_type_id": "discusses"
+    }
 
 ## Evidence Record
 
-*Content to follow*
+ - Includes batches of `landing-page-url` type observations.
 
 ## Edits / Deletion
-
- - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
 ## Quirks
 
@@ -56,11 +68,7 @@ Note that this only monitors blogs hosted on Wordpress' hosted wordpress.com pla
 ## Failure modes
 
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
- - Wordpress.com may block the Agent
- - Wordpress.com may block the Percolator Bot
 
 ## Further information
 
  - [Wordpress.com](http://wordpress.com)
-

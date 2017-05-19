@@ -1,26 +1,20 @@
 # How Sources and Agents Work
 
-Every Event starts its life in a Source. Because of the diversity of Agents, Sources and Events, it's difficult to give a single definition of a source, so here are some examples:
+Every Event starts its life in a Data Contributor. We use the term 'Source' to refer to the Data Contributor and in some cases a particular way of looking at their data. Most Data Contributors are represented by a single Source, but where a Data Contributor has more than one type of data they may be represented by more than one Source. For example, Twitter is a Data Contributor and we have a corresponding `twitter` source. Reddit is another Data Contributor, but we have two Sources: `reddit` for the content of discussions that happen on reddit and `reddit-links` for the content of pages that are linked to from Reddit.
 
- - The Twitter API is a Source because it provides information about Tweets.
- - Newsfeeds (e.g. RSS or Atom feeds of blogs) are Sources because they provide pointers to blog posts. They don't provide the content of the blog posts, but tell the Agent where to look.
- - DataCite is a source because it provides links between DOIs and Crossref DOIs. It provides DOI to DOI links.
-
-Every Source has one or more Agents dedicated to it. Each Agent connects to its Source and produces Events. The kind of data that the Source makes available, and the way that the Agent processes it, vary.
+Every Source usually has one or more Agents dedicated to it. Each Agent connects to its Source and produces Events. The kind of data that the Source makes available, and the way that the Agent processes it, vary.
 
  - Some Sources send content which is refined by the Agent. This is how the Twitter and Reddit Agents work.
  - Some Sources send pointers to content, which the Agent then visits. This is how the Wikipedia and Newsfeeds Agents work.
  - Some Sources are custom-built to send Events directly. This is how the Crossref and DataCite Agents work.
 
-A source not only identifies a concrete external service, Twitter, but also a conceptual view of the data. For example:
-
- - The `newsfeed` source covers all newsfeeds that we track.
- - The `reddit` source covers comments and activity that occur on Reddit.
- - The `reddit-links` source covers the content of links (e.g. blog posts) that people share on Reddit. 
-
 ## Common features in Agents
 
 There are some common features and patterns that occur accross Agents. 
+
+### Reversing Landing Page Domains back into DOIs
+
+When a Registered Content Item is linked to via its landing page, the Agent will identify the link and then attempt to convert the Landing Page URL back into a DOI. If it is unable to do this, no Event will be created. This process is the most dyanmic and potentially variable step. 
 
 ### Issuing Queries for Landing Page Domains
 

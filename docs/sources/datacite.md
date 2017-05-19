@@ -1,19 +1,23 @@
 # DataCite Links
 
-| Property                  | Value          |
-|---------------------------|----------------|
-| Name                      | datacite |
-| Consumes Artifacts        | none |
-| Matches by                | DOI references and relationships in DataCite Metadata |
-| Produces relation types   | `references` and other types found in the DataCite schema |
-| Freshness                 | Multiple times per day |
-| Data Source               | DataCite Metadata deposited by DataCite Members |
-| Coverage                  | From all DataCite DOIs to all Crossref DOIs |
-| Identifies links by       | References in DataCite Schema |
+|-|-|
+|---------------------------|-|
+| Agent                     | `28276d12-b320-41ba-9272-bb0adc3466ff` |
+| Consumes Artifacts        | None |
+| Subject Coverage          | All DataCite DOIs |
+| Object Coverage           | All Crossref DOIs |
+| Data Contributor          | DataCite |
+| Data Origin               | DataCite Metadata deposited by Crossref Members |
+| Freshness                 | Every few hours |
+| Identifies                | DOIs |
+| License                   | Creative Commons [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | References in DataCite Schema |
+| Name                      | DataCite Links |
 | Operated by               | DataCite |
-| Agent                     | DataCite Links |
-| Agent Source Token        | 8676e950-8ac5-4074-8ac3-c0a18ada7e99 |
-| License                   | CC0 1.0 Universal |
+| Produces Evidence Records | No |
+| Produces relation types   | `references` and other types found in the DataCite schema |
+| Source ID                 | `datacite` |
+| Updates or deletions      | None expected |
 
 ## What it is
 
