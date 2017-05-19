@@ -5,15 +5,15 @@
 
 Every Event results from an action that was taken at some point in time. This is considered to be the time that the Event 'occurred'. Examples of the 'occurred' field:
 
- - the time the Tweet was published
+ - the time the tweet was published
  - the time the edit was made on Wikipedia
  - the time that the Reddit comment was made
  - the time that the blog post was published
  - the time an article with a data citation was published
 
-In some cases, the occurrence time is reported by the Source. In other cases, such as the Web source, the occurrence time isn't available and it's recorded by the Agent as the point point in time when it visited the page.
+In some cases, the occurrence time is reported by the source. In other cases, such as the Web source, the occurrence time isn't available and it's recorded by the Agent as the point point in time when it visited the page.
 
-Usually Events are collected soon after they occur, but we make no guarantees. For example, agents may receive archives of old data, or re-scan old date ranges, or reprocess inputs that couldn't be processed in the past.
+Usually Events are collected soon after they occur, but we make no guarantees. For example, Agents may receive archives of old data, or re-scan old date ranges, or reprocess inputs that couldn't be processed in the past.
 
 Every Event also has a 'collected' time. This is the time when the Agent submitted an Event to the Event Data Service. Depending on load, there may be a delay between when the Agent ingested some data and when it was timestamped. 
 
@@ -41,7 +41,7 @@ The downside of this is that you will not be able to find Events that occurred o
 
 ### Flexible data with `occurred`
 
-The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query URL will change over time, so you can't rely on the dataset to be stable and citable.
+The `occurred` dataset provides an up-to-date dataset that lets you find Events that occurred on a given day. The data at a Query API URL will change over time, so you can't rely on the dataset to be stable and citable.
 
 The timestamp field is available on all Events, so you can see when they were collected and added to the dataset for a given day.
 

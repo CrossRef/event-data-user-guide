@@ -2,10 +2,10 @@
 
 Events are never *removed* from the system, but they are sometimes updated. Because immutability and stability are important design principles, we will avoid doing this where possible. We will make edits under the following circumstances:
 
- - Where we are contractually obliged to. For example, Twitter requires us to monitor deleted Tweets and update our data to remove the deleted material accordingly.
+ - Where we are contractually obliged to. For example, Twitter requires us to monitor deleted tweets and update our data to remove the deleted material accordingly.
  - Where Events have been produced as the result of a bug. For example, if Events are issued for DOIs that don't exist and the Event is therefore invalid.
 
-For example, if an Agent has a bug that generates Events with invalid DOIs, and we are able to clean them up and mark the Events as edited, we will update those Events. If it generates non-existent DOIs, we may mark those Events as deleted. If a user deletes a Tweet that's refereced from an Event, we will erase the tweet and author ID from the Event, leaving the rest untouched, and mark it as deleted.
+For example, if an Agent has a bug that generates Events with invalid DOIs, and we are able to clean them up and mark the Events as edited, we will update those Events. If it generates non-existent DOIs, we may mark those Events as deleted. If a user deletes a tweet that's refereced from an Event, we will erase the tweet ID and author ID from the Event, leaving the rest untouched, and mark it as deleted.
 
 If an Event is updated, three fields will be set:
 

@@ -1,12 +1,12 @@
 # Artifacts
 
-Crossref maintains a number of Artifacts. These are individual pieces of information that we have produced internnaly which enable Agents or other parts of the Event Data system to do their job. They contain information like:
+Crossref maintains a number of Artifacts. These are individual pieces of information that we have produced internally which enable Agents or other parts of the Event Data system to do their job. They contain information like:
 
- - the list of domains where we think we'll find publisher landing pages
+ - the list of domains where we think we'll find Publisher Landing Pages
  - the list of DOI prefixes
  - the list of available sources
 
-Every Artifact has a label and a version number. Whenever one is used, its label and version number are mentioned in an Evidence Record. This way you can trace the provenance of an Event all the way back. For example you may wish to know why an Event was captured for this landing page domain but not this one. The Artifact will tell you which domains we knew about, when.
+Every Artifact has a label and a version number. Whenever one is used, its label and version number are mentioned in an Evidence Record. This way you can trace the provenance of an Event all the way back. For example you may wish to know why an Event was captured for this Landing Page domain but not this one. The Artifact will tell you which domains we knew about, when.
 
 Here are the current Artifacts in use:
 
