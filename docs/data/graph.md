@@ -87,7 +87,7 @@ We can also identify several potential arcs in the Event. In order of obviousnes
     - Content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - discusses
     - the Registered Content Item with DOI `https://doi.org/10.3201/eid2202.151250`
-2. From the `subj.id` field:
+2. From the `subj_id` field:
     - The content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - referred to the subject
     - using URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article`
