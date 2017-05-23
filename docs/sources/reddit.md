@@ -21,7 +21,7 @@
 
 ## What it is
 
-Users share and discuss links on Reddit. The Reddit Source looks at the links that are shared and detects if any of them are DOIs or links to article Landing Pages. It is different to the Reddit Links Source in that it looks for discussions of Registered Content (rather than discussions of webpages that themselves discuss Registered Content).
+Users share and discuss links on Reddit. The Reddit Source looks at the links that are shared and detects if any of them are DOIs or links to Article Landing Pages. It is different to the Reddit Links Source in that it looks for discussions of Registered Content (rather than discussions of webpages that themselves discuss Registered Content).
 
 ## What it does
 

@@ -1,6 +1,6 @@
 # Crossref Event Data (Beta)
 
-Version 1.0.0RC1 - Nearly Beta!
+Version 1.0.0 - Beta
 
 > **Beta service is live!**
 

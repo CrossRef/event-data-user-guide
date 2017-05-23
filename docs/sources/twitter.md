@@ -105,6 +105,7 @@ According to the agreement we have with Twitter, we are allowed to process the t
 
 If you are interested in the text of a tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
 
+Please be aware that if you retrieve data from the Twitter API you are bound by Twitter's terms and conditions.
 
 ## Failure modes
 
