@@ -49,7 +49,7 @@ Ten Events collected in the month of March 2017
 
 Ten Events that occurred on or after the 10th of March 2017
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-10
+    http://query.eventdata.crossref.org/events?rows=10&filter=from-occurred-date:2017-03-10
 
 Ten Events for the DOI https://doi.org/10.1186/s13006-016-0076-7
 
