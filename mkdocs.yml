@@ -44,10 +44,10 @@ pages:
  #   - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
  #   - "Streaming: Spark": connecting/streaming-spark.md
  #   - "Lagotto": connecting/lagotto.md
- # - "Best Practice":
- #   - "For Publishers": best-practice/publishers-best-practice.md
- #   - "Keep your data up to date": best-practice/up-to-date.md
- #   - "Getting Started": best-practice/getting-started.md
+ - "Best Practice":
+    - "For Publishers": best-practice/publishers-best-practice.md
+    - "Keep your data up to date": best-practice/up-to-date.md
+    - "Getting Started": best-practice/getting-started.md
  -  "Appendix 1: Software in Use": app-software.md
  - "Appendix: NISO Altmetrics Code of Conduct": app-niso.md
  - "Appendix: Contributing to Event Data": app-contributing.md

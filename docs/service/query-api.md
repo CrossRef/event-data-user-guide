@@ -15,15 +15,26 @@ The following query parameters are available:
 
 ## Filter parameters
 
-The `filter` parameter takes a `field:value,other-field:other-value` format, using colon (`:`) to separate keys and values and commas (`,`) to separate clauses. The following fields are available. They can be used in any combination.
+The `filter` parameter takes a `field:value,other-field:other-value` format, using colon (`:`) to separate keys and values and commas (`,`) to separate clauses. You can put keys or values in quotes if they contain colons, for example `subj-id:"http://example.com"`. The following fields are available. They can be used in any combination.
 
- - `from-collected-date` — filter Events that were collected on or after this date, in `YYYY-MM-DD` format.
- - `until-collected-date` — filter Events that were collected on or before this date, in `YYYY-MM-DD` format.
- - `from-occurred-date` — filter Events that occurred on or after this date, in `YYYY-MM-DD` format. Note that as new Events are collected in the future, new Events may fall into a previously queried date range. Therefore results that use `occurred` filters are not stable and may change.
- - `until-occurred-date` — filter Events that occurred on or before this date, in `YYYY-MM-DD` format.
- - `prefix` — filter by DOI prefix of the Event's subject or object
- - `work` — filter by the DOI of the Event's subject or object
- - `source` — filter by the `source_id` of the Event
+  - `from-occurred-date ` - as YYYY-MM-DD
+  - `until-occurred-date ` - as YYYY-MM-DD
+  - `from-collected-date` - as YYYY-MM-DD
+  - `until-collected-date` - as YYYY-MM-DD
+  - `subj-id` - quoted URL or a DOI
+  - `obj-id` - quoted URL or a DOI
+  - `subj-id.prefix` - DOI prefix like 10.5555
+  - `obj-id.prefix` - DOI prefix like 10.5555
+  - `subj-id.domain` - domain of the subj_id e.g. en.wikipedia.org
+  - `obj-id.domain` - domain of the subj_id e.g. en.wikipedia.org
+  - `subj.url` - quoted full URL
+  - `obj.url` - quoted full URL
+  - `subj.url.domain` - domain of the optional subj.url, if present e.g. en.wikipedia.org
+  - `obj.url.domain` - domain of the optional obj.url, if present e.g. en.wikipedia.org
+  - `subj.alternative-id` - optional subj.alternative-id
+  - `obj.alternative-id` - optional obj.alternative-id
+  - `relation` - relation type ID
+  - `source` - source ID
 
 ## Navigating results
 
