@@ -26,7 +26,7 @@ The `filter` parameter takes a `field:value,other-field:other-value` format, usi
   - `subj-id.prefix` - DOI prefix like 10.5555
   - `obj-id.prefix` - DOI prefix like 10.5555
   - `subj-id.domain` - domain of the subj_id e.g. en.wikipedia.org
-  - `obj-id.domain` - domain of the subj_id e.g. en.wikipedia.org
+  - `obj-id.domain` - domain of the obj_url e.g. en.wikipedia.org
   - `subj.url` - quoted full URL
   - `obj.url` - quoted full URL
   - `subj.url.domain` - domain of the optional subj.url, if present e.g. en.wikipedia.org
@@ -62,13 +62,13 @@ Ten Events that occurred on or after the 10th of March 2017
 
     http://query.eventdata.crossref.org/events?rows=10&filter=from-occurred-date:2017-03-10
 
-Ten Events for the DOI https://doi.org/10.1186/s13006-016-0076-7
+Up to ten Events for the DOI https://doi.org/10.1186/s40536-017-0036-8
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=work:10.1186/s13006-016-0076-7
+    http://query.eventdata.crossref.org/events?rows=10&filter=obj-id:10.1186/s40536-017-0036-8
 
 Ten Events for the DOI prefix 10.1186
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=prefix:10.1186
+    http://query.eventdata.crossref.org/events?rows=10&filter=obj-id.prefix:10.1186
 
 All Events ever! Note that you will need to use the cursor to iterate through the result set.
 
