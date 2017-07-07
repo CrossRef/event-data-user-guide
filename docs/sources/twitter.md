@@ -61,11 +61,11 @@ We then attempt to match all links to Registered Content Items.
         "title": "Tweet 863621047475728386",
         "issued": "2017-05-14T05:04:37.000Z",
         "author": {
-        "url": "http://www.twitter.com/AfSynchrotron"
-      },
-      "original-tweet-url": "http://twitter.com/AfSynchrotron/statuses/863621047475728386",
-      "original-tweet-author": null,
-      "alternative-id": "863621047475728386"
+          "url": "http://www.twitter.com/AfSynchrotron"
+        },
+        "original-tweet-url": "http://twitter.com/AfSynchrotron/statuses/863621047475728386",
+        "original-tweet-author": null,
+        "alternative-id": "863621047475728386"
       },
       "source_id": "twitter",
       "obj": {
