@@ -2,7 +2,8 @@
 
 Version 1.0.0 - Beta
 
->**UPDATE: Friday 14th July, 2017 - We're experiencing system performance issues with the Event Data Query API (Beta). We're working to resolve this as soon as possible.**
+>**UPDATE: Friday 14th July, 2017 - We are experiencing system performance issues with the Event Data Query API (Beta). We're working to resolve this as soon as possible.**
+
 
 
 ## A note about Beta
