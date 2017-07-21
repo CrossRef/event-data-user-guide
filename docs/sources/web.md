@@ -53,7 +53,7 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
       "action": "add",
       "subj": {
         "pid": "http://philpapers.org/rec/ANNAAS",
-        "work"-type: "webpage",
+        "work-type": "webpage",
         "url": "http://philpapers.org/rec/ANNAAS"
       },
       "source_id": "web",
