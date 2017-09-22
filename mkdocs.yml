@@ -12,6 +12,7 @@ pages:
    - "IDs and URLs and the Web": data/ids-and-urls.md
    - "Event Data as a Graph Data Structure": data/graph.md
    - "Transparency, Authority and Trust": data/transparency-authority-trust.md
+   - "Evidence Logs": data/evidence-logs.md
    - "Evidence Records": data/evidence-records.md
    - "Artifacts": data/artifacts.md
    - "Reports": data/reports.md

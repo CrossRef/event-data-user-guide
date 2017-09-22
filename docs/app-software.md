@@ -9,26 +9,19 @@ Crossref Event Data uses a collection of software. It is all open source, and yo
 | Name                       | Description                                                            | URL                                                               | Maintainer          |
 |----------------------------|------------------------------------------------------------------------|-------------------------------------------------------------------|---------------------|
 | Artifact Manager           | Utility to allow Crossref to manage and upload new Artifacts           | https://github.com/Crossref/event-data-artifact-manager           | jwass@crossref.org  |
-| Crossref Agent Framework   | Clojure framework for Crossref Agents                                  | https://github.com/Crossref/event-data-agent-framework            | jwass@crossref.org  |
 | Event Bus                  | Internal service that accepts Events, archives, rebroadcasts           | https://github.com/Crossref/event-data-event-bus                  | jwass@crossref.org  |
 | Event Data Common          | Clojure library providing common functionality                         | https://github.com/Crossref/event-data-common                     | jwass@crossref.org  |
 | Event Data Integration     | End-to-end demonstration of the Event Data internal system with Docker | https://github.com/Crossref/event-data-integration                | jwass@crossref.org  |
 | Event Data Reports         | Create daily reports on internal system activity                       | https://github.com/Crossref/event-data-reports                    | jwass@crossref.org  |
-| Hypothes.is Agent          | Agent to monitor Hypothes.is                                           | https://github.com/Crossref/event-data-hypothesis-agent           | jwass@crossref.org  |
+| Crossref Agents            | Crossref-operated Agents that take data from external sources: hypothesis, newsfeed, reddit, reddit-links, stackexchange, twitter, wikipedia | https://github.com/Crossref/event-data-agents | jwass@crossref.org  |
 | Live Demo                  | Show a live stream of Events as they happen                            | https://github.com/Crossref/event-data-live-demo                  | jwass@crossref.org  |
-| Newsfeed Agent             | Agent to monitor newsfeeds for blogs (RSS, Atom) for Events            | https://github.com/crossref/event-data-newsfeed-agent             | jwass@crossref.org  |
 | Percolator                 | Produces Evidence and Events from data Agents send                     | https://github.com/Crossref/event-data-percolator                 | jwass@crossref.org  |
 | Query API Server           | Serve up the Query API                                                 | https://github.com/Crossref/event-data-query                      | jwass@crossref.org  |
-| Reddit Agent               | Agent to monitor Reddit for Events.                                    | https://github.com/crossref/event-data-reddit-agent               | jwass@crossref.org  |
-| StackExchange Agent        | Agent to monitor StackExchange sites                                   | https://github.com/Crossref/event-data-stackexchange-agent        | jwass@crossref.org  |
 | Status                     | Service to collect Status messages and serve dashboard                 | https://github.com/Crossref/event-data-status                     | jwass@crossref.org  |
-| Twitter Agent              | Agent to monitor Twitter for Events.                                   | https://github.com/crossref/event-data-twitter-agent              | jwass@crossref.org  |
 | Twitter Compliance Logger  | Collect Compliance events to ensure we abide by them                   | https://github.com/Crossref/event-data-twitter-compliance-logger  | jwass@crossref.org  |
 | Twitter Compliance Patcher | Automatically apply Twitter compliance (deletions) to Events           | https://github.com/Crossref/event-data-twitter-compliance-patcher | jwass@crossref.org  |
 | Twitter Spot Check         | Tool for manually auditing Events for compliance.                      | https://github.com/crossref/event-data-twitter-spot-check         | jwass@crossref.org  |
 | User Guide                 | This User Guide                                                        | https://github.com/Crossref/event-data-user-guide                 | jwass@crossref.org  |
-| Wikipedia Agent            | Agent to monitor Wikipedia for Events.                                 | https://github.com/crossref/event-data-wikipedia-agent            | jwass@crossref.org  |
-| Wordpress.com Agent        | Agent to monitor Wordpress.com for Events.                             | https://github.com/crossref/event-data-wordpressdotcom-agent      | jwass@crossref.org  |
   
 ## Data flow through the system
 
