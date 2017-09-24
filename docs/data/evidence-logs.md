@@ -1031,3 +1031,34 @@ There is no way to fill-in any missed data during disconnection.
  - `u` - URL queried.
 
 
+## Event Bus
+
+### Event Bus receives new Event
+
+ - `i` - "b0001"
+ - `s` - "event-bus"
+ - `c` - "event"
+ - `f` - "received"
+ - `n` - Event ID.
+ - `v` - The Source ID of the Event.
+ - `t` - Timestamp.
+
+### Event Bus updates Event
+
+This happens if an Event is updated, for example due to Twitter compliance.
+
+ - `i` - "b0002"
+ - `s` - "event-bus"
+ - `c` - "event"
+ - `f` - "updated"
+ - `n` - Event ID.
+ - `v` - The Source ID of the Event.
+ - `t` - Timestamp.
+
+### Event Bus Heartbeat
+
+ - `i` - "b0003"
+ - `s` - "event-bus"
+ - `c` - "heartbeat"
+ - `f` - "tick"
+ - `t` - Timestamp.
