@@ -10,7 +10,7 @@ For example, if an Agent has a bug that generates Events with invalid DOIs, and 
 If an Event is updated, three fields will be set:
 
  - `updated` - will have a value of `deleted` or `edited`
- - `updated-reason` - optional, may point to an announcement page explaining the edit
- - `updated-date` - ISO8601 date string for when the event was updated.
+ - `updated_reason` - optional, may point to an announcement page explaining the edit
+ - `updated_date` - ISO8601 date string for when the event was updated.
 
 By default, the Query API **will not** serve Events that have been already been `deleted`, but **will** serve Events that have been `edited`. See the [Query API documentation](/service/query-api) for more details.
