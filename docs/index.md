@@ -44,4 +44,5 @@ Click the 'Next' button at the bottom of this page to get started...
 | 22-Feb-2017       | 0.6.1   | Joe Wass jwass@crossref.org | Pre-beta adjustments. Reflects major refactor of services. |
 | 09-Mar-2017       | 0.7.0   | Joe Wass jwass@crossref.org | Complete review of all documentation. Most of it overhauled. |
 | 06-May-2017       | 1.0.0   | Joe Wass jwass@crossref.org | Beta! |
+| 06-May-2017       | 1.0.1   | Joe Wass jwass@crossref.org | Add Canonical URLs, Evidence Logs |
 

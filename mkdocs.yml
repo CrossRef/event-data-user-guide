@@ -19,10 +19,11 @@ pages:
    - "Updates": data/updates.md
    - "Duplication and Redundancy": data/duplication.md
  - "The Service":
-   - "The Event Data Service": service/ced-service.md
+   - "The Event Data Service": service/event-data-service.md
    - "Query API": service/query-api.md
    - "Quick Start": service/quickstart.md
    - "Evidence Registry": service/evidence-registry.md
+   - "Evidence Logs": service/evidence-logs.md
    - "Artifact Registry": service/artifact-registry.md
  - "Data Contributors":
    - "How Data Contributors, Sources and Agents Work": sources/how-agents-work.md
