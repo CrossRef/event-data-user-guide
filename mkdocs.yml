@@ -15,7 +15,6 @@ pages:
    - "Evidence Logs": data/evidence-logs.md
    - "Evidence Records": data/evidence-records.md
    - "Artifacts": data/artifacts.md
-   - "Reports": data/reports.md
    - "Time": data/time.md
    - "Updates": data/updates.md
    - "Duplication and Redundancy": data/duplication.md
@@ -23,7 +22,6 @@ pages:
    - "The Event Data Service": service/ced-service.md
    - "Query API": service/query-api.md
    - "Quick Start": service/quickstart.md
-   - "Reports Service": service/reports-service.md
    - "Evidence Registry": service/evidence-registry.md
    - "Artifact Registry": service/artifact-registry.md
  - "Data Contributors":
