@@ -23,8 +23,8 @@ The `filter` parameter takes a `field:value,other-field:other-value` format, usi
   - `until-collected-date` - as YYYY-MM-DD
   - `subj-id` - quoted URL or a DOI
   - `obj-id` - quoted URL or a DOI
-  - `subj-id.prefix` - DOI prefix like 10.5555
-  - `obj-id.prefix` - DOI prefix like 10.5555
+  - `subj-id.prefix` - DOI prefix like 10.5555, if Subject is a DOI
+  - `obj-id.prefix` - DOI prefix like 10.5555, if Object is a DOI
   - `subj-id.domain` - domain of the subj_id e.g. en.wikipedia.org
   - `obj-id.domain` - domain of the obj_url e.g. en.wikipedia.org
   - `subj.url` - quoted full URL
@@ -33,8 +33,88 @@ The `filter` parameter takes a `field:value,other-field:other-value` format, usi
   - `obj.url.domain` - domain of the optional obj.url, if present e.g. en.wikipedia.org
   - `subj.alternative-id` - optional subj.alternative-id
   - `obj.alternative-id` - optional obj.alternative-id
-  - `relation` - relation type ID
+  - `relation-type` - relation type ID
   - `source` - source ID
+
+## Facets
+
+Facets allow you to view a breakdown of the results that match your query. Using facets, you can answer questions like "of the search results, how many came from each source" or "of the search results, what were the top domains?". Facets can help you understand search results and to guide further investigation.
+
+**The numbers that are returned are approximate not exact** and you should be careful what you do with them. Bear in mind, for example, that the same link may be observed more than once at different points in time. Facets represent "this many Events" not necessarily "this many links".
+
+The following facets are available.
+
+ - `source` - source ID
+ - `relation-type` - relation type ID
+ - `obj-id.prefix` - DOI prefix like 10.5555, if Object is a DOI
+ - `subj-id.prefix` - DOI prefix like 10.5555, if Subject is a DOI
+ - `subj-id.domain` - Domain of the `subj_id` URL
+ - `obj-id.domain` - Domain of the `obj_id` URL
+ - `subj.url.domain` - Domain of the `subj.url` URL. This may or may not be the same as the `subj_id`.
+ - `obj.url.domain` - Domain of the `obj.url` URL. This may or may not be the same as the `obj_id`.
+
+Each facet should be supplied with a limit (i.e. the top <i>n</i> results) or `*`, which is the maximum number supported. The syntax of a facet is `«facet»:«limit»`. For example
+
+ - `source:*` means "show me the breakdown by source, up to the limit"
+ - `subj-id.domain:*` means "show me the breakdown by the subject's domain name, up to the limit"
+ - `subj-id.domain:10` means "show me the top 10 subj-id domains".
+
+You many use any combination of facets, separated by commas. The following query means "show me the top 10 domains found in Events for the Newsfeed source":
+
+    http://query.eventdata.crossref.org/events?rows=0&filter=source:newsfeed&facet=subj-id.domain:10
+
+The result, at the time of writing, incldues:
+
+    facets: {
+      subj-id-domain: {
+        value-count: 10,
+        values: {
+          www.sciencenews.org: 11572,
+          www.curiousmeerkat.co.uk: 7782,
+          www.scientificamerican.com: 6768,
+          www.euroscientist.com: 6191,
+          www.sbpdiscovery.org: 5063,
+          speakingofresearch.com: 5031,
+          www.nationalelfservice.net: 4926,
+          retractionwatch.com: 4848,
+          cosmosmagazine.com: 4507,
+          academic.oup.com: 4365
+        }
+      }
+    }
+
+The following query means "of all Newsfeed Events found from www.theguardian.com, show me the top DOI prefixes that Events refer to".
+
+    http://query.eventdata.crossref.org/events?rows=0&filter=source:newsfeed,subj-id.domain:www.theguardian.com&facet=obj-id.prefix:*
+
+The result shows:
+
+    facets: {
+      obj-prefix: {
+        value-count: 46,
+        values: {
+          10.1038: 418,
+          10.5281: 255,
+          10.1136: 45,
+          10.1080: 36,
+          10.1371: 27,
+          10.1111: 27,
+          10.2139: 25,
+          10.1007: 19,
+          10.1002: 16,
+          10.3354: 9,
+          10.5772: 8,
+          10.1056: 7,
+          10.3389: 5,
+          10.1098: 4,
+          10.7717: 3,
+          10.1086: 3,
+    ...
+        }
+      }
+    }
+
+Remember that these totals don't refer to unique links necessarily, so you should be cautious about using the numbers for anything other than exploration.
 
 ## Navigating results
 
@@ -48,23 +128,23 @@ The order or Events returned in the result is not defined, but is stable. This m
 
 Ten Events from the Reddit source:
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=source:reddit
+    https://query.eventdata.crossref.org/events?rows=10&filter=source:reddit
 
 Ten Events collected on the first of March 2017
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-01
+    https://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-01
 
 Ten Events collected in the month of March 2017
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-31
+    https://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-31
 
 Ten Events that occurred on or after the 10th of March 2017
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=from-occurred-date:2017-03-10
+    https://query.eventdata.crossref.org/events?rows=10&filter=from-occurred-date:2017-03-10
 
 Up to ten Events for the DOI https://doi.org/10.1186/s40536-017-0036-8
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=obj-id:10.1186/s40536-017-0036-8
+    https://query.eventdata.crossref.org/events?rows=10&filter=obj-id:10.1186/s40536-017-0036-8
 
 Ten Events for the DOI prefix 10.1186
 
