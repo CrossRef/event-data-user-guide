@@ -1,6 +1,6 @@
 # Duplication and Redundancy
 
-Event Data plays host to a number of Agents which monitor different data sources. It also provides a pipeline through which other Agents can publish data. Crossref Agents will try to avoid producing duplicate Events, but make no guarantee of uniqueness. The below examples are all hypothetical.
+Event Data has a number of Agents which monitor different data sources. It also provides a pipeline through which other Agents can publish data. Crossref Agents will try to avoid producing redundant Events, but make no guarantee of uniqueness.
 
 ## Duplication in the Event Data Service
 
@@ -28,6 +28,10 @@ Two Agents might have looked at the same piece of data and produced the same Eve
 ### Duplicate inputs
 
 The same content may be served on separate domains on the web. For example, some sites offer desktop and mobile versions. If these are served on different domains, they will be found on different URLs. If the Web agent finds these, it will treat them as different pages, which may result in two Events that link to the desktop and mobile versions of the site respectively. Another example is Google's Blogspot service, which may publish the same blog on a number of different country domains.
+
+### Canonical URLs
+
+As described in [IDs and URls](ids-and-urls), if a webpage provides a Canonical URL we will use it to refer to that webpage. We also include the `subj.url`, which is the URL that was actually visited. The Newsfeed Agent may visit the same blogpost more than once, but if it does this you you filter out repeated observations of the same links by ignoring duplicate `subj_id`, `obj_id` pairs.
 
 ### DOIs vs Landing Pages
 
