@@ -48,15 +48,16 @@ In this example, Bigipedia informs us that the DOI is referenced by the article 
            -H "Content-Type: application/json" \
            -H "Authorization: Token token=591df7a9-5b32-4f1a-b23c-d54c19adf3fe" \
            -X POST \
-           --data '{"deposit": {"uuid": "dbba925e-b47c-4732-a27b-0063040c079d",
-                                "source_token": "b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff",
-                                "subj_id": "http://bigipedia.com/pages/Chianto",
-                                "obj_id": "http://doi.org/10.3403/30164641u",
-                                "relation_type_id": "references",
-                                "source_id": "bigipedia",
-                                "subj": {"title": "Chianto",
-                                            "issued": "2016-01-02",
-                                             "URL": "http://bigipedia.com/pages/Chianto"}}}'
+           --data '{"id": "dbba925e-b47c-4732-a27b-0063040c079d",
+                    "source_token": "b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff",
+                    "subj_id": "http://bigipedia.com/pages/Chianto",
+                    "obj_id": "http://doi.org/10.3403/30164641u",
+                    "relation_type_id": "references",
+                    "source_id": "bigipedia",
+                    "license: "https://creativecommons.org/publicdomain/zero/1.0/",
+                    "subj": {"title": "Chianto",
+                             "issued": "2016-01-02",
+                              "URL": "http://bigipedia.com/pages/Chianto"}}'
 
 ### Example 2: DOI Remember
 
@@ -69,18 +70,19 @@ In this example, DOI Remember tells that as of the 1st of March 2016, 922 people
            -H "Content-Type: application/json" \
            -H "Authorization: Token token=22e49a7c-5edd-4873-a2b2-c541512c933a" \
            -X POST \
-           --data '{"deposit": {"uuid": "c06fc051-5e29-4cd3-b46a-652c646a3582",
-                                "source_token": "366273b5-d3d8-488b-afdc-940bcd0b9b87",
-                                "subj_id": "http://doiremember.com",
-                                "obj_id": "https://doi.org/10.3403/30164641u",
-                                "total": 922,
-                                "occurred_at": "2016-03-01",
-                                "relation_type_id": "bookmarks",
-                                "source_id": "doi_remember",
-                                "subj":{
-                                  "title":"DOI Remember",
-                                  "issued":"0000-01-01",
-                                  "URL":"http://doiremember.com"}}}'
+           --data '{"id": "c06fc051-5e29-4cd3-b46a-652c646a3582",
+                     "source_token": "366273b5-d3d8-488b-afdc-940bcd0b9b87",
+                     "subj_id": "http://doiremember.com",
+                     "obj_id": "https://doi.org/10.3403/30164641u",
+                     "total": 922,
+                     "occurred_at": "2016-03-01",
+                     "relation_type_id": "bookmarks",
+                     "source_id": "doi_remember",
+                     "license: "https://creativecommons.org/publicdomain/zero/1.0/",
+                     "subj":{
+                       "title":"DOI Remember",
+                       "issued":"0000-01-01",
+                       "URL":"http://doiremember.com"}}}'
 
 ### Example 3: Hansard Watch
 
@@ -93,17 +95,18 @@ In this example, the given Hansard page discusses the given DOI. It has a public
        -H "Content-Type: application/json" \
        -H "Authorization: Token token=b832bf3a-f5ca-4435-9a2b-09fec0f313a6" \
        -X POST \
-       --data '{"deposit": {"uuid": "16acd857-82b8-493c-8e79-6ac0a67ce53b",
-                            "source_token": "a8d4efa6-868b-4230-9685-74b6c7c192bf",
-                            "subj_id": "https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches",
-                            "obj_id": "https://doi.org/10.3403/30164641u",
-                            "occurred_at": "2013-03-24",
-                            "relation_type_id": "discusses",
-                            "source_id": "hansard_watch",
-                            "subj":{
-                              "title":"Previous VAT on toasted sandwiches",
-                              "issued":"2013-03-24",
-                              "URL":"https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches"}}}'
+       --data '{"id": "16acd857-82b8-493c-8e79-6ac0a67ce53b",
+                "source_token": "a8d4efa6-868b-4230-9685-74b6c7c192bf",
+                "subj_id": "https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches",
+                "obj_id": "https://doi.org/10.3403/30164641u",
+                "occurred_at": "2013-03-24",
+                "relation_type_id": "discusses",
+                "source_id": "hansard_watch",
+                "license: "https://creativecommons.org/publicdomain/zero/1.0/",
+                "subj":{
+                  "title":"Previous VAT on toasted sandwiches",
+                  "issued":"2013-03-24",
+                  "URL":"https://hansard.parliament.uk/Commons/2013-04-24/debates/13042449000029/VATOnToastedSandwiches"}}'
 
 ### Example 4: TrouserPress
 
@@ -116,15 +119,16 @@ In this example, the given TrouserPress article discusses the DOI.
        -H "Content-Type: application/json" \
        -H "Authorization: Token token=22810d9a-8fae-4905-8d0d-ac7b98731646" \
        -X POST \
-       --data '{"deposit": {"uuid": "baa93bc4-c832-4e19-aaac-d52ad827843a",
-                            "source_token": "d9a177bd-9906-4244-864d-1fb83d8c58ed",
-                            "subj_id": "http://trouser.press/jim/my-favourite-dois",
-                            "obj_id": "http://doi.org/10.3403/30164641u",
-                            "occurred_at": "2013-03-24",
-                            "relation_type_id": "discusses",
-                            "source_id": "trouser_press",
-                            "subj":{
-                              "title":"My Top 10 DOIs",
-                              "author": "Jim",
-                              "issued":"2013-03-24",
-                              "URL":"http://trouser.press/jim/my-favourite-dois"}}}'
+       --data '{"id": "baa93bc4-c832-4e19-aaac-d52ad827843a",
+                "source_token": "d9a177bd-9906-4244-864d-1fb83d8c58ed",
+                "subj_id": "http://trouser.press/jim/my-favourite-dois",
+                "obj_id": "http://doi.org/10.3403/30164641u",
+                "occurred_at": "2013-03-24",
+                "relation_type_id": "discusses",
+                "source_id": "trouser_press",
+                "license: "https://creativecommons.org/publicdomain/zero/1.0/",
+                "subj":{
+                  "title":"My Top 10 DOIs",
+                  "author": "Jim",
+                  "issued":"2013-03-24",
+                  "URL":"http://trouser.press/jim/my-favourite-dois"}}'
