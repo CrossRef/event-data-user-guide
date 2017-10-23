@@ -1,5 +1,7 @@
 # Hypothes.is
 
+|  |  |
+|---------------------------|----------------------------------------|
 | Agent Source Token        | `8075957f-e0da-405f-9eee-7f35519d7c4c` |
 | Consumes Artifacts        | `domain-list` |
 | Subject Coverage          | All Hypothes.is annotations that are available to the public |
