@@ -83,7 +83,7 @@ The Query API allows you to collect Event Data in bulk, to make sure you're up t
 
 ## Reliability and Monitoring
 
-The Reports Service shows how each component in the system and each external source is functioning. Event Data integrates with a number of external Data Contributors, and is transparent about how we interact with them.
+The Evidence Logs describe the activity undertaken during the process of creating Events. This includes external API access.
 
 ## Interpretation
 

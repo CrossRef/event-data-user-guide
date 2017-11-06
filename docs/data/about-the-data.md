@@ -5,7 +5,7 @@ The Crossref Event Data is centred around Events, but contains supporting data a
  - **Events** record activity around Registered Content.
  - **Evidence Records** provide an evidence trail for Events.
  - **Artifacts** show some of the inputs that were used and feed into Evidence Records.
- - **Reports** document the behaviour of the system.
+ - **Evidence Logs** document the behaviour of the system.
 
 This section describes in detail exactly what data exists in Event Data, and what you should bear in mind when using it.
 

@@ -12,7 +12,6 @@ Crossref Event Data uses a collection of software. It is all open source, and yo
 | Event Bus                  | Internal service that accepts Events, archives, rebroadcasts           | https://github.com/Crossref/event-data-event-bus                  | jwass@crossref.org  |
 | Event Data Common          | Clojure library providing common functionality                         | https://github.com/Crossref/event-data-common                     | jwass@crossref.org  |
 | Event Data Integration     | End-to-end demonstration of the Event Data internal system with Docker | https://github.com/Crossref/event-data-integration                | jwass@crossref.org  |
-| Event Data Reports         | Create daily reports on internal system activity                       | https://github.com/Crossref/event-data-reports                    | jwass@crossref.org  |
 | Crossref Agents            | Crossref-operated Agents that take data from external sources: hypothesis, newsfeed, reddit, reddit-links, stackexchange, twitter, wikipedia | https://github.com/Crossref/event-data-agents | jwass@crossref.org  |
 | Live Demo                  | Show a live stream of Events as they happen                            | https://github.com/Crossref/event-data-live-demo                  | jwass@crossref.org  |
 | Percolator                 | Produces Evidence and Events from data Agents send                     | https://github.com/Crossref/event-data-percolator                 | jwass@crossref.org  |
@@ -22,7 +21,10 @@ Crossref Event Data uses a collection of software. It is all open source, and yo
 | Twitter Compliance Patcher | Automatically apply Twitter compliance (deletions) to Events           | https://github.com/Crossref/event-data-twitter-compliance-patcher | jwass@crossref.org  |
 | Twitter Spot Check         | Tool for manually auditing Events for compliance.                      | https://github.com/crossref/event-data-twitter-spot-check         | jwass@crossref.org  |
 | User Guide                 | This User Guide                                                        | https://github.com/Crossref/event-data-user-guide                 | jwass@crossref.org  |
-  
+| Evidence Logger            | Saves Evidence Logs to application logs for internal monitoring        | https://github.com/CrossRef/event-data-evidence-logger            | jwass@crossref.org  |
+| Evidence Log Snapshot      | Saves snapshots of the Evidence Log to daily archive.                  | https://github.com/CrossRef/event-data-evidence-log-snapshot      | jwass@crossref.org  |
+
+
 ## Data flow through the system
 
 This chart shows the flow of data through the system. A [PDF](/images/ced-data-flow.pdf) shows more detail.
