@@ -30,6 +30,7 @@ pages:
    - "Crossref Metadata": sources/crossref.md
    - "DataCite Metadata": sources/datacite.md
    - "Hypothes.is": sources/hypothesis.md
+   - "The Lens": sources/cambia-lens.md
    - "Newsfeed": sources/newsfeed.md
    - "Reddit": sources/reddit.md
    - "Reddit Links": sources/reddit-links.md
