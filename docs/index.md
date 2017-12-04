@@ -2,7 +2,7 @@
 
 Version 1.0.0 - Beta
 
-> Beta is available! 
+> UPDATE: As of 30th November 2017, new Events from all data sources other than Crossref and DataCite will be temporarily unavailable in the Beta service. All Events added prior to this data are available in the Query API as normal. An update will be posted here once new Events are made available in API. 
 
 ## A note about Beta
 
