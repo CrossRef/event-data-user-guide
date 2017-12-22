@@ -5,7 +5,7 @@ Each Event is a JSON-representable object. Events have a core set of fields and 
 | Field              | Type        | Optional? | Description |
 |--------------------|-------------|-----------|-------------|
 | `subj_id`          | URI         | No  | Subject Persistent ID. |
-| `relation_type_id` | string      | No  | Type of the reationship between the subject and object. |
+| `relation_type_id` | string      | No  | Type of the relationship between the subject and object. |
 | `obj_id`           | URI         | No  | Object Persistent ID. |
 | `timestamp`        | Timestamp   | No  | Timestamp of when the Event was created. |
 | `occurred_at`      | Timestamp   | No  | Timestamp of when the Event is reported to have occurred |
