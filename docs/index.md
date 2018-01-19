@@ -2,7 +2,7 @@
 
 Version 1.0.0 - Beta
 
-> UPDATE: As of 30th November 2017, new Events from all data sources other than Crossref and DataCite will be temporarily unavailable in the Beta service. All Events added prior to this data are available in the Query API as normal. An update will be posted here once new Events are made available in API. 
+> UPDATE: **The Event Data Beta service is now functioning normally.** The Percolator stopped processing new data in November, but it is now running, processing new Events, and has re-scanned the problem period.
 
 ## A note about Beta
 
