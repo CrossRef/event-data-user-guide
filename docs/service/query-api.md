@@ -13,6 +13,14 @@ The following query parameters are available:
  - `cursor` — allows you to iterate through a search result set.
  - `from-updated-date` — a special filter that includes updated and deleted Events, to allow you to keep your dataset up to date.
 
+## Tell us who you are
+
+Please also send the `mailto` query parameter. **It is not compulsory**, but will help us understand how people are using the API and get in contact if we need to. We won't share your email address, and will only contact you in connection with API use. For example: 
+
+    http://query.eventdata.crossref.org/events?mailto=example@example.org&filter=obj-id:10.5555/12345678&obj-id.domain:diabesity.ejournals.ca
+
+If you are uncomfortable sending a contact email address, then don't. You can [read more about the rationale here](https://github.com/CrossRef/rest-api-doc#etiquette).
+
 ## Filter parameters
 
 The `filter` parameter takes a `field:value,other-field:other-value` format, using colon (`:`) to separate keys and values and commas (`,`) to separate clauses. You can put keys or values in quotes if they contain colons, for example `subj-id:"http://example.com"`. The following fields are available. They can be used in any combination.
@@ -61,7 +69,7 @@ Each facet should be supplied with a limit (i.e. the top <i>n</i> results) or `*
 
 You many use any combination of facets, separated by commas. The following query means "show me the top 10 domains found in Events for the Newsfeed source":
 
-    http://query.eventdata.crossref.org/events?rows=0&filter=source:newsfeed&facet=subj-id.domain:10
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=0&filter=source:newsfeed&facet=subj-id.domain:10
 
 The result, at the time of writing, incldues:
 
@@ -85,7 +93,7 @@ The result, at the time of writing, incldues:
 
 The following query means "of all Newsfeed Events found from www.theguardian.com, show me the top DOI prefixes that Events refer to".
 
-    http://query.eventdata.crossref.org/events?rows=0&filter=source:newsfeed,subj-id.domain:www.theguardian.com&facet=obj-id.prefix:*
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=0&filter=source:newsfeed,subj-id.domain:www.theguardian.com&facet=obj-id.prefix:*
 
 The result shows:
 
@@ -128,35 +136,35 @@ The order or Events returned in the result is not defined, but is stable. This m
 
 Ten Events from the Reddit source:
 
-    https://query.eventdata.crossref.org/events?rows=10&filter=source:reddit
+    https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=source:reddit
 
 Ten Events collected on the first of March 2017
 
-    https://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-01
+    https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-01
 
 Ten Events collected in the month of March 2017
 
-    https://query.eventdata.crossref.org/events?rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-31
+    https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=from-collected-date:2017-03-01,until-collected-date:2017-03-31
 
 Ten Events that occurred on or after the 10th of March 2017
 
-    https://query.eventdata.crossref.org/events?rows=10&filter=from-occurred-date:2017-03-10
+    https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=from-occurred-date:2017-03-10
 
 Up to ten Events for the DOI https://doi.org/10.1186/s40536-017-0036-8
 
-    https://query.eventdata.crossref.org/events?rows=10&filter=obj-id:10.1186/s40536-017-0036-8
+    https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=obj-id:10.1186/s40536-017-0036-8
 
 Ten Events for the DOI prefix 10.1186
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=obj-id.prefix:10.1186
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=obj-id.prefix:10.1186
 
 All Events ever! Note that you will need to use the cursor to iterate through the result set.
 
-    http://query.eventdata.crossref.org/events?rows=10000
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10000
 
 Using the cursor returned from the first page (yours may be different) 
 
-    http://query.eventdata.crossref.org/events?rows=10000&cursor=17399fd9-319d-4b28-9727-887264a632b1
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10000&cursor=17399fd9-319d-4b28-9727-887264a632b1
 
 ## Keeping up to date
 
@@ -166,11 +174,11 @@ If you want to check whether not not events have been updated (edited or deleted
 
 For example, on the 2nd of February 2017 you retrieve events from Twitter:
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=source:twitter
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=source:twitter
 
 You store the Events. One month later, you re-query for any Events that were updated since you last queried:
 
-    http://query.eventdata.crossref.org/events?rows=10&filter=source:twitter&from-update-date:2017-02-02
+    http://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10&filter=source:twitter&from-update-date:2017-02-02
 
 **We only edit Events when we absolutely need to** and the Query API will usually send an empty reply, confirming that you don't need to update your data. If it does, you should over-write your stored Events with the new ones. 
 
