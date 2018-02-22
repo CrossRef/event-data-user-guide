@@ -29,6 +29,7 @@ pages:
    - "How Data Contributors, Sources and Agents Work": sources/how-agents-work.md
    - "Crossref Metadata": sources/crossref.md
    - "DataCite Metadata": sources/datacite.md
+   - "F1000": sources/f1000.md
    - "Hypothes.is": sources/hypothesis.md
    - "The Lens": sources/cambia-lens.md
    - "Newsfeed": sources/newsfeed.md

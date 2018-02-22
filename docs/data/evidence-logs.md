@@ -1030,6 +1030,26 @@ There is no way to fill-in any missed data during disconnection.
  - `p` - Page number.
  - `u` - URL queried.
 
+## F1000 Agent
+
+### F1000 Agent starts a scan of the F1000 input.
+
+ - `i` - "a0041"
+ - `s` - "f1000-agent"
+ - `c` - "f1000-dump"
+ - `f` - "start"
+ - `r` - The Evidence Record ID.
+ - `t` - Timestamp.
+
+### F1000 Agent finishes its scan of the F1000 input
+
+ - `i` - "a0042"
+ - `s` - "f1000-agent"
+ - `c` - "f1000-dump"
+ - `f` - "finish"
+ - `r` - The Evidence Record ID.
+ - `t` - Timestamp.
+
 
 ## Event Bus
 

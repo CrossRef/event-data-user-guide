@@ -25,40 +25,14 @@ Wikipedia is the free encyclopedia that anyone can edit. We find references to R
 
 One of the features of Wikipedia is that pages can be edited and each version is given a unique ID. Because of this, references can come and go over the course of a page's lifetime. **Event Data treats every version of a page as a separate entity** and reports on links from that page. This means that if a page is edited and a reference is added, it will record an Event for every reference in the old version and an also Event for every reference in the new version. Wikipedia pages change once they are created but Events don't. The stream of Events for a Wikipedia page describe its evolution over time.
 
-For every edit for a page the Agent creates an Event to link that new version to the canonical ID of the page and another Event that records that it supersedes the previous version. It then records all the Events for the new page.
-
-In this example we have a Page on Wikipedia called "Psychoceramics". It has three versions. The first version has a reference to the DOI https://doi.org/10.5555/12345678. In the second version a reference to https://doi.org/10.5555/777766665555 was added and the original one was retained. In the third version that reference was removed, leaving only the original. This would be as follows (where each arrow represents an Event):
-
-<img src="../../images/wikipedia-links.png" alt="Wikipedia Links" class="img-responsive">
-
-The evolution of the page is recorded with `replaces` links. The relationship between the page version and its canonical ID is recorded with `is_version_of` links. And each version has its own `references` links.
-
 ## What it does
 
  - The Agent subscribes to the Event Stream. This stream sends information about every edit of every page on MediaWiki properties. 
  - For every edit, the Agent visits that page. It uses the RESTBase API to retrieve the rendered HTML of the page.
  - The HTML of the page is searched for unlinked DOIs, linked DOIs and Landing Page URLs.
- - The Agent sends an Event to record the `is_version_of` and `replaces` relationships
  - The Agent sends an Event for every Reference it finds.
 
 ## Example Event
-
-An Event that records a new version of a Wikipedia page.
-
-    {
-      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "obj_id": "https://fr.wikipedia.org/wiki/Pierre_de_Bonzi",
-      "source_token": "36c35e23-8757-4a9d-aacf-345e9b7eb50d",
-      "occurred_at": "2017-04-15T23:53:50Z",
-      "subj_id": "https://fr.wikipedia.org/w/index.php?title=Pierre_de_Bonzi&oldid=135865709",
-      "id": "0000524c-d000-4011-b35f-0709bd4b34ca",
-      "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170415-wikipedia-ef00e0c1-303c-45ce-9a68-e94cd95bc696",
-      "terms": "https://doi.org/10.13003/CED-terms-of-use",
-      "action": "add",
-      "source_id": "wikipedia",
-      "timestamp": "2017-04-15T23:54:36Z",
-      "relation_type_id": "is_version_of"
-    }
 
 An Event that records a reference from a Wikipedia page to a DOI.
 
@@ -67,14 +41,14 @@ An Event that records a reference from a Wikipedia page to a DOI.
       "obj_id": "https://doi.org/10.1007/s00253-011-3689-1",
       "source_token": "36c35e23-8757-4a9d-aacf-345e9b7eb50d",
       "occurred_at": "2017-05-17T16:18:29Z",
-      "subj_id": "https://en.wikipedia.org/w/index.php?title=Gliotoxin&oldid=780858119",
+      "subj_id": "https://en.wikipedia.org/wiki/Gliotoxin",
       "id": "000053b8-4eaf-460f-80fd-84d8bd0ff640",
       "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170517-wikipedia-8397e91a-c10b-4058-96a7-e0f83e7e988a",
       "terms": "https://doi.org/10.13003/CED-terms-of-use",
       "action": "add",
       "subj": {
-        "pid": "https://en.wikipedia.org/w/index.php?title=Gliotoxin&oldid=780858119",
-        "url": "https://en.wikipedia.org/wiki/Gliotoxin",
+        "pid": "https://en.wikipedia.org/wiki/Gliotoxin",
+        "url": "https://en.wikipedia.org/w/index.php?title=Gliotoxin&oldid=780858119",
         "title": "Gliotoxin",
         "api-url": "https://en.wikipedia.org/api/rest_v1/page/html/Gliotoxin/780858119"
       },
@@ -85,23 +59,6 @@ An Event that records a reference from a Wikipedia page to a DOI.
       },
       "timestamp": "2017-05-17T16:19:23Z",
       "relation_type_id": "references"
-    }
-
-An Event that records a new version of a Wikipedia page replacing its previous version.
-
-    {
-      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "obj_id": "https://en.wikipedia.org/w/index.php?title=Varg_Vikernes&oldid=780351110",
-      "source_token": "36c35e23-8757-4a9d-aacf-345e9b7eb50d",
-      "occurred_at": "2017-05-14T22:37:56Z",
-      "subj_id": "https://en.wikipedia.org/w/index.php?title=Varg_Vikernes&oldid=780410405",
-      "id": "0000549c-ad9e-412c-ac13-4934646db3dc",
-      "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170514-wikipedia-ce59b8d6-c83e-4d7c-9fec-35a174da1d17",
-      "terms": "https://doi.org/10.13003/CED-terms-of-use",
-      "action": "add",
-      "source_id": "wikipedia",
-      "timestamp": "2017-05-14T22:39:39Z",
-      "relation_type_id": "replaces"
     }
 
 ## Evidence Record

@@ -39,66 +39,61 @@ When looking for annotations of Registered Content:
 
 Annotates:
 
-  {
-    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "obj_id": "https://doi.org/10.1007/bfb0105342",
-    "source_token": "8075957f-e0da-405f-9eee-7f35519d7c4c",
-    "occurred_at": "2015-11-04T06:30:10Z",
-    "subj_id": "https://hypothes.is/a/NrIw4KlKTwa7MzbTrMAyjw",
-    "id": "00044ac9-d729-4d3f-a2c8-618bcdf1d252",
-    "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170412-hypothesis-de560308-e500-4c55-ba28-799d7b272039",
-    "terms": "https://doi.org/10.13003/CED-terms-of-use",
-    "action": "add",
-    "subj": {
-      "pid": "https://hypothes.is/a/NrIw4KlKTwa7MzbTrMAyjw",
-      "json-url": "https://hypothes.is/api/annotations/NrIw4KlKTwa7MzbTrMAyjw",
-      "url": "https://hyp.is/NrIw4KlKTwa7MzbTrMAyjw/arxiv.org/abs/quant-ph/9803052",
-      "type": "annotation",
-      "title": "[This article](http://arxiv.org/abs/quant-ph/9803052) was referenced by ["Decoherence"](http://web.mit.edu/redingtn/www/netadv/Xdecoherenc.html) on Sunday, September 25 2005.",
-      "issued": "2015-11-04T06:30:10Z"
-    },
-    "source_id": "hypothesis",
-    "obj": {
-      "pid": "https://doi.org/10.1007/bfb0105342",
-      "url": "http://arxiv.org/abs/quant-ph/9803052"
-    },
-    "timestamp": "2017-04-12T07:16:20Z",
-    "relation_type_id": "annotates"
-  }
-
-Discusses:
-
     {
       "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "obj_id": "https://doi.org/10.1146/annurev.earth.32.082503.144359",
+      "obj_id": "https://doi.org/10.1007/bfb0105342",
       "source_token": "8075957f-e0da-405f-9eee-7f35519d7c4c",
-      "occurred_at": "2015-05-11T04:03:44Z",
-      "subj_id": "https://hypothes.is/a/qNv_Ei5ZSnWOWO54GXdFPA",
-      "id": "00054d54-7f35-4557-b083-7fa1f028856d",
-      "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170413-hypothesis-a37bc9bf-1dc0-4c8a-b943-2e14beb4de6f",
+      "occurred_at": "2015-11-04T06:30:10Z",
+      "subj_id": "https://hypothes.is/a/NrIw4KlKTwa7MzbTrMAyjw",
+      "id": "00044ac9-d729-4d3f-a2c8-618bcdf1d252",
+      "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170412-hypothesis-de560308-e500-4c55-ba28-799d7b272039",
       "terms": "https://doi.org/10.13003/CED-terms-of-use",
       "action": "add",
       "subj": {
-        "pid": "https://hypothes.is/a/qNv_Ei5ZSnWOWO54GXdFPA",
-        "json-url": "https://hypothes.is/api/annotations/qNv_Ei5ZSnWOWO54GXdFPA",
-        "url": "https://hyp.is/qNv_Ei5ZSnWOWO54GXdFPA/www.cnn.com/2015/05/05/opinions/sutter-sea-level-climate/#",
+        "pid": "https://hypothes.is/a/NrIw4KlKTwa7MzbTrMAyjw",
+        "json-url": "https://hypothes.is/api/annotations/NrIw4KlKTwa7MzbTrMAyjw",
+        "url": "https://hyp.is/NrIw4KlKTwa7MzbTrMAyjw/arxiv.org/abs/quant-ph/9803052",
         "type": "annotation",
-        "title": "The various scenarios presented should be specified as being global averages of expected sea level rise. The sea level rise observed locally will vary significantly, due to a lot of different geophysical factors.
-
-        For instance, the ongoing recovery of the Earth's surface to the impact of the last ice age causes a natural change in local observations of sea level, with some regions sinking or rising (thus mitigating, or aggravating the impact of mean sea level change) (for example, see Peltier, 2004: http://www.annualreviews.org/doi/abs/10.1146/annurev.earth.32.082503.144359).
-
-        Also, the observed local sea level rise due to the melting of land ice will not be uniform globally, due to the gravitational response of the Earth to the changing distribution of mass at its surface (see Spada et al., 2013: http://onlinelibrary.wiley.com/doi/10.1029/2012GL053000/abstract, and Hay et al., 2015: http://www.nature.com/nature/journal/v517/n7535/full/nature14093.html).
-        ",
-        "issued": "2015-05-11T04:03:44Z"
+        "title": "[This article](http://arxiv.org/abs/quant-ph/9803052) was referenced by ["Decoherence"](http://web.mit.edu/redingtn/www/netadv/Xdecoherenc.html) on Sunday, September 25 2005.",
+        "issued": "2015-11-04T06:30:10Z"
       },
       "source_id": "hypothesis",
       "obj": {
-      "pid": "https://doi.org/10.1146/annurev.earth.32.082503.144359",
-      "url": "https://doi.org/10.1146/annurev.earth.32.082503.144359"
+        "pid": "https://doi.org/10.1007/bfb0105342",
+        "url": "http://arxiv.org/abs/quant-ph/9803052"
       },
-      "timestamp": "2017-04-13T10:40:18Z",
-      "relation_type_id": "discusses"
+      "timestamp": "2017-04-12T07:16:20Z",
+      "relation_type_id": "annotates"
     }
+
+Discusses:
+
+      {
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "obj_id": "https://doi.org/10.1146/annurev.earth.32.082503.144359",
+        "source_token": "8075957f-e0da-405f-9eee-7f35519d7c4c",
+        "occurred_at": "2015-05-11T04:03:44Z",
+        "subj_id": "https://hypothes.is/a/qNv_Ei5ZSnWOWO54GXdFPA",
+        "id": "00054d54-7f35-4557-b083-7fa1f028856d",
+        "evidence_record": "https://evidence.eventdata.crossref.org/evidence/20170413-hypothesis-a37bc9bf-1dc0-4c8a-b943-2e14beb4de6f",
+        "terms": "https://doi.org/10.13003/CED-terms-of-use",
+        "action": "add",
+        "subj": {
+          "pid": "https://hypothes.is/a/qNv_Ei5ZSnWOWO54GXdFPA",
+          "json-url": "https://hypothes.is/api/annotations/qNv_Ei5ZSnWOWO54GXdFPA",
+          "url": "https://hyp.is/qNv_Ei5ZSnWOWO54GXdFPA/www.cnn.com/2015/05/05/opinions/sutter-sea-level-climate/#",
+          "type": "annotation",
+          "title": "The various scenarios presented should be specified as being global averages of expected sea level rise. The sea level rise observed locally will vary significantly, due to a lot of different geophysical factors.",
+          "issued": "2015-05-11T04:03:44Z"
+        },
+        "source_id": "hypothesis",
+        "obj": {
+        "pid": "https://doi.org/10.1146/annurev.earth.32.082503.144359",
+        "url": "https://doi.org/10.1146/annurev.earth.32.082503.144359"
+        },
+        "timestamp": "2017-04-13T10:40:18Z",
+        "relation_type_id": "discusses"
+      }
 
 
 ## Evidence Record
