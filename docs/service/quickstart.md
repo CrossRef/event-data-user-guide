@@ -10,17 +10,17 @@ This quick start is going to show you how to fetch data and then do some rudimen
 
 Data is available on a per-day basis. To fetch 10,000 Events from Event Data, collected at any time:
 
-    curl "https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10000" > all-events.json
+    curl "https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000" > all-events.json
 
 That returns 10,000 Events (out of a possible 1,363,971 at the time of writing).
 
 If you're only interested in Reddit, you can filter that:
 
-    curl "https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10000&filter=source:reddit" > reddit-events.json
+    curl "https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000&source=reddit" > reddit-events.json
 
 If you're only interested in PLOS articles (4013 Events), you can filter by their prefix:
 
-    curl "https://query.eventdata.crossref.org/events?mailto=YOUR_EMAIL_HERE&rows=10000&filter=source:reddit,prefix:10.1371" > reddit-plos.json
+    curl "https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000&source=reddit&subj-id.prefix=10.1371" > reddit-plos.json
 
 Now you've got a few thousand Events to crunch.
 

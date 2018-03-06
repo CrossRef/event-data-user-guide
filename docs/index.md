@@ -1,8 +1,8 @@
 # Crossref Event Data (Beta)
 
-Version 1.0.0 - Beta
+Version 1.1.0 - Beta
 
-> UPDATE: **The Event Data Beta service is now functioning normally.** The Percolator stopped processing new data in November, but it is now running, processing new Events, and has re-scanned the problem period.
+> UPDATE: The new Event Data API v1 is available. **There are some breaking changes.** See the [Query API page](/service/query-api) for more information.
 
 ## A note about Beta
 
@@ -45,4 +45,5 @@ Click the 'Next' button at the bottom of this page to get started...
 | 09-Mar-2017       | 0.7.0   | Joe Wass jwass@crossref.org | Complete review of all documentation. Most of it overhauled. |
 | 06-May-2017       | 1.0.0   | Joe Wass jwass@crossref.org | Beta! |
 | 06-May-2017       | 1.0.1   | Joe Wass jwass@crossref.org | Add Canonical URLs, Evidence Logs |
+| 06-March-2018     | 1.1.0   | Joe Wass jwass@crossref.org | New Version 1 API, breaking changes. |
 
