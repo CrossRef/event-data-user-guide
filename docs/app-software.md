@@ -1,4 +1,4 @@
-# Appendix 1: Software in Use
+# Appendix: Software in Use
 
 ## Software used internally in Event Data
 
