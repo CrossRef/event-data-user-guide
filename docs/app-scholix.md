@@ -1,6 +1,4 @@
-# Appendix: Software in Use
-
-## Scholix API Endpoint
+# Appendix: Scholix API Endpoint
 
 [Scholix](http://www.scholix.org/) is a metadata specification for the expression of scholarly links between literature and datasets. Event Data implements a Scholix endpoint in the API:
 
