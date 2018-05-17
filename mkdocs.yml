@@ -25,6 +25,8 @@ pages:
    - "Evidence Registry": service/evidence-registry.md
    - "Evidence Logs": service/evidence-logs.md
    - "Artifact Registry": service/artifact-registry.md
+ - "Quality Assurance and Feedback":
+   - "Quality Assurance and Feedback": quality-assurance/quality.md
  - "Data Contributors":
    - "How Data Contributors, Sources and Agents Work": sources/how-agents-work.md
    - "Crossref Metadata": sources/crossref.md

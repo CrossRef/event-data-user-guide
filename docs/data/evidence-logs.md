@@ -339,7 +339,7 @@ Whenever the Percolator visits a webpage it records any newsfeed links (e.g. RSS
  - `f` - "found"
  - `a` - The Action ID.
  - `v` - The URL of the page visited.
- - `u` - The URL fo the newsfeed.
+ - `u` - The URL of the newsfeed.
  - `p` - The "rel" field of the link (could be e.g "alternate", "comments" etc)
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
@@ -1082,3 +1082,99 @@ This happens if an Event is updated, for example due to Twitter compliance.
  - `c` - "heartbeat"
  - `f` - "tick"
  - `t` - Timestamp.
+
+# Quality checks
+
+## Archive Integrity Check
+
+### Check started
+
+ - `i` - "q0001"
+ - `s` - "quality"
+ - `c` - "archive-query-integrity"
+ - `f` - "start"
+ - `t` - Timestamp
+
+### Check finished
+
+ - `i` - "q0002"
+ - `s` - "quality"
+ - `c` - "archive-query-integrity"
+ - `f` - "finish"
+ - `t` - Timestamp
+
+### Events are missing in the Query API (compared to the Archive)
+
+ - `i` - "q0003"
+ - `s` - "quality"
+ - `c` - "archive-query-integrity"
+ - `f` - "missing-from-query"
+ - `p` - Date of Events in question
+ - `v` - Number of Events missing
+ - `e` - Result - "f" if there are missing Events, otherwise "t"
+ - `t` - Timestamp
+
+### Events are missing in the Archive (compared to the Query API)
+
+ - `i` - "q0004"
+ - `s` - "quality"
+ - `c` - "archive-query-integrity"
+ - `f` - "missing-from-archive"
+ - `p` - Date of Events in question
+ - `v` - Number of Events missing
+ - `e` - Result - "f" if there are missing Events, otherwise "t"
+ - `t` - Timestamp
+
+## Evidence Log Check
+
+### Check for presence of Evidence Log dump for day
+
+ - `i` - "q0005"
+ - `s` - "quality"
+ - `c` - "evidence-log"
+ - `f` - "check"
+ - `p` - Date of the log snapshot in question
+ - `t` - Timestamp
+
+### CSV dump present
+
+ - `i` - "q0006"
+ - `s` - "quality"
+ - `c` - "evidence-log"
+ - `f` - "csv-present"
+ - `p` - Date of the log snapshot in question
+ - `e` - Result - "t" if the file is present.
+ - `t` - Timestamp
+
+### JSON dump present
+
+ - `i` - "q0007"
+ - `s` - "quality"
+ - `c` - "evidence-log"
+ - `f` - "json-present"
+ - `p` - Date of the log snapshot in question
+ - `e` - Result - "t" if the file is present.
+ - `t` - Timestamp
+
+## Twitter Compliance Check
+
+### Twitter compliance check started for Events on date
+
+ - `i` - "q0009"
+ - `s` - "quality"
+ - `c` - "twitter-compliance-scan"
+ - `f` - "start"
+ - `p` - Date of the Eventss in question
+ - `v` - 
+ - `t` - Timestamp
+
+### Twitter compliance check started for Events on date
+
+ - `i` - "q000a"
+ - `s` - "quality"
+ - `c` - "twitter-compliance-scan"
+ - `f` - "finish"
+ - `p` - Date of the Eventss in question
+ - `v` - Number of Events that were deleted
+ - `t` - Timestamp
+
