@@ -21,11 +21,11 @@
 
 ## What it is
 
-Links from Crossref DOIs to DataCite DOIs. These are recorded in the metadata for Crossref's Registered Content. The data is supplied by Crossref members who are the 'owners' of the Registered Content.
+Relationships from Crossref DOIs to DataCite DOIs. The data is supplied in the metadata of Crossref's Registered Content by Crossref members who are the 'owners' of the Registered Content.
 
 ## What it does
 
-The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent as an Event.
+Where members include DataCite DOIs in references the Crossref Event Data agent establishes the relationship between the DataCite DOI and the Crossref DOI as an event.
 
 ## Where data comes from
 
