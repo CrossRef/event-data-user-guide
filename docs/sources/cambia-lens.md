@@ -46,24 +46,24 @@ All subject types are patents, but the following types of patents may be indicat
 ## Example Event
 
     {
-      license: "https://creativecommons.org/licenses/by-sa/4.0/",
-      obj_id: "https://doi.org/10.1002/chin.200416142",
-      source_token: "1ad0b713-78ed-4bb9-8d5d-a3c2d163d46f",
-      occurred_at: "2014-06-17T00:00:00Z",
-      subj_id: "https://lens.org/173-631-769-260-712",
-      id: "fba4a28f-9bb8-682e-d742-eefeab0f8e04",
-      terms: "https://doi.org/10.13003/CED-terms-of-use",
-      action: "add",
-      subj: {
-        work_subtype_id: "Granted Patent",
-        work_type_id: "patent",
-        title: "Cycloalkyl Containing Thienopyrimidines For Pharmaceutical Compositions",
-        pid: "https://lens.org/173-631-769-260-712",
-        jurisdiction: "US"
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "obj_id": "https://doi.org/10.1002/chin.200416142",
+      "source_token": "1ad0b713-78ed-4bb9-8d5d-a3c2d163d46f",
+      "occurred_at": "2014-06-17T00:00:00Z",
+      "subj_id": "https://lens.org/173-631-769-260-712",
+      "id": "fba4a28f-9bb8-682e-d742-eefeab0f8e04",
+      "terms": "https://doi.org/10.13003/CED-terms-of-use",
+      "action": "add",
+      "subj": {
+        "work_subtype_id": "Granted Patent",
+        "work_type_id": "patent",
+        "title": "Cycloalkyl Containing Thienopyrimidines For Pharmaceutical Compositions",
+        "pid": "https://lens.org/173-631-769-260-712",
+        "jurisdiction": "US"
       },
-      source_id: "cambia-lens",
-      timestamp: "2017-11-10T19:40:21Z",
-      relation_type_id: "cites"
+      "source_id": "cambia-lens",
+      "timestamp": "2017-11-10T19:40:21Z",
+      "relation_type_id": "cites"
     }
 
 ## Evidence Record
