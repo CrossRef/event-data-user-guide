@@ -3,9 +3,9 @@
 [TOC]
 
 ### Does Event Data collect data for all DOIs in existence?
-  
+
 Event Data will accept Events for DOIs issued by any Registration Agency (RA) (for example, DataCite), and will poll for all DOIs in the 'doi-prefix' Artifact (currently Crossref, DataCite in future). Different Agents operate differently, so the data for some sources will be fresher than others.
- 
+
 ### Which Registration Agencies' DOIs does Event Data use?
 
 Event Data is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most Data Sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some Data Sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual Data Sources for full details.
@@ -13,7 +13,7 @@ Event Data is is a joint venture by Crossref and DataCite. It is able to collect
 ### How long is Data available?
 
 Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
- 
+
 ### What is an Event?
 
 An Event can be described as 'an action that occurs concerning a Registered Content Item'. Every kind of event is slightly different, see the Sources for details.
@@ -26,11 +26,11 @@ All APIs use JSON format
 
 No, the data available via the Query API is free-of-charge. In the future, we will offer a paid-for Service Level Agreement that will provide more timely access to data.
 
-### Will the data be auditable?
+### Can the data be audited?
 
 Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concepts/trustworthiness-and-quality/#evidence-first).
 
-### Can I use the data to feed into my commercial tool? 
+### Can I use the data to feed into my commercial tool?
 
 Yes. We do not clean or aggregate the data we collect so that any commercial vendor has the opportunity to do this themselves in order to use the data in the way which best suits their needs.
 
@@ -44,7 +44,7 @@ Check the [Event Data page](https://www.crossref.org/services-event-data) on the
 
 ### How do I access the data?
 
-The Query API is currently the only way to access data. 
+The Query API is currently the only way to access data.
 
 ### Does Event Data work with Multiple Resolution?
 
@@ -52,7 +52,7 @@ We plan to address and clarify how Event Data relates to Multiple Resolution in 
 
 ### Does Event Data work with DOIs that include emoticons?
 
-Yes. 
+Yes.
 
 ### Will the API make data available in other formats?
 

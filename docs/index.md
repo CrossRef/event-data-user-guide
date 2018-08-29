@@ -10,10 +10,10 @@ Crossref Event Data has not yet launched as a production service, but is current
 
 - **If you have feedback or a specific use case to share, we'd love to hear from you**. You can email eventdata@crossref.org .
 - The Beta service is freely available, but we recommend you contact us to register as a Beta tester so we can keep you in the loop.
-- The Beta service isn't feature-complete and there may be funtionality mentioned in this Guide that is not yet implemented.
+- The Beta service isn't feature-complete and there may be functionality mentioned in this Guide that is not yet implemented.
 - We cannot guarantee the stability of the Beta service.
 - All data you collect from Event Data during Beta is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/). Until Event Data is in production mode though, we do not recommend building any  commercial or customer-based tools off the data.
-- You may find bugs. If you do, please contact us. 
+- You may find bugs. If you do, please contact us.
 
 ## This guide is for everyone
 
@@ -25,9 +25,9 @@ This Guide is a living document, and if you have questions or suggestions you ca
 
 If you're keen to get your hands on the data, you can jump straight to the [Quick Start](https://www.eventdata.crossref.org/guide/service/quickstart/) page. Please bear in mind that the service is in Beta.
 
-All data collected from Event Data is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/). Every Event will include a `license` link so you know which licence applies to the data, as well as a `terms` link which points to our Terms of Use page where all the information and links you need regarding re-use will be available. Please ensure you read the [Terms of Use](https://www.crossref.org/services/event-data/terms/) before using Event Data. 
+All data collected from Event Data is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/). Every Event will include a `license` link so you know which licence applies to the data, as well as a `terms` link which points to our Terms of Use page where all the information and links you need regarding re-use will be available. Please ensure you read the [Terms of Use](https://www.crossref.org/services/event-data/terms/) before using Event Data.
 
-If after the Quick Start you decide to use Event Data, you are strongly encouraged to read the entire Guide. Event Data is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it. 
+If after the Quick Start you decide to use Event Data, you are strongly encouraged to read the entire Guide. Event Data is an open, flexible service that gathers data from a range of sources. It's important that you understand where the data comes from, how it's processed, and what you should bear in in mind when using it.
 
 Click the 'Next' button at the bottom of this page to get started...
 
@@ -45,4 +45,3 @@ Click the 'Next' button at the bottom of this page to get started...
 | 09-Mar-2017       | 0.7.0   | Joe Wass jwass@crossref.org | Complete review of all documentation. Most of it overhauled. |
 | 06-May-2017       | 1.0.0   | Joe Wass jwass@crossref.org | Beta! |
 | 06-May-2017       | 1.0.1   | Joe Wass jwass@crossref.org | Add Canonical URLs, Evidence Logs |
-

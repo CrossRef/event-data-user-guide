@@ -1,6 +1,6 @@
 # Introduction
 
-Before the growth of the Web, most discussion around scholarly content stayed in scholarly content, with articles referencing each other. With the growth of online platforms for discussion, publication and social media, we have seen discussions occurr in new, non-traditional places.
+Before the growth of the Web, most discussion around scholarly content stayed in scholarly content, with articles referencing each other. With the growth of online platforms for discussion, publication and social media, we have seen discussions occur in new, non-traditional places.
 
 The Event Data service captures this activity and acts as a hub for the storage and distribution of this data. The service provides a record of instances where research has been bookmarked, linked, liked, shared, referenced, commented on etc, beyond publisher platforms. For example, when datasets are linked to articles, articles are mentioned on social media or referenced in Wikipedia.
 
@@ -10,7 +10,7 @@ When a relationship is observed between a Crossref-Registered Content Item and a
 
 Registered Content is the name we give to items that are registered with Crossref, and to which DOIs have been assigned. This includes Articles, Books and Datasets. When the phrase 'Registered Content Item' is used, you can usually think of a journal article, but be aware that it can apply to any piece of content that was registered with Crossref.
 
-Additionaly, Event Data not only collects this data but also serves as an open platform for third parties to make their own activity data available to everyone. Anyone can build tools, services and research using this platform.
+Additionally, Event Data not only collects this data but also serves as an open platform for third parties to make their own activity data available to everyone. Anyone can build tools, services and research using this platform.
 
 <img src='../images/overview.png' alt='Event Data Overview' class='img-responsive'>
 
@@ -69,7 +69,7 @@ Every Event starts its journey somewhere, usually in an external source. Data fr
 
 Crossref Event Data was developed alongside the NISO recommendations for Altmetrics Data Quality Code of Conduct, and we participated in the Data Quality working group. Event Data aims to be an example of openness and transparency. You can read the [Event Data Code of Conduct Self-Reporting table](app-niso.md) in the Appendix.
 
-## Accessing the Data 
+## Accessing the Data
 
 Crossref Event Data is available via our Query API. The Query API allows you to make requests like:
 

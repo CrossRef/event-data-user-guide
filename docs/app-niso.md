@@ -10,7 +10,7 @@ Crossref Event Data reports raw Events, not metrics. The [Sources in Depth](sour
 
 ### 3: Describe the method(s) by which data are generated or collected and how data are maintained over time.
 
-The Data Contributors section of the User Guide provides a detailed discussion of each Source and exactly what Events from the Source means. 
+The Data Contributors section of the User Guide provides a detailed discussion of each Source and exactly what Events from the Source means.
 
 ### 4: Describe all known limitations of the data.
 
@@ -18,7 +18,7 @@ The Data Contributors section of the User Guide provides a detailed discussion o
 
 ### 5: Provide a documented audit trail of how and when data generation and collection methods change over time and list all known effects of these changes. Documentation should note whether changes were applied historically or only from change date forward.
 
-The [Evidence In Depth](evidence-in-depth) section describes the complete audit trail of data, from input to Events, via Evidence Records. It also describes how the Artifact Service shows the complete environment under which an Event was generated. The [Evidence Logs](data/evidence-logs) provide a very high level of detail about every activity and process that took place, including nevative results. 
+The [Evidence In Depth](evidence-in-depth) section describes the complete audit trail of data, from input to Events, via Evidence Records. It also describes how the Artifact Service shows the complete environment under which an Event was generated. The [Evidence Logs](data/evidence-logs) provide a very high level of detail about every activity and process that took place, including negative results. 
 
 ### 6: Describe how data are aggregated
 
