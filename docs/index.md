@@ -4,14 +4,14 @@ Version 1.0.0 - Beta
 
 ## A note about Beta
 
-Crossref Event Data has not yet launched as a production service, but is currently available in Beta. This means:
+Crossref Event Data has now launched as a production service, but is currently still in Beta. This means:
 
 - **If you have feedback or a specific use case to share, we'd love to hear from you**. You can email eventdata@crossref.org .
 - The Beta service is freely available, but we recommend you contact us to register as a Beta tester so we can keep you in the loop.
 - The Beta service isn't feature-complete and there may be functionality mentioned in this Guide that is not yet implemented.
-- We cannot guarantee the stability of the Beta service.
-- All data you collect from Event Data during Beta is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/). Until Event Data is in production mode though, we do not recommend building any  commercial or customer-based tools off the data.
-- You may find bugs. If you do, please contact us.
+- All data you collect from Event Data during Beta is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/).
+- Event Data is now in production mode, this means we do not anticipate making any breaking changes to the code and you are encouraged to build customer facing tools with Event Data.
+- As always, it is possible you may find bugs. If you do, please contact us.
 
 ## This guide is for everyone
 
