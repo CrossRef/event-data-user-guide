@@ -73,11 +73,11 @@ Crossref Event Data was developed alongside the NISO recommendations for Altmetr
 
 Crossref Event Data is available via our Query API. The Query API allows you to make requests like:
 
- - give me all Events that were collected on 2016-12-08
- - give me all Events that occurred on 2015-12-08
- - give me all the Reddit Events that were collected on 2015-12-08
- - give me all the Events that occurred for this DOI on 2016-01-08
- - give me all the Twitter Events that occurred for this DOI on 2016-01-08
+ - give me all Events that were collected on 2017-12-08
+ - give me all Events that occurred on 2016-12-08
+ - give me all the Reddit Events that were collected on 2016-12-08
+ - give me all the Events that occurred for this DOI on 2017-01-08
+ - give me all the Twitter Events that occurred for this DOI on 2017-01-08
 
 The Query API allows you to collect Event Data in bulk, to make sure you're up to date.
 
