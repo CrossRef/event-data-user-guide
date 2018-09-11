@@ -2,8 +2,6 @@
 
 Version 1.0.0 - Beta
 
-> UPDATE: **The Event Data Beta service is now functioning normally.** The Percolator stopped processing new data in November, but it is now running, processing new Events, and has re-scanned the problem period.
-
 ## A note about Beta
 
 Crossref Event Data has not yet launched as a production service, but is currently available in Beta. This means:
