@@ -93,4 +93,4 @@ Interpretation is a significant theme in Event Data, and it's something you must
 
 *This feature will be available once Event Data is a production service*
 
-We will introduce a Service Level Agreement which will provide agreed service levels for responsiveness of the service. It will also include APIs for access to data.
+We will introduce a Service Level Agreement which will provide agreed service levels. It will also include APIs for access to data.
