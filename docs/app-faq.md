@@ -24,7 +24,7 @@ All APIs use JSON format
 
 ### Do I have to pay for the data?
 
-No, the data available via the Query API is free-of-charge. In the future, we will offer a paid-for Service Level Agreement that will provide more timely access to data.
+No, the data available via the Query API is free-of-charge. In the future, we will offer a paid-for Service Level Agreement that will provide additional features and services.
 
 ### Can the data be audited?
 
