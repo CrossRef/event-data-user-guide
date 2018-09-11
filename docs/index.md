@@ -21,7 +21,7 @@ This Guide is a living document, and if you have questions or suggestions you ca
 
 ## Quick Start
 
-If you're keen to get your hands on the data, you can jump straight to the [Quick Start](https://www.eventdata.crossref.org/guide/service/quickstart/) page. Please bear in mind that the service is in Beta.
+If you're keen to get your hands on the data, you can jump straight to the [Quick Start](https://www.eventdata.crossref.org/guide/service/quickstart/) page.
 
 All data collected from Event Data is licensed for public sharing and reuse, according to our [Terms of Use](https://www.crossref.org/services/event-data/terms/). Every Event will include a `license` link so you know which licence applies to the data, as well as a `terms` link which points to our Terms of Use page where all the information and links you need regarding re-use will be available. Please ensure you read the [Terms of Use](https://www.crossref.org/services/event-data/terms/) before using Event Data.
 
