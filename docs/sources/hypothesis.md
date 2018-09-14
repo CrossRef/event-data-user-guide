@@ -54,7 +54,7 @@ Annotates:
         "json-url": "https://hypothes.is/api/annotations/NrIw4KlKTwa7MzbTrMAyjw",
         "url": "https://hyp.is/NrIw4KlKTwa7MzbTrMAyjw/arxiv.org/abs/quant-ph/9803052",
         "type": "annotation",
-        "title": "[This article](http://arxiv.org/abs/quant-ph/9803052) was referenced by ["Decoherence"](http://web.mit.edu/redingtn/www/netadv/Xdecoherenc.html) on Sunday, September 25 2005.",
+        "title": "[This article](http://arxiv.org/abs/quant-ph/9803052) was referenced by [\"Decoherence\"](http://web.mit.edu/redingtn/www/netadv/Xdecoherenc.html) on Sunday, September 25 2005.",
         "issued": "2015-11-04T06:30:10Z"
       },
       "source_id": "hypothesis",

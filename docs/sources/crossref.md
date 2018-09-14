@@ -21,19 +21,16 @@
 
 ## What it is
 
-Links from Crossref DOIs to DataCite DOIs. These are recorded in the metadata for Crosref's Registered Content. The data is ultimatley supplied by Crossref members who are the publishers and 'owners' of the Registered Content.
-
-Only Relations between Crossref DOIs and DataCite DOIs are included. If you want other metadata you can find it in the [Crossref Metadata REST API](https://www.crossref.org/services/metadata-delivery/rest-api/).
-
-In future we may add links to other objects, such as ORCID IDs and Clinical Trial Numbers.
+Relationships from Crossref DOIs to DataCite DOIs. The data is supplied in the metadata of Crossref's Registered Content by Crossref members who are the 'owners' of the Registered Content.
 
 ## What it does
 
-The Agent monitors all relationships in Crossref metadata deposited by members. Where a relation is made between a Crossref DOI and a DataCite DOI, that link is sent as an Event.
+Where members include DataCite DOIs in references the Crossref Event Data agent establishes the relationship between the DataCite DOI and the Crossref DOI as an event.
 
 ## Where data comes from
 
-Metadata deposits from Crossref members, usually Publishers.
+Metadata registered with Crossref that references a DataCite DOI. For other Crossref member metadata, you can find it in the [Crossref Metadata REST API](https://www.crossref.org/services/metadata-delivery/rest-api/).
+
 
 ## Example Event
 

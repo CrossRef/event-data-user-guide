@@ -67,8 +67,8 @@ Full scan:
       },
       "source_id": "stackexchange",
       "obj": {
-        pid: "https://doi.org/10.1063/1.1792071",
-        url: "http://doi.org/10.1063/1.1792071"
+        "pid": "https://doi.org/10.1063/1.1792071",
+        "url": "http://doi.org/10.1063/1.1792071"
       },
       "timestamp": "2017-04-13T20:03:24Z",
       "relation_type_id": "discusses"
