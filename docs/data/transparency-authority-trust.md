@@ -11,6 +11,8 @@ The provenance of the Event isn't simple: the assertion and supporting data has 
  - The Event Data API got the Event from the internal Event Data system
  - The Event Data system got the Event from the Agent, which is operated by someone (in most cases Crossref)
  - The Agent generated the Event from some data that it retrieved from the Reddit API
+ - The Percolator found a landing page domain in the data.
+ - The Percolator matched the landing page to the DOI based on metadata found on the landing page.
  - The Reddit API got the data from a Reddit user
  - The Reddit user may be talking about published research
  - The published research may have been peer reviewed
@@ -22,30 +24,11 @@ It's up to you to decide how far down the provenance chain you want to go. Event
 
 ## Relations
 
-Every subject-relation-object Event is an assertion made by the Agent. When deciding whether or not you trust an Event, you should look at the Agent ID and make your decision on that basis. Some Agents, like Crossref Metadata and DataCite Metadata, are operated by organizations that directly hold the data. Some Agents, like Reddit or Newsfeeds, observe things on the web and make assertions about what they saw. The Evidence Record provides the link between what the external party said and the Event.
+Every subject-relation-object Event is an assertion made by the Agent (and in the case of Crossref Agent, the Percolator). When deciding whether or not you trust an Event, you should look at the Agent ID and make your decision on that basis. Some Agents, like Crossref Metadata and DataCite Metadata, are operated by organizations that directly hold the data. Some Agents, like Reddit or Newsfeeds, observe things on the web and make assertions about what they saw. The Evidence Record provides the link between what the external party said and the Event.
 
 ## Landing Page to DOI mappings
 
-When an Event links to a DOI but the URL in the corresponding `obj` metadata is different, the Agent has made a judgment about an Article Landing Page. The Event therefore contains two assertions:
-
- - this webpage mentions this Article Landing Page
- - this Article Landing Page corresponds to this DOI
-
-The Evidence Record for each Event documents this mapping in some detail.
-
-Agents that perform this mapping have a few methods available. The first method is to look for the DOI embedded in the URL. This happens quite often, e.g. PLOS:
-
-    http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160617
-
-There are other similar methods to this. If we are unable to get the DOI from the URL, we will visit the URL. If the landing page has the correct metadata tags in the HTML, we will use that. e.g. from the same PLOS Page:
-
-    <head>
-      <meta name="dc.identifier" content="10.1371/journal.pone.0160617" />
-    </head>
-
-This means that in cases like this, the Landing Page URL-to-DOI mapping is made on the authority of the organization running that website, i.e. the Publisher's. 
-
-We maintain a list of publisher domains (see the [Artifacts](artifacts)), which we do by following DOIs to see where they resolve to. We will only accept URL-to-DOI equivalence assertions from domains on this list. 
+When a blog post or Tweet mentions a DOI directly, you know that the author intended to link to the specific piece of content identified by that DOI. When the author uses a landing page, which is more common, we find the best DOI match we can, and describe how performed the match and verification. This is described fully in the [How Crossref Agents match Landing Pages to DOIs](/data/matching-landing-pages).
 
 ## Data Aggregator or Provider?
 

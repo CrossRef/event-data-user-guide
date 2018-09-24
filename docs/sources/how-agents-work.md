@@ -8,13 +8,13 @@ Every Source usually has one or more Agents dedicated to it. Each Agent connects
  - Some Sources send pointers to content, which the Agent then visits. This is how the Wikipedia and Newsfeeds Agents work.
  - Some Sources are custom-built to send Events directly. This is how the Crossref and DataCite Agents work.
 
-## Common features in Agents
+## Common features in data collection
 
-There are some common features and patterns that occur across Agents. 
+There are some common features and patterns that occur across Agents and the Percolator. 
 
 ### Reversing Landing Page Domains back into DOIs
 
-When a Registered Content Item is linked to via its Landing Page, the Agent will identify the link and then attempt to convert the Landing Page URL back into a DOI. If it is unable to do this, no Event will be created. This process is the most dynamic and potentially variable step. 
+When a Registered Content Item is linked to via its Landing Page, the Agent will identify the link and then pass it to the Percolator, which will attempt to convert the Landing Page URL back into a DOI. If it is unable to do this, no Event will be created. This process is the most dynamic and potentially variable step. You can read all about it in [Matching Landing Pages to DOIs](data/matching-landing-pages/).
 
 ### Issuing Queries for Landing Page Domains
 
@@ -28,6 +28,6 @@ Some sources send links to things that must be consulted. For example, each RSS 
 
 Most Agents don't produce Events directly. Instead they produce Evidence Records, which are further processed into Events at a later. This means that the Agent only does the job of converting external data into the standard Evidence Record format.
 
-An internal component, called the Percolator, does the job of processing the Evidence Record into Events and inserting them into the system. You can read about the process in [Evidence Records](/data/evidence-records). 
+The Percolator does the job of processing the Evidence Record into Events and inserting them into the system. You can read about the process in [Evidence Records](/data/evidence-records). 
 
 Some Agents, such as Crossref Metadata and DataCite Metadata, create Events directly from their internal databases and skip the Evidence Record stage. In the future, Agents operated by external parties may also do this. The reason for this is that Evidence Records exist to document how external data was processed, and to make transparent the internal processes within Event Data. When the data comes directly from the external source, we perform no extra processing, so there is nothing to document. External services which operate Agents may choose to record their own form of Evidence, but these will be different to the standardized Crossref Event Data Evidence Records.

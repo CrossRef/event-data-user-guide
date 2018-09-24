@@ -4,17 +4,17 @@ If you follow this best practice you will give Event Data the best chance of reg
 
 We collect data and generate reports about domains for which we are prevented from gathering Event Data. Please contact us for further information.
 
-## Don't block the Event Data Bot
+## Don't block Event Data Agents
 
-The Event Data Bot often needs to visit URLs to work out if they have DOIs. It will visit a publisher site and look for metadata in the page that indicates it's for an article with a DOI. 
+The Event Data Agents often needs to visit URLs to work out if they have DOIs. It will visit a publisher site and look for metadata in the page that indicates it's for an article with a DOI. 
 
-If you block the Event Data Bot from your site, we will be unable to collect Events for your DOIs.
+If you block the Event Data Agents from your site, we will be unable to collect Events for your DOIs.
 
-**Action:** Don't block the Event Data Bot.
+**Action:** Don't block the Event Data Agents.
 
 ## Don't have a restrictive robots.txt
 
-The Event Data Bot respects robots.txt files. If it is instructed not to visit a site, it won't. If you prevent the Bot from accessing your article pages, we will be unable to collect Events from your DOIs.
+The Event Data Agents respects robots.txt files. If it is instructed not to collect content a site, it won't. If you prevent the Agents from accessing your article pages, we will be unable to collect Events from your DOIs.
 
 **Action:** Don't have a restrictive robots.txt, or provide an exception for `CrossrefEventDataBot`.
 
@@ -37,7 +37,7 @@ Some Publisher sites don't allow browsers to visit unless cookies are enabled, a
 
 ## Don't require JavaScript to read your pages
 
-Some Publisher sites require JavaScript to be enabled, and don't show any content to browsers that don't execute JavaScript. The Event Data Bot does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your Events.
+Some Publisher sites require JavaScript to be enabled, and don't show any content to browsers that don't execute JavaScript. The Event Data Agent does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your Events.
 
 **Actions:**
 

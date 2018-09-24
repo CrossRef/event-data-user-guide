@@ -15,7 +15,7 @@ In some cases, the occurrence time is reported by the source. In other cases, su
 
 Usually Events are collected soon after they occur, but we make no guarantees. For example, Agents may receive archives of old data, or re-scan old date ranges, or reprocess inputs that couldn't be processed in the past.
 
-Every Event also has a 'collected' time. This is the time when the Agent submitted an Event to the Event Data Service. Depending on load, there may be a delay between when the Agent ingested some data and when it was timestamped. 
+Every Event also has a 'collected' time. This is the time when the Agent or Percolator submitted an Event. Depending on load, there may be a delay between when the Agent ingested some data and when it was timestamped. 
 
 We try to avoid changing an Event after it has been collected, but in some circumstances, for example when we are contractually obliged to, we will edit an Event. Read more in [Updates](/data/updates). 
 
@@ -23,7 +23,7 @@ These three dates are represented as the `occurred_at`, `timestamp` and `updated
 
 ### Using the Query API over time
 
-The Query API is updated every day. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a day's worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited for compliance reasons). 
+The Query API is updated continuously, usually within one hour of current activity. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a day's worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited for compliance reasons). 
 
 The Query API also contains an `occurred` view. This returns Events based on the date they **occurred** on. Because Events can be collected some time after they occurred, the data in this view can change.
 

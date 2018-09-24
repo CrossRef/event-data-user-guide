@@ -111,10 +111,8 @@ None known.
 
 ## Failure modes
 
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
- - Wordpress.com may block the Agent
- - Wordpress.com may block the Percolator Bot
+ - We may fail to reverse landing pages to DOIs.
+ - The Hypothesis API may be unavailable.
 
 ## Further information
 

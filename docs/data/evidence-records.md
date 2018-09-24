@@ -34,7 +34,7 @@ An Action contains information about the thing that happened. This corresponds t
 
 ### Observations
 
-Each Action also comes with one or more Observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an Observation:
+Each Action contains one or more Observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an Observation:
 
  - the text of a tweet (which may contain plaintext DOIs)
  - the automatically extracted URLs from a tweet (which could be DOIs or Article Landing Pages)
@@ -90,9 +90,7 @@ Actions are collected together into pages of lists. This model suits all Agents:
 
 ### Extras
 
-Finally, there are always little bits of extra information that come from sources that it's useful to have. The Evidence Record, Page and Action objects can all have an `extra` field to accommodate these.
-
-The Event Data Bot spends a lot of time visiting webpages on behalf of Event Data Agents. Every Evidence Record contains a log of all of the URLs that were visited, and the HTTP status codes that were received. If you see an inconsistency in the processing of an Event Record, you can look at the log to see if it was caused by an external URL timing out, blocking the agent etc.
+Finally, little bits of extra useful information may come from sources. The Evidence Record, Page and Action objects can all have an `extra` field to accommodate these.
 
 ### Journey
 

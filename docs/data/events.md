@@ -77,7 +77,7 @@ The Event may include metadata about its subject and/or object. For example:
 
 We typically only include metadata that you are unable to get elsewhere and that is unlikely to change. Where the `subj_id` or `obj_id` is a DOI, we will not include the metadata because you can easily look it up using the Crossref or DataCite APIs and it could go out of date if recorded. We also store a large amount of metadata associated with each DOI, and including it all would balloon the data to many times its size.
 
-People don't always use DOIs to cite Registered Content, especially on social media. Where a link to Article Landing Page is identified, and we can match that to a DOI, we will use the DOI as the `obj_id` and `obj.pid`, and the actual URL of the Landing Page as the `obj.url`. In these cases, we include an optional `method` and `verification` and field to indicate how we matched a DOI, and how we verified that. For a full description see [IDs and URLs and the Web](/data/ids-and-urls).
+People don't always use DOIs to cite Registered Content, especially on social media, so we often links using the Landing Page. Where a link to Landing Page is identified, and we can match that to a DOI, we will use the DOI as the `obj_id` and `obj.pid`, and the actual URL of the Landing Page as the `obj.url`. In these cases, we include an optional `method` and `verification` and field to indicate how we matched a DOI, and how we verified that. For a full description see [Matching Landing Pages](/data/matching-landing-pages).
 
 
 

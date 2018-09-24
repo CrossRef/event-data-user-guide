@@ -13,7 +13,9 @@ If an Event is updated, three fields will be set:
  - `updated` - will have a value of `deleted` or `edited`
  - `updated_reason` - optional, may point to an announcement page explaining the edit
  - `updated_date` - ISO8601 date string for when the event was updated.
- 
+
+The Evidence Record is also updated.
+
 Here are real examples of changes we have made to Events:
 
  - `deleted` to remove data from Twitter Events for tweets that have been deleted.
