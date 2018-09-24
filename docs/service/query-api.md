@@ -38,7 +38,7 @@ The following can be used to filter Events:
 
 Please also send the `mailto` query parameter. **It is not compulsory**, but will help us understand how people are using the API and get in contact if we need to. We won't share your email address, and will only contact you in connection with API use. For example: 
 
-    http://api.eventdata.crossref.org/v1/events?mailto=example@example.org&obj-id=10.5555/12345678
+    https://api.eventdata.crossref.org/v1/events?mailto=example@example.org&obj-id=10.5555/12345678
 
 If you are uncomfortable sending a contact email address, you don't have to. You can [read more about the rationale here](https://github.com/CrossRef/rest-api-doc#etiquette). 
 
@@ -67,9 +67,9 @@ Each facet should be supplied with a limit (i.e. the top <i>n</i> results) or `*
 
 You many use any combination of facets, separated by commas. The following query means "show me the top 10 domains found in Events for the Newsfeed source":
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=0&source=newsfeed&facet=subj-id.domain:10
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=0&source=newsfeed&facet=subj-id.domain:10
 
-The result, at the time of writing, incldues:
+The result, at the time of writing, includes:
 
     facets: {
       subj-id-domain: {
@@ -91,7 +91,7 @@ The result, at the time of writing, incldues:
 
 The following query means "of all Newsfeed Events found from www.theguardian.com, show me the top DOI prefixes that Events refer to".
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=0&source=newsfeed&subj-id.domain=www.theguardian.com&facet=obj-id.prefix:*
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=0&source=newsfeed&subj-id.domain=www.theguardian.com&facet=obj-id.prefix:*
 
 The result shows:
 
@@ -154,15 +154,15 @@ Up to ten Events for the DOI https://doi.org/10.1186/s40536-017-0036-8
 
 Ten Events for the DOI prefix 10.1186
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10&obj-id.prefix=10.1186
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10&obj-id.prefix=10.1186
 
 All Events ever! Note that you will need to use the cursor to iterate through the result set.
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000
 
 Using the cursor returned from the first page (yours may be different) 
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000&cursor=17399fd9-319d-4b28-9727-887264a632b1
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000&cursor=17399fd9-319d-4b28-9727-887264a632b1
 
 ## Keeping up to date
 
@@ -190,30 +190,13 @@ These are available at this endpoint:
 
 For example, on the 2nd of February 2017 you retrieve events from Twitter:
 
-    http://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter
+    https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter
 
 You store the Events. One month later, you re-query for any Events that were updated since you last queried:
 
-    http://api.eventdata.crossref.org/v1/events/edited?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter&from-updated-date=2017-02-02
+    https://api.eventdata.crossref.org/v1/events/edited?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter&from-updated-date=2017-02-02
 
 And any that were deleted:
 
-    http://api.eventdata.crossref.org/v1/events/deleted?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter&from-updated-date=2017-02-02
-
-# Changes from the previous Beta Query API
-
-When we introduced API version 1, we made some breaking changes to the Beta API:
-
-1. All paths now start with 'v1'. This allows us to version the API in future, and means you know which version you are using.
-2. The filter parameter syntax has been deprecated. All filters are now standard query parameters. This makes the syntax eaiser to document and use.
-2. Checking for updates (edits and deletions) now requires two special URls. Previously this was done with filter parameters. The 'from-updated-date' and 'until-updated-date' parameters still apply. You should now use:
-   - `https://query.eventdata.crossref.org/v1/events/edited` - for Events that have been edited.
-   - `https://query.eventdata.crossref.org/v1/events/deleted` - for Events that have been deleted.
-3. The format of Wikipedia Events has been much simplified. All previously created 'is_version_of' and 'replaces' Events have been deleted. They are still accessible via the special Deleted path.
-4. The distinct view is now only available via `https://query.eventdata.crossref.org/v1/events/distinct`.
-5. Scholix-format Events are now available at `https://query.eventdata.crossref.org/v1/events/scholix`
-6. Experimental Events are now only available via `https://query.eventdata.crossref.org/v1/events/experimental`.
-7. If you want to get an Event using its ID you should use one of the following:
-   - `https://query.eventdata.crossref.org/v1/events/«id»` - For all normal non-deleted Events. If the Event has been deleted then that endpoint will return HTTP 404 Not Found. 
-   - `https://query.eventdata.crossref.org/v1/deleted/«id»` - If the Event has been deleted.
+    https://api.eventdata.crossref.org/v1/events/deleted?mailto=YOUR_EMAIL_HERE&rows=10&source=twitter&from-updated-date=2017-02-02
 

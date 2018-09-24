@@ -16,7 +16,7 @@ A webpage may be accessed via a number of different URLs. To take a real example
  - `https://arstechnica.com/science/2017/09/new-evidence-would-push-life-back-to-at-least-3-95-billion-years-ago/`
  - `https://arstechnica.com/science/2017/09/new-evidence-would-push-life-back-to-at-least-3-95-billion-years-ago/?comments=1&post=34078349`
 
-Whilst it's important to record exactly where we looked to find a particular link, it's also important that we represent content as consistently as possible. The above webpage has metadata indicating the Canonical URL. When we identify a Canonical URL we use this as the `subj_id` in the Event. We store the URL we visited in the `subj.url` so you always know which URL we visited in the first place.
+Whilst it's important to record exactly where we looked to find a particular link, it's also important that we represent content as consistently as possible. The above webpage has metadata indicating the Canonical URL. When we identify a Canonical URL we use this URL as the `subj_id` in the Event. We store the URL we visited in the `subj.url` so you always know which URL we visited in the first place.
 
 ## Removing tracking URLs
 
@@ -40,11 +40,11 @@ When picking a `subj_id`, we use the following options in order:
 
  1. The Canonical URL as indicated in the HTML metadata.
  2. Failing that, URL where we found the content (if there were redirects, then the final destination), with tracking parameters removed.
- 3. Failing that (e.g. if there were errors removing the tracking parameters), the URL that the Agent intended to visit. 
+ 3. Failing that (e.g. if there were errors removing the tracking parameters), the URL that the Agent visited.
 
 ## DOIs for Objects
 
-In most cases, the Object of an Event is a piece of Crossref Registered Content. For these, the best URL to unambiguously identify the content is the DOI. The process of matching a DOI also confirms that it is actually a piece of Crossref Registered Content. If we cannot find the DOI, we cannot verify that it is Crossref Registered Content, so we do not produce an Event.
+In most cases, the Object of an Event is a piece of Crossref or DataCite Registered Content. For these, the best URL to unambiguously identify the content is the DOI. The process of matching a DOI also confirms that it is actually a piece of Registered Content. If we cannot find the DOI, we cannot verify that it is Crossref Registered Content, so we do not produce an Event.
 
 ## We look for DOIs as well as Landing Pages
 
@@ -68,9 +68,9 @@ If you are a Publisher, refer to the [Best Practice for Publishers](../best-prac
 
 ## You might want to know the difference
 
-When we match an Event because someone discussed an Item using its DOI, the only processing that takes place is normalising the DOI and checking that it exists. You can see the full process in the Evidence Record for that Event, even though there's not much to it.
+When we match an Event because someone discussed an Item using its DOI, the only processing that takes place is normalizing the DOI and checking that it exists. You can see the full process in the Evidence Record for that Event, even though there's not much to it.
 
-When we match an Event because someone used a Landing Page, the Agent has to do some work to match it to a DOI. When we do this, we are making an implicit assertion that 'this Landing Page is for this DOI'. We are confident in the accuracy of our Agents, but it's important to understand that this is an automated process and might not be 100% reliable.
+When we match an Event because someone used a Landing Page, the Agent has to do some work to match it to a DOI. When we do this, we are making an implicit assertion that 'this Landing Page is for this DOI'. Our Agents reflect the data they find, so it's important to understand that this automated process and might not be 100% reliable.
 
 You can put Event Data to different uses. You might want to know:
 
@@ -101,7 +101,7 @@ If a publisher stops using an Article Landing Page domain, we will not remove it
 
 ### We don't match all domains
 
-Some DOIs have been registered to domains such as `youtube.com`. We have no way of matching YouTube videos back to DOIs. So, for the small number of domains that we can never match and produce a high volume of unusable input, we maintain the `exclude-domains` Artifact which lists domains that we explicitly won't check.
+Some DOIs have been registered to domains such as `youtube.com`. We have no way of matching YouTube videos back to DOIs. So, we exclude this small number of domains that we can never match.
 
 ### We don't know all of the Landing Page URLs, and it's not possible to discover them all
 
@@ -130,7 +130,7 @@ If we follow the DOI URL, we see the following chain of redirects.
 In cases like this, the final Landing Page is different to that registered with Crossref, so we can't know without following it. 
 
 
-In some cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. In this example the DOI has been anonymised, but it is based on a real example. Trying to resolve the DOI `10.XXX/YYY.06.008` without cookies enabled produces:
+In some cases, Publisher sites implement checks which prevent automated access, such as requiring cookies and performing redirects using JavaScript. In this example the DOI has been anonymized, but it is based on a real example. Trying to resolve the DOI `10.XXX/YYY.06.008` without cookies enabled produces:
 
 | URL | Comment |
 |-----|---------|
@@ -153,27 +153,13 @@ In some cases, Publisher sites implement checks which prevent automated access, 
 
 The final step in this chain is an error page stating that cookies are required and it is therefore impossible to resolve the DOI using HTTP.
 
-Crossref [Membership rules #7](http://www.crossref.org/02publishers/59pub_rules.html) state that: 
+Crossref [Membership rules #7](https://www.crossref.org/02publishers/59pub_rules.html) state that: 
 
 > You must have your DOIs resolve to a page containing complete bibliographic information for the content with a link to — or information about — getting the full text of the content.
 
 Where publishers break these rules, we will alert them.
 
-Becuase of restrictions like this, along with other practical constraints, we cannot and do not attempt to visit every DOI ahead of time to find its Landing Page. 
-
-### How we match Landing Page URLs to DOIs
-
-The job of matching Landing Page URLs back to DOIs is done by the Percolator, which is an internal service that forms part of the Agents. It has a number of methods for reversing a Landing Page URL back into a DOI, including:
-
- - Looking for a DOI embedded in the URL, such as in the above PLOS example `http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160106`
- - Looking for a PII ([Publisher Item Identifier](https://en.wikipedia.org/wiki/Publisher_Item_Identifier)) embedded in the URL and matching that back to a DOI using the Publisher's deposited metadata.
- - Visiting the page and looking for a [Dublin Core Identifier](https://en.wikipedia.org/wiki/Dublin_Core) tag in the HTML. Including this in Article Landing Pages is recommended best practice.
-
-The third option, visiting the site to look up the metadata, is used in a large proportion of cases.
-
-The Percolator respects the [`robots.txt` file](http://www.robotstxt.org/) on every site it visits. If `robots.txt` is set too aggressively, we will not collect Events for Landing Pages on that site. We will also be unable to collect Events if the site requires JavaScript or cookies to execute. See [Percolator](/sources/percolator) for more detail.
-
-This means that **we can only match Landing Page URLs back to DOIs when the Publisher allows us to**. Our ability to collect Events for these Publishers is compromised, and you should bear this in mind when comparing Events for Registered Content Items between publishers. All of this behaviour is recorded in Evidence Records, so if you have any queries about a particular site or domain, you can interrogate those.
+Because of restrictions like this, along with other practical constraints, we cannot and do not attempt to visit every DOI ahead of time to find its Landing Page. 
 
 <a href="concept-external-doi-mappings"></a>
 ### External Parties Matching Content to DOIs 

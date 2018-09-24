@@ -10,13 +10,13 @@ There are three categories of feedback:
  - **Patches** are actions we manually take to improve the data.
  - **Support queries** can feed back into our datasets.
 
-All the resuts are published in the Evidence Log. See the [Evidence Log page](/guide/data/evidence-logs/) for the description of all of the Evidence Log Message types.
+All the results are published in the Evidence Log. See the [Evidence Log page](/guide/data/evidence-logs/) for the description of all of the Evidence Log Message types.
 
 We are currently handling support queries manually. If you want to raise an issue, suggest a new data source or change to any of our Artifacts, please contact eventdata@crossref.org
 
 ## Daily Checks
 
-These run every day. If there is an interruption of service and a day is missed, it will be automatically filled in later. The resuts of daily checks are published in the Evidence Record.
+These run every day. If there is an interruption of service and a day is missed, it will be automatically filled in later. The results of daily checks are published in the Evidence Record.
 
 ### Archive / Query API Integrity Check
 
@@ -26,7 +26,7 @@ Errors will be logged in the Evidence Log if an Event is present in the Archive 
 
 ### Evidence Log Dump Check
 
-The Evidence Log is archived every day, available as a CSV and a JSON file. The presence of this file is checked, and an errir is logged if either are missing.
+The Evidence Log is archived every day, available as a CSV and a JSON file. The presence of this file is checked, and an error is logged if either are missing.
 
 ### Twitter Compliance
 

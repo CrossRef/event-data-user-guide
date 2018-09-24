@@ -4,7 +4,7 @@ Evidence Logs trace the actions performed within Event Data during the creation 
 
 There are a standard set of fields, including the Evidence Record ID. You can use this either to find all activity in the Evidence Log that correspond to the processing of a particular Evidence Record, or to find the Evidence Record that corresponds to a particular Log Entry.
 
-Evidence Logs and Evidence Records fulfill slightly different roles. Whilst the Evidence Record describes the data that came in, the resulting Events, and the interrim steps that were taken, the Evidence Logs describe in detail exactly which steps were taken.
+Evidence Logs and Evidence Records fulfill slightly different roles. Whilst the Evidence Record describes the data that came in, the resulting Events, and the interim steps that were taken, the Evidence Logs describe in detail exactly which steps were taken.
 
 # Format
 

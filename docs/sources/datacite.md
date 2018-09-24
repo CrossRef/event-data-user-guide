@@ -21,7 +21,7 @@
 
 ## What it is
 
-Links from DataCite DOIs to Crossref DOIs. These are recorded in the metadata for DataCite's Registered Content. The data is ultimatley supplied by DataCite members who are the publishers and 'owners' of the Registered Content.
+Links from DataCite DOIs to Crossref DOIs. These are recorded in the metadata for DataCite's Registered Content. The data is ultimately supplied by DataCite members who are the publishers and 'owners' of the Registered Content.
 
 Only Relations between DataCite DOIs and Crossref DOIs are included. If you want other metadata you can find it in DataCite's APIs.
 

@@ -18,7 +18,7 @@ The Data Contributors section of the User Guide provides a detailed discussion o
 
 ### 5: Provide a documented audit trail of how and when data generation and collection methods change over time and list all known effects of these changes. Documentation should note whether changes were applied historically or only from change date forward.
 
-The [Evidence In Depth](evidence-in-depth) section describes the complete audit trail of data, from input to Events, via Evidence Records. It also describes how the Artifact Service shows the complete environment under which an Event was generated. The [Evidence Logs](data/evidence-logs) provide a very high level of detail about every activity and process that took place, including nevative results. 
+The [Evidence In Depth](evidence-in-depth) section describes the complete audit trail of data, from input to Events, via Evidence Records. It also describes how the Artifact Service shows the complete environment under which an Event was generated. The [Evidence Logs](data/evidence-logs) provide a very high level of detail about every activity and process that took place, including negative results. 
 
 ### 6: Describe how data are aggregated
 
@@ -42,7 +42,7 @@ There is only one version of the data. All consumers receive the same data regar
 
 ### 11: Describe the data-quality monitoring process.
 
-The Evidence Service allows anyone to perform audits on Event Data. The Status Service monitors the performance and activity of all parts of the system. We will run an automatic service to analyse the outputs to ensure they correlate to the inputs. In addition to this, the Evidence Logs provide all the information required for an external party to monitor data quality.
+The Evidence Service allows anyone to perform audits on Event Data. The Status Service monitors the performance and activity of all parts of the system. We will run an automatic service to analyze the outputs to ensure they correlate to the inputs. In addition to this, the Evidence Logs provide all the information required for an external party to monitor data quality.
 
 ### 12: Provide a process by which data can be independently verified.
 

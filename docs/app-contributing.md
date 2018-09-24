@@ -43,7 +43,7 @@ Bigipedia is an online Encyclopedia. It cites DOIs in its reference list for its
 
 In this example, Bigipedia informs us that the DOI is referenced by the article page. Note that because the subject is not a DOI, the metadata must be supplied in the `subj` key. 
 
-    $ curl "http://bus.eventdata.crossref.org/events" \
+    $ curl "https://bus.eventdata.crossref.org/events" \
            --verbose \
            -H "Content-Type: application/json" \
            -H "Authorization: Token token=591df7a9-5b32-4f1a-b23c-d54c19adf3fe" \
@@ -51,7 +51,7 @@ In this example, Bigipedia informs us that the DOI is referenced by the article 
            --data '{"id": "dbba925e-b47c-4732-a27b-0063040c079d",
                     "source_token": "b1bba157-ab5b-4cb8-9ac8-4beb2d6405ff",
                     "subj_id": "http://bigipedia.com/pages/Chianto",
-                    "obj_id": "http://doi.org/10.3403/30164641u",
+                    "obj_id": "https://doi.org/10.3403/30164641u",
                     "relation_type_id": "references",
                     "source_id": "bigipedia",
                     "license: "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -65,7 +65,7 @@ DOI Remember is a bookmarking service for DOIs. DOI Remember will tell Event Dat
 
 In this example, DOI Remember tells that as of the 1st of March 2016, 922 people have bookmarked the given DOI. The Subject is the 'DOI Remember' source as a whole. As its URL is not a DOI, subject metadata must be included. Event Data allows for the year `0000-01-01` for the issue date when it's not meaningful to provide one.
     
-    $ curl "http://bus.eventdata.crossref.org/events" \
+    $ curl "https://bus.eventdata.crossref.org/events" \
            --verbose \
            -H "Content-Type: application/json" \
            -H "Authorization: Token token=22e49a7c-5edd-4873-a2b2-c541512c933a" \
@@ -90,7 +90,7 @@ Hansard Watch is a service that monitors the UK House of Commons and sends an ev
 
 In this example, the given Hansard page discusses the given DOI. It has a publication date.
 
-    $ curl "http://bus.eventdata.crossref.org/events" \
+    $ curl "https://bus.eventdata.crossref.org/events" \
        --verbose \
        -H "Content-Type: application/json" \
        -H "Authorization: Token token=b832bf3a-f5ca-4435-9a2b-09fec0f313a6" \
@@ -114,7 +114,7 @@ TrouserPress is an online hosted blogging platform. It's increasingly being used
 
 In this example, the given TrouserPress article discusses the DOI.
 
-    $ curl "http://bus.eventdata.crossref.org/events" \
+    $ curl "https://bus.eventdata.crossref.org/events" \
        --verbose \
        -H "Content-Type: application/json" \
        -H "Authorization: Token token=22810d9a-8fae-4905-8d0d-ac7b98731646" \

@@ -91,7 +91,7 @@ Some tweets are deleted by their authors after they are published. We observe si
 
  - The `updated` field is set to indicate the timestamp when we took the action.
  - The `updated_type` field is set to `deleted`.
- - The `updated_reason` will be set to the URL of an announcement that incicates the reason.
+ - The `updated_reason` will be set to the URL of an announcement that indicates the reason.
  - The `subj_id` will be updated to remove the tweet ID (it is considered to be sensitive information), and will just show `https://twitter.com`
  - The `subj` metadata will be removed.
 

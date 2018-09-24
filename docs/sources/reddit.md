@@ -11,7 +11,7 @@
 | Freshness                 | Every few hours |
 | Identifies                | Linked DOIs |
 | License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
-| Looks in                  | The link that corredsponds to each discussion |
+| Looks in                  | The link that corresponds to each discussion |
 | Name                      | Reddit Links |
 | Operated by               | Crossref |
 | Produces Evidence Records | Yes |

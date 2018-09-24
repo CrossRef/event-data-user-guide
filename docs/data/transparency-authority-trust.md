@@ -22,7 +22,7 @@ It's up to you to decide how far down the provenance chain you want to go. Event
 
 ## Relations
 
-Every subject-relation-object Event is an assertion made by the Agent. When deciding whether or not you trust an Event, you should look at the Agent ID and make your decision on that basis. Some Agents, like Crossref Metadata and DataCite Metadata, are operated by organisations that directly hold the data. Some Agents, like Reddit or Newsfeeds, observe things on the web and make assertions about what they saw. The Evidence Record provides the link between what the external party said and the Event.
+Every subject-relation-object Event is an assertion made by the Agent. When deciding whether or not you trust an Event, you should look at the Agent ID and make your decision on that basis. Some Agents, like Crossref Metadata and DataCite Metadata, are operated by organizations that directly hold the data. Some Agents, like Reddit or Newsfeeds, observe things on the web and make assertions about what they saw. The Evidence Record provides the link between what the external party said and the Event.
 
 ## Landing Page to DOI mappings
 
@@ -43,7 +43,7 @@ There are other similar methods to this. If we are unable to get the DOI from th
       <meta name="dc.identifier" content="10.1371/journal.pone.0160617" />
     </head>
 
-This means that in cases like this, the Landing Page URL-to-DOI mapping is made on the authority of the organisation running that website, i.e. the Publisher's. 
+This means that in cases like this, the Landing Page URL-to-DOI mapping is made on the authority of the organization running that website, i.e. the Publisher's. 
 
 We maintain a list of publisher domains (see the [Artifacts](artifacts)), which we do by following DOIs to see where they resolve to. We will only accept URL-to-DOI equivalence assertions from domains on this list. 
 
@@ -76,7 +76,7 @@ Event Data solves this by taking an **Evidence First** approach. For every piece
 
 <img src="../../images/evidence-first-bridge.svg" alt="Bridging the Evidence Gap" class="img-responsive">
 
-Evidence is important because it bridges the gap between generic primary data souces, such as Twitter, with the specialised Events in Event Data. They explain not only what data were used to construct an Event, but also the process by which the Event was created. Providing this explanation pinpoints the precise meaning of the Event within the individual context it comes from.
+Evidence is important because it bridges the gap between generic primary data sources, such as Twitter, with the specialized Events in Event Data. They explain not only what data were used to construct an Event, but also the process by which the Event was created. Providing this explanation pinpoints the precise meaning of the Event within the individual context it comes from.
 
 You may want to compare Event Data with, or to combine it to, other services. Evidence Records enable two Events from different providers to be compared and helps to explain any discrepancies. It allows the consumer to check whether they were working from the same input data, and whether they processed it the same way.
 

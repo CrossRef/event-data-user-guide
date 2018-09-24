@@ -1,23 +1,23 @@
 # About the Data
 
-The Crossref Event Data is centred around Events, but contains supporting data and metadata:
+The Crossref Event Data is centered around Events, but contains supporting data and metadata:
 
  - **Events** record activity around Registered Content.
  - **Evidence Records** provide an evidence trail for Events.
  - **Artifacts** show some of the inputs that were used and feed into Evidence Records.
- - **Evidence Logs** document the behaviour of the system.
+ - **Evidence Logs** document the behavior of the system.
 
 This section describes in detail exactly what data exists in Event Data, and what you should bear in mind when using it.
 
 ## Why Events?
 
-Each Event represents an atomic unit of observed activity. It contains a single subject-relation-object triple and also has other supporting fields and metadata that indicate how, why, where and by whom the Event was created. In order to communicate all the relevant information, it's necessary to deliver data on this level of detail.
+Each Event represents a single observation. It contains a subject-relation-object triple and also has other supporting fields and metadata that indicate how, why, where and by whom the Event was created. In order to communicate all the relevant information, it's necessary to deliver data on this level of detail.
 
-As we track connections as they cocur between a known set of things, you may wonder why the Event Data service is presented as a sequence of Events rather than a graph database of relations like, for example, Facebook's Graph API. The answers are twofold:
+As we track connections as they occur between objects, you may wonder why the Event Data service is presented as a sequence of Events rather than a graph database of relations like, for example, Facebook's Graph API. The answers are twofold:
 
-Firstly, the data is always changing. Any representation of Event Data in a graph structure would either have to be in a constant state of change, or it would have to be scoped for a specific date range. Both of these are good use cases for end-users but not for a the Event Data API that provides the original data.
+ - Firstly, we're observing a constantly changing web. We want to be able to provide all of this information to our users, and the best way to do this is a constant stream of Events that describe new links. If we stored the Events in a graph store it would be in a constant state of flux, with no way to let our users be confident that they have the entire data set at a given point in time. You are welcome to build your _own_ database using the Event stream. 
 
-Secondly, there are many ways that the Event Data could be modelled into a graph database. Choosing exactly how to do this involves interpreting the data, which is something we do not do. This subject is covered in depth in the [Event Data as a Graph Data Structure](/data/graph) page.
+ - Secondly, there are many ways that the Event Data could be modeled into a graph database. Choosing exactly how to do this involves interpreting the data, which is something we do not do. This subject is covered in depth in the [Event Data as a Graph Data Structure](/data/graph) page.
 
 Because of this we present Event Data as a series of Events and you can decide if you want to create other representations in your own application. The Query API gives you the flexibility to scan over all data, or only to get those Events that were collected since your last visit.
 
@@ -25,17 +25,17 @@ The API also allows you to make queries like "all Events for this DOI" or "all E
 
 ## Where we look
 
-Data comes from different sources, via different routes. For some sources, like Crossref Metadata and DataCite Metadata, we receive Events directly from the source. For others, we operate an Agent (or bot) to go and look for Events.
+Data comes from different sources, via different routes. For some sources, like Crossref Metadata and DataCite Metadata, we receive Events directly from the source. For others, we operate an Agent to go and look for Events.
 
 ![Event journeys](../images/journeys.png)
 
-Events from each source go on a different journey to get into Event Data. Each Event documents its own provenance and links to supporting evidence, where applicable. Because of the diversity of routes by which data enters Event Data, you should consider which sources you are interested in. Each source is individually documented in this Guide.
+Events from each source go on a different journey to get into Event Data. Each Event provides documentation of its own provenance and links to supporting evidence, where applicable. Because of the diversity of routes by which data enters Event Data, you should consider which sources you are interested in. Each source is individually documented in this Guide.
 
 Because Event Data captures links between 'traditional literature' and 'non-traditional literature', the 'subject' of most Events is a webpage and the 'object' is a Registered Content Item, linked via its DOI.
 
-Crossref members already provide reference information for Registered Content, for example article to article citations. This falls under the 'traditional scholarship' category and is outside the scope of Event Data. If the Publisher has made it open, this data is available via the Deposit system (available via the Crossref REST API).
+Crossref members already provide reference information for Registered Content, for example article-to-article citations. This falls under the 'traditional scholarship' category and is outside the scope of Event Data. If the Publisher has made it open, this data is available via the [Crossref REST API](https://api.crossref.org).
 
-"Webpages" represent a wide variety of things, including members' sites. In order to avoid accidentally collecting 'traditional' reference information, all Crossref Event Data Agents avoid websites that belong to our members. We maintain a list of domains that the Event Data Bot will not visit because we know they belong to Publishers. This exclusion is done on a best-effort basis.
+"Webpages" represent a wide variety of things, including members' sites. In order to avoid accidentally collecting 'traditional' reference information, all Crossref Event Data Agents avoid websites that belong to our members. We maintain a list of domains that the Event Data Agents will not visit because we know they belong to Publishers. This exclusion is done on a best-effort basis.
 
 We also exclude other webpages that we believe are part of databases, library systems etc. As we monitor a potentially limitless set of websites, this with is done with heuristics on a best-effort basis.
 

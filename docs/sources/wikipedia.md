@@ -71,14 +71,14 @@ We don't expect to have to edit or delete any Events.
 
 ## Quirks
 
-There are a number of initatives in the community concerning citation and referencing in Wikipedia, leading to various ways in which links may be made in the WikiText source of the article. The Agent monitors the final rendered HTML, so transcends these different methods.
+There are a number of initiatives in the community concerning citation and referencing in Wikipedia, leading to various ways in which links may be made in the WikiText source of the article. The Agent monitors the final rendered HTML, so transcends these different methods.
 
 Due to the way that references are sometimes made (for example, both Landing Pages and DOIs), an article may contain two references to the same Registered Content Item. Because these are treated differently by Event Data, you should pay careful attention to the `obj.url` field.
 
 We record every edit for which we find relevant references. This means that if a page is edited in a way that doesn't change the references, we will still record it as normal.
 
 There are some similar but distinct terms:
- - Wikipedia is the encyclopedia, available at http://wikipedia.org . There are various Wikipedia servers, e.g. for different language versions.
+ - Wikipedia is the encyclopedia, available at https://wikipedia.org . There are various Wikipedia servers, e.g. for different language versions.
  - MediaWiki is the software that runs Wikipedia. It also runs some other websites. 
  - Wikimedia is the organisation that runs Wikipedia and develops the MediaWiki software
  - WikiText is the markup language used to author pages in MediaWiki.
@@ -86,7 +86,7 @@ There are some similar but distinct terms:
 ## Failure modes
 
  - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - If the bot is temporarily disconnected from the edit stream, we will not be aware of edits until it reconnects.
+ - If the Agent is temporarily disconnected from the edit stream, we will not be aware of edits until it reconnects.
 
 ## Further information
 

@@ -33,7 +33,7 @@ As graphs grow, we can represent concepts and real objects and they way they are
 
 You can model Event Data as a graph, and you can combine it with data from other sources and other graphs. Each new Event represents a new connection between things you may already know about, and as more data comes in the connectedness of the graph will increase, allowing you to make new inferences.
 
-But although each Event corresponds to a connection, that doesn't always mean just two nodes an an edge. In order to construct a graph, you must choose how you represent Events as nodes and edges, and to do that it's necessary to _interpret_ the Events. How you interpret them is up to you, and will depend on what you're trying to achieve. Models go from very simple but easy to navigate, to very detailed but possibly hard to interrogate or query.
+But although each Event corresponds to a connection, that doesnt't always mean just two nodes an an edge. In order to construct a graph, you must choose how you represent Events as nodes and edges, and to do that it's necessary to _interpret_ the Events. How you interpret them is up to you, and will depend on what you're trying to achieve. Models go from very simple but easy to navigate, to very detailed but possibly hard to interrogate or query.
 
 Let's take an example Event:
 
@@ -70,7 +70,7 @@ We can identify several potential nodes that this Event mentions. In order of ob
 4. The URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/` that identifies a Reddit comment (from the `subj_id` field).
 5. The URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article` that is associated with to the same piece of content as the DOI (from the `subj` field).
 6. The Evidence Record with the URL `https://evidence.eventdata.crossref.org/evidence/2017022244f5e774-b3ca-4b29-8555-269777b38983` (form the `evidence-record` field)
-7. The source with ID `a6c9d511-9239-4de8-a266-b013f5bd8764` that identifies the Agent that collected the Event (from the `source_token` field)
+7. The source with ID `a6c9d511-9239-4de8-a266-b013f5bd8764` that idenfies the Agent that collected the Event (from the `source_token` field)
 8. The URL `https://doi.org/10.13003/Event Data-terms-of-use` that identifies the Terms of the Event (from the `terms` field).
 9. The Action type `add` (from the `action` field)
 10. The Reddit type of `post` (from the `subj` field)
@@ -138,9 +138,9 @@ We can also identify several potential arcs in the Event. In order of obviousnes
 
 If we were to show the above graphically it might look like:
 
-![All full modeling of Reddit Event](/images/graph-reddit.png)
+![All full modelling of Reddit Event](/images/graph-reddit.png)
 
-There are even more potential arcs in there, and they can be represented at any level of detail. But this level of detail is already overkill for most uses and adding unnecessary detail can slow things down and make the data more difficult to query.
+There are even more potential arcs in there, and they can be represented at any level of detail. But this level of detail is already overkill for most uses and adding unncecessary detail can slow things down and make the data more difficult to query.
 
 **The way you represent Event Data in a graph database should be guided by the kind of queries you want to run.**
 
@@ -207,7 +207,7 @@ This model represents the activity more accurately, but still discards informati
 
 This model represents the link between the conceptual items via their PIDs and also includes the URLs. This model includes more information but, like model 1, doesn't describe exactly which URLs were used in a given link.
 
-This is similar to model 1, except that the relationship is modeled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the Article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
+This is similar to model 1, except that the relationship is modelled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the Article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
 
 Event Data uses DOIs to represent Registered Content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
 
@@ -246,5 +246,5 @@ This model combines all of the above. It represents the relationships between PI
 
 ## Over to you
 
-Hopefully this has been an useful introduction to modeling Event Data. Just as there's no one true user of Event Data, there's no one true way to represent this information in a graph database. Choosing the right model will always be a trade-off between fullness of data, ease of querying, and practical considerations. 
+Hopefully this has been an useful introduction to modelling Event Data. Just as there's no one true user of Event Data, there's no one true way to represent this information in a graph database. Choosing the right model will always be a trade-off between fullness of data, ease of querying, and practical considerations. 
 

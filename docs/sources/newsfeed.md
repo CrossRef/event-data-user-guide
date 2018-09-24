@@ -32,7 +32,7 @@ The Agent has a list of RSS feeds. It monitors each one for links to blog posts.
 The `newsfeed-list` Artifact is consulted. On a regular basis the Agent retrieves the Artifact, then follows the link to every blog post or page mentioned. Data sources:
 
 1. The `newsfeed-list` Artifact, curated by Crossref.
-2. The content of each newsfeed. Each newsfeed may be operated by a different organisation. 
+2. The content of each newsfeed. Each newsfeed may be operated by a different organization. 
 3. The content of the individual blog posts.
 
 Example RSS feeds include:

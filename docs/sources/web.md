@@ -21,7 +21,7 @@
 
 ## What it is
 
-The Web source is a catch-all name we give to Events collected from the Web when we folllow links that fall outside any other source. As with all other sources, we don't visit webpages that belong to Crossref members.
+The Web source is a catch-all name we give to Events collected from the Web when we follow links that fall outside any other source. As with all other sources, we don't visit webpages that belong to Crossref members.
 
 Many Agents such as Reddit Links, Newsfeed, Wikipedia follow links.
 
@@ -33,7 +33,7 @@ The list of URLs can come from a range of sources, including those submitted by 
 
 ## What it does
 
-A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked a›rticle Landing Pages in the HTML of each page.
+A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked article Landing Pages in the HTML of each page.
 
 ## Where data comes from
 
@@ -67,7 +67,7 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
 
 ## Evidence Record
 
-The Evidence Record contains obserations of type `content-url` which correspond to every URL visited.
+The Evidence Record contains observations of type `content-url` which correspond to every URL visited.
 
 ## Edits / Deletion
 

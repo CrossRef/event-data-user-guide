@@ -118,5 +118,5 @@ None known.
 
 ## Further information
 
- - [Hypothes.is](http://hypothes.is)
+ - [Hypothes.is](https://hypothes.is)
 

@@ -86,7 +86,7 @@ We don't expect to have to edit or delete any Events.
 
 The Event is captured at the point it is returned from the StackExchange search. It may be edited before or after it is captured. We don't detect if it has been edited, so you should be aware of this. 
 
-The Agent is only aware of Questions or Answers that are matched via a Landing Page or doi.org domain. If an answer mentions an unlinked DOI (i.e. plain text DOIs such as `10.5555/12345678`) we will not retreive it. However, if the Agent does become aware of a Question or Answer becuase it contains a linked DOI or Landing Page URL and it also contain an unlinked DOI, it will match both.
+The Agent is only aware of Questions or Answers that are matched via a Landing Page or doi.org domain. If an answer mentions an unlinked DOI (i.e. plain text DOIs such as `10.5555/12345678`) we will not retrieve it. However, if the Agent does become aware of a Question or Answer because it contains a linked DOI or Landing Page URL and it also contain an unlinked DOI, it will match both.
 
 ## Failure modes
 

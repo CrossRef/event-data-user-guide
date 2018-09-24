@@ -6,7 +6,7 @@ Events are never *removed* from the system, but they are sometimes updated. Beca
  - Where Events have been produced as the result of a bug. For example, if Events are issued for DOIs that don't exist and the Event is therefore invalid.
  - Where we have added new features or enhancements, to bring old Events into line with new ones.
 
-For example, if an Agent has a bug that generates Events with invalid DOIs, and we are able to clean them up and mark the Events as edited, we will update those Events. If it generates non-existent DOIs, we may mark those Events as deleted. If a user deletes a tweet that's refereced from an Event, we will erase the tweet ID and author ID from the Event, leaving the rest untouched, and mark it as deleted.
+For example, if an Agent has a bug that generates Events with invalid DOIs, and we are able to clean them up and mark the Events as edited, we will update those Events. If it generates non-existent DOIs, we may mark those Events as deleted. If a user deletes a tweet that's referenced from an Event, we will erase the tweet ID and author ID from the Event, leaving the rest untouched, and mark it as deleted.
 
 If an Event is updated, three fields will be set:
 

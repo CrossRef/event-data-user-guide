@@ -6,10 +6,11 @@ site_url: https://www.eventdata.crossref.org/guide/
 pages:
  - "Welcome": index.md
  - "Introduction": introduction.md
- - "What's in CED?":
+ - "What's in Event Data?":
    - "About the Data": data/about-the-data.md
    - "Events": data/events.md
    - "IDs and URLs and the Web": data/ids-and-urls.md
+   - "Matching Landing Page URLs to DOIs": data/matching-landing-pages.md
    - "Event Data as a Graph Data Structure": data/graph.md
    - "Transparency, Authority and Trust": data/transparency-authority-trust.md
    - "Evidence Logs": data/evidence-logs.md
@@ -43,7 +44,7 @@ pages:
    - "Wikipedia": sources/wikipedia.md
    - "Wordpress.com": sources/wordpress-dot-com.md
  # - "Connecting to Your System": 
- #   - "Connecting CED to a Graph Database": connecting/graph-database.md
+ #   - "Connecting Event Data to a Graph Database": connecting/graph-database.md
  #   - "JSON Document Store: MongoDb": connecting/json-document-store.md
  #   - "Map Reduce: Hadoop": connecting/mapreduce-hadoop.md
  #   - "Streaming: Spark": connecting/streaming-spark.md
@@ -58,3 +59,4 @@ pages:
  - "Appendix: Scholix": app-scholix.md
  - "Appendix: FAQ": app-faq.md
  - "Appendix: Glossary": app-gloss.md
+ - "Document history": history.md
