@@ -1,8 +1,8 @@
-# Best Practice for Publishers
+# Best practice for publishers
 
-If you follow this best practice you will give Event Data the best chance of registering Events for your Registered Content. There are several factors that can impair, or completely prevent, us collecting Event Data. This is also all general good advice for running a website.
+If you follow this best practice you will give Event Data the best chance of registering Events for your registered content. There are several factors that can impair, or completely prevent, us collecting Event Data. This is also all general good advice for running a website.
 
-We collect data and generate reports about domains for which we are prevented from gathering Event Data. Please contact us for further information.
+We collect data and generate reports from domains where we are prevented from gathering Events from. Please contact us for further information.
 
 ## Don't block Event Data Agents
 
@@ -14,13 +14,13 @@ If you block the Event Data Agents from your site, we will be unable to collect 
 
 ## Don't have a restrictive robots.txt
 
-The Event Data Agents respects robots.txt files. If it is instructed not to collect content a site, it won't. If you prevent the Agents from accessing your article pages, we will be unable to collect Events from your DOIs.
+The Event Data Agents respects robots.txt files. If it is instructed not to collect content from a site, it won't. If you prevent the Agents from accessing your article pages, we will be unable to collect Events for your DOIs.
 
 **Action:** Don't have a restrictive robots.txt, or provide an exception for `CrossrefEventDataBot`.
 
-## Include the DC Identifier
+## Include the DC identifier
 
-Including good metadata is general best practice for scholarly publishing. Follow the Dublin Core identifiers to include a DOI in each article page so the Percolator can match your landing pages back to DOIs. 
+Including good metadata is general best practice for scholarly publishing. Follow the Dublin Core identifiers to include a DOI in each article page, so the Percolator can match your landing pages back to DOIs. 
 
 **Action:** Include a DC identifier meta tag in each article page, e.g. 
 
@@ -31,19 +31,19 @@ Including good metadata is general best practice for scholarly publishing. Follo
 
 ## Don't require cookies
 
-Some Publisher sites don't allow browsers to visit unless cookies are enabled, and block visitors that don't accept them. If your site does this, we will be unable to collect DOIs for your Events.
+Some publisher sites don't allow browsers to visit them unless cookies are enabled, and they block visitors that don't accept them. If your site does this, we will be unable to collect DOIs for your Events.
 
 **Action:** Allow your site to be accessed without cookies.
 
 ## Don't require JavaScript to read your pages
 
-Some Publisher sites require JavaScript to be enabled, and don't show any content to browsers that don't execute JavaScript. The Event Data Agent does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your Events.
+Some publisher sites require JavaScript to be enabled, and they don't show content to browsers that don't execute JavaScript. The Event Data Agent does not execute JavaScript when looking for a DOI. If your site does this, we will be unable to collect DOIs for your Events.
 
 **Actions:**
 
 - Allow your site to be accessed without JavaScript.
 - If you are unable to do do this, at least include the `<meta name="dc.identifier">` tag in the HTML header.
 
-## Review Terms of use
+## Review terms of use
 
 You should be familiar with the [Terms of Use](https://www.crossref.org/services/event-data/terms/).
