@@ -2,14 +2,14 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `d9c55bad-73db-4860-be18-520d3891b01f` |
+| Agent Source token        | `d9c55bad-73db-4860-be18-520d3891b01f` |
 | Consumes Artifacts        | `domain-list` |
-| Subject Coverage          | Any webpage. |
-| Object Coverage           | All DOIs, all article Landing Pages |
-| Data Contributor          | Various |
-| Data Origin               | Authors of webpages |
+| Subject coverage          | Any webpage. |
+| Object coverage           | All DOIs, all Article Landing Pages |
+| Data contributor          | Various |
+| Data origin               | Authors of webpages |
 | Freshness                 | Infrequent |
-| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
+| Identifies                | Linked DOIs, unlinked DOIs, landing page URLs |
 | License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | Text of webpages. |
 | Name                      | Web |
@@ -27,13 +27,13 @@ Many Agents such as Reddit Links, Newsfeed, Wikipedia follow links.
 
 ## What it is
 
-Events from any non-member web page we think might be relevant. We monitor a list of URLs that we think might have links to Items via their DOIs or Landing Pages, and then follow them to see if we can find any Items. We curate this list, as best we can, to ensure that we never follow a link when we believe it belongs to a Crossref member or when directed not to by robots.txt.
+Events from any non-member web page we think might be relevant. We monitor a list of URLs that we think might have links to Items via their DOIs or landing pages, and then follow them to see if we can find any Items. We curate this list, as best we can, to ensure that we never follow a link when we believe it belongs to a Crossref member or when directed not to by robots.txt.
 
 The list of URLs can come from a range of sources, including those submitted by users. If you have such a list, feel free to contact us. 
 
 ## What it does
 
-A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked article Landing Pages in the HTML of each page.
+A list of URLs is maintained. The Agent submits every URL to the Percolator. The Percolator looks for linked or unlinked DOIs, or linked Article Landing Pages in the HTML of each page.
 
 ## Where data comes from
 
@@ -69,7 +69,7 @@ A list of URLs is maintained. The Agent submits every URL to the Percolator. The
 
 The Evidence Record contains observations of type `content-url` which correspond to every URL visited.
 
-## Edits / Deletion
+## Edits / deletion
 
 We may mark Events as deleted if we subsequently find that the `subj_id` doesn't conform to the Event Data aims (e.g. if it belongs to a member). 
 
@@ -79,7 +79,7 @@ We may mark Events as deleted if we subsequently find that the `subj_id` doesn't
 
 ## Failure modes
 
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may block the Event Data Bot collecting landing pages.
 
 ## Further information
 
