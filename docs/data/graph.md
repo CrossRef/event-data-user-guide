@@ -12,7 +12,7 @@ Graphs are made up of 'nodes' and 'edges'. A node represents a 'thing' and an ed
 
 In this example we have two nodes and one edge. The nodes and edges have labels which represent the concepts 'apple', 'is a kind of' and 'fruit'.
 
-![Apple is a kind of fruit, humans eat apples, animals eat apple](/images/graph-food.png)
+![Apple is a kind of fruit, humans eat apples, animals eat apples](/images/graph-food.png)
 
 In this example we've added a few more edges and nodes. It contains nodes for real instances of things, such as 'Alice' and 'Bob'. It also contains nodes for concepts, such as 'animals' and 'apples"'. You could issue a query on this graph that asks:
 
@@ -86,13 +86,13 @@ We can also identify several potential arcs in the Event. In order of obviousnes
 1. From the `subj_id`, `relation_type_id` and `obj_id` fields:
     - Content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - discusses
-    - the Registered Content Item with DOI `https://doi.org/10.3201/eid2202.151250`
+    - the registered content item with DOI `https://doi.org/10.3201/eid2202.151250`
 2. From the `subj.url` and `obj.url` fields:
     - The content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - referred to the subject
     - using URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article`
 3. From the `subj_id` field:
-    - The Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
+    - the Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
     - has a `subj_id`
     - of `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
 4. From the `obj_id` field: 
@@ -108,11 +108,11 @@ We can also identify several potential arcs in the Event. In order of obviousnes
     - is asserted by
     - Agent with source token `a6c9d511-9239-4de8-a266-b013f5bd8764`.
 7. From the `source_id` field:
-    - The data for Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
+    - the data for Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
     - came from
     - source ID `reddit`.
 8. From the `subj.url` and `subj_id` fields:
-    - The Agent asserts that the content found at the URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article`
+    - the Agent asserts that the content found at the URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article`
     - has the DOI
     - `https://doi.org/10.3201/eid2202.151250`.
 9. From the `terms` field:
@@ -124,11 +124,11 @@ We can also identify several potential arcs in the Event. In order of obviousnes
     - is made available under the license
     - `https://creativecommons.org/publicdomain/zero/1.0/`.
 11. From the `id` and `relation_type_id` fields:
-    - The Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
+    - the Event ID `0003a012-e3fd-4d2f-8c18-1d8b7bb07e20`
     - reports on activity of type
     - `discusses`
 12. From the `subj_id` and `subj.type` fields:
-    - The content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/` 
+    - the content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/` 
     - has the type
     - `post`
 13. From the `action` field:
@@ -207,9 +207,9 @@ This model represents the activity more accurately, but still discards informati
 
 This model represents the link between the conceptual items via their PIDs and also includes the URLs. This model includes more information but, like model 1, doesn't describe exactly which URLs were used in a given link.
 
-This is similar to model 1, except that the relationship is modeled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the Article Landing Page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
+This is similar to model 1, except that the relationship is modeled between the PIDs, not the URLs. This may not represent that the Reddit page mentioned the Article landing page, but it does represent that it mentioned the article, and that the article has the Landing Page URL.
 
-Event Data uses DOIs to represent Registered Content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
+Event Data uses DOIs to represent registered content such as articles, so the way this model is expressed is closer to the way the Event is expressed. However it discards the information about *how* the Reddit post linked to the article.
 
 ### 4: The Event as the central node.
 
@@ -227,8 +227,8 @@ In previous models the place of an Event is represented implicitly as an arc. In
 
 Questions you can ask of this model are:
 
- - If this node is the subject of an Event node, give me all nodes that are the object of the Event node
- - If this node is an article DOI, find all URL nodes that are the subj_url of nodes of which this is an a subj_PID. In other words, find the Landing Page URL for this article DOI.
+ - If this node is the subject of an Event node, give me all nodes that are the object of the Event node.
+ - If this node is an article DOI, find all URL nodes that are the subj_url of nodes of which this is an a subj_PID. In other words, find the landing page URL for this article DOI.
 
 This model is the richest so far, but issuing queries between subject and object nodes requires an extra 'hop' to find the intermediary Event node. 
 
@@ -242,7 +242,7 @@ In this model we mix #3 and #4. We can make simple queries like 'find nodes that
 
 ![Model 6](/images/graph-6.png)
 
-This model combines all of the above. It represents the relationships between PID nodes and their URLs, between pairs of PID nodes, using the `relation_type_id` as the type of node. It also connects the Event to all of the nodes to allow queries like 'which Events(s) connect these two PIDs' but also 'in which Event was it asserted that this DOI has this Landing Page URL'.
+This model combines all of the above. It represents the relationships between PID nodes and their URLs, between pairs of PID nodes, using the `relation_type_id` as the type of node. It also connects the Event to all of the nodes to allow queries like 'which Events(s) connect these two PIDs' but also 'in which Event was it asserted that this DOI has this landing page URL'.
 
 ## Over to you
 
