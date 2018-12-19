@@ -1,6 +1,6 @@
 # Appendix: Contributing to Event Data
 
-We welcome new Data Contributors. We have two interfaces: the Event Bus which accepts raw Events, or the Percolator, which does some work to reverse Landing Pages and text back into Events.
+We welcome new data contributors. We have two interfaces: the Event Bus which accepts raw Events, or the Percolator, which does some work to reverse landing pages and text back into Events.
 
 ### Preparation
 
@@ -29,9 +29,9 @@ The [Event Bus is open source and available on Github](https://github.com/crossr
 
 If you have data that you think is useful but not enough to make Events, you could send it to the Percolator. The Percolator accepts inputs as input Evidence Records, and will:
  
- - convert Landing Pages into DOIs
- - verify that DOIs really exist
- - extract Landing Pages and DOIs from supplied HTML snippets, text snippets, or follow URLs to do this
+ - Convert landing pages into DOIs.
+ - Verify that DOIs really exist.
+ - Extract landing pages and DOIs from supplied HTML snippets, text snippets, or follow URLs to do this.
 
 If you use the Percolator then your input will be converted into an Evidence Record and enter the Evidence Registry.
 
