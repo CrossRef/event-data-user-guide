@@ -4,7 +4,7 @@ The [Quick Start guide](quickstart) shows you how to get your hands dirty quickl
 
 In most cases you will want to retrieve a large batch of Events so you can perform further processing on them. The Query API provides access to all Events, with filters to restrict the results based on source, date-range, DOI etc. 
 
-## Query Parameters
+## Query parameters
 
 The following query parameters are control how you retrieve the data:
 
@@ -50,8 +50,8 @@ Facets allow you to view a breakdown of the results that match your query. Using
 
 The following facets are available.
 
- - `source` - source ID
- - `relation-type` - relation type ID
+ - `source` - Source ID
+ - `relation-type` - Relation type ID
  - `obj-id.prefix` - DOI prefix like 10.5555, if Object is a DOI
  - `subj-id.prefix` - DOI prefix like 10.5555, if Subject is a DOI
  - `subj-id.domain` - Domain of the `subj_id` URL
@@ -61,8 +61,8 @@ The following facets are available.
 
 Each facet should be supplied with a limit (i.e. the top <i>n</i> results) or `*`, which is the maximum number supported. The syntax of a facet is `«facet»:«limit»`. For example
 
- - `source:*` means "show me the breakdown by source, up to the limit"
- - `subj-id.domain:*` means "show me the breakdown by the subject's domain name, up to the limit"
+ - `source:*` means "show me the breakdown by source, up to the limit".
+ - `subj-id.domain:*` means "show me the breakdown by the subject's domain name, up to the limit".
  - `subj-id.domain:10` means "show me the top 10 subj-id domains".
 
 You many use any combination of facets, separated by commas. The following query means "show me the top 10 domains found in Events for the Newsfeed source":
@@ -164,7 +164,7 @@ Using the cursor returned from the first page (yours may be different)
 
     https://api.eventdata.crossref.org/v1/events?mailto=YOUR_EMAIL_HERE&rows=10000&cursor=17399fd9-319d-4b28-9727-887264a632b1
 
-## Keeping up to date
+## Keeping up-to-date
 
 Events can be marked as deleted or edited, as described in the [updates](../data/updates) page. If you retrieve data and store it, you must make regular checks against Event Data to see if you need to update your own copy of the data.
 
