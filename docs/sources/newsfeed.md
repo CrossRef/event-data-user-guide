@@ -2,15 +2,15 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `c1bfb47c-39b8-4224-bb18-96edf85e3f7b` |
+| Agent Source token        | `c1bfb47c-39b8-4224-bb18-96edf85e3f7b` |
 | Consumes Artifacts        | `newsfeed-list` |
-| Subject Coverage          | Blog posts mentioned in RSS and Atom feeds on `newsfeed-list`  |
-| Object Coverage           | All DOIs, Landing Page URLs, plain-text DOIs. |
-| Data Contributor          | Curators of RSS and Atom feed aggregators. Authors of blog posts. |
-| Data Origin               | RSS and Atom feeds, and the blog posts they point to. |
+| Subject coverage          | Blog posts mentioned in RSS and Atom feeds on `newsfeed-list`  |
+| Object coverage           | All DOIs, landing page URLs, plain-text DOIs. |
+| Data contributor          | Curators of RSS and Atom feed aggregators. Authors of blog posts. |
+| Data origin               | RSS and Atom feeds, and the blog posts they point to. |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | HTML of webpages (mostly blog posts) linked to from RSS and Atom feeds. |
 | Name                      | Newsfeed |
 | Operated by               | Crossref |
@@ -25,7 +25,7 @@ Links from blogs and other content with a newsfeed.
 
 ## What it does
 
-The Agent has a list of RSS feeds. It monitors each one for links to blog posts. If a blog post links to Registered Content, or mentions DOIs in the text, they are extracted into Events.
+The Agent has a list of RSS feeds. It monitors each one for links to blog posts. If a blog post links to registered content, or mentions DOIs in the text, they are extracted into Events.
 
 ## Where data comes from
 
@@ -50,13 +50,13 @@ On a regular basis (approximately every hour) the Newsfeed Agent starts a scan. 
 
 1. It retrieves the most recent version of the `newsfeed-list` Artifact.
 2. It scans over every RSS feed.
-3. It passes the URL of every Blog post to the Percolator.
+3. It passes the URL of every blog post to the Percolator.
 
 ## Evidence Record
 
  - Includes batches of `landing-page-url` type observations.
 
-## Edits / Deletion
+## Edits / deletion
 
  - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
 
@@ -69,10 +69,10 @@ On a regular basis (approximately every hour) the Newsfeed Agent starts a scan. 
  - RSS feeds may be taken offline.
  - RSS feeds may contain incomplete data.
  - RSS feeds may update too quickly for the Agent to keep up.
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
- - Blog sites may block the Event Data Bot collecting Landing Pages.
- - Blog sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+ - Publisher sites may block the Event Data Bot collecting landing pages.
+ - Publisher sites may prevent the Event Data Bot collecting landing pages with robots.txt
+ - Blog sites may block the Event Data Bot collecting landing pages.
+ - Blog sites may prevent the Event Data Bot collecting landing pages with robots.txt
 
 ## Further information
 
