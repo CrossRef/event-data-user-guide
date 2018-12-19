@@ -8,15 +8,15 @@ Event Data will accept Events for DOIs issued by any Registration Agency (RA) (f
  
 ### Which Registration Agencies' DOIs does Event Data use?
 
-Event Data is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most Data Sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some Data Sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual Data Sources for full details.
+Event Data is is a joint venture by Crossref and DataCite. It is able to collect DOIs from any DOI Registration Agency (RA), and most data sources don't check which RA a DOI belongs to. So in theory, some MEDRA DOIs might end up being included. However, some data sources (such as Twitter) target only Crossref and DataCite DOIs. Check the individual data sources for full details.
 
-### How long is Data available?
+### How long is data available?
 
 Once data has entered the Query API it won't be removed (unless under extraordinary circumstances). The data will never 'expire'.
  
 ### What is an Event?
 
-An Event can be described as 'an action that occurs concerning a Registered Content Item'. Every kind of event is slightly different, see the Sources for details.
+An Event can be described as 'an action that occurs concerning a registered content item'. Every kind of event is slightly different, see the Sources for details.
 
 ### What format does the API data come in?
 
@@ -28,7 +28,7 @@ No, the data available via the Query API is free-of-charge. In the future, we wi
 
 ### Will the data be auditable?
 
-Yes. Event Data is evidence-first and we will supply supporting Evidence for all data that we collect. See [Evidence First](concepts/trustworthiness-and-quality/#evidence-first).
+Yes. Event Data is evidence-first and we will supply supporting evidence for all data that we collect. See [Evidence First](concepts/trustworthiness-and-quality/#evidence-first).
 
 ### Can I use the data to feed into my commercial tool? 
 
