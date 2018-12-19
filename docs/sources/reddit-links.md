@@ -1,16 +1,16 @@
-# Reddit Links
+# Reddit links
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `93df90e8-1881-40fc-b19d-49d78cc9ee24` |
+| Agent Source token        | `93df90e8-1881-40fc-b19d-49d78cc9ee24` |
 | Consumes Artifacts        | `subreddit-list` |
-| Subject Coverage          | All Links posted in subreddits on the `subreddit-list`. |
-| Object Coverage           | All DOIs, all article Landing Pages. |
-| Data Contributor          | Reddit |
-| Data Origin               | Subreddit feeds and websites that they link to. |
+| Subject coverage          | All Links posted in subreddits on the `subreddit-list`. |
+| Object coverage           | All DOIs, all article landing pages. |
+| Data contributor          | Reddit |
+| Data origin               | Subreddit feeds and websites that they link to. |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | The text of Webpages linked to on specified subreddits. |
 | Name                      | Reddit Links |
 | Operated by               | Crossref |
@@ -21,7 +21,7 @@
 
 ## What it is
 
-Users share and discuss links on Reddit. The Reddit Links source looks at the links that are shared in a specific selection of subreddits (Reddit discussion forums) and visits the webpages that are linked. The selection of Subreddits that are visited are specified in the `subreddit-list` Artifact. The subreddits tend to be scientific or academic in focus.
+Users share and discuss links on Reddit. The Reddit links source looks at the links that are shared in a specific selection of subreddits (Reddit discussion forums) and visits the webpages that are linked. The selection of Subreddits that are visited are specified in the `subreddit-list` Artifact. The subreddits tend to be scientific or academic in focus.
 
 This is different to the Reddit source, which looks at the discussions themselves.
 
@@ -29,7 +29,7 @@ This is different to the Reddit source, which looks at the discussions themselve
 
  - Visits each subreddit in turn.
  - Fetches all links that were shared since the last visit.
- - Visits each link and looks in the HTML of the webpage for links to DOIs, links to article Landing Pages and unlinked DOIs.
+ - Visits each link and looks in the HTML of the webpage for links to DOIs, links to article landing pages and unlinked DOIs.
 
 ## Example Event
 
@@ -60,7 +60,7 @@ This is different to the Reddit source, which looks at the discussions themselve
 
  - Includes batches of `landing-page-url` type observations.
 
-## Edits / Deletion
+## Edits / deletion
 
 We don't expect to have to edit or delete any Events.
 
@@ -71,8 +71,8 @@ We will only visit subreddits on the list. However we monitor the Events generat
 ## Failure modes
 
  - Reddit API may be unavailable.
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
- - Publisher sites may prevent the Event Data Bot collecting Landing Pages with robots.txt
+ - Publisher sites may block the Event Data Bot collecting landing pages.
+ - Publisher sites may prevent the Event Data Bot collecting landing pages with robots.txt
 
 
 ## Further information
