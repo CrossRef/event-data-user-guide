@@ -2,14 +2,14 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `36c35e23-8757-4a9d-aacf-345e9b7eb50d` |
+| Agent Source token        | `36c35e23-8757-4a9d-aacf-345e9b7eb50d` |
 | Consumes Artifacts        | |
-| Subject Coverage          | All Wikimedia properties whose changes are published via [MediaWiki Event Streams](https://wikitech.wikimedia.org/wiki/EventStreams)|
-| Object Coverage           | All DOIs, all article Landing Pages |
-| Data Contributor          | Wikimedia Foundation |
-| Data Origin               | Edits of articles on Wikimedia properties, e.g. Wikipedias. Via the Wikipedia MediaWiki Event Streams and the Media WikiRESTBase API.|
+| Subject coverage          | All Wikimedia properties whose changes are published via [MediaWiki Event Streams](https://wikitech.wikimedia.org/wiki/EventStreams)|
+| Object coverage           | All DOIs, all Article Landing Pages |
+| Data contributor          | Wikimedia Foundation |
+| Data origin               | Edits of articles on Wikimedia properties, e.g. Wikipedias. Via the Wikipedia MediaWiki Event Streams and the media WikiRESTBase API.|
 | Freshness                 | Continuous. |
-| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
+| Identifies                | Linked DOIs, unlinked DOIs, landing page URLs |
 | License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | The rendered HTML of Wikipedia pages, including inline citations and references. |
 | Name                      | Wikipedia |
@@ -21,7 +21,7 @@
 
 ## What it is
 
-Wikipedia is the free encyclopedia that anyone can edit. We find references to Registered Content Items in page references and citations. The Wikipedia Agent monitors all WikiMedia properties that are exposed via the MediaWiki Event Stream. This includes all Wikipedia sites, plus some other sites.
+Wikipedia is the free encyclopedia that anyone can edit. We find references to registered content items in page references and citations. The Wikipedia Agent monitors all WikiMedia properties that are exposed via the MediaWiki Event Stream. This includes all Wikipedia sites, plus some other sites.
 
 One of the features of Wikipedia is that pages can be edited and each version is given a unique ID. Because of this, references can come and go over the course of a page's lifetime. **Event Data treats every version of a page as a separate entity** and reports on links from that page. This means that if a page is edited and a reference is added, it will record an Event for every reference in the old version and an also Event for every reference in the new version. Wikipedia pages change once they are created but Events don't. The stream of Events for a Wikipedia page describe its evolution over time.
 
@@ -29,7 +29,7 @@ One of the features of Wikipedia is that pages can be edited and each version is
 
  - The Agent subscribes to the Event Stream. This stream sends information about every edit of every page on MediaWiki properties. 
  - For every edit, the Agent visits that page. It uses the RESTBase API to retrieve the rendered HTML of the page.
- - The HTML of the page is searched for unlinked DOIs, linked DOIs and Landing Page URLs.
+ - The HTML of the page is searched for unlinked DOIs, linked DOIs and landing page URLs.
  - The Agent sends an Event for every Reference it finds.
 
 ## Example Event
@@ -65,7 +65,7 @@ An Event that records a reference from a Wikipedia page to a DOI.
 
 The Agent collects edits into batches and sends a number per Evidence Record. These are sent as `content-url` type observations. Note that because of the volume, and the fact that MediaWiki stores all past versions, the text is not saved. A checksum is included however. Also note that the RESTBase URL is included for observation, but the version URL is included as the `subj_url`.
 
-## Edits / Deletion
+## Edits / deletion
 
 We don't expect to have to edit or delete any Events.
 
@@ -73,19 +73,19 @@ We don't expect to have to edit or delete any Events.
 
 There are a number of initiatives in the community concerning citation and referencing in Wikipedia, leading to various ways in which links may be made in the WikiText source of the article. The Agent monitors the final rendered HTML, so transcends these different methods.
 
-Due to the way that references are sometimes made (for example, both Landing Pages and DOIs), an article may contain two references to the same Registered Content Item. Because these are treated differently by Event Data, you should pay careful attention to the `obj.url` field.
+Due to the way that references are sometimes made (for example, both landing pages and DOIs), an Article may contain two references to the same registered content item. Because these are treated differently by Event Data, you should pay careful attention to the `obj.url` field.
 
 We record every edit for which we find relevant references. This means that if a page is edited in a way that doesn't change the references, we will still record it as normal.
 
 There are some similar but distinct terms:
  - Wikipedia is the encyclopedia, available at https://wikipedia.org . There are various Wikipedia servers, e.g. for different language versions.
  - MediaWiki is the software that runs Wikipedia. It also runs some other websites. 
- - Wikimedia is the organisation that runs Wikipedia and develops the MediaWiki software
+ - Wikimedia is the organisation that runs Wikipedia and develops the MediaWiki software.
  - WikiText is the markup language used to author pages in MediaWiki.
 
 ## Failure modes
 
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may block the Event Data Bot collecting landing pages.
  - If the Agent is temporarily disconnected from the edit stream, we will not be aware of edits until it reconnects.
 
 ## Further information
