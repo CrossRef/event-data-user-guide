@@ -1,18 +1,18 @@
-# Crossref Metadata
+# Crossref metadata
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `8676e950-8ac5-4074-8ac3-c0a18ada7e99` |
+| Agent Source token        | `8676e950-8ac5-4074-8ac3-c0a18ada7e99` |
 | Consumes Artifacts        | none |
 | Subject coverage          | All Crossref DOIs |
-| Object Coverage           | All DataCite DOIs |
-| Data Contributor          | Crossref |
-| Data Origin               | Crossref Metadata deposited by Crossref Members |
+| Object coverage           | All DataCite DOIs |
+| Data contributor          | Crossref |
+| Data origin               | Crossref metadata deposited by Crossref members |
 | Freshness                 | Every few hours |
 | Identifies                | DOIs |
 | License                   | Made available without restriction |
-| Looks in                  | References in Crossref Schema |
-| Name                      | Crossref Metadata |
+| Looks in                  | References in Crossref schema |
+| Name                      | Crossref metadata |
 | Operated by               | Crossref |
 | Produces Evidence Records | No |
 | Produces relation types   | `references` and other types found in the Crossref schema |
@@ -21,7 +21,7 @@
 
 ## What it is
 
-Relationships from Crossref DOIs to DataCite DOIs. The data is supplied in the metadata of Crossref's Registered Content by Crossref members who are the 'owners' of the Registered Content.
+Relationships from Crossref DOIs to DataCite DOIs. The data is supplied in the metadata of Crossref's registered content by Crossref members who are the 'owners' of the registered content.
 
 ## What it does
 
@@ -50,7 +50,7 @@ Metadata registered with Crossref that references a DataCite DOI. For other Cros
 ## Methodology
 
 1. A member makes an XML deposit with Crossref.
-2. The agent monitors new deposits (or back-fills).
+2. The Agent monitors new deposits (or back-fills).
 3. When a link is found an Event is created if:
     - it is to a non-Crossref DOI
     - it has not already been reported to Event Data
@@ -59,7 +59,7 @@ Metadata registered with Crossref that references a DataCite DOI. For other Cros
 
 No evidence record is created because the events come straight from the data source into Event Data.
 
-## Edits / Deletion
+## Edits / deletion
 
 We do not anticipate that Events are ever deleted or edited.
 
