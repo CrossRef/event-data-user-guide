@@ -2,12 +2,12 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `1ad0b713-78ed-4bb9-8d5d-a3c2d163d46f` |
+| Agent Source token        | `1ad0b713-78ed-4bb9-8d5d-a3c2d163d46f` |
 | Consumes Artifacts        | None |
-| Subject Coverage          | All patents tracked by Cambia Lens. |
-| Object Coverage           | All DOIs identified by Cambia Lens. |
-| Data Contributor          | The Lens, Cambia. |
-| Data Origin               | The Lens, Cambia. |
+| Subject coverage          | All patents tracked by Cambia Lens. |
+| Object coverage           | All DOIs identified by Cambia Lens. |
+| Data contributor          | The Lens, Cambia. |
+| Data origin               | The Lens, Cambia. |
 | Freshness                 | Every few hours. |
 | Identifies                | Content with DOIs cited in Patents. |
 | License                   | Creative Commons Attribution-ShareAlike 4.0 International  [(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/) |
@@ -70,7 +70,7 @@ All subject types are patents, but the following types of patents may be indicat
 
 As Cambia Lens Events are created by an external party, Evidence Records are not generated for these Events.
 
-## Edits / Deletion
+## Edits / deletion
 
 Edits and deletions may be made when a citation has been misidentified or when subject metadata (such as the title) is edited.
 
