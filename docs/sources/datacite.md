@@ -1,18 +1,18 @@
-# DataCite Metadata
+# DataCite metadata
 
 |-|-|
 |---------------------------|-|
 | Agent                     | `28276d12-b320-41ba-9272-bb0adc3466ff` |
 | Consumes Artifacts        | None |
-| Subject Coverage          | All DataCite DOIs |
-| Object Coverage           | All Crossref DOIs |
-| Data Contributor          | DataCite |
-| Data Origin               | DataCite Metadata deposited by Crossref Members |
+| Subject coverage          | All DataCite DOIs |
+| Object coverage           | All Crossref DOIs |
+| Data contributor          | DataCite |
+| Data origin               | DataCite metadata deposited by Crossref members |
 | Freshness                 | Every few hours |
 | Identifies                | DOIs |
-| License                   | Creative Commons [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) |
-| Looks in                  | References in DataCite Schema |
-| Name                      | DataCite Metadata |
+| License                   | Creative commons [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | References in DataCite schema |
+| Name                      | DataCite metadata |
 | Operated by               | DataCite |
 | Produces Evidence Records | No |
 | Produces relation types   | `references` and other types found in the DataCite schema |
@@ -21,7 +21,7 @@
 
 ## What it is
 
-Links from DataCite DOIs to Crossref DOIs. These are recorded in the metadata for DataCite's Registered Content. The data is ultimately supplied by DataCite members who are the publishers and 'owners' of the Registered Content.
+Links from DataCite DOIs to Crossref DOIs. These are recorded in the metadata for DataCite's registered content. The data is ultimately supplied by DataCite members who are the publishers and 'owners' of the registered content.
 
 Only Relations between DataCite DOIs and Crossref DOIs are included. If you want other metadata you can find it in DataCite's APIs.
 
@@ -59,9 +59,9 @@ Metadata deposits from DataCite members, usually publishers and libraries.
 
 ## Evidence Record
 
-No evidence record is created because the events come straight from the data source into Event Data.
+No Evidence Record is created because the events come straight from the data source into Event Data.
 
-## Edits / Deletion
+## Edits / deletion
 
 We do not anticipate that Events are ever deleted or edited.
 
@@ -71,8 +71,8 @@ None.
 
 ## Failure modes
 
- - Member may remove references before the Agent first scans the data, in which case we will not create a new Event
- - Member may deposit incorrect metadata.
+ - Members may remove references before the Agent first scans the data, in which case we will not create a new Event.
+ - Members may deposit incorrect metadata.
 
 ## Further information
 
