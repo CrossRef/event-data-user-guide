@@ -1,4 +1,4 @@
-# Quick Start
+# Quick start
 
 After this page, please ensure you have read this guide thoroughly before using this data for anything serious! Additionally, you should consult the documentation for each Source you intend to use.
 
