@@ -21,39 +21,39 @@ Each Evidence Record comes from a single Agent, so it includes identifying field
 
  An Evidence Record contains Actions. An example of an Action:
 
- - a comment was posted on Reddit
- - a tweet was published
- - an edit was made to a Wikipedia page
+ - A comment was posted on Reddit.
+ - A tweet was published.
+ - An edit was made to a Wikipedia page.
 
 An Action contains information about the thing that happened. This corresponds to the *Subject* of an Event. 
 
- - the URL of the Subject (comment, tweet or page)
- - the relation type that the subject has to anything that we found in it. E.g. a Wikipedia page always `references`, a Tweet always `discusses`
- - the time that the Action is reported to have occurred
- - metadata about the Subject, such as the title
+ - The URL of the subject (comment, tweet or page).
+ - The relation type that the subject has to anything that we found in it. E.g. a Wikipedia page always `references`, a tweet always `discusses`.
+ - The time that the action is reported to have occurred.
+ - Metadata about the subject, such as the title.
 
 ### Observations
 
-Each Action contains one or more Observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an Observation:
+Each Action contains one or more observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an observation:
 
- - the text of a tweet (which may contain plaintext DOIs)
- - the automatically extracted URLs from a tweet (which could be DOIs or Article Landing Pages)
- - the URL of a blog post from an RSS newsfeed (which must be visited to see the content of the blog post)
+ - The text of a tweet (which may contain plaintext DOIs).
+ - The automatically extracted URLs from a tweet (which could be DOIs or Article Landing Pages).
+ - The URL of a blog post from an RSS newsfeed (which must be visited to see the content of the blog post).
 
 As you can see from the tweet example, it's possible to make different observations of different types about the same input. In some cases, such as Twitter, we do not have the permission to include the text, so it is removed before the Evidence Record is saved. In this case, the `sensitive` flag on the Evidence Record is set to `true` and a SHA1 hash of the content is included. This means that if you want to verify the Evidence Record you can retrieve the tweet text yourself from Twitter and compare the hash. If the hash matches, you know you were working from the same input text as the Agent.
 
-The following Observation types are available:
+The following observation types are available:
 
- - `plaintext` - some text that could contain plain text DOIs, DOI URLs or Landing Page URLs
- - `html` - some HTML that could contain plain text DOIs, DOI URLs or Landing Page URLs
- - `content-url` - the URL of a webpage that could point to a webpage that could contain plain text DOIs, DOI URLs or Landing Page URLs
+ - `plaintext` - some text that could contain plain text DOIs, DOI URLs or landing page URLs
+ - `html` - some HTML that could contain plain text DOIs, DOI URLs or landing page URLs
+ - `content-url` - the URL of a webpage that could point to a webpage that could contain plain text DOIs, DOI URLs or landing page URLs
  - `url` - a URL that could itself be a DOI or an Article Landing Page
 
 ### Deduplication and Action IDs
 
 Every Action also has an ID, which is generated differently for each source. Action IDs are usually calculated from the URL of the object in question (tweet URL, blog post URL etc).
 
-If the same Action is reported twice (e.g. duplicate data is sent from the Twitter API, or two different RSS feeds link to the same blog post), the `duplicate` field will be set on the Action, showing a link to the previous Evidence Record where the action occurred. When a Duplicate Action happens, no Events are extracted.
+If the same Action is reported twice (e.g. duplicate data is sent from the Twitter API, or two different RSS feeds link to the same blog post), the `duplicate` field will be set on the Action, showing a link to the previous Evidence Record where the action occurred. When a duplicate Action happens, no Events are extracted.
 
 Note that this is not a guarantee that the same 'thing' may be observed in different Events. It is possible that two Agents independently see the same thing and report on it. If, for example, a Reddit page appeared in an RSS feed, it might be picked up by both the Reddit and the Newsfeed agents, producing two Events. In each case, the Agent, source ID, and supporting Evidence Record would be different, and describe the process by which the Event came into being.
 
@@ -61,9 +61,9 @@ See [Duplication and Redundancy](/data/duplication) for further discussion.
 
 ### Observations to Candidates to Matches to Events
 
-Each Observation may or may not ultimately yield Events. 
+Each observation may or may not ultimately yield Events. 
 
-The first step is to create a set of Candidates for each Observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an Article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
+The first step is to create a set of Candidates for each observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an Article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
 
 The set of available candidate types are:
 
@@ -73,18 +73,18 @@ The set of available candidate types are:
  - `shortdoi-url` - a shortDOI like `http://doi.org/dvx`
  - `landing-page-url` - the URL of an Article Landing Page
 
-The next step is to try and match every Candidate into a known DOI. It does this by trying to reverse the Landing Page back into a DOI, and by verifying that every DOI exists and cleaning it up.
+The next step is to try and match every Candidate into a known DOI. It does this by trying to reverse the landing page back into a DOI, and by verifying that every DOI exists and cleaning it up.
 
 Once Matches have been made, they are combined with the information in the Action (for example the subject ID and URL and any bibliographic metadata) to produce Events. When Events are successfully extracted, they are included along with the Action that gave rise to them. They are then sent through the Event Data system for you to consume.
 
 Note that Events do not have a `terms` or `timestamp` field at this point - they are added at the next step of the journey. Also note that Events may be altered between the Evidence Record and the Query API, for example for compliance reasons. You should never take Events directly from Evidence Records, except for verifying the provenance trail.
 
-### Page Structure
+### Page structure
 
 Actions are collected together into pages of lists. This model suits all Agents:
 
- - the Reddit API responds to a query with pages of results. Each API page corresponds to a page in the Evidence Record.
- - the Twitter agent always sends a single page containing a batch of tweet Actions.
+ - The Reddit API responds to a query with pages of results. Each API page corresponds to a page in the Evidence Record.
+ - The Twitter Agent always sends a single page containing a batch of tweet Actions.
 
  ![Structure of an Evidence Record](../images/evidence-record-structure.png)
 
@@ -148,14 +148,14 @@ The list of Actions in this page corresponds to the list of items in the Reddit 
             {
               "occurred-at": "2011-01-12T06:07:04.000Z",
 
-One Observation was made about this Action.
+One observation was made about this Action.
 
               "processed-observations": [
                 {
                   "type": "url",
                   "input-url": "http://www.ams.org/journals/bull/2005-42-02/S0273-0979-05-01048-7/S0273-0979-05-01048-7.pdf",
                   
-It turns out that the observation looks like a Landing Page URL, so one candidate is generated.
+It turns out that the observation looks like a landing page URL, so one Candidate is generated.
 
                   "candidates": [
                     {
@@ -262,7 +262,7 @@ Subject metadata is included.
                     "url": "http://www.ams.org/journals/bull/2008-45-04/S0273-0979-08-01223-8/home.html"
                   },
                   
-Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent Identifier), as all pieces of Registered Content are in Event Data. However, the URL field demonstrates that we actually found a link to the article via its Landing Page.
+Note that the Article is referred to by its DOI in the `obj_id` and `obj.pid` field (Persistent Identifier), as all pieces of Registered Content are in Event Data. However, the URL field demonstrates that we actually found a link to the article via its landing page.
                   
                   "evidence-record": "https://evidence.eventdata.crossref.org/evidence/2017022284421dfd-ddbe-4730-bc35-caf11d92231f",
                   
