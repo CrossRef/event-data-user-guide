@@ -1,4 +1,4 @@
-# Quality Assurance and Feedback
+# Quality assurance and feedback
 
 Event Data has built-in feedback and monitoring mechanisms. These observe the flow of data through the system, ensure that scheduled tasks have been performed, and help to maintain and improve the quality of data in the system. 
 
@@ -10,33 +10,33 @@ There are three categories of feedback:
  - **Patches** are actions we manually take to improve the data.
  - **Support queries** can feed back into our datasets.
 
-All the results are published in the Evidence Log. See the [Evidence Log page](/guide/data/evidence-logs/) for the description of all of the Evidence Log Message types.
+All the results are published in the Evidence Log. See the [Evidence Log page](/guide/data/evidence-logs/) for the description of all of the Evidence Log message types.
 
 We are currently handling support queries manually. If you want to raise an issue, suggest a new data source or change to any of our Artifacts, please contact eventdata@crossref.org
 
-## Daily Checks
+## Daily checks
 
 These run every day. If there is an interruption of service and a day is missed, it will be automatically filled in later. The results of daily checks are published in the Evidence Record.
 
-### Archive / Query API Integrity Check
+### Archive / Query API integrity check
 
-Internally, the Event Bus stores every Event in the Bus Archive. Events are made available via the Query API. This check compares the content of the Event Bus Archive with the Query API, to ensure that every Event exists.
+Internally, the Event Bus stores every Event in the Bus archive. Events are made available via the Query API. This check compares the content of the Event Bus Archive with the Query API, to ensure that every Event exists.
 
 Errors will be logged in the Evidence Log if an Event is present in the Archive but not in the Query API, and vice versa.
 
-### Evidence Log Dump Check
+### Evidence Log dump check
 
 The Evidence Log is archived every day, available as a CSV and a JSON file. The presence of this file is checked, and an error is logged if either are missing.
 
-### Twitter Compliance
+### Twitter compliance
 
-Around 5% of Tweets that we capture are subsequently deleted. When this happens, we will update the Event to remove the Twitter-specific data (`subj_id`, which contains the Tweet ID and `subj` metadata which also contains the author) and mark the Event as having been deleted. This is documented in the [updates](/guide/data/updates) section.
+Around 5% of tweets that we capture are subsequently deleted. When this happens, we will update the Event to remove the Twitter-specific data (`subj_id`, which contains the tweet ID and `subj` metadata which also contains the author) and mark the Event as having been deleted. This is documented in the [updates](/guide/data/updates) section.
 
-Checks run every day. They will check every Tweet mentioned in an Event three times:
+Checks run every day. They will check every tweet mentioned in an Event three times:
  
- - the day after the Tweet was published
- - one month after the Tweet was published
- - one year after the Tweet was published
+ - The day after the Tweet was published.
+ - One month after the Tweet was published.
+ - One year after the Tweet was published.
 
 When an Event is updated for Twitter compliance reasons, the Evidence Record will also be updated to mirror the Event.
 
@@ -44,9 +44,9 @@ When an Event is updated for Twitter compliance reasons, the Evidence Record wil
 
 From time to time we need to make manual updates to Events. Reasons for past updates include:
 
- - bugs in our software produced incorrect data
- - we wanted to add Canonical URLs to all of our Events
- - we wanted to change the data model for Wikipedia Events and apply this to previous data (during Beta)
+ - Bugs in our software produced incorrect data.
+ - We wanted to add canonical URLs to all of our Events.
+ - We wanted to change the data model for Wikipedia Events and apply this to previous data (during Beta).
 
 The software that makes these changes is open source. This means that when an Event is updated you can see exactly what source code produced the change.
 
