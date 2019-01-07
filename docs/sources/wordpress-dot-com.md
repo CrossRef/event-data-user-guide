@@ -2,16 +2,16 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `7750d578-d74d-4e92-9348-cd443cbb7afa` |
+| Agent Source token        | `7750d578-d74d-4e92-9348-cd443cbb7afa` |
 | Consumes Artifacts        | `domain-list` |
-| Subject Coverage          | All blogs hosted on Wordpress.com that are listed in the search. |
-| Object Coverage           | All DOIs, Landing Page URLs, plain-text DOIs. |
-| Data Contributor          | Authors of blogs on the Wordpress.com platform. |
-| Data Origin               | Wordpress.com search results API, and the blog posts they point to that are hosted on Wordpress.com |
+| Subject coverage          | All blogs hosted on Wordpress.com that are listed in the search. |
+| Object coverage           | All DOIs, landing page URLs, plain-text DOIs. |
+| Data contributor          | Authors of blogs on the Wordpress.com platform. |
+| Data origin               | Wordpress.com search results API, and the blog posts they point to that are hosted on Wordpress.com |
 | Freshness                 | Every few hours. |
-| Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
-| Looks in                  | HTML of Blog posts |
+| Identifies                | Linked DOIs, unlinked DOIs, landing page URLs |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | HTML of blog posts |
 | Name                      | Wordpress.com |
 | Operated by               | Crossref |
 | Produces Evidence Records | Yes |
@@ -21,11 +21,11 @@
 
 ## What it is
 
-Authors of blog posts hosted on the Wordpress.com platform link to Registered Content Items. The Wordpress.com Agent monitors the service to look for these links.
+Authors of blog posts hosted on the Wordpress.com platform link to registered content items. The Wordpress.com Agent monitors the service to look for these links.
 
 ## What it does
 
- - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every article landing page domain in the `domain-list`, including `doi.org`
  - Makes a query to the Wordpress.com API for blog posts that mentioned that domain.
  - For each result, visits the blog post and attempts to extract links from the HTML of the blog post.
 
@@ -59,7 +59,7 @@ Authors of blog posts hosted on the Wordpress.com platform link to Registered Co
 
  - Includes batches of `landing-page-url` type observations.
 
-## Edits / Deletion
+## Edits / deletion
 
 ## Quirks
 
@@ -67,7 +67,7 @@ Note that this only monitors blogs hosted on Wordpress' wordpress.com platform. 
 
 ## Failure modes
 
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may block the Event Data Bot collecting landing pages.
 
 ## Further information
 
