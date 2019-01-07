@@ -1,6 +1,6 @@
-# Matching Landing Pages to DOIs
+# Matching landing pages to DOIs
 
-Crossref Agents gather data from exernal APIs, and where they spot a link to a URL to a potential Landing Page they pass it onto the Percolator. The Percolator follows a multi-step process to try and work out the DOI for the page and verify it as accurately as possible. The optional `obj.method` and `obj.verification` fields record which path was taken.
+Crossref Agents gather data from exernal APIs, and where they spot a link to a URL to a potential landing page they pass it onto the Percolator. The Percolator follows a multi-step process to try and work out the DOI for the page and verify it as accurately as possible. The optional `obj.method` and `obj.verification` fields record which path was taken.
 
 ![Agents and Percolator](../images/agent-percolator.png)
 
@@ -35,10 +35,10 @@ The method is described in the Event's `subj.method` field. It can be one of the
 
 We monitor DOIs for  Crossref and DataCite across all DOI prefixes. We follow a sample of DOIs per prefix to see where they lead. From this sampling, we build a dataset that describes:
 
- - the list of domains that we recognise as belonging to members
- - the list of prefixes
- - which DOI prefixes redirect to which domain names
- - which DOI prefixes redirect to which domain names, where the landing page correctly records its DOI in the HTML metadata.
+ - The list of domains that we recognise as belonging to members.
+ - The list of prefixes.
+ - Which DOI prefixes redirect to which domain names.
+ - Which DOI prefixes redirect to which domain names, where the landing page correctly records its DOI in the HTML metadata.
 
 This is detailed in the [domain-doi-decision-structure](/data/artifacts) Artifact. Using this dataset we can determine:
 
@@ -46,7 +46,7 @@ This is detailed in the [domain-doi-decision-structure](/data/artifacts) Artifac
  - Which domains we recognise as being connected to which DOI prefixes.
  - Which domains generally have DOIs registered.
 
-When we match a Landing Page Domain to a DOI, we try to verify it using the following measures:
+When we match a landing page domain to a DOI, we try to verify it using the following measures:
 
 
  - `literal` - The URL is a DOI, so no need to validate. This is the most reliable.
