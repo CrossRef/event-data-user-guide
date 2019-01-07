@@ -2,15 +2,15 @@
 
 |  |  |
 |---------------------------|----------------------------------------|
-| Agent Source Token        | `8075957f-e0da-405f-9eee-7f35519d7c4c` |
+| Agent Source token        | `8075957f-e0da-405f-9eee-7f35519d7c4c` |
 | Consumes Artifacts        | `domain-list` |
-| Subject Coverage          | All Hypothes.is annotations that are available to the public |
-| Object Coverage           | All DOIs, Landing Page URLs, plain text DOIs. |
-| Data Contributor          | Hypothes.is |
-| Data Origin               | Annotations made by Hypothes.is users, via the Hypothes.is API |
+| Subject coverage          | All Hypothes.is annotations that are available to the public |
+| Object coverage           | All DOIs, Landing Page URLs, plain text DOIs. |
+| Data contributor          | Hypothes.is |
+| Data origin               | Annotations made by Hypothes.is users, via the Hypothes.is API |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | URL for annotation, text of annotations |
 | Name                      | Hypothes.is |
 | Operated by               | Crossref |
@@ -21,19 +21,18 @@
 
 ## What it is
 
-Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of Registered Content (for example article Landing Pages) and the mentioning of Registered Content (for example DOIs) in the text of annotations.
+Users of the Hypothes.is annotate and discuss webpages. The Hypothes.is Agent monitors annotations. It looks for two things: the annotation of registered content (for example Article Landing Pages) and the mentioning of registered content (for example DOIs) in the text of annotations.
 
 ## What it does
 
-When looking for annotations of Registered Content:
+When looking for annotations of registered content:
 
- - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
+ - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`.
  - Makes a query to the Hypothes.is API for annotations to URLs on that domain.
- - For each result, attempts to reverse that URL back to a Registered Content Item, recording an Event with the `annotates` relation type.
-
- - Scans every article Landing Page domain in the `domain-list`, including `doi.org`
+ - For each result, attempts to reverse that URL back to a registered content item, recording an Event with the `annotates` relation type.
+ - Scans every Article Landing Page domain in the `domain-list`, including `doi.org`.
  - Makes a query to the Hypothes.is API for annotations that contain URLs on that domain in the text of the annotation.
- - For each result, looks in the text for links to Registered Content and records Events with the `discusses` relation type.
+ - For each result, looks in the text for links to registered content and records Events with the `discusses` relation type.
 
 ## Example Event
 
@@ -101,9 +100,9 @@ Discusses:
  - Creates observations of type `landing-page-url` for `annotates` relation types.
  - Creates observations of type `plaintext` for `discusses` relation types.
 
-## Edits / Deletion
+## Edits / deletion
 
- - Events may be edited if they are found to be faulty, e.g. non-existent DOIs
+ - Events may be edited if they are found to be faulty, e.g. non-existent DOIs.
  
 ## Quirks
 
