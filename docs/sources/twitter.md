@@ -2,15 +2,15 @@
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231` |
+| Agent Source token        | `45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231` |
 | Consumes Artifacts        | `domain-list`, `doi-prefix-list` |
-| Subject Coverage          | All tweets |
-| Object Coverage           | All DOIs, all article Landing Pages |
-| Data Contributor          | Twitter via the Gnip PowerTrack service |
-| Data Origin               | Tweet text and associated metadata |
+| Subject coverage          | All tweets |
+| Object coverage           | All DOIs, all Article Landing Pages |
+| Data contributor          | Twitter via the Gnip PowerTrack service |
+| Data origin               | Tweet text and associated metadata |
 | Freshness                 | Continual |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | Text of tweets, plus URLs extracted by Twitter's Gnip product. |
 | Name                      | Twitter |
 | Operated by               | Crossref |
@@ -21,7 +21,7 @@
 
 ## What it is
 
-Twitter users discuss Registered Content Items in tweets. They also retweet others who have discussed Registered Content Items. The Twitter agent monitors a stream of tweets and tries to match DOI links, Landing Page links, and unlinked DOIs back to Registered Content Items.
+Twitter users discuss registered content items in tweets. They also retweet others who have discussed registered content items. The Twitter agent monitors a stream of tweets and tries to match DOI links, landing page links, and unlinked DOIs back to registered content items.
 
 ## What it does
 
@@ -31,18 +31,18 @@ We submit a set of filter rules to the Gnip PowerTrack service. This list is mad
  - DOI resolver domains, e.g. `doi.org`, `dx.doi.org`
  - All domains in the `domain-list` Artifact, e.g. `journals.iucr.org`
 
-This is managed manually whenever we update the Domain List artifact.
+This is managed manually whenever we update the domain list Artifact.
 
 The Agent monitors all data sent back from the PowerTrack stream. This includes:
 
- - tweets that contain a DOI prefix, i.e. those that look like they might contain an unlinked DOI
- - tweets that contain a hyperlinked DOI
- - tweets that contain a hyperlinked Landing Page URL
- - tweets that contain a link-shortened link to a DOI or Landing Page URL
+ - Tweets that contain a DOI prefix, i.e. those that look like they might contain an unlinked DOI.
+ - Tweets that contain a hyperlinked DOI.
+ - Tweets that contain a hyperlinked landing page URL.
+ - Tweets that contain a link-shortened link to a DOI or landing page URL.
 
 The Gnip service automatically follows and extracts URLs from link-shortening services like bit.ly before the data is sent to us. This gives the Twitter source an advantage, as it removes opaque link-shortened links that we otherwise could not match.
 
-We then attempt to match all links to Registered Content Items.
+We then attempt to match all links to registered content items.
 
 ## Example Event
 
@@ -85,7 +85,7 @@ The Agent collects tweets into batches and sends a number per Evidence Record.
  - Includes observations of type `plaintext` for the text of the tweet. This is marked as `sensitive` because we are not allowed to share the tweet text for contractual reasons.
  - Includes observations of the type `landing-page-url`, one for each URL extracted and sent to us by the Gnip PowerTrack service.
 
-## Edits / Deletion
+## Edits / deletion
 
 Some tweets are deleted by their authors after they are published. We observe single-digit percentage deletion rates in Event Data. Twitter publishes a stream of deleted tweet IDs, which we check against our database. If we find that a tweet has been deleted, we will edit the Event:
 
@@ -109,7 +109,7 @@ Please be aware that if you retrieve data from the Twitter API you are bound by 
 
 ## Failure modes
 
- - Publisher sites may block the Event Data Bot collecting Landing Pages.
+ - Publisher sites may block the Event Data Bot collecting landing pages.
 
 ## Further information
 
