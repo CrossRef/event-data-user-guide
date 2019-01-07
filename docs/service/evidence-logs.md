@@ -1,4 +1,4 @@
-# Evidence Logs Service
+# Evidence Logs service
 
 Every action that is taken in the process of producing an Event, including actions that did not eventually lead to an Event, are saved in the Evidence Logs. These are archived daily. 
 
