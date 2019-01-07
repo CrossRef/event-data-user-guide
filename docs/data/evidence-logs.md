@@ -1,12 +1,12 @@
 # Evidence Records
 
-Evidence Logs trace the actions performed within Event Data during the creation of an Event. They should be read in conjunction with the Evidence Records. Evidence Logs are collected daily and are made up of a sequence of entries, each entry describing a particular action that was taken. Each Evidence Log corresponds to a slice of time, and typically comprises a few million entries.
+Evidence Logs trace the actions performed within Event Data during the creation of an Event. They should be read in conjunction with the Evidence Records. Evidence Logs are collected daily and are made up of a sequence of entries, each entry describing a particular action taken. Each Evidence Log corresponds to a slice of time, and typically comprises a few million entries.
 
-There are a standard set of fields, including the Evidence Record ID. You can use this either to find all activity in the Evidence Log that correspond to the processing of a particular Evidence Record, or to find the Evidence Record that corresponds to a particular Log Entry.
+There are a standard set of fields, including the Evidence Record ID. You can use this either to find all activity in the Evidence Log that corresponds to the processing of a particular Evidence Record, or to find the Evidence Record that corresponds to a particular Log Entry.
 
-Evidence Logs and Evidence Records fulfill slightly different roles. Whilst the Evidence Record describes the data that came in, the resulting Events, and the interim steps that were taken, the Evidence Logs describe in detail exactly which steps were taken.
+Evidence Logs and Evidence Records fulfill slightly different roles. The Evidence Record describes the data that came in, the resulting Events, and the interim steps that were taken, while the Evidence Logs describe in detail exactly which steps were taken.
 
-Software changes over time, so it may not behave today the same way it behaved a year ago. The Evidence Records describe exactly what happened. Becuase of this you will see changes in the logs over time, including some log message types that are no longer produced.
+Software changes over time, so it may not behave today the same way it behaved a year ago. The Evidence Records describe exactly what happened. Because of this you will see changes in the logs over time, including some log message types that are no longer produced.
 
 # Format
 
@@ -20,8 +20,8 @@ There is a controlled set of fields available. They have one-character names for
 | Field | Name | Description |
 |-------|------|-------------|
 | `t` | <u>T</u>imestamp | A UNIX epoch timestamp of when the action occurred, i.e. milliseconds since January 1, 1970 UTC. |
-| `s` | <u>S</u>ervice | The service that logged the Entry, in most cases the name of an Agent or the Percolator. For example, `reddit-agent` or `percolator`. |
-| `c` | <u>C</u>omponent | The Component within the Service, which broadly corresponds to a task being performed. For example, the Percolator has a `web` component to retrieve web pages. |
+| `s` | <u>S</u>ervice | The service that logged the entry, in most cases the name of an Agent or the Percolator. For example, `reddit-agent` or `percolator`. |
+| `c` | <u>C</u>omponent | The Component within the service, which broadly corresponds to a task being performed. For example, the Percolator has a `web` component to retrieve web pages. |
 | `f` | <u>F</u>acet | The facet of work being done. For example, the Percolator's `web` component has a `request` facet for reporting on how it retrieves webpages, and a `robots-txt-check` to report on how it checks various websites' `robots.txt` files. |
 | `i` | Log message type <u>I</u>D | An ID for the message type. Enables you to find a log type in the source code or to trace all log messages of the same type. |
 | `p` | <u>P</u>artition | When the same task is running a number of times in parallel, a partition number might be indicated. |
@@ -44,11 +44,11 @@ Every type of log message communicates a type of action or decision that was tak
 
 ## Percolator
 
-The Percolator is the system that performs the work of extracting and identifying links to Registered Content, and is used by all of the Crossref Agents. Therefore, when tracing the creation of an Event, most of the activity, and therefore log entries, will come from the Percolator. The Percolator works in batches, each batch being stored an Evidence Record. 
+The Percolator is the system that performs the work of extracting and identifying links to registered content, and is used by all of the Crossref Agents. Therefore, when tracing the creation of an Event, most of the activity, and therefore log entries, will come from the Percolator. The Percolator works in batches, each batch being stored an Evidence Record. 
 
 The Percolator works in three stages: identify candidates from the input data, match each candidate to a DOI, then produce an Event for each match. There are also underlying activities that happen (such as fetching webpages) that describe activity in more detail.
 
-## Percolator DOI Matching
+## Percolator DOI matching
 
 ### Percolator was instructed to a visit a URL to look for links
 
@@ -78,7 +78,7 @@ The Percolator was instructed to visit a URL to see if it is an article landing 
 
 ### Percolator attempted to match observation
 
-The Percolator attempted to match one of a number of types of Observation to a DOI. The log entry records the type of observation, the success or failure of the operation, and the resulting DOI.
+The Percolator attempted to match one of a number of types of observation to a DOI. The log entry records the type of observation, the success or failure of the operation, and the resulting DOI.
 
 The operations involved in performing this match are described in more detail in other log messages (such as percolator.match-doi-url.match).
 
@@ -111,9 +111,9 @@ The Percolator attempted to match a candidate DOI URL to a valid DOI. This provi
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
 
-### Percolator attempted to match a Landing Page URL
+### Percolator attempted to match a landing page URL
 
-The Percolator attempted to match a Landing Page URL that contains a DOI as one of the query parameters to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
+The Percolator attempted to match a landing page URL that contains a DOI as one of the query parameters to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
 
  - `i` - "p0005"
  - `s` - "percolator"
@@ -126,9 +126,9 @@ The Percolator attempted to match a Landing Page URL that contains a DOI as one 
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
  
-### Percolator attempted to match a Landing Page URL with embedded DOI
+### Percolator attempted to match a landing page URL with embedded DOI
 
-The Percolator attempted to match a Landing Page URL that contains an embedded DOI string to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
+The Percolator attempted to match a landing page URL that contains an embedded DOI string to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
 
  - `i` - "p0006"
  - `s` - "percolator"
@@ -141,9 +141,9 @@ The Percolator attempted to match a Landing Page URL that contains an embedded D
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
  
-### Percolator attempted to match a Landing Page URL with embedded PII
+### Percolator attempted to match a landing page URL with embedded PII
 
-The Percolator attempted to match a Landing Page URL that contains an embedded PII string to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
+The Percolator attempted to match a landing page URL that contains an embedded PII string to a valid DOI. This provides more detail for `percolator.match.landing-page-url`.
 
  - `i` - "p0007"
  - `s` - "percolator"
@@ -156,9 +156,9 @@ The Percolator attempted to match a Landing Page URL that contains an embedded P
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
  
-### Percolator attempted to match Landing Page URL with DOI in metadata
+### Percolator attempted to match landing page URL with DOI in metadata
 
-The Percolator attempted to match Landing Page URL in case that page contains a valid DOI in in its HTML metadata. In order to do this, it must fetch the landing page to look at its metadata. Because this is a frequent operation, the result is cached to avoid overloading websites. The `e` field indicates whether the cache was consulted or whether the Percolator had to go and retrieve the page from an external request via Internet.
+The Percolator attempted to match landing page URL in case that page contains a valid DOI in in its HTML metadata. In order to do this, it must fetch the landing page to look at its metadata. Because this is a frequent operation, the result is cached to avoid overloading websites. The `e` field indicates whether the cache was consulted or whether the Percolator had to go and retrieve the page from an external request via Internet.
 
 This provides more detail for `percolator.match.landing-page-url`.
 
@@ -192,7 +192,6 @@ The Percolator attempted to match a PII to a valid DOI. This provides more detai
 ### Percolator attempted to match a plain DOI to a valid DOI
 
 The Percolator attempted to match a plain DOI to a valid DOI. This provides more detail for `percolator.match.plain-doi`.
-
 
  - `i` - "p000a"
  - `s` - "percolator"
@@ -346,7 +345,7 @@ Whenever the Percolator visits a webpage it records any newsfeed links (e.g. RSS
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
 
-## Percolator Lookups / Matching
+## Percolator lookups / matching
 
 ### Percolator validates DOI
 
@@ -395,7 +394,7 @@ When the percolator finds a PII, it needs to make a call to the Crossref REST AP
 
 ### Percolator URL fetch request
 
-This occurs when the Percolator requests a webpage. There are a number of reasons for this, for example visiting a Landing Page to retrieve article metadata or visiting a webpage that was mentioned in a newsfeed. The response is indicated by `percolator.fetch.response` or `percolator.fetch.error`.
+This occurs when the Percolator requests a webpage. There are a number of reasons for this, for example visiting a landing page to retrieve article metadata or visiting a webpage that was mentioned in a newsfeed. The response is indicated by `percolator.fetch.response` or `percolator.fetch.error`.
 
  - `i` - "p0018"
  - `s` - "percolator"
@@ -478,7 +477,7 @@ By default every request to a URL is whitelisted by a robots.txt file. However, 
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
 
-### Agent Fails to send Evdience Record
+### Agent fails to send Evidence Record
 
 If the Agent can't connect to the internal message bus, it will fail sending data. This will only happen in serious circumstances. If a situation arises whereby it's impossible to send data, this log message may also fail to register. 
 
@@ -835,7 +834,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "disonnect"
  - `t` - Timestamp.
 
-### Twitter Agent starts the process of ingesting Tweets from the Twitter API
+### Twitter Agent starts the process of ingesting tweets from the Twitter API
 
  - `i` - "a0023"
  - `s` - "twitter-agent"
@@ -843,7 +842,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "start"
  - `t` - Timestamp.
 
-### Twitter Agent starts the process of processing Tweets from the Twitter API
+### Twitter Agent starts the process of processing tweets from the Twitter API
 
  - `i` - "a0024"
  - `s` - "twitter-agent"
@@ -851,7 +850,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "start"
  - `t` - Timestamp.
 
-### Twitter Agent got a chunk of Tweets and bundled them in an Evidence Record
+### Twitter Agent got a chunk of tweets and bundled them in an Evidence Record
 
  - `i` - "a0025"
  - `s` - "twitter-agent"
@@ -863,7 +862,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
 
 ### Twitter agent performed periodic fresh of rules
 
-Agent periodically retrieves the domain list, the DOI Prefix list, and produces a set of rules to send to Twitter. These are used to filter Tweets that are sent to the Agent.
+Agent periodically retrieves the domain list, the DOI Prefix list, and produces a set of rules to send to Twitter. These are used to filter tweets that are sent to the Agent.
 
  - `i` - "a0037"
  - `s` - "twitter-agent"
@@ -1127,7 +1126,7 @@ This happens if an Event is updated, for example due to Twitter compliance.
  - `e` - Result - "f" if there are missing Events, otherwise "t"
  - `t` - Timestamp
 
-## Evidence Log Check
+## Evidence Log check
 
 ### Check for presence of Evidence Log dump for day
 
@@ -1158,7 +1157,7 @@ This happens if an Event is updated, for example due to Twitter compliance.
  - `e` - Result - "t" if the file is present.
  - `t` - Timestamp
 
-## Twitter Compliance Check
+## Twitter compliance check
 
 ### Twitter compliance check started for Events on date
 
