@@ -8,15 +8,15 @@ Experimental Events are data we collect as part of prototypes and experiments. I
 
 | | |
 |---------------------------|-|
-| Agent Source Token        | `e330ad99-b54e-4557-a81c-b9178ed7953f` |
+| Agent Source token        | `e330ad99-b54e-4557-a81c-b9178ed7953f` |
 | Consumes Artifacts        | None |
-| Subject Coverage          | ORCID IDs |
-| Object Coverage           | DOIs |
-| Data Contributor          | PLAUDiT.pub |
-| Data Origin               | PLAUDiT.pub |
+| Subject coverage          | ORCID IDs |
+| Object coverage           | DOIs |
+| Data contributor          | PLAUDiT.pub |
+| Data origin               | PLAUDiT.pub |
 | Freshness                 | Life |
 | Identifies                | Users' ORCID IDs who want to ensorse a paper. |
-| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Name                      | PLUADiT |
 | Operated by               | PLAUDiT |
 | Produces Evidence Records | No |
@@ -62,7 +62,7 @@ Every time a new interaction occurs on Plaudit, an Event is created and sent int
 
 Events are sent directly as they happen. No Evidence Records are created.
 
-## Edits / Deletion
+## Edits / deletion
 
 We don't expect to have to edit or delete any Events.
 
