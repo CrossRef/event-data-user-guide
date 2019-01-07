@@ -16,8 +16,8 @@ Crossref Event Data uses a collection of software. It is all open source, and yo
 | Live Demo                  | Show a live stream of Events as they happen                            | https://github.com/Crossref/event-data-live-demo                  | jwass@crossref.org  |
 | Percolator                 | Produces Evidence and Events from data Agents send                     | https://github.com/Crossref/event-data-percolator                 | jwass@crossref.org  |
 | Query API Server           | Serve up the Query API                                                 | https://github.com/Crossref/event-data-query                      | jwass@crossref.org  |
-| Status                     | Service to collect Status messages and serve dashboard                 | https://github.com/Crossref/event-data-status                     | jwass@crossref.org  |
-| Twitter Compliance Logger  | Collect Compliance events to ensure we abide by them                   | https://github.com/Crossref/event-data-twitter-compliance-logger  | jwass@crossref.org  |
+| Status                     | Service to collect status messages and serve dashboard                 | https://github.com/Crossref/event-data-status                     | jwass@crossref.org  |
+| Twitter Compliance Logger  | Collect compliance events to ensure we abide by them                   | https://github.com/Crossref/event-data-twitter-compliance-logger  | jwass@crossref.org  |
 | Twitter Compliance Patcher | Automatically apply Twitter compliance (deletions) to Events           | https://github.com/Crossref/event-data-twitter-compliance-patcher | jwass@crossref.org  |
 | Twitter Spot Check         | Tool for manually auditing Events for compliance.                      | https://github.com/crossref/event-data-twitter-spot-check         | jwass@crossref.org  |
 | User Guide                 | This User Guide                                                        | https://github.com/Crossref/event-data-user-guide                 | jwass@crossref.org  |
