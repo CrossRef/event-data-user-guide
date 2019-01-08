@@ -5,7 +5,7 @@
 
 Every Event results from an action that was taken at some point in time. This is considered to be the time that the Event 'occurred'. Examples of the 'occurred' field:
 
- - The time the tweet was published.
+ - The time the Tweet was published.
  - The time the edit was made on Wikipedia.
  - The time that the Reddit comment was made.
  - The time that the blog post was published.
@@ -23,7 +23,7 @@ These three dates are represented as the `occurred_at`, `timestamp` and `updated
 
 ### Using the Query API over time
 
-The Query API is updated continuously, usually within one hour of current activity. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a days worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited for compliance reasons). 
+The Query API is updated continuously, usually within one hour of current activity. It has two views (as documented in the [Query API page](../service/query-api)): `collected` and `observed`. Once a day's worth of data is collected and made available via its `collected` view, that selection of Events won't change (although Events themselves may be edited for compliance reasons). 
 
 The Query API also contains an `occurred` view. This returns Events based on the date they **occurred** on. Because Events can be collected some time after they occurred, the data in this view can change.
 
