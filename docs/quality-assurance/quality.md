@@ -30,9 +30,9 @@ The Evidence Log is archived every day, available as a CSV and a JSON file. The 
 
 ### Twitter compliance
 
-Around 5% of tweets that we capture are subsequently deleted. When this happens, we will update the Event to remove the Twitter-specific data (`subj_id`, which contains the tweet ID and `subj` metadata which also contains the author) and mark the Event as having been deleted. This is documented in the [updates](/guide/data/updates) section.
+Around 5% of Tweets that we capture are subsequently deleted. When this happens, we will update the Event to remove the Twitter-specific data (`subj_id`, which contains the Tweet ID and `subj` metadata which also contains the author) and mark the Event as having been deleted. This is documented in the [updates](/guide/data/updates) section.
 
-Checks run every day. They will check every tweet mentioned in an Event three times:
+Checks run every day. They will check every Tweet mentioned in an Event three times:
  
  - The day after the Tweet was published.
  - One month after the Tweet was published.
