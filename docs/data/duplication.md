@@ -23,11 +23,11 @@ In the first case, you could interpret two or more completely identical Events a
 
 ### Duplicate Events from the same input
 
-Two Agents might have looked at the same piece of data and produced the same Event. They might have processed them under different circumstances. For example, an agent that specifically monitors Wikipedia may have generated an Event for a DOI that occurs on the page. A general purpose web agent might also have become aware of a page, and might have visited it and found the same DOI. In this situation you might find two Events for the same DOI in the page.
+Two Agents might have looked at the same piece of data and produced the same Event. They might have processed them under different circumstances. For example, an agent that specifically monitors Wikipedia may have generated an Event for a DOI that occurs on the page. A general purpose Web Agent might also have become aware of a page, and might have visited it and found the same DOI. In this situation you might find two Events for the same DOI in the page.
 
 ### Duplicate inputs
 
-The same content may be served on separate domains on the web. For example, some sites offer desktop and mobile versions. If these are served on different domains, they will be found on different URLs. If the Web agent finds these, it will treat them as different pages, which may result in two Events that link to the desktop and mobile versions of the site respectively. Another example is Google's Blogspot service, which may publish the same blog on a number of different country domains.
+The same content may be served on separate domains on the web. For example, some sites offer desktop and mobile versions. If these are served on different domains, they will be found on different URLs. If the Web Agent finds these, it will treat them as different pages, which may result in two Events that link to the desktop and mobile versions of the site respectively. Another example is Google's Blogspot service, which may publish the same blog on a number of different country domains.
 
 ### Canonical URLs
 
@@ -45,7 +45,7 @@ Every source has different characteristics which must be taken into account when
 
 ## Repeated observations
 
-The web source Agent may check the same webpage more than once over time. In this case it may make the same observations repeatedly. If you find an Event that has a duplicate, or is very similar to another Event made a while ago, this may be the reason.
+The Web source Agent may check the same webpage more than once over time. In this case it may make the same observations repeatedly. If you find an Event that has a duplicate, or is very similar to another Event made a while ago, this may be the reason.
 
 ## Crossref Agents avoid producing duplicate Events.
 
