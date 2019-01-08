@@ -9,13 +9,13 @@ If you retrieve Events from Event Data, or if you perform calculations based on 
 
 Data can change for a number of reasons:
 
- - If a tweet was deleted by its author, we are obliged to remove it from Event Data.
+ - If a Tweet was deleted by its author, we are obliged to remove it from Event Data.
  - If we ran a report that indicated we produced obviously incorrect data as a result of a software bug, we may mark Events as having been deleted or edited.
 
 When an Event is updated, we will add the an `updated` field, an `updated-date` field and an `updated-reason`. The `updated` field will have a value of:
 
  - `deleted`
-   - When a tweet is deleted. We will remove the tweet content (tweet ID and author) but retain all other parts of the Event.
+   - When a Tweet is deleted. We will remove the Tweet content (Tweet ID and author) but retain all other parts of the Event.
    - When we identified obviously faulty data.
  - `edited`
    - When we identified obviously faulty data but it can be corrected.
