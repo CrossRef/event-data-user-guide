@@ -10,7 +10,7 @@
 | Data origin               | Annotations made by Hypothes.is users, via the Hypothes.is API |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | URL for annotation, text of annotations |
 | Name                      | Hypothes.is |
 | Operated by               | Crossref |
