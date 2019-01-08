@@ -28,7 +28,7 @@ Every subject-relation-object Event is an assertion made by the Agent (and in th
 
 ## Landing page to DOI mappings
 
-When a blog post or tweet mentions a DOI directly, you know that the author intended to link to the specific piece of content identified by that DOI. When the author uses a landing page, which is more common, we find the best DOI match we can, and describe how performed the match and verification. This is described fully in the [How Crossref Agents match landing pages to DOIs](/data/matching-landing-pages).
+When a blog post or Tweet mentions a DOI directly, you know that the author intended to link to the specific piece of content identified by that DOI. When the author uses a landing page, which is more common, we find the best DOI match we can, and describe how performed the match and verification. This is described fully in the [How Crossref Agents match landing pages to DOIs](/data/matching-landing-pages).
 
 ## Data aggregator or provider?
 
