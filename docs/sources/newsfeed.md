@@ -10,7 +10,7 @@
 | Data origin               | RSS and Atom feeds, and the blog posts they point to. |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | HTML of webpages (mostly blog posts) linked to from RSS and Atom feeds. |
 | Name                      | Newsfeed |
 | Operated by               | Crossref |
