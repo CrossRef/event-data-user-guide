@@ -10,18 +10,18 @@
 | Data origin               | Tweet text and associated metadata |
 | Freshness                 | Continual |
 | Identifies                | Linked DOIs, unlinked DOIs, Landing Page URLs |
-| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
-| Looks in                  | Text of tweets, plus URLs extracted by Twitter's Gnip product. |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Looks in                  | Text of Tweets, plus URLs extracted by Twitter's Gnip product. |
 | Name                      | Twitter |
 | Operated by               | Crossref |
 | Produces Evidence Records | Yes |
 | Produces relation types   | `discusses` |
 | Source ID                 | `twitter` |
-| Updates or deletions      | Deletions if a tweet is deleted |
+| Updates or deletions      | Deletions if a Tweet is deleted |
 
 ## What it is
 
-Twitter users discuss registered content items in tweets. They also retweet others who have discussed registered content items. The Twitter agent monitors a stream of tweets and tries to match DOI links, landing page links, and unlinked DOIs back to registered content items.
+Twitter users discuss registered content items in Tweets. They also retweet others who have discussed registered content items. The Twitter agent monitors a stream of Tweets and tries to match DOI links, landing page links, and unlinked DOIs back to registered content items.
 
 ## What it does
 
@@ -80,19 +80,19 @@ You can see that this is a retweet because of the presence of the `original-twee
 
 ## Evidence Record
 
-The Agent collects tweets into batches and sends a number per Evidence Record.
+The Agent collects Tweets into batches and sends a number per Evidence Record.
 
- - Includes observations of type `plaintext` for the text of the tweet. This is marked as `sensitive` because we are not allowed to share the tweet text for contractual reasons.
+ - Includes observations of type `plaintext` for the text of the Tweet. This is marked as `sensitive` because we are not allowed to share the Tweet text for contractual reasons.
  - Includes observations of the type `landing-page-url`, one for each URL extracted and sent to us by the Gnip PowerTrack service.
 
 ## Edits / deletion
 
-Some tweets are deleted by their authors after they are published. We observe single-digit percentage deletion rates in Event Data. Twitter publishes a stream of deleted tweet IDs, which we check against our database. If we find that a tweet has been deleted, we will edit the Event:
+Some Tweets are deleted by their authors after they are published. We observe single-digit percentage deletion rates in Event Data. Twitter publishes a stream of deleted Tweet IDs, which we check against our database. If we find that a Tweet has been deleted, we will edit the Event:
 
  - The `updated` field is set to indicate the timestamp when we took the action.
  - The `updated_type` field is set to `deleted`.
  - The `updated_reason` will be set to the URL of an announcement that indicates the reason.
- - The `subj_id` will be updated to remove the tweet ID (it is considered to be sensitive information), and will just show `https://twitter.com`
+ - The `subj_id` will be updated to remove the Tweet ID (it is considered to be sensitive information), and will just show `https://twitter.com`
  - The `subj` metadata will be removed.
 
 Events that have been subject to compliance actions will not be included in new query results from the Query API. They will be available via the `from-updated-date` query to allow you to perform your own compliance actions. If you store Twitter Events from Event Data, you should perform periodic checks to see if you should update your own data.
@@ -101,9 +101,9 @@ Events that have been subject to compliance actions will not be included in new 
 
 The rules sent to Gnip PowerTack are manually updated. We aim to keep them in sync with the `domain-list` Artifact, but they may lag slightly.
 
-According to the agreement we have with Twitter, we are allowed to process the text of tweets to extract events but we are not allowed to store or redistribute it. The text of the tweet is therefore passed to the Percolator and marked as 'sensitive'. This means that the SHA1 hash of the text appears in the Evidence Record as an `input-content-hash`, but not the text itself.
+According to the agreement we have with Twitter, we are allowed to process the text of Tweets to extract events but we are not allowed to store or redistribute it. The text of the Tweet is therefore passed to the Percolator and marked as 'sensitive'. This means that the SHA1 hash of the text appears in the Evidence Record as an `input-content-hash`, but not the text itself.
 
-If you are interested in the text of a tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
+If you are interested in the text of a Tweet, you can easily follow the link to Twitter or use the Twitter API to fetch the data. Twitter calls this process 'rehydration'. If you want to check the content of the Tweet as part of an audit, you can apply a SHA1 hash of the retrieved text yourself and compare it to ours.
 
 Please be aware that if you retrieve data from the Twitter API you are bound by Twitter's terms and conditions.
 
