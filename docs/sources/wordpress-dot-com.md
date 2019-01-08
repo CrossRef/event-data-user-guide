@@ -10,7 +10,7 @@
 | Data origin               | Wordpress.com search results API, and the blog posts they point to that are hosted on Wordpress.com |
 | Freshness                 | Every few hours. |
 | Identifies                | Linked DOIs, unlinked DOIs, landing page URLs |
-| License                   | Creative commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
+| License                   | Creative Commons [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Looks in                  | HTML of blog posts |
 | Name                      | Wordpress.com |
 | Operated by               | Crossref |
