@@ -68,7 +68,7 @@ National Information Standards Organization. A standards body who have created a
 
 ### ORCiD
 
-Open researcher and contributor ID. A system for assigning identifiers to authors.
+Open Researcher and Contributor ID. A system for assigning identifiers to authors.
 
 ### PII: 
 
@@ -98,7 +98,7 @@ Uniform Resource Locator. A path that points to a Research Object, e.g. `http://
 
 Universally Unique Identifier. Looks like `c0eb1c46-6a59-49c9-926b-a10667ddd9de`.
 
-## Deprecated Terminology
+## Deprecated terminology
 
 The following words have been used during the development of Event Data but are no longer official:
 
