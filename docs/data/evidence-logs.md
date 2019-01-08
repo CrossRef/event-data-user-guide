@@ -76,9 +76,9 @@ The Percolator was instructed to visit a URL to see if it is an article landing 
  - `u` - The URL in question.
  - `t` - Timestamp.
 
-### Percolator attempted to match observation
+### Percolator attempted to match Observation
 
-The Percolator attempted to match one of a number of types of observation to a DOI. The log entry records the type of observation, the success or failure of the operation, and the resulting DOI.
+The Percolator attempted to match one of a number of types of Observation to a DOI. The log entry records the type of Observation, the success or failure of the operation, and the resulting DOI.
 
 The operations involved in performing this match are described in more detail in other log messages (such as percolator.match-doi-url.match).
 
@@ -219,7 +219,7 @@ The Percolator attempted to match a ShortDOI URL to a valid DOI. This provides m
  - `r` - The Evidence Record ID.
  - `t` - Timestamp.
 
-## Percolator Process Control
+## Percolator process control
 
 ### Percolator created Event
 
@@ -818,7 +818,7 @@ If the Agent can't connect to the internal message bus, it will fail sending dat
 
 ### Twitter Agent (re)connects to Twitter streaming API to get stream of input Tweets
 
-Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on disconnection.
+Agent will attempt to get Tweets from up to 5 minutes ago to fill in any gaps on disconnection.
 
  - `i` - "a0021"
  - `s` - "twitter-agent"
@@ -834,7 +834,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "disonnect"
  - `t` - Timestamp.
 
-### Twitter Agent starts the process of ingesting tweets from the Twitter API
+### Twitter Agent starts the process of ingesting Tweets from the Twitter API
 
  - `i` - "a0023"
  - `s` - "twitter-agent"
@@ -842,7 +842,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "start"
  - `t` - Timestamp.
 
-### Twitter Agent starts the process of processing tweets from the Twitter API
+### Twitter Agent starts the process of processing Tweets from the Twitter API
 
  - `i` - "a0024"
  - `s` - "twitter-agent"
@@ -850,7 +850,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
  - `f` - "start"
  - `t` - Timestamp.
 
-### Twitter Agent got a chunk of tweets and bundled them in an Evidence Record
+### Twitter Agent got a chunk of Tweets and bundled them in an Evidence Record
 
  - `i` - "a0025"
  - `s` - "twitter-agent"
@@ -862,7 +862,7 @@ Agent will attempt to get tweets from up to 5 minutes ago to fill in any gaps on
 
 ### Twitter agent performed periodic fresh of rules
 
-Agent periodically retrieves the domain list, the DOI Prefix list, and produces a set of rules to send to Twitter. These are used to filter tweets that are sent to the Agent.
+Agent periodically retrieves the domain list, the DOI Prefix list, and produces a set of rules to send to Twitter. These are used to filter Tweets that are sent to the Agent.
 
  - `i` - "a0037"
  - `s` - "twitter-agent"
