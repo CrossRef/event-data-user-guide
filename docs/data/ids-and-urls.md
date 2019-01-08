@@ -74,7 +74,7 @@ When we match an Event because someone used a landing page, the Agent has to do 
 
 You can put Event Data to different uses. You might want to know:
 
- - How often do people tweet DOIs compared to landing page URLs?
+ - How often do people Tweet DOIs compared to landing page URLs?
  - I'm only interested in data where I can be 100% sure that only the DOI is used.
  - I want to know about these articles. I don't care what URL was used to refer to them.
 
@@ -87,7 +87,7 @@ If the URL field is the same as the PID field (i.e. a DOI) then you know that th
 
 DOIs can be assigned to books and book chapters, articles and figures. Each Agent will do its job as accurately as possible, with minimal cleaning-up, which could affect interpretation. 
 
-This means that if someone tweets the DOI for a figure within an article, we will record that figure's DOI. If they tweet the landing page URL for that figure, we will do our best to match it to a DOI. Depending on the method used, and what the publisher landing page tells us, we may match the article's DOI or the figure's DOI.
+This means that if someone Tweets the DOI for a figure within an article, we will record that figure's DOI. If they Tweet the landing page URL for that figure, we will do our best to match it to a DOI. Depending on the method used, and what the publisher landing page tells us, we may match the article's DOI or the figure's DOI.
 
 Sometimes two pages may claim to be about the same DOI. This could happen if a publisher runs two different sites about the same content. It's also possible that a landing page has no DOI metadata, so we can't match it to an Event.
 
@@ -97,7 +97,7 @@ The reverse is true: sometimes two DOIs point to the same landing page. This can
 
 We periodically scan our DOIs, take a sample and find the domains that are used by publishers. This is documented in our Artifacts, which have versions and date stamps. We therefore might miss Events in the time between a new domain being used and the Artifact being updated.
 
-If a publisher stops using an Article Landing Page domain, we will not remove it from the list. Agents may at any time go back and re-process old data, or work with dumps of historical data. People may retweet old tweets which point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows. As with all Artifacts, you can browse all past versions to see how it changes over time. 
+If a publisher stops using an Article Landing Page domain, we will not remove it from the list. Agents may at any time go back and re-process old data, or work with dumps of historical data. People may retweet old Tweets which point to old landing pages. We still want to attempt to match these if possible. Therefore the domain list Artifact only grows. As with all Artifacts, you can browse all past versions to see how it changes over time. 
 
 ### We don't match all domains
 
