@@ -34,15 +34,15 @@ An Action contains information about the thing that happened. This corresponds t
 
 ### Observations
 
-Each Action contains one or more observations. Because there are a diverse range of types of input data in Event Data, different observations can be made. For example each of these is an observation:
+Each Action contains one or more Observations. Because there are a diverse range of types of input data in Event Data, different Observations can be made. For example each of these is an Observation:
 
  - The text of a tweet (which may contain plaintext DOIs).
  - The automatically extracted URLs from a tweet (which could be DOIs or Article Landing Pages).
  - The URL of a blog post from an RSS newsfeed (which must be visited to see the content of the blog post).
 
-As you can see from the tweet example, it's possible to make different observations of different types about the same input. In some cases, such as Twitter, we do not have the permission to include the text, so it is removed before the Evidence Record is saved. In this case, the `sensitive` flag on the Evidence Record is set to `true` and a SHA1 hash of the content is included. This means that if you want to verify the Evidence Record you can retrieve the tweet text yourself from Twitter and compare the hash. If the hash matches, you know you were working from the same input text as the Agent.
+As you can see from the tweet example, it's possible to make different Observations of different types about the same input. In some cases, such as Twitter, we do not have the permission to include the text, so it is removed before the Evidence Record is saved. In this case, the `sensitive` flag on the Evidence Record is set to `true` and a SHA1 hash of the content is included. This means that if you want to verify the Evidence Record you can retrieve the tweet text yourself from Twitter and compare the hash. If the hash matches, you know you were working from the same input text as the Agent.
 
-The following observation types are available:
+The following Observation types are available:
 
  - `plaintext` - some text that could contain plain text DOIs, DOI URLs or landing page URLs
  - `html` - some HTML that could contain plain text DOIs, DOI URLs or landing page URLs
@@ -61,11 +61,11 @@ See [Duplication and Redundancy](/data/duplication) for further discussion.
 
 ### Observations to Candidates to Matches to Events
 
-Each observation may or may not ultimately yield Events. 
+Each Observation may or may not ultimately yield Events. 
 
-The first step is to create a set of Candidates for each observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an Article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
+The first step is to create a set of Candidates for each Observation. For example some `plaintext` may contain something that looks like a DOI and something that looks like an Article Landing Page URL. The webpage at the end of a `content-url` may contain something that looks like an Article Landing Page in the HTML of that page.
 
-The set of available candidate types are:
+The set of available Candidate types are:
 
  - `doi-url` - a full DOI URL
  - `pii` - a Publication Item Identifier
