@@ -1,9 +1,13 @@
 site_name: Event Data User Guide
-theme_dir: crossref_rtd
+theme:
+  name: 'readthedocs'
+  include_sidebar: true
+
+
 site_description: User Guide for Crossref Event Data
 repo_url: https://github.com/CrossRef/event-data-user-guide
 site_url: https://www.eventdata.crossref.org/guide/
-pages:
+nav:
  - "Welcome": index.md
  - "Introduction": introduction.md
  - "What's in Event Data?":
