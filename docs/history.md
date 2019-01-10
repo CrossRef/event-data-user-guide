@@ -4,10 +4,23 @@ This document describes substantial or breaking changes to the Event Data system
 
 ## Changes
 
-### [2019-01-10] Update Release History page
+### [2019-01-10] Change to Twitter URLs
+ - [event-data-user-guide 1.2.2](https://github.com/CrossRef/event-data-user-guide/releases/tag/1.2.2)
+ - [event-data-agents 0.1.17](https://github.com/CrossRef/event-data-agents/releases/tag/0.1.17) 
+ - [event-investigator 0.1.5](https://github.com/CrossRef/event-data-investigator/releases/tag/0.1.5)
+ 
+New Twitter guidance means that for future Events we are unable to share Tweet URLs. Instead we use custom URIs to express Tweet IDs and author usernames. They still contain all the necessary information to identify the Twitter Content and retrieve the data from the Twitter APIs. Full documentation on the [Twitter Agent](/sources/twitter/) page.  
+
+### [2019-01-10] Update Release History page and copy editing
  - [event-data-user-guide 1.2.1](https://github.com/crossref/event-data-user-guide/tree/1.2.1)
 
 The Release History page now tracks substantial changes to the Event Data Service, not just changes to the documentation. From this point onward it also includes versions of software releases that correspond to changes.
+
+The guide was also reviewed for wording.
+
+## Older changes
+
+Before this point changes only pertain to the documentation.
 
 ### [2018-09-21] Documentation review
  - [event-data-user-guide](https://github.com/crossref/event-data-user-guide) 1.2.0

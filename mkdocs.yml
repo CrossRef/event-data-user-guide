@@ -9,6 +9,7 @@ repo_url: https://github.com/CrossRef/event-data-user-guide
 site_url: https://www.eventdata.crossref.org/guide/
 nav:
  - "Welcome": index.md
+ - "Release history": history.md
  - "Introduction": introduction.md
  - "What's in Event Data?":
    - "About the Data": data/about-the-data.md
@@ -63,4 +64,3 @@ nav:
  - "Appendix: Scholix": app-scholix.md
  - "Appendix: FAQ": app-faq.md
  - "Appendix: Glossary": app-gloss.md
- - "Document history": history.md

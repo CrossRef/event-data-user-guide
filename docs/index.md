@@ -1,6 +1,6 @@
 # Crossref Event Data
 
-[Version 2.2.0 - Release](/history)
+Version 1.2.2 [Release history](/history)
 
 ## This guide is for everyone
 

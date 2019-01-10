@@ -21,7 +21,7 @@
 
 ## What it is
 
-Twitter users discuss registered content items in tweets. They also retweet others who have discussed registered content items. The Twitter agent monitors a stream of tweets and tries to match DOI links, landing page links, and unlinked DOIs back to registered content items.
+Twitter users discuss registered content items in tweets. They also retweet others who have discussed registered content items. The Twitter agent monitors a stream of tweets and tries to match DOI links, landing page links, and unlinked DOIs back to registered content items. Note that we use a unique URI format when we refer to Tweets.
 
 ## What it does
 
@@ -45,6 +45,46 @@ The Gnip service automatically follows and extracts URLs from link-shortening se
 We then attempt to match all links to registered content items.
 
 ## Example Event
+
+Note that the format of Tweet and author IDs changed in January 2019. They are now non-resolvable URIs. To read a Tweet in your browser, you can visit the URL: 
+
+    http://twitter.com/statuses/«ID»
+
+New format:
+
+    {
+     "license":"https://creativecommons.org/publicdomain/zero/1.0/",
+     "obj_id":"https://doi.org/10.1039/c8ee03134g",
+     "source_token":"45a1ef76-4f43-4cdc-9ba8-5a6ad01cc231",
+     "occurred_at":"2019-01-10T17:12:26Z",
+     "subj_id":"twitter://status?id=1083411254788739073",
+     "id":"29ffcda3-c9bc-47ca-a916-dcde1e2023fa",
+     "evidence_record":"https://evidence.eventdata.crossref.org/evidence/20190110-twitter-28393e6c-03e9-47f8-89ae-584f0d9687f9",
+     "terms":"https://doi.org/10.13003/CED-terms-of-use",
+     "action":"add",
+     "subj":{
+        "pid":"twitter://status?id=1083411254788739073",
+        "url":"twitter://status?id=1083411254788739073",
+        "title":"Tweet 1083411254788739073",
+        "issued":"2019-01-10T17:12:26.000Z",
+        "author":{
+          "url":"twitter://user?screen_name=pmherder"},
+          "original-tweet-url":"twitter://status?id=1083379011089133568",
+          "original-tweet-author":"twitter://user?screen_name=TomBurdyny",
+          "alternative-id":"1083411254788739073"
+        },
+     "source_id":"twitter",
+     "obj":{
+       "pid":"https://doi.org/10.1039/c8ee03134g",
+       "url":"https://pubs.rsc.org/en/Content/ArticleLanding/2019/EE/C8EE03134G",
+       "method":"landing-page-meta-tag",
+       "verification":"checked-url-exact"
+       },
+       "timestamp":"2019-01-10T17:21:51Z",
+       "relation_type_id":"discusses"
+     }
+
+Old style, pre 2019:
 
     {
       "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -98,6 +138,8 @@ Some tweets are deleted by their authors after they are published. We observe si
 Events that have been subject to compliance actions will not be included in new query results from the Query API. They will be available via the `from-updated-date` query to allow you to perform your own compliance actions. If you store Twitter Events from Event Data, you should perform periodic checks to see if you should update your own data.
 
 ## Quirks
+
+In January we updated the Agent to use the new URL format. We did not update old Events. You should expect URIs in either format when you use data from this Source.
 
 The rules sent to Gnip PowerTack are manually updated. We aim to keep them in sync with the `domain-list` Artifact, but they may lag slightly.
 
