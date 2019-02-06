@@ -20,7 +20,7 @@
 
 ## What it is
 
-[Plaudit](https://plaudit.pub/) links researchers, identified by their ORCID, to research they endorse, identified by its DOI. is a simple mechanism that allows an individual with an ORCID iD to endorse a work with a DOI.
+[Plaudit](https://plaudit.pub/) links researchers, identified by their ORCID, to research they endorse, identified by its DOI.
 
 ## What it does
 
