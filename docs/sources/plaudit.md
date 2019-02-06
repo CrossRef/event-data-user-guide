@@ -2,29 +2,29 @@
 
 | | |
 |---------------------------|-|
-| Agent Source token        | `TODO` |
-| Consumes Artifacts        | none |
+| Agent Source token        | `99c3978e-ec40-4cef-8151-32b62832398c` |
+| Consumes Artifacts        | None |
 | Subject coverage          | All ORCID iDs |
 | Object coverage           | All DOIs |
 | Data contributor          | Plaudit |
 | Data origin               | Plaudit |
 | Freshness                 | Every day |
 | Identifies                | ORCID iDs whose owners have endorsed articles with the given DOIs |
-| License                   | Made available without restriction |
+| License                   | [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Name                      | Plaudit |
 | Operated by               | Plaudit |
 | Produces Evidence Records | No |
 | Produces relation types   | `recommends` |
-| Source ID                 | `plauudit` |
+| Source ID                 | `plaudit` |
 | Updates or deletions      | None expected |
 
 ## What it is
 
-Plaudit is a simple mechanism that allows an individual with an ORCID iD to endorse a work with a DOI.
+[Plaudit](https://plaudit.pub/) links researchers, identified by their ORCID, to research they endorse, identified by its DOI. is a simple mechanism that allows an individual with an ORCID iD to endorse a work with a DOI.
 
 ## What it does
 
-For every endorsement made through Plaudit, Plaudit creates an event in CrossRef Event Data.
+For every endorsement made through Plaudit, Plaudit creates an Event in Crossref Event Data. Each Event represents an endorsement of DOI Registered Content by an individual using theor ORCID iD.
 
 ## Where data comes from
 
@@ -47,7 +47,7 @@ Data is provided directly by Plaudit.
 
 1. A user endorses an academic work through Plaudit.
 2. Once a day, Plaudit checks which endorsements have been added since the last export.
-3. Plaudit creates new Events for every endorsement created since the last export.
+3. Plaudit creates new Events for every endorsement created since the last export and sends them to Event Data.
 
 ## Evidence Record
 
@@ -63,7 +63,7 @@ None.
 
 ## Failure modes
 
- - An endorsement might have been added after the last export, in which case no events have been created yet.
+ - An endorsement might have been added after the last export, so the data may be a few hours out of date.
 
 ## Further information
 
