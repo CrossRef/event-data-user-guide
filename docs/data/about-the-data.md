@@ -21,7 +21,7 @@ We track connections as they occur between objects, so you may wonder why the Ev
 
 Because of this we present Event Data as a series of Events and you can decide if you want to create other representations in your own application. The Query API gives you the flexibility to scan over all data, or only to get those Events that were collected since your last visit.
 
-The API also allows you to make queries like "all Events for this DOI" or "all Events for this tweet". The results for these queries will change over time.
+The API also allows you to make queries like "all Events for this DOI" or "all Events for this Tweet". The results for these queries will change over time.
 
 ## Where we look
 
