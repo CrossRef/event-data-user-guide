@@ -84,11 +84,11 @@ Some of these are specific to the Reddit source. Some may or may not be relevant
 We can also identify several potential arcs in the Event. In order of obviousness:
 
 1. From the `subj_id`, `relation_type_id` and `obj_id` fields:
-    - Content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
+    - content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - discusses
     - the registered content item with DOI `https://doi.org/10.3201/eid2202.151250`
 2. From the `subj.url` and `obj.url` fields:
-    - The content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
+    - the content at the URL `https://reddit.com/r/science/comments/42p4xg/prognostic_indicators_for_ebola_patient_survival/`
     - referred to the subject
     - using URL `http://wwwnc.cdc.gov/eid/article/22/2/15-1250_article`
 3. From the `subj_id` field:
