@@ -37,7 +37,7 @@ The Relation Type ID is taken from a controlled vocabulary. You should refer to 
 
 Every Event has a time at which it was *created*. This is automatically assigned when the Agent sends an Event into the Event Data system. This is usually soon after the Event was observed. You can use this `timestamp` to filter Events that were collected within a certain date range, and as a reliable method for iterating over all Events. 
 
-In addition to this, every Event has a theoretical date on which it *occurred*. The precise meaning of this can vary from source to source. Twitter's `occurred_at` corresponds to the date that Twitter reports that the tweet was published. The Newsfeed source takes the date from the time that an RSS feed indicates that the blog was published. The web source takes the date that a webpage was observed. For more information, see each source's documentation. There is an in-depth discussion of times in the [Time](/data/time) page.
+In addition to this, every Event has a theoretical date on which it *occurred*. The precise meaning of this can vary from source to source. Twitter's `occurred_at` corresponds to the date that Twitter reports that the Tweet was published. The Newsfeed source takes the date from the time that an RSS feed indicates that the blog was published. The Web source takes the date that a webpage was observed. For more information, see each source's documentation. There is an in-depth discussion of times in the [Time](/data/time) page.
 
 Timestamps found in the `timestamp` or `occurred_at` fields are given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC Z format, e.g. `2017-05-14T05:04:57Z`. In other fields you may see formats including, e.g. `2017-05-14T05:04:57.000Z`. All dates conform to ISO8601.
 
@@ -77,7 +77,7 @@ The Event may include metadata about its subject and/or object. For example:
 
 We typically only include metadata that you are unable to get elsewhere and that is unlikely to change. Where the `subj_id` or `obj_id` is a DOI, we will not include the metadata because you can easily look it up using the Crossref or DataCite APIs and it could go out of date if recorded. We also store a large amount of metadata associated with each DOI, and including it all would balloon the data to many times its size.
 
-People don't always use DOIs to cite registered content, especially on social media, so we often links using the landing page. Where a link to landing page is identified, and we can match that to a DOI, we will use the DOI as the `obj_id` and `obj.pid`, and the actual URL of the landing page as the `obj.url`. In these cases, we include an optional `method` and `verification` and field to indicate how we matched a DOI, and how we verified that. For a full description see [Matching Landing Pages](/data/matching-landing-pages).
+People don't always use DOIs to cite registered content, especially on social media, so we often links using the landing page. Where a link to landing page is identified, and we can match that to a DOI, we will use the DOI as the `obj_id` and `obj.pid`, and the actual URL of the landing page as the `obj.url`. In these cases, we include an optional `method` and `verification` and field to indicate how we matched a DOI, and how we verified that. For a full description see [matching landing pages](/data/matching-landing-pages).
 
 
 
